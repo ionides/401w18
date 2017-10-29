@@ -1,0 +1,38 @@
+%\documentclass[handout]{beamer}
+\documentclass{beamer}
+
+\input{header.tex}
+
+\begin{document}
+
+\begin{frame}
+\frametitle{STATS 401. Applied Statistical Methods II}
+
+\vspace{-5mm}
+
+\begin{center} \Large\bf
+Welcome!
+\end{center}
+
+\vspace{-2mm}
+
+{\bf Objectives}: Linear statistical models are the foundation for most of applied statistics. We will develop statistical computation skills (R programming) and mathematical skills (working with matrices) while studying data analysis using linear models.
+
+\vspace{3mm}
+
+{\bf Pre-requisites}: We will assume familiarity with material in STATS 250. All course notes and labs are at
+
+\url{open.umich.edu/find/open-educational-resources/statistics}
+
+
+If you have a different background (AP Statistics, STATS 280, or some other introductory statistics class) you should check the STATS 250 notes and if necessary come for help in office hours.
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{}
+\end{frame}
+
+\end{document}

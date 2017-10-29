@@ -1,0 +1,44 @@
+\usefonttheme[onlymath]{serif}
+% use article-like math letters, from http://tex.stackexchange.com/questions/34265/how-to-get-beamer-math-to-look-like-article-math
+
+\newcommand\mydot{{\,\cdot\,}}
+%\newcommand\seq[2]{{#1}\!:\!{#2}}
+
+\newcommand\bi{\begin{itemize}}
+\newcommand\ei{\end{itemize}}
+\newcommand\prob{\mathbb{P}}
+\newcommand\E{\mathbb{E}}
+\newcommand\var{\mathrm{Var}}
+\newcommand\cov{\mathrm{Cov}}
+\newcommand\given{{\, | \,}}
+\newcommand\param{\,;}
+\newcommand\mycolon{{\hspace{0.5mm}:\hspace{0.5mm}}}
+\newcommand\myemph[1]{{\textbf{#1}}}
+\newcommand\mymathenv[1]{\textcolor{blue}{#1}}
+\newcommand\mymath[1]{\begin{math}\textcolor{blue}{#1}\end{math}}
+\newcommand\mydisplaymath[1]{\begin{displaymath}\textcolor{blue}{#1}\end{displaymath}}
+\newcommand\myspace{\quad}
+\newcommand\altdisplaymath[1]{\vspace{1mm}\textcolor{blue}{\begin{math}\displaystyle #1 \end{math}}\vspace{1mm}}
+\usepackage{natbib}
+\usepackage{url}
+\usepackage{ulem}
+\renewcommand\emph[1]{{\it #1}} % the ulem package redefines \emph
+\renewcommand\em{\it} % the ulem package redefines \emph
+
+\usepackage{graphicx} % Allows including images
+%\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\mode<presentation> {
+
+\usetheme{Madrid}
+
+\setbeamertemplate{footline} 
+
+\setbeamertemplate{navigation symbols}{} 
+
+}
+
+\setlength{\parskip}{2mm}
+\setlength{\parindent}{0mm}
+
+
+
