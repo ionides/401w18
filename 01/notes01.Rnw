@@ -32,13 +32,16 @@ opts_chunk$set(
   message=FALSE,
   progress=TRUE,
   prompt=FALSE,
-  results='asis',
+#  results='asis',
+  results="markup",
   size='small',
   strip.white=TRUE,
   tidy=FALSE,
-  warning=FALSE,
+  warning=FALSE
 #  comment=NA # to remove ## on output
 )
+
+options(width = 60) # number of characters in R output before wrapping
 @
 
 \begin{frame}
@@ -91,13 +94,13 @@ The two rising stars in statistical computing are R and Python (\url{http://r4st
 
 \begin{frame}[fragile]
 \frametitle{Case study: Are people healthier in booms or busts?}
-\bi
+\begin{myitemize}
 \item Is population health \myemph{pro-cyclical} (improving in business cycle booms) or \myemph{counter-cyclical} (improving in recessions), or neither? 
 \item \myemph{Life expectancy at birth} combines instantaneous death rates at all ages and is a basic measure of current population health.
 %(\url{data.oecd.org/healthstat/life-expectancy-at-birth.htm}).
-\item USA data for 1933--2015 are in the file \url{life_expectancy.txt} on the course GitHub repository \url{github.com/ionides/401w18/01} or the website \url{ionides.github.io/401w18/01}.
-\ei
-
+\item USA data for 1933--2015 are in the file \url{life_expectancy.txt} on the course GitHub repository \url{github.com/ionides/401w18/01} or the website \url{ionides.github.io/401w18/01}. The first lines of this file are:
+%\ei
+\end{myitemize}
 \vspace{-3mm}
 
 \begin{verbatim}
@@ -112,9 +115,9 @@ The two rising stars in statistical computing are R and Python (\url{http://r4st
 
 \vspace{-3mm}
 
-\bi
+\begin{myitemize}
 \item Note: \url{#} denotes a comment in R, so the first four text lines will be ignored when we read in the data.
-\ei
+\end{myitemize}
 
 \end{frame}
 
@@ -131,7 +134,7 @@ L <- read.table(file="life_expectancy.txt",header=TRUE)
 
 Now, let's check on the data. To see the first three rows,
 
-<<LE_rows,results="markup">>=
+<<LE_rows>>=
 L[1:3,]
 @
 
@@ -142,9 +145,447 @@ Also, \texttt{1:3} is the sequence \texttt{1,2,3} and the blank space after the 
 
 \end{frame}
 
-\begin{frame}
-\frametitle{}
+\begin{frame}[fragile]
+\frametitle{Matrices and their dimensions}
+Mathematically, we write \altdisplaymath{
+L
+%=[\ell_{ij}]
+=\left[
+\begin{array}{cccc}
+\ell_{11} & \ell_{12} & \dots & \ell_{1n} \\
+\ell_{21}& \ell_{22} & \dots & \ell_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+\ell_{m1} & \ell_{m2} & \dots & \ell_{mn} 
+\end{array}
+\right]
+}.
+
+We say \mymath{L} is a matrix with \myemph{dimension} \mymath{m\times n}. To get the dimension in R,
+<<dim>>=
+dim(L)
+@
+
+\vspace{2mm}
+
+We can also get the number of rows and columns separately,
+<<row+col>>=
+cat("number of rows = ", nrow(L), 
+  "; number of columns = ", ncol(L))
+@
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Vectors}
+A single row or column of a matrix is called a \myemph{vector}. For example, we can set \code{y} to be total life expectancy, combining men and women,
+<<vec>>=
+y <- L[,4]
+y[1:3]
+@
+
+\question: We read the assignment operator \code{<-} as ``\code{y} gets \code{L[,4]}''.
+We could have written \code{y=L[,4]}. 
+However, \code{<-} is slightly better coding practice than \code{=}. Why?
+
+\vspace{3mm}
+
+Mathematically, we write \altdisplaymath{y=\left[
+\begin{array}{c}
+y_{1}\\
+y_{2}\\
+\vdots \\
+y_{m} 
+\end{array}
+\right]
+ =
+\left[
+\begin{array}{c}
+L_{14}\\
+L_{24}\\
+\vdots \\
+L_{m4} 
+\end{array}
+\right]
+}
+ 
+We see that \mymath{y} is a \mymath{m\times 1} matrix. 
+We call \mymath{y} a \myemph{column vector}.
+A row of \mymath{L} is a \mymath{1\times n} matrix called a \myemph{row vector}.
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Vectors in R}
+
+For R, vectors are not matrices. 
+The dimension of length  \code{1} is dropped, and the vector has a \code{length} but not a \code{dim}.
+\begin{columns}[T] 
+\begin{column}{.3\textwidth}
+<<dim_for_vec>>=
+dim(y)
+@
+\end{column}
+\begin{column}{0.1\textwidth}
+\end{column}
+\begin{column}{0.4\textwidth}
+<<length_for_vec>>=
+length(y)
+@
+\end{column}
+\end{columns}
+We can extract the components of a vector. For example, to obtain the increase in life expectancy each year over the previous year,
+<<e0_gain>>=
+g <- y[2:length(y)] - y[1:(length(y)-1)] 
+@
+Since the increase is not defined for the first year life expectancy is measured, let's set
+<<e0_gain_with_na>>=
+g <- c(NA,g)
+g[1:8]
+@
+Note: here we've seen two of R's special non-numeric values. \code{NULL} means ``doesn't exist''. \code{NA} means ``not available'' or ``missing''. Data matrices can have \code{NA} entries but not \code{NULL}. R tries to treat missing data appropriately. 
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Numeric, logical and character data in R}
+\myemph{Numeric data} are matrices and vectors whose entries are numbers.
+\myemph{Qualitative data} are \myemph{character strings}.
+\myemph{Logical data} are \code{TRUE} or \code{FALSE}.
+\begin{columns}[T] 
+\begin{column}{.45\textwidth}
+<<numeric_vec>>=
+g[1:4]
+@
+\end{column}
+\begin{column}{0.45\textwidth}
+<<logical_vec>>=
+L_up_logical <- g>0
+L_up_logical[1:4]
+@
+\end{column}
+\end{columns}
+
+\vspace{3mm}
+
+<<character_vec>>=
+L_up_qualitative <- ifelse(g>0,"increased","decreased")
+L_up_qualitative[1:4]
+@
+
+\vspace{3mm}
+
+The \code{class} function tells us what data type R is working with
+
+\begin{columns}[T] 
+\begin{column}{.25\textwidth}
+<<>>=
+class(g)
+@
+\end{column}
+\begin{column}{0.3\textwidth}
+<<>>=
+class(L_up_logical)
+@
+\end{column}
+\begin{column}{0.35\textwidth}
+<<>>=
+class(L_up_qualitative)
+@
+\end{column}
+\end{columns}
+
+\vspace{2mm}
+
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{Getting help with R}
+Learning a computing language is sometimes frustrating.
+Please proceed in the following order
+\begin{enumerate}
+\item The R help, e.g., type \code{?ifelse}) for information on the syntax of \code{ifelse}.
+\item The internet, e.g., google ``R ifelse''.
+\item Classmates. 
+\item Office hours, start-and-end of class, lab
+\item Email to instructor and/or GSI.
+\end{enumerate}
+For detailed email help, please construct and email a simple example demonstrating the issue. Sometimes, the issue gets resolved by writing it out!
+
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{R data structures: dataframes and matrices}
+
+\vspace{-3mm}
+
+\begin{myitemize}
+
+%\bi
+%\item 
+%The mathematics of \myemph{linear algebra} uses numeric matrices and vectors.
+%\bi
+\item A matrix in R must have all entries of the same type. 
+The mathematics of fitting a linear statistical model will require type to be numeric.
+
+\item For example, to convert data to a numeric representation for statistical analysis, \code{L_up_logical} or \code{L_up_qualitative} could be coded using \code{0} for \code{FALSE} (or \code{"decreased"}) and \code{1} for \code{TRUE} (or \code{"increased"}).
+
+
+\item A dataframe in R may have different types in each column. Data are usually stored in dataframes, e.g., \code{read.table()} generates a dataframe.  
+\end{myitemize}
+
+\vspace{-2mm}
+
+\begin{columns}[T] 
+\begin{column}{.4\textwidth}
+<<>>=
+class(L)
+@
+\end{column}
+\begin{column}{0.45\textwidth}
+<<>>=
+L_matrix <- as.matrix(L)
+class(L_matrix)
+@
+\end{column}
+\end{columns}
+\begin{myitemize}
+\item For many purposes, dataframes and matrices behave the same.
+\end{myitemize}
+
+\vspace{-2mm}
+
+Innuit have many words for snow {(\url{wikipedia:Eskimo_words_for_snow})} and R has many ways of working with data. To do effective data analysis, these are worth learning!
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Subsetting matrices and vectors in R}
+
+\vspace{-2mm}
+
+\begin{myitemize}
+\item
+Vectors and matrices can be subsetted using logical vectors.
+Each entry of a vector (or row/column of a matrix) is included if the logical vector is \code{TRUE} and excluded if \code{FALSE}.
+%The length of the logical vector should match the length of the vector subsetted, or the dimension of a matrix being subsetted.
+
+\item Rows and columns can be selected using row and column names:
+\end{myitemize}
+
+<<,echo=F,cache=F>>=
+op <- options()
+options(width=22)
+@
+
+\begin{columns}[T] 
+\begin{column}{.4\textwidth}
+<<rownames>>=
+colnames(L)
+@
+\end{column}
+\begin{column}{0.1\textwidth}
+\end{column}
+\begin{column}{0.4\textwidth}
+<<>>=
+rownames(L)[1:8]
+@
+\end{column}
+\end{columns}
+
+<<,echo=F,cache=F>>=
+options(op)
+@
+
+\vspace{3mm}
+
+{\bf Example}: What is computed below. Can you find any interpretation?
+
+<<subsetting_using_logical>>=
+L[g<0,"Year"]
+@
+
+\vspace{20mm}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Building matrices and vectors in R}
+The \code{c()} function concatenates numbers into vectors, and also concatenates vectors into longer vectors.
+\begin{columns}[T] 
+\begin{column}{.2\textwidth}
+<<>>=
+u <- c(1,2) 
+u
+@
+\end{column}
+\begin{column}{0.2\textwidth}
+<<>>=
+v <- c(3,4) 
+v
+@
+\end{column}
+\begin{column}{0.3\textwidth}
+<<>>=
+w <- c(u,v) 
+w
+@
+\end{column}
+\end{columns}
+
+\vspace{2mm}
+
+We can build a matrix using \code{matrix()}. Also, we can get a matrix by  binding together vectors either as rows or columns.
+\begin{columns}[T] 
+\begin{column}{0.37\textwidth}
+<<>>=
+A <- matrix(1:6,nrow=2)
+A
+@
+\end{column}
+\begin{column}{0.25\textwidth}
+<<>>=
+B <- rbind(u,v) 
+B
+@
+\end{column}
+\begin{column}{0.25\textwidth}
+<<>>=
+C <- cbind(u,v) 
+C
+@
+\end{column}
+\end{columns}
+
+\vspace{3mm}
+
+{\bf Exercises}. What would \code{cbind(A,B)} produce? Play with these functions. Check out \code{?matrix} to get the syntax of this command.
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Continuing our health economics case study}
+
+\vspace{-5mm}
+
+We looked at data on mortality. 
+We'll use Bureau of Labor Statistics data on unemployment as a measure of the business cycle.
+
+\vspace{-5mm}
+
+\begin{verbatim}
+# Data extracted on: February 4, 2016 
+# from http://data.bls.gov/timeseries/LNU04000000
+# Percent unemployment, age 16+, not seasonally adjusted
+Year,Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec
+1948,4.0,4.7,4.5,4.0,3.4,3.9,3.9,3.6,3.4,2.9,3.3,3.6
+1949,5.0,5.8,5.6,5.4,5.7,6.4,7.0,6.3,5.9,6.1,5.7,6.0
+\end{verbatim}
+
+\vspace{-3mm}
+
+<<read_u>>=
+U <- read.table(file="unemployment.csv",sep=",",header=TRUE)
+U[1:2,]
+@
+
+Note: the data are in a comma separated variable (csv) format, so we use \code{read.table(..., sep=",",...)}.
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Averaging columns in R}
+We want annual average unemployment. For each row, we must average columns \code{2:13}.
+<<>>=
+u <- apply(U[,2:13],1,mean)
+u[1:6]
+@
+\begin{myitemize}
+\item
+\code{apply()} is a useful function for manipulating data matrices. Learn to use it!
+\item 
+The middle argument \code{1} to \code{apply()} asks for the function \code{mean()} to be applied to each row. 
+\item
+Setting \code{2} would give the average over rows for each column.
+\item 
+Remember: \code{apply(U,1,...)} gives a vector of length \code{dim(U)[1]}, and \code{apply(U,2,...)} gives a vector of length \code{dim(U)[2]}.
+\end{myitemize}
+\begin{columns}[T] 
+\begin{column}{0.2\textwidth}
+<<>>=
+dim(U)
+@
+\end{column}
+\begin{column}{0.35\textwidth}
+<<>>=
+length(apply(U,1,mean))
+@
+\end{column}
+\begin{column}{0.35\textwidth}
+<<>>=
+length(apply(U,2,mean))
+@
+\end{column}
+\end{columns}
+
+\end{frame}
+
+<<,echo=F>>=
+par(mai=c(1,0.5,0,0))
+@
+
+\begin{frame}[fragile]
+\frametitle{Plotting the data}
+\begin{columns}[T] 
+\begin{column}{0.45\textwidth}
+<<fig_L,eval=F,echo=T>>=
+plot(L$Year,y,type="line",
+  xlab="Year",
+  ylab="Life expectancy")
+@
+
+<<fig_L_eval,fig.width=5,fig.height=4,echo=F>>=
+<<fig_L>>
+@
+\end{column}
+\begin{column}{0.45\textwidth}
+<<fig_U,eval=F,echo=T>>=
+plot(U$Year,u,
+  xlab="Year",
+  ylab="Unemployment")
+@
+<<fig_U_eval,fig.width=5,fig.height=4,echo=F>>=
+<<fig_U>>
+@
+\end{column}
+\end{columns}
+
+\vspace{3mm}
+
+\begin{myitemize}
+\item A basic rule of applied statistics is to plot the data.
+\item Carefully designed plots can reveal secrets in the data: (i) label axes; (ii) lines or points or both; (iii) any other creative ideas? 
+\item This course will use the basic \code{plot()} function. A powerful modern approach to graphics is the ``grammar of graphics'' in the \code{ggplot2} package, taught in STATS 306.
+\end{myitemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Detrending life expectancy}
+Life expectancy shows an \myemph{increasing trend}. We're interested in whether it is above or below trend. 
 \end{frame}
 
 \end{document}
+
+\begin{frame}[fragile]
+\frametitle{}
+\end{frame}
+
 
