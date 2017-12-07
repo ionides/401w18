@@ -1,14 +1,16 @@
 %\documentclass[handout]{beamer}
 \documentclass{beamer}
 
-\input{header.tex}
+\input{../header.tex}
 
-\renewenvironment{knitrout}{\vspace{-3mm}}{\vspace{-5mm}}
+% used for \utilde in alternative vector notation
+\usepackage{undertilde}
+
 
 \begin{document}
 
 % knitr set up
-<<knitr_opts,echo=F,cache=F>>=
+<<knitr_opts,echo=F,cache=F,purl=F>>=
 library(knitr)
 opts_chunk$set(
 #  cache=FALSE,
@@ -55,7 +57,7 @@ n <- length(e0)
 @
 
 \begin{frame}
-\frametitle{Linear algebra for statistics}
+\frametitle{Linear algebra for applied statistics}
 
 \vspace{-2mm}
 
@@ -65,38 +67,52 @@ n <- length(e0)
 \item A \myemph{vector} of length \mymath{n} is also called an \mymath{n}-\myemph{tuple}, or an \myemph{ordered sequence} of length \mymath{n}. 
 \item We can suppose that each data point is a \myemph{real number}. We write \mymath{\Rspace} for the set of real numbers, and \mymath{\Rspace^n} for the set of vectors of \mymath{n} real numbers.
 \item Write the US life expectancy at birth for \Sexpr{L$Year[n-4]} to \Sexpr{L$Year[n]} as
-\mymath{y=(y_1,y_2,y_3,y_4,y_5)=( \Sexpr{myround(e0[n],1)},\Sexpr{myround(e0[n-1])},\Sexpr{myround(e0[n-2],1)},\Sexpr{myround(e0[n-3],1)},\Sexpr{myround(e0[n-4],1)} )}.
-\item We see \mymath{y\in\Rspace^5}. Numerical data can always be written as a vector in \mymath{\Rspace^n} where \mymath{n} is the number of datapoints. Categorical data can also be written as a vector in \mymath{\Rspace^n} by assigning a number for each category.
+\mymath{\vec{y}=(y_1,y_2,y_3,y_4,y_5)=( \Sexpr{myround(e0[n],1)},\Sexpr{myround(e0[n-1])},\Sexpr{myround(e0[n-2],1)},\Sexpr{myround(e0[n-3],1)},\Sexpr{myround(e0[n-4],1)} )}.
+\item We see \mymath{\vec{y}\in\Rspace^5}. Numerical data can always be written as a vector in \mymath{\Rspace^n} where \mymath{n} is the number of datapoints. Categorical data can also be written as a vector in \mymath{\Rspace^n} by assigning a number for each category.
+\item Note that we use a bold font for vectors, and an italic font for the \myemph{components} of the vector. 
 \end{myitemize}
 
-\vspace{-2mm}
 
-\question: You may or may not have seen vectors in other contexts. In physics, a vector is a quantity with magnitude and direction. How does that fit in with our definition?
-
-\vspace{15mm}
-
+%\vspace{-2mm}
 \end{frame}
 
 %\end{document}
 
 \begin{frame}[fragile]
+\frametitle{More perspectives on vectors}
+
+\question: You may or may not have seen vectors in other contexts. In physics, a vector is a quantity with magnitude and direction. How does that fit in with our definition?
+
+\vspace{25mm}
+
+\question: How can I distinguish vectors using handwriting, when a bold font is not possible?
+
+\uncover<2->{
+An underscore is a conventional handwritten alternative to a bold font, so \m{\vec{x}} is equivalent to \m{\utilde{x}}.
+In physics and mathematics, vectors are sometimes written as \m{\stackrel{\to}{x}}, but we will not do that here.
+}
+
+\end{frame}
+
+
+%\end{document}
+
+
+\begin{frame}[fragile]
 \frametitle{Adding vectors and multiplying by a scalar: Example}
 \begin{myitemize}
 \item
-For a dataset, the \myemph{index} \m{i} of the \myemph{component} \m{y_i} of the vector \m{y} might correspond to a measurement on the \m{i}th member of a population, the outcome of the \m{i}th group in an experiment, or the \m{i}th observation out of a sequence of observations on a system.
+For a dataset, the \myemph{index} \m{i} of the component \m{y_i} of the vector \m{y} might correspond to a measurement on the \m{i}th member of a population, the outcome of the \m{i}th group in an experiment, or the \m{i}th observation out of a sequence of observations on a system.
 Generically, we will call \m{i} an \myemph{observational unit}, or just \myemph{unit}.
 \item
 We might want to add two quantities \m{u_i} and \m{v_i} for unit \m{i}.
 \item
-Using vector notation, if \mymath{u=(u_1,u_2,\dots,u_n)}, \mymath{v=(v_1,v_2,\dots,v_n)} and \mymath{y=(y_1,y_2,\dots,y_n)} we define the \myemph{vector sum} \mymath{y=u+v} to be the \myemph{componentwise sum} \m{y_i=u_i+v_i}, adding up the corresponding components for each unit.
+Using vector notation, if \mymath{\vec{u}=(u_1,u_2,\dots,u_n)}, \mymath{\vec{v}=(v_1,v_2,\dots,v_n)} and \mymath{\vec{y}=(y_1,y_2,\dots,y_n)} we define the \myemph{vector sum} \mymath{\vec{y}=\vec{u}+\vec{v}} to be the \myemph{componentwise sum} \m{y_i=u_i+v_i}, adding up the corresponding components for each unit.
 \item 
 We might also want to rescale each component by the same factor. 
 To change a measurement \m{y_i} in inches to a new measurement \m{z_i} in mm, we rescale with the \myemph{scalar} \m{\alpha=25.4}. 
 We want \m{z_i=\alpha y_i} for each \m{i}. 
-This is written in vector notation as \myemph{multplication of a vector by a scalar}, \m{z=\alpha y}.
-%\item
-%In statistics, vectors are so common that we don't use a special type face to distinguish them from scalars.  
-%When we are computing, or writing formulas, we should bear in mind if 
+This is written in vector notation as \myemph{multplication of a vector by a scalar}, \m{\vec{z}=\alpha \vec{y}}.
 \item
 Keep track of whether each object is a scalar, a vector (what is its length?) or a matrix (what are its dimensions?).
 \end{myitemize} 
@@ -117,33 +133,354 @@ First, set up notation.
 
 Let \mymath{x_i} be the first pH measurement in lake \mymath{i}, for \mymath{i\in\{1,2,\dots,10\}}.
 
-Then, \mymath{x=(x_1,\dots,x_{10})} is the vector of the first pH measurement in each of the 10 lakes.
+Then, \mymath{\vec{x}=(x_1,\dots,x_{10})} is the vector of the first pH measurement in each of the 10 lakes.
  
-Let \mymath{y=(y_1,\dots,y_{10})} be the vector of second measurements. 
+Let \mymath{\vec{y}=(y_1,\dots,y_{10})} be the vector of second measurements. 
 
-Let \mymath{\mu=(\mu_1,\dots,\mu_{10})} be the average pH for each of the 10 lakes.
+Let \mymath{\vec{\mu}=(\mu_1,\dots,\mu_{10})} be the average pH for each of the 10 lakes.
 }
 
 \uncover<3->{
 For each lake \mymath{i}, the mean is \mymath{\mu_i = \frac{1}{2}(x_i+y_i)}. In vector notation,
-this is \mymath{\mu = \frac{1}{2}(x+y)}.
+this is \mymath{\vec{\mu} = \frac{1}{2}(\vec{x}+\vec{y})}.
 }
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Vectors and scalars in R}
+
+\vspace{-2mm}
+
 \begin{myitemize}
 \item
 We have seen in Chapter 1 that R has vectors. 
-An R vector of length 1 could be called a scalar. 
+An R vector of length 1 is a scalar. 
 \item
 You can check that R follows the usual mathematical rules of vector addition and multiplication by a a scalar.
+\end{myitemize}
+\begin{columns}[T] 
+\begin{column}{0.3\textwidth}
+<<>>=
+x <- c(1,2,3)
+y <- c(4,5,6)
+@
+\end{column}
+\begin{column}{0.3\textwidth}
+<<>>=
+x+y 
+@
+\end{column}
+\begin{column}{0.3\textwidth}
+<<>>=
+3*x
+@
+\end{column}
+\end{columns}
+\begin{myitemize}
+\item R also allows adding a scalar to a vector
+\end{myitemize}
+\begin{columns}[T]
+\begin{column}{0.3\textwidth}
+<<>>=
+x <- c(1,2,3)
+@
+\end{column}
+\begin{column}{0.3\textwidth}
+<<>>=
+x+2 
+@
+\end{column}
+\begin{column}{0.3\textwidth}
+\end{column}
+\end{columns}
+\begin{myitemize}
+\item Mathematically, adding scalars to vectors is not allowed. Instead, we define the \myemph{vector of ones}, \m{\vec{1}=(1,1,\dots,1)}, and write \m{\vec{x}+ 2\times \vec{1}}.
+\end{myitemize}
+
+\vspace{-2mm}
+
+\question: Why does R break the usual rules of mathematics here?
+
+\vspace{10mm}
+
+\end{frame}
+
+%\newcommand{\Amat}{A}
+%\newcommand{\Aelement}{a}
+
+\begin{frame}[fragile]
+\frametitle{Matrices}
+\begin{myitemize}
+\item Matrices provide a way to store and manipulate \m{p} quantitites for each of \m{n} units.
+\item An \m{n\times p} matrix \m{\mat{A}} is a numerical array with \m{n} rows and \m{p} columns,
+\altdisplaymath{
+\mat{A} = \mymatrix{a}{n}{p}.
+}
+\item
+Data that have the form of a matrix are called \myemph{rectangular}.
+\item
+Many common datasets are rectangular, consisting of multiple variables collected on a groups of individual units.
+\item
+We will use blackboard bold capital letters, \m{\mat{A}}, \m{\mat{B}}, \m{\mat{X}}, \m{\mat{Z}}, etc, for matrices. 
+We are keeping plain capital letters to use for random variables.
+\item We say \m{\mat{A}=[a_{ij}]_{n\times p}} as an abbreviation for writing the full \m{n\times p} matrix.
+\end{myitemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Matrix times vector multiplication}
+\begin{myitemize}
+\item 
+A linear system of \m{n} equations with \m{p} unknown variables, \m{x_1,\dots,x_p} is
+\mydisplaymath{
+%\left.
+\begin{array}{ccccccccc}
+a_{11}x_1 &+& a_{12}x_2 &+& \dots &+& a_{1p}x_p &=& b_1 \\
+a_{21}x_1 &+& a_{22}x_2 &+& \dots &+& a_{2p}x_p &=& b_2 \\
+\vdots    & &           & &       & & \vdots    & & \vdots \\
+a_{n1}x_1 &+& a_{n2}x_2 &+& \dots &+& a_{np}x_p &=& b_n 
+\end{array}
+%\hspace{20mm}
+%\right\} \hfill (1)
+}
+We define matrix multiplication \m{\mat{A}\vec{x}=\vec{b}} to match this linear system. So,
+\mydisplaymath{
+\mymatrix{a}{n}{p}
+\myvector{x}{p}
+=
+\myvector{b}{n}
+%\hfill (2)
+}
+is exactly equivalent to the collection of \m{p} linear equations above.
+\item
+Mechanically, the \m{i}th component of \m{\mat{A}\vec{x}} is found by multiplying each term in the \m{i}th row of \m{\mat{A}} with corresponding terms in the \myemph{column vector} \m{\vec{x}}, and adding these contributions.  See homework for practice!
+\end{myitemize}
+
+\end{frame}
+
+%\end{document}
+
+\begin{frame}[fragile]
+\frametitle{Column vectors and row vectors}
+\begin{myitemize}
+\item
+In the matrix times vector multiplication on the previous slide, the vector \m{\vec{x}} is written in a column, as a \m{p\times 1} matrix.
+\item 
+We say that that \m{\vec{x}} is a \myemph{column vector}. We interpret a vector \m{\vec{x}} as a column vectors unless we explicitly say it is a \m{1\times p} \myemph{row vector}. 
+\item
+Similarly, \m{\vec{b}} in the previous slide is a length \m{n} column vector.
+\item
+R matches our notation: a vector in R is not a matrix, but is interpreted as a column vector for matrix times vector multiplication. R uses \code{\%*\%} to denote matrix multiplication.
+\end{myitemize}
+\begin{columns}[T] 
+\begin{column}{0.22\textwidth}
+<<>>=
+x <- c(1,2)
+is(x,"matrix")
+is(x,"vector")
+@
+\end{column}
+\begin{column}{0.35\textwidth}
+<<>>=
+A <- matrix(
+  c(1,0,0,-1), nrow=2)
+A %*% x
+@
+\end{column}
+\begin{column}{0.33\textwidth}
+<<>>=
+xx <- matrix(x,ncol=2)
+
+A %*% x
+@
+\end{column}
+\end{columns}
+
+ 
+\end{frame}
+
+%\end{document}
+
+
+\begin{frame}[fragile]
+\frametitle{Does a system of linear equations have no solution? One solution? Many solutions?}
+\begin{myitemize}
+\item One linear equation in one unknown, \m{ax=u}, has a unique solution unless \m{a=0}.
+\item One linear equation with two unknowns, \m{ax+by=u}, has a solution consisting of all points on a line in the \m{x-y} plane, as long as one of \m{a} and \m{b} is nonzero.
+\item Two linear equations with two unknowns, 
+\altdisplaymath{
+\begin{array}{ccccc}
+ax &+& by &=& u \\
+cx &+& dy &=& v
+\end{array}
+},
+have a unique solution where the lines \m{ax+by=u} and \m{cx+dy=v} intersect, so long as these lines are not parallel.
+\item Three linear equations in two unknowns will not usually have a solution---the three corresponding lines would all have to meet at a common point. 
+\item Can you see the general pattern?
+\end{myitemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Does a system of linear equations have no solution? One solution? Many solutions? Continued...}
+\begin{myitemize}
+\item For three unknowns, an equation \m{ax+by+cz=u} corresponds to a plane in three-dimensional space.
+\item Three planes will typically intersect at a single point, so three equations in three unknowns will typically have a unique solution.
+\item Two planes that are not parallel will meet along a line, and give a family of solutions.
+\item Four or more planes will typically not all meet at any point.
+\item In higher dimensions, we can't visualize but the pattern remains true.
+\item With \m{n} equations in \m{p} unknowns we expect a unique solution when \m{p=n}, no
+solution when \m{p<n} and a family of solutions when \m{p>n}.
+\end{myitemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Using matrices to solve a system of linear equations}
+\begin{myitemize}
+\item
+We've seen how matrices can represent a system of linear equations as \m{\mat{A}\vec{x}=\vec{b}}.
+\item
+For a basic linear algebra equation \m{ax=b} we would divide through by \m{a}, or equivalently multiply through by \m{a^{-1}}, to find \m{x=a^{-1}b} when \m{a\neq 0}.
+\item Is there a \myemph{matrix inverse} \m{\mat{A}^{-1}} such that \m{\vec{x}=\mat{A}^{-1}\vec{b}}?
+\item We will see that there is an inverse \m{\mat{A}^{-1}} when the system of linear equations has a unique solution. Since software can compute this inverse, we can solve systems of linear equations easily. 
+This is useful in statistics for fitting linear models to datasets.
+Understanding when this inverse exists, and what to do when it doesn't, will help us develop appropriate models for data analysis.
+\item From the previous slide, we can only expect \m{\mat{A}^{-1}} to exist when \m{p=n}, in which case \m{\mat{A}} is called a \myemph{square matrix}.
+\end{myitemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Multiplying two matrices}
+\begin{myitemize}
+\item Let \m{\mat{A}=[a_{ij}]_{n\times p}} and \m{\mat{X}=[x_{ij}]_{p\times q}} be two matrices. 
+\item The columns of \m{\mat{X}} can be written as \m{\vec{x}_1}, \m{\vec{x}_2}, $\dots$, \m{\vec{x}_q}.
+\item \m{\mat{X}} consists of these \m{q} columns glued together, so \m{\mat{X}=[\vec{x}_1\; \vec{x}_2 \; \vec{x}_3 \; \cdots \; \vec{x}_q]}.
+\item Here, \m{\vec{x}_j} is a vector whose \m{i}th component is \m{x_{ij}}. 
+\item We define the \myemph{matrix product} \m{\mat{A}\mat{X}} by gluing together the matrix times vector products for each column of \m{\mat{X}}, so
+\m{\mat{A}\mat{X} = [\mat{A}\vec{x}_1\; \mat{A}\vec{x}_2 \; \mat{A}\vec{x}_3 \; \cdots \; \mat{A}\vec{x}_q]}.
+\item From this definition, we see:\\
+\begin{enumerate}
+\item The \m{(i,j)} entry of \m{\mat{A}\mat{X}} is found by sliding the \m{i}th row of \m{\mat{A}} down the \m{j}th column of \m{\mat{X}}, multiplying the corresponding terms and adding them. See homework for practice!\\
+\item \vspace{2mm} Since each product \m{\mat{A}\vec{x}_j} is a vector of length \m{n}, the dimension of \m{\mat{A}\mat{X}} is \m{n\times q}. 
+So, the rule for the dimension of a matrix product is 
+\mydisplaymath{(n\times p)\times (p\times q) = (n\times q)}
+\item
+For the matrix product to exist, the number of columns of the first matrix must equal the number of rows of the second.
+\end{enumerate} 
+\end{myitemize} 
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{A matrix product example}
+
+\question: Let \m{\mat{U}=\left[\begin{array}{cc} 2& 2 \\ 1 & -1 \end{array}\right]} and
+\m{\mat{V}=\left[\begin{array}{cc} 3& 1 \\ 1 & 2 \end{array}\right]}. Calculate \m{\mat{U}\mat{V}}.
+
+\vspace{20mm}
+
+We can check our working in R. 
+\begin{columns}[T] 
+\begin{column}{0.3\textwidth}
+<<>>=
+(U <- matrix(
+   c(2,2,1,-1),2))
+@
+\end{column}
+\begin{column}{0.3\textwidth}
+<<>>=
+(V <- matrix(
+   c(3,1,1,2),2))
+@
+\end{column}
+\begin{column}{0.3\textwidth}
+<<>>=
+U %*% V
+
+@
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Matrix multiplication is not commutative}
+\begin{myitemize}
+\item
+Scalar multiplication (i.e., the usual multiplication of two real numbers) has the \myemph{commutative} property, \m{uv=vu}.
+\item
+Matrix multiplication does not usually have this property, e.g., 
+\end{myitemize}
+\begin{columns}[T] 
+\begin{column}{0.4\textwidth}
+<<>>=
+U %*% V
+@
+\end{column}
+\begin{column}{0.4\textwidth}
+<<>>=
+V %*% U
+@
+\end{column}
+\end{columns}
+\begin{myitemize}
+\item
+We are all very used to multiplication being commutative.  
+It takes practice to get used to the fact that matrix multiplication doesn't commute.
+\end{myitemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Addition of matrices and multiplication by a scalar}
+\begin{myitemize}
+\item
+We can add matrices componentwise, and multiply them by scalars, in exactly the same way we have already done for vectors.
+\item If \m{\mat{A}=[a_{ij}]_{p\times q}} and \m{\mat{B}=[b_{ij}]_{p\times q}} then the \myemph{matrix sum} \m{\mat{A}+\mat{B}} is {\small
+\mydisplaymath{
+\mymatrix{a}{p}{q}+\mymatrix{b}{p}{q} =
+\left[
+\begin{array}{cccc}
+(a_{11}+b_{11}) & (a_{12}+b_{12}) & \dots & (a_{1q}+b_{1q}) \\
+(a_{21}+b_{21})& (a_{22}+b_{22}) & \dots & (a_{2q}+b_{2q}) \\ 
+\vdots & \vdots & \ddots & \vdots \\
+(a_{p1}+b_{p1}) & (a_{p2}+b_{p2}) & \dots & (a_{pq}+b_{pq}) 
+\end{array}
+\right]
+}
+}
+
+Matrix multiplication does have a \myemph{distributive} property: 
+\m{\mat{U}(\mat{V}+\mat{W})=\mat{U}\mat{V} + \mat{U}\mat{W}},
+where matrix addition (just like vector addition) is carried out for each 
+\end{myitemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{The identity matrix}
+\begin{myitemize}
+\item The \m{p\times p} \myemph{identity matrix}, \m{\mat{I}_p}, is a square matrix with 1's on the diagonal and 0's everywhere else: 
+\mydisplaymath{
+  \mat{I}_p =  \left[
+\begin{array}{ccccc}
+1 & 0 &  0 & \dots & 0 \\
+0 & 1 &  0 & \dots & 0 \\
+0 & 0 &  1 & \dots & 0 \\
+\vdots & \vdots & & \ddots & \vdots \\
+0 & 0 & 0 &  \dots & 1 
+\end{array}
+\right]
+}
 \end{myitemize}
 \end{frame}
 
 
-
 \end{document}
+
+\end{frame}
 
 \begin{frame}[fragile]
 \frametitle{}

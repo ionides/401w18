@@ -1,3 +1,8 @@
+default: r-scripts pdf-docs
+
+r-scripts: notes02.R
+pdf-docs: notes02.pdf
+
 PDFLATEX = pdflatex
 BIBTEX = bibtex
 MAKEIDX = makeindex
@@ -8,7 +13,6 @@ REXE = R --vanilla
 RCMD = $(REXE) CMD
 RSCRIPT = Rscript --vanilla
 
-default: 
 
 %.pdf: export R_QPDF=qpdf
 %.pdf: export R_GSCMD=gs

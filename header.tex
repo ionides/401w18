@@ -12,6 +12,30 @@
 %\newcommand\Rspace{\mathscr{R}}
 \newcommand\Rspace{\mathcal{R}}
 
+\usepackage{amsmath}
+\renewcommand\vec[1]{\boldsymbol{\mathrm{#1}}}
+\newcommand\mat[1]{\mathbb{#1}}
+%\newcommand\mat[1]{\mathcal{#1}}
+\newcommand\mymatrix[3]{\left[
+\begin{array}{cccc}
+{#1}_{11} & {#1}_{12} & \dots & {#1}_{1{#3}} \\
+{#1}_{21}& {#1}_{22} & \dots & {#1}_{2{#3}} \\ 
+\vdots & \vdots & \ddots & \vdots \\
+{#1}_{{#2}1} & {#1}_{{#2}2} & \dots & {#1}_{{#2}{#3}} 
+\end{array}
+\right]
+}
+\newcommand\myvector[2]{\left[
+\begin{array}{c}
+{#1}_{1} \\
+{#1}_{2} \\
+\vdots \\
+{#1}_{{#2}}
+\end{array}
+\right]
+}
+
+
 \newcommand\bi{\begin{itemize}}
 \newcommand\ei{\end{itemize}}
 \newcommand\prob{\mathbb{P}}
@@ -34,8 +58,10 @@
 \renewcommand\emph[1]{{\it #1}} % the ulem package redefines \emph
 \renewcommand\em{\it} % the ulem package redefines \emph
 
+\usepackage{amssymb}
 \newenvironment {myitemize} {
-                 \begin{list}{\textcolor{blue}{$\bullet$} \hfill}
+                 \begin{list}{\textcolor{black}{$\bullet$} \hfill}
+%                 \begin{list}{\textcolor{blue}{{\small{$\blacktriangleright$}}} \hfill}
                  {\setlength{\labelwidth}{0.3 cm}
                   %\setlength{\leftmargin}{0em}
                   \setlength{\leftmargin}{0.15cm}
@@ -66,6 +92,8 @@
 %\newcommand\negAfterCode{\vspace{-3mm}}
 \newcommand\negBeforeCode{}
 \newcommand\negAfterCode{}
+
+\renewenvironment{knitrout}{\vspace{-3mm}}{\vspace{-5mm}}
 
 
 

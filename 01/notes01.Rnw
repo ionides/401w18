@@ -1,14 +1,14 @@
 %\documentclass[handout]{beamer}
 \documentclass{beamer}
 
-\input{header.tex}
+\input{../header.tex}
 
 \renewenvironment{knitrout}{\vspace{-3mm}}{\vspace{-5mm}}
 
 \begin{document}
 
 % knitr set up
-<<knitr_opts,echo=F>>=
+<<knitr_opts,echo=F,purl=F>>=
 library(knitr)
 opts_chunk$set(
 #  cache=FALSE,
@@ -59,7 +59,7 @@ Welcome!
 
 \vspace{3mm}
 
-{\bf Pre-requisites}: We will assume familiarity with material in STATS 250. All course notes and labs are at
+{\bf Pre-requisites}: We will assume familiarity with material in STATS 250. All course notes and labs for STATS 250 are at
 
 \url{open.umich.edu/find/open-educational-resources/statistics}
 
@@ -148,7 +148,7 @@ Also, \texttt{1:3} is the sequence \texttt{1,2,3} and the blank space after the 
 \begin{frame}[fragile]
 \frametitle{Matrices and their dimensions}
 Mathematically, we write \altdisplaymath{
-L
+\mat{L}
 %=[\ell_{ij}]
 =\left[
 \begin{array}{cccc}
@@ -160,7 +160,7 @@ L
 \right]
 }.
 
-We say \mymath{L} is a matrix with \myemph{dimension} \mymath{m\times n}. To get the dimension in R,
+We say \mymath{\mat{L}} is a matrix with \myemph{dimension} \mymath{m\times n}. To get the dimension in R,
 <<dim>>=
 dim(L)
 @
@@ -176,8 +176,12 @@ cat("number of rows = ", nrow(L),
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Vectors}
-A single row or column of a matrix is called a \myemph{vector}. For example, we can set \code{y} to be total life expectancy, combining men and women,
+\frametitle{Extracting rows and columns from a matrix}
+A single row or column of a matrix is a \myemph{vector}. 
+Vectors will be discussed more in Chapter~2.
+
+
+For example, we can set \code{y} to be total life expectancy, combining men and women, which is the fourth column of \code{L}, as follows.
 <<vec>>=
 y <- L[,4]
 y[1:3]
@@ -187,30 +191,7 @@ y[1:3]
 We could have written \code{y=L[,4]}. 
 However, \code{<-} is slightly better coding practice than \code{=}. Why?
 
-\vspace{3mm}
-
-Mathematically, we write \altdisplaymath{y=\left[
-\begin{array}{c}
-y_{1}\\
-y_{2}\\
-\vdots \\
-y_{m} 
-\end{array}
-\right]
- =
-\left[
-\begin{array}{c}
-L_{14}\\
-L_{24}\\
-\vdots \\
-L_{m4} 
-\end{array}
-\right]
-}
- 
-We see that \mymath{y} is a \mymath{m\times 1} matrix. 
-We call \mymath{y} a \myemph{column vector}.
-A row of \mymath{L} is a \mymath{1\times n} matrix called a \myemph{row vector}.
+\vspace{20mm}
 
 
 \end{frame}
@@ -238,7 +219,7 @@ We can extract the components of a vector. For example, to obtain the increase i
 <<e0_gain>>=
 g <- y[2:length(y)] - y[1:(length(y)-1)] 
 @
-Since the increase is not defined for the first year life expectancy is measured, let's set
+Since the increase is not defined for the first year life expectancy is measured, let's set the first increase to \code{NA}, 
 <<e0_gain_with_na>>=
 g <- c(NA,g)
 g[1:8]
@@ -326,10 +307,7 @@ For detailed email help, please construct and email a simple example demonstrati
 
 \begin{myitemize}
 
-%\bi
-%\item 
 %The mathematics of \myemph{linear algebra} uses numeric matrices and vectors.
-%\bi
 \item A matrix in R must have all entries of the same type. 
 The mathematics of fitting a linear statistical model will require type to be numeric.
 
@@ -374,12 +352,11 @@ Innuit have many words for snow {(\url{wikipedia:Eskimo_words_for_snow})} and R 
 \item
 Vectors and matrices can be subsetted using logical vectors.
 Each entry of a vector (or row/column of a matrix) is included if the logical vector is \code{TRUE} and excluded if \code{FALSE}.
-%The length of the logical vector should match the length of the vector subsetted, or the dimension of a matrix being subsetted.
 
 \item Rows and columns can be selected using row and column names:
 \end{myitemize}
 
-<<,echo=F,cache=F>>=
+<<,echo=F,cache=F,purl=F>>=
 op <- options()
 options(width=22)
 @
@@ -399,7 +376,7 @@ rownames(L)[1:8]
 \end{column}
 \end{columns}
 
-<<,echo=F,cache=F>>=
+<<,echo=F,cache=F,purl=F>>=
 options(op)
 @
 
@@ -537,7 +514,7 @@ length(apply(U,2,mean))
 
 \end{frame}
 
-<<,echo=F>>=
+<<plot_margins,echo=F>>=
 par(mai=c(1,0.5,0,0))
 @
 
