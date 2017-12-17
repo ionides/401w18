@@ -1,0 +1,69 @@
+---
+title: "Homework 1, STATS 401 W18"
+author: "Due in class on Wednesday 1/10"
+output:
+  html_document:
+    theme: flatly
+    toc: yes
+csl: ecology.csl
+---
+
+
+### Work through an R tutorial
+
+You should have R and RStudio installed (that was homework zero). 
+If you have never used R before, the following [swirl](http://swirlstats.com/) tutorial will get you started. 
+If you have used some R before, it is likely a good idea to work through the tutorial to make sure you have the required background for this course.
+More experienced users can help newer users get started.
+
+In R or RStudio, type ```install.packages("swirl")```  to download the ```swirl``` tutorial package from the internet. 
+Every line of code must be followed by the ```[ENTER]``` key, but usually we don't mention that. 
+The ```[ENTER]``` key is sometimes called ```[RETURN]```.
+
+Now ```swirl``` is installed on your computer, you can type ```library("swirl")``` to load the package into your R session.
+
+Finally, ```swirl()``` starts the tutorial program.
+Select ```1: R Programming``` by typing ```1 [ENTER]``` and then, again, hit ```1 [ENTER]``` to start ```lesson 1: Basic Building Blocks```.
+
+
+Repeat this with lesson ```3: Sequences of Numbers``` and ```4: Vectors```. We will not need the material in ```2: Workspace and Files``` but you can do this tutorial too if you have time. 
+
+The lessons are designed to take 10-20 minutes each. In addition to introducing some knowledge, they give your fingers a chance to start practicing coding in R. You will have a chance to ask ```swirl``` questions during lab. 
+If possible, bring your laptop to lab. 
+
+For your homework report, write a brief paragraph on what you did with ```swirl``` and the techical or conceptual obstacles (if any) that you encountered and (hopefully) overcame.
+
+------
+
+### A data manipulation exercise
+
+Here we will test some of the basics of R data manipulation which you should know or should have learned by following the tutorials above. 
+We will look at the data in [femaleMiceWeights.csv](https://ionides.github.io/401w18/hw/hw01/femaleMiceWeights.csv) taken from [a study of diabetes](http://diabetes.diabetesjournals.org/content/53/suppl_3/S215).
+```{r data, eval=F}
+mice <- read.table("https://ionides.github.io/401w18/hw/hw01/femaleMiceWeights.csv")
+```
+
+Read in the file femaleMiceWeights.csv and report the body weight of the mouse in the exact name of the column containing the weights.
+
+The ```[``` and ```]``` symbols can be used to extract specific rows and specific columns of the table. What is the entry in the 12th row and second column?
+
+You should have learned how to use the ```$``` character to extract a column from a table and return it as a vector. Use ```$``` to extract the weight column and report the weight of the mouse in the 11th row.
+
+The length function returns the number of elements in a vector. How many mice are included in our dataset?
+
+To create a vector with the numbers 3 to 7, we can use ```seq(3,7)``` or, because they are consecutive, ```3:7```. 
+View the data and determine what rows are associated with the high fat or hf diet. 
+Then use the ```mean``` function to compute the average weight of these mice.
+
+For your homework report, give answers to the questions above and the code used to generate them.
+If you already know Rmarkdown, this is a great tool for statistical writing and data analysis, and you can write your homework by editing the Rmarkdown document at https://ionides.github.io/401w18/hw/hw01/hw01.Rmd.
+If you don't know Rmarkdown yet, working it out may be too much for this homework; you can simply cut and paste from the homework document and an R session.
+
+
+------
+
+License: This material is provided under an [MIT license](https://ionides.github.io/401w18/LICENSE)<br>
+Acknowledgement: This homework is derived from http://genomicsclass.github.io/book
+
+
+------

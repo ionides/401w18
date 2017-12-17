@@ -45,10 +45,10 @@ Labs: Thursdays and Fridays
 
 ##  Grading
 
-* Weekly homeworks (20\%).
-* Two lab quizzes (5\%+5\%), in lab on February 1 or 2, and March 29 or 30.
-* Midterm exam (20\%), in class on Wednesday 2/21).
-* Final exam (50\%),  Tuesday, April 24, 4:00pm - 6:00pm
+* Weekly homeworks (20\%) due at the start of lab. Extensions will be granted upon request for up to two late homeworks. Subsequent late homeworks will receive no credit.
+* Two lab quizzes (5\%+5\%) in lab on February 1 or 2, and March 29 or 30.
+* Midterm exam (20\%) in class on Wednesday 2/21).
+* Final exam (50\%) on Tuesday, April 24, 4:00pm - 6:00pm
 
 Homework will be graded on completeness. 
 To get these points, the homework must include two statements titled "Sources" and "Please explain".

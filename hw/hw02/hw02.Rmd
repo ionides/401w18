@@ -1,0 +1,67 @@
+---
+title: "Homework 2, STATS 401 W18"
+author: "Due in class on Wednesday 1/17"
+output:
+  html_document:
+    theme: flatly
+    toc: yes
+csl: ecology.csl
+---
+
+
+### Investigating the regression effect
+
+We will look at a dataset on the heights of 928 children and their parents, taken from an 1886 article by [Francis Galton](https://en.wikipedia.org/wiki/Francis_Galton) on Regression Towards Mediocrity in Hereditary Stature (*Journal of the Anthropological Institute*, 15, 246-263).
+These data developed Galton's invention of the concept "regression to the mean."
+We can obtain them through the HistData library.
+
+```{r install_histdata,eval=F}
+install.packages("HistData")
+```
+
+```{r histdata}
+library("HistData")
+data("Galton")
+head(Galton)
+```
+
+
+<!--data("father.son",library="UsingR")-->
+Here, ```parent``` is the mean of father and mother height, in inches. ```child``` is child's height, multiplied by 1.08 for daughters. 
+Galton rounded in a curious way, so that parent mid-heights usually end in .5 and child heights usually end in .2.
+We will simply call these quantities the parent and child heights. 
+
+What is the average height of the children (don’t round off)?
+
+What is the average height of children with parent height between 70.0 and 71.0 inches?
+
+Plot the data appropriately. You will have to decide is "appropriate." 
+
+Find some numbers to quantify Galton's observation that the children of tall parents tend to be taller than average, yet less tall than their parents. Conversely, the children of short parents tend to be shorter than average, yet taller than their parents. This is called the *regression effect*.
+
+A regression effect for midterm and final scores would be as follows: students who do well in the midterm tend to do above average on the final, yet less well than in the midterm; students who do badly in the midterm tend to do below average in the final, yet better than they did in the midterm. Do you expect to see this regression effect in exam scores? Explain.
+
+
+### What does it mean for a statistical model to be linear?
+
+We say a statistical model is a linear model when we can write it as a linear combination of parameters and known covariates, plus random error terms. In the choices below, $Y_i$ models an observation at a time $t_i$ for $i=1,\dots,n$. Unknown parameters are represented with letters $a,b,c,d$, and measurement error on the $i$th obserservation is represented by $\epsilon_i$. If $t_i$ is known, then any transformation of $t_i$ is also known. So, for example, both $Y_i=a+bt_i+\epsilon_i$ and $Y_i=a+bf(t_i)+\epsilon_i$ are linear models for any nonlinear function $f(t)$. Which of the following cannot be written as a linear model?
+
+A) $\quad Y_i=a+bt_i+\epsilon_i$
+B) $\quad Y_i=a+b\cos(t_i)+\epsilon_i$
+C) $\quad Y_i=a+b^{t_i}+\epsilon_i$
+D) $\quad Y_i=a+bt_i+ct_i^2+dt_i^3+\epsilon_i$
+
+### How do we interpret the error term in a linear model?
+
+Suppose you model the relationship between weight and height across individuals with a linear model. You assume that the height of individual $i$ with weight $x_i$ follows a linear model,  $Y_i=a+bx_i+\epsilon_i$. Which of the following do you feel best describes what $\epsilon_i$ represents?
+
+A) Measurement error: scales are not perfect.
+B) Within individual random fluctuations: you don’t weigh the same in the morning as in the afternoon.
+C) Round off error introduced by the computer we use to analyze the data.
+D) Between individual variability: people of the same height vary in their weight.
+
+------
+
+Acknowledgement: this homework is derived from (http://genomicsclass.github.io/book)
+
+------

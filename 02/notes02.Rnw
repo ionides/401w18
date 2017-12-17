@@ -233,15 +233,15 @@ We are keeping plain capital letters to use for random variables.
 \item 
 A linear system of \m{n} equations with \m{p} unknown variables, \m{x_1,\dots,x_p} is
 \mydisplaymath{
-%\left.
+\left.
 \begin{array}{ccccccccc}
 a_{11}x_1 &+& a_{12}x_2 &+& \dots &+& a_{1p}x_p &=& b_1 \\
 a_{21}x_1 &+& a_{22}x_2 &+& \dots &+& a_{2p}x_p &=& b_2 \\
 \vdots    & &           & &       & & \vdots    & & \vdots \\
 a_{n1}x_1 &+& a_{n2}x_2 &+& \dots &+& a_{np}x_p &=& b_n 
 \end{array}
-%\hspace{20mm}
-%\right\} \hfill (1)
+\hspace{12mm}
+\right\} \hspace{2mm} (\mathrm{L1})
 }
 We define matrix multiplication \m{\mat{A}\vec{x}=\vec{b}} to match this linear system. So,
 \mydisplaymath{
@@ -251,7 +251,7 @@ We define matrix multiplication \m{\mat{A}\vec{x}=\vec{b}} to match this linear 
 \myvector{b}{n}
 %\hfill (2)
 }
-is exactly equivalent to the collection of \m{p} linear equations above.
+is exactly equivalent to the collection of \m{p} linear equations in (L1) above.
 \item
 Mechanically, the \m{i}th component of \m{\mat{A}\vec{x}} is found by multiplying each term in the \m{i}th row of \m{\mat{A}} with corresponding terms in the \myemph{column vector} \m{\vec{x}}, and adding these contributions.  See homework for practice!
 \end{myitemize}
@@ -324,12 +324,13 @@ have a unique solution where the lines \m{ax+by=u} and \m{cx+dy=v} intersect, so
 \begin{frame}[fragile]
 \frametitle{Does a system of linear equations have no solution? One solution? Many solutions? Continued...}
 \begin{myitemize}
-\item For three unknowns, an equation \m{ax+by+cz=u} corresponds to a plane in three-dimensional space.
+\item For three unknowns, an equation \m{ax+by+cz=u} corresponds to a plane in three-dimensional \m{(x,y,z)} space.
 \item Three planes will typically intersect at a single point, so three equations in three unknowns will typically have a unique solution.
 \item Two planes that are not parallel will meet along a line, and give a family of solutions.
 \item Four or more planes will typically not all meet at any point.
 \item In higher dimensions, we can't visualize but the pattern remains true.
-\item With \m{n} equations in \m{p} unknowns we expect a unique solution when \m{p=n}, no
+\item The general linear system we wrote previously in (L1) has \m{n} equations with \m{p} unknowns. 
+We expect a unique solution when \m{p=n}, no
 solution when \m{p<n} and a family of solutions when \m{p>n}.
 \end{myitemize}
 
@@ -379,20 +380,22 @@ For the matrix product to exist, the number of columns of the first matrix must 
 \question: Let \m{\mat{U}=\left[\begin{array}{cc} 2& 2 \\ 1 & -1 \end{array}\right]} and
 \m{\mat{V}=\left[\begin{array}{cc} 3& 1 \\ 1 & 2 \end{array}\right]}. Calculate \m{\mat{U}\mat{V}}.
 
-\vspace{20mm}
+\vspace{30mm}
 
 We can check our working in R. 
 \begin{columns}[T] 
 \begin{column}{0.3\textwidth}
 <<>>=
-(U <- matrix(
-   c(2,2,1,-1),2))
+U <- matrix(
+   c(2,2,1,-1),2)
+U
 @
 \end{column}
 \begin{column}{0.3\textwidth}
 <<>>=
-(V <- matrix(
-   c(3,1,1,2),2))
+V <- matrix(
+   c(3,1,1,2),2)
+V
 @
 \end{column}
 \begin{column}{0.3\textwidth}
@@ -435,25 +438,37 @@ It takes practice to get used to the fact that matrix multiplication doesn't com
 \begin{frame}[fragile]
 \frametitle{Addition of matrices and multiplication by a scalar}
 \begin{myitemize}
-\item
-We can add matrices componentwise, and multiply them by scalars, in exactly the same way we have already done for vectors.
-\item If \m{\mat{A}=[a_{ij}]_{p\times q}} and \m{\mat{B}=[b_{ij}]_{p\times q}} then the \myemph{matrix sum} \m{\mat{A}+\mat{B}} is {\small
+\item If \m{\mat{A}=[a_{ij}]_{p\times q}} and \m{\mat{B}=[b_{ij}]_{p\times q}} then the \myemph{matrix sum} \m{\mat{A}+\mat{B}} is computed componentwise, just like for vectors:
+{\small
 \mydisplaymath{
-\mymatrix{a}{p}{q}+\mymatrix{b}{p}{q} =
+\mysmallmatrix{a}{p}{q}+\mysmallmatrix{b}{p}{q} =
 \left[
-\begin{array}{cccc}
-(a_{11}+b_{11}) & (a_{12}+b_{12}) & \dots & (a_{1q}+b_{1q}) \\
-(a_{21}+b_{21})& (a_{22}+b_{22}) & \dots & (a_{2q}+b_{2q}) \\ 
-\vdots & \vdots & \ddots & \vdots \\
-(a_{p1}+b_{p1}) & (a_{p2}+b_{p2}) & \dots & (a_{pq}+b_{pq}) 
+\begin{array}{ccc}
+a_{11}+b_{11} & \dots & a_{1q}+b_{1q} \\
+\vdots & \ddots & \vdots \\
+a_{p1}+b_{p1} & \dots & a_{pq}+b_{pq} 
 \end{array}
 \right]
 }
 }
-
-Matrix multiplication does have a \myemph{distributive} property: 
-\m{\mat{U}(\mat{V}+\mat{W})=\mat{U}\mat{V} + \mat{U}\mat{W}},
-where matrix addition (just like vector addition) is carried out for each 
+\item \myemph{Scalar times matrix} multiplication is also computed componentwise:
+{\small
+\mydisplaymath{
+s\mat{A}=s
+\mysmallmatrix{a}{p}{q} =
+\left[
+\begin{array}{ccc}
+s\, a_{11} & \dots & s \, a_{1q} \\
+\vdots & \ddots & \vdots \\
+s\, a_{p1} & \dots & s\, a_{pq} 
+\end{array}
+\right]
+}
+}
+\item Scalar times matrix multiplication does commute: \m{s\mat{A} = \mat{A}s}.
+\item Matrix and scalar multiplication both have a \myemph{distributive} property: 
+\m{\mat{U}(\mat{V}+\mat{W})=\mat{U}\mat{V} + \mat{U}\mat{W}}, and
+\m{s(\mat{V}+\mat{W})=s\mat{V} + s\mat{W}}, 
 \end{myitemize}
 
 \end{frame}
@@ -461,20 +476,108 @@ where matrix addition (just like vector addition) is carried out for each
 
 \begin{frame}[fragile]
 \frametitle{The identity matrix}
+
+\vspace{-2mm}
+
 \begin{myitemize}
 \item The \m{p\times p} \myemph{identity matrix}, \m{\mat{I}_p}, is a square matrix with 1's on the diagonal and 0's everywhere else: 
 \mydisplaymath{
   \mat{I}_p =  \left[
 \begin{array}{ccccc}
-1 & 0 &  0 & \dots & 0 \\
-0 & 1 &  0 & \dots & 0 \\
-0 & 0 &  1 & \dots & 0 \\
-\vdots & \vdots & & \ddots & \vdots \\
-0 & 0 & 0 &  \dots & 1 
+1 & 0 & \dots & 0 \\
+0 & 1 & \dots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 &  \dots & 1 
 \end{array}
 \right]
 }
+\item Check that for any \m{p\times p} matrix \m{\mat{A}}, we have \m{\mat{I}_p\mat{A}=\mat{A}\mat{I}_p=\mat{A}}. Also, for any vector \m{\vec{v}\in \Rspace^p} we have \m{\mat{I}_p\vec{v}=\vec{v}}.
+\item We can often write \m{\mat{I}} in place of \m{\mat{I}_p} since the dimension of \m{\mat{I}} is always evident from the context. 
 \end{myitemize}
+
+\vspace{-2mm}
+
+\question. Suppose \m{\mat{B}} is a \m{n\times q} matrix and \m{\mat{I}} is an identity matrix.
+
+\vspace{-2mm}
+
+(i) If we write \m{\mat{B}\mat{I}}, what must be the dimension of \m{\mat{I}}? Find a simplification of \m{\mat{B}\mat{I}}.\\
+
+\vspace{5mm}
+
+(ii) How about if we write \m{\mat{I}\mat{B}}?
+
+\vspace{5mm}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Inverting a $2\times 2$ matrix}
+\begin{myitemize}
+\item Let \m{\mat{A}=\mytwomatrix{a}{b}{c}{d}} be a general \m{2\times 2} matrix.
+\item Then, \m{\mat{A}\mytwovector{x}{y}=\mytwovector{u}{v}} corresponds to a system of linear equations,
+\mydisplaymath{
+\left.
+\begin{array}{ccccc}
+ax &+& by &=& u \\
+cx &+& dy &=& v
+\end{array}
+\hspace{12mm}
+\right\}
+\hspace{6mm} 
+(\mathrm{L2})
+}
+\item Recall that the inverse \m{\mat{A}^{-1}} should solve this linear system, i.e., 
+ \mydisplaymath{\mytwovector{x}{y}=\mat{A}^{-1}\mytwovector{u}{v}}.
+
+\vspace{-3mm}
+
+\item We can solve a pair of linear equations by hand. First, we solve for \m{x} by eliminating \m{y}. We can rewrite (L2) as 
+
+\vspace{-4mm}
+
+\mydisplaymath{
+\begin{array}{ccccc}
+adx &+& bdy &=& du \\
+bcx &+& bdy &=& bv
+\end{array}
+\hspace{20mm}\begin{array}{c} (\mathrm{L3.1}) \\ (\mathrm{L3.2}) \end{array}
+}
+\item
+Subtracting (L3.2) from (L3.1) gives \m{(ad-bc)x = du-bv} and so \m{x=\frac{1}{ad-bc}(du-bv)}. 
+\end{myitemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Inverting a $2\times 2$ matrix, Continued...}
+\begin{myitemize}
+\item
+Next, we can find \m{y} by eliminating \m{x}. We rewrite (L2) as
+\mydisplaymath{
+\begin{array}{ccccc}
+acx &+& bcy &=& cu \\
+acx &+& ady &=& av
+\end{array}
+}
+Then subtraction gives \m{(ad-bc)y = av-cu}. 
+
+\item Collecting these results, we find
+\mydisplaymath{
+\mytwovector{x}{y} = \frac{1}{ad-bc}\mytwomatrix{d}{-b}{-c}{a} \mytwovector{u}{v}.
+}
+\item
+This gives us the formula,
+\mydisplaymath{
+%\box{
+ {\mytwomatrix{a}{b}{c}{d}}^{-1} = \frac{1}{ad-bc}\mytwomatrix{d}{-b}{-c}{a} 
+%}
+}
+
+\end{myitemize}
+
+
+
+
+
 \end{frame}
 
 
