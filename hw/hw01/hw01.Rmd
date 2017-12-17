@@ -1,6 +1,6 @@
 ---
 title: "Homework 1, STATS 401 W18"
-author: "Due in class on Wednesday 1/10"
+author: "Due in your lab on Thursday 1/11 or Friday 1/12"
 output:
   html_document:
     theme: flatly
@@ -16,34 +16,37 @@ If you have never used R before, the following [swirl](http://swirlstats.com/) t
 If you have used some R before, it is likely a good idea to work through the tutorial to make sure you have the required background for this course.
 More experienced users can help newer users get started.
 
-In R or RStudio, type ```install.packages("swirl")```  to download the ```swirl``` tutorial package from the internet. 
+In R or RStudio, type ```install.packages("swirl")```  to download the swirl tutorial package from the internet. 
 Every line of code must be followed by the ```[ENTER]``` key, but usually we don't mention that. 
 The ```[ENTER]``` key is sometimes called ```[RETURN]```.
 
-Now ```swirl``` is installed on your computer, you can type ```library("swirl")``` to load the package into your R session.
+Now swirl is installed on your computer, you can type ```library("swirl")``` to load the package into your R session.
 
 Finally, ```swirl()``` starts the tutorial program.
-Select ```1: R Programming``` by typing ```1 [ENTER]``` and then, again, hit ```1 [ENTER]``` to start ```lesson 1: Basic Building Blocks```.
+Select ```1: R Programming``` by typing ```1 [ENTER]``` and then, again, hit ```1 [ENTER]``` to start ```Lesson 1: Basic Building Blocks```.
 
 
-Repeat this with lesson ```3: Sequences of Numbers``` and ```4: Vectors```. We will not need the material in ```2: Workspace and Files``` but you can do this tutorial too if you have time. 
+Repeat this with ```Lesson 3: Sequences of Numbers``` and ```Lesson 4: Vectors```. We will not need the material in ```Lesson 2: Workspace and Files``` but you can do this tutorial too if you have time. 
 
-The lessons are designed to take 10-20 minutes each. In addition to introducing some knowledge, they give your fingers a chance to start practicing coding in R. You will have a chance to ask ```swirl``` questions during lab. 
+The lessons are designed to take 10-20 minutes each. In addition to introducing some knowledge, they give your fingers a chance to start practicing coding in R. You will have a chance to ask swirl questions during lab. 
 If possible, bring your laptop to lab. 
 
-For your homework report, write a brief paragraph on what you did with ```swirl``` and the techical or conceptual obstacles (if any) that you encountered and (hopefully) overcame.
+For your homework report, write a brief paragraph on what you did with swirl and the techical or conceptual obstacles (if any) that you encountered and (hopefully) overcame.
 
 ------
 
 ### A data manipulation exercise
 
 Here we will test some of the basics of R data manipulation which you should know or should have learned by following the tutorials above. 
-We will look at the data in [femaleMiceWeights.csv](https://ionides.github.io/401w18/hw/hw01/femaleMiceWeights.csv) taken from [a study of diabetes](http://diabetes.diabetesjournals.org/content/53/suppl_3/S215).
+We will look at the data in the file [femaleMiceWeights.csv](https://ionides.github.io/401w18/hw/hw01/femaleMiceWeights.csv) taken from [a study of diabetes](https://doi.org/10.2337/diabetes.53.suppl_3.S215).
+The body weight of mice (in grams) was measured after around two weeks on one of two diets (chow or high fat).
+These data are in comma separated variable (csv) format.
+You can read the data into R with
 ```{r data, eval=F}
-mice <- read.table("https://ionides.github.io/401w18/hw/hw01/femaleMiceWeights.csv")
+mice <- read.csv("https://ionides.github.io/401w18/hw/hw01/femaleMiceWeights.csv")
 ```
 
-Read in the file femaleMiceWeights.csv and report the body weight of the mouse in the exact name of the column containing the weights.
+Report the body weight of the first mouse and the exact name of the column containing the weights.
 
 The ```[``` and ```]``` symbols can be used to extract specific rows and specific columns of the table. What is the entry in the 12th row and second column?
 

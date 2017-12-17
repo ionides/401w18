@@ -9,7 +9,7 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="Due in class on Wednesday 1/10" />
+<meta name="author" content="Due in your lab on Thursday 1/11 or Friday 1/12" />
 
 
 <title>Homework 1, STATS 401 W18</title>
@@ -119,7 +119,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Homework 1, STATS 401 W18</h1>
-<h4 class="author"><em>Due in class on Wednesday 1/10</em></h4>
+<h4 class="author"><em>Due in your lab on Thursday 1/11 or Friday 1/12</em></h4>
 
 </div>
 
@@ -133,19 +133,19 @@ $(document).ready(function () {
 <div id="work-through-an-r-tutorial" class="section level3">
 <h3>Work through an R tutorial</h3>
 <p>You should have R and RStudio installed (that was homework zero). If you have never used R before, the following <a href="http://swirlstats.com/">swirl</a> tutorial will get you started. If you have used some R before, it is likely a good idea to work through the tutorial to make sure you have the required background for this course. More experienced users can help newer users get started.</p>
-<p>In R or RStudio, type <code>install.packages(&quot;swirl&quot;)</code> to download the <code>swirl</code> tutorial package from the internet. Every line of code must be followed by the <code>[ENTER]</code> key, but usually we don’t mention that. The <code>[ENTER]</code> key is sometimes called <code>[RETURN]</code>.</p>
-<p>Now <code>swirl</code> is installed on your computer, you can type <code>library(&quot;swirl&quot;)</code> to load the package into your R session.</p>
-<p>Finally, <code>swirl()</code> starts the tutorial program. Select <code>1: R Programming</code> by typing <code>1 [ENTER]</code> and then, again, hit <code>1 [ENTER]</code> to start <code>lesson 1: Basic Building Blocks</code>.</p>
-<p>Repeat this with lesson <code>3: Sequences of Numbers</code> and <code>4: Vectors</code>. We will not need the material in <code>2: Workspace and Files</code> but you can do this tutorial too if you have time.</p>
-<p>The lessons are designed to take 10-20 minutes each. In addition to introducing some knowledge, they give your fingers a chance to start practicing coding in R. You will have a chance to ask <code>swirl</code> questions during lab. If possible, bring your laptop to lab.</p>
-<p>For your homework report, write a brief paragraph on what you did with <code>swirl</code> and the techical or conceptual obstacles (if any) that you encountered and (hopefully) overcame.</p>
+<p>In R or RStudio, type <code>install.packages(&quot;swirl&quot;)</code> to download the swirl tutorial package from the internet. Every line of code must be followed by the <code>[ENTER]</code> key, but usually we don’t mention that. The <code>[ENTER]</code> key is sometimes called <code>[RETURN]</code>.</p>
+<p>Now swirl is installed on your computer, you can type <code>library(&quot;swirl&quot;)</code> to load the package into your R session.</p>
+<p>Finally, <code>swirl()</code> starts the tutorial program. Select <code>1: R Programming</code> by typing <code>1 [ENTER]</code> and then, again, hit <code>1 [ENTER]</code> to start <code>Lesson 1: Basic Building Blocks</code>.</p>
+<p>Repeat this with <code>Lesson 3: Sequences of Numbers</code> and <code>Lesson 4: Vectors</code>. We will not need the material in <code>Lesson 2: Workspace and Files</code> but you can do this tutorial too if you have time.</p>
+<p>The lessons are designed to take 10-20 minutes each. In addition to introducing some knowledge, they give your fingers a chance to start practicing coding in R. You will have a chance to ask swirl questions during lab. If possible, bring your laptop to lab.</p>
+<p>For your homework report, write a brief paragraph on what you did with swirl and the techical or conceptual obstacles (if any) that you encountered and (hopefully) overcame.</p>
 <hr />
 </div>
 <div id="a-data-manipulation-exercise" class="section level3">
 <h3>A data manipulation exercise</h3>
-<p>Here we will test some of the basics of R data manipulation which you should know or should have learned by following the tutorials above. We will look at the data in <a href="https://ionides.github.io/401w18/hw/hw01/femaleMiceWeights.csv">femaleMiceWeights.csv</a> taken from <a href="http://diabetes.diabetesjournals.org/content/53/suppl_3/S215">a study of diabetes</a>.</p>
-<pre class="r"><code>mice &lt;- read.table(&quot;https://ionides.github.io/401w18/hw/hw01/femaleMiceWeights.csv&quot;)</code></pre>
-<p>Read in the file femaleMiceWeights.csv and report the body weight of the mouse in the exact name of the column containing the weights.</p>
+<p>Here we will test some of the basics of R data manipulation which you should know or should have learned by following the tutorials above. We will look at the data in the file <a href="https://ionides.github.io/401w18/hw/hw01/femaleMiceWeights.csv">femaleMiceWeights.csv</a> taken from <a href="https://doi.org/10.2337/diabetes.53.suppl_3.S215">a study of diabetes</a>. The body weight of mice (in grams) was measured after around two weeks on one of two diets (chow or high fat). These data are in comma separated variable (csv) format. You can read the data into R with</p>
+<pre class="r"><code>mice &lt;- read.csv(&quot;https://ionides.github.io/401w18/hw/hw01/femaleMiceWeights.csv&quot;)</code></pre>
+<p>Report the body weight of the first mouse and the exact name of the column containing the weights.</p>
 <p>The <code>[</code> and <code>]</code> symbols can be used to extract specific rows and specific columns of the table. What is the entry in the 12th row and second column?</p>
 <p>You should have learned how to use the <code>$</code> character to extract a column from a table and return it as a vector. Use <code>$</code> to extract the weight column and report the weight of the mouse in the 11th row.</p>
 <p>The length function returns the number of elements in a vector. How many mice are included in our dataset?</p>
