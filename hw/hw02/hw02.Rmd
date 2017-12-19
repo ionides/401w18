@@ -8,6 +8,28 @@ output:
 csl: ecology.csl
 ---
 
+### Matrix exercises
+
+1. Multiplying two matrices.
+
+```{r randomMatrix}
+randomMatrix <- function(p,q,values=-4:4){
+   matrix(sample(values,size=p*q,replace=TRUE),p,q)
+}
+set.seed(1)
+A <- randomMatrix(2,2)
+B <- randomMatrix(2,2)
+A
+B
+```
+
+
+1. Inverting a matrix.
+
+2. Transposing a matrix.
+
+3. Solving a large system of linear equations using R.
+
 
 ### Investigating the regression effect
 
