@@ -1,6 +1,6 @@
 ---
 title: "Homework 2, STATS 401 W18"
-author: "Due in class on Wednesday 1/17"
+author: "Due in your lab on 1/18 or 1/19"
 output:
   html_document:
     theme: flatly
@@ -8,14 +8,32 @@ output:
 csl: ecology.csl
 ---
 
+\newcommand\mat[1]{\mathbb{#1}}
+\newcommand\xtranspose{{\mbox{\tiny \textsc{t}}}}
+\newcommand\transpose{{\scriptscriptstyle \mathrm{T}}}
+
+
+**For your homework report this week, you do not need to submit solutions to the swirl lessons and matrix exercises 1-6. For exercises 1-6, you should say which parts you were able to compute by hand and check successfully using R. You do need to submit a solution to exercise 7. As usual, you also need to make _Sources_ and _Please explain_ statements.**
+
+### More swirl lessons
+
+Continuing from Homework 1, complete the following swirl modules: ```Lesson 5: Missing Values```, ```Lesson 6: Subsetting Vectors```, ```Lesson 7: Matrices and Data Frames```, ```Lesson 9: Functions```. We will not need the material in ```Lesson 8: Logic```, but you can do this too if you like. You will have a chance to ask swirl questions in lab (on 1/11 or 1/12) if difficulties arise.
+
+---------------
+
 ### Matrix exercises
 
-1. Multiplying two matrices.
+It is good to do at least one example of each of the fundamental matrix operations by hand, even though in practice we almost always use a computer. For the homework, you are required to carry out and check exactly one example of each operation, but the code provided can be used to make more examples until you are comfortable with carrying out all of them.
 
+We will generates exercises using the following function:
 ```{r randomMatrix}
 randomMatrix <- function(p,q,values=-4:4){
    matrix(sample(values,size=p*q,replace=TRUE),p,q)
 }
+```
+This produces a $p\times q$ matrix with random entries which are, by default, drawn with replacement from the sequence $-4,-3,\dots,0,\dots,3,4$. 
+Let's use ```randomMatrix``` to produce two $2\times 2$ matrices $\mat{A}$ and $\mat{B}$, setting the seed of the random number generator so that the function returns the same matrix each time
+```{r AB}
 set.seed(1)
 A <- randomMatrix(2,2)
 B <- randomMatrix(2,2)
@@ -23,67 +41,63 @@ A
 B
 ```
 
+1. Addition.  Compute by hand the matrix sum
+```{r sum,echo=FALSE,results='asis',cache=FALSE}
+library(mat2tex)
+xx("\\mat{A}+\\mat{B} = ",A,"+",B,digits=0,mtype="bmatrix")
+```
+Then check your calculation using R. 
 
-1. Inverting a matrix.
+2. Scalar multiplication. Compute by hand the following product of a scalar and a matrix
+```{r scalar_mult,echo=FALSE,results='asis'}
+xx("2 \\mat{A} = ", "2",A,digits=0,mtype="bmatrix")
+```
+Then check your calculation using R. 
 
-2. Transposing a matrix.
+3. Multiplying two square matrices. Compute by hand the matrix product
+```{r AB_prod,echo=FALSE,results='asis'}
+xx("\\mat{A}\\mat{B} = ",A,B,digits=0,mtype="bmatrix")
+```
+Then check your calculation using R. 
 
-3. Solving a large system of linear equations using R.
+4. Multiplying two rectangular matrices. Compute by hand the product $\mat{C}\mat{D}$ where 
+$\mat{C}$ and $\mat{D}$ are given by
+```{r CD_prod}
+set.seed(2)
+C <- randomMatrix(2,3)
+D <- randomMatrix(3,2)
+```
+Then check your calculation using R. 
 
+5. Inverting a $2\times 2$ matrix. Compute by hand the matrix inverse
+```{r inverse,echo=FALSE,results='asis'}
+xx("\\mat{A}^{-1} = ",A,"^{-1}", digits=0,mtype="bmatrix")
+```
+Then check your calculation using R. 
+Generate more examples using ```randomMatrix()``` until you are confident about inverting $2\times 2$ matrices by hand.
 
-### Investigating the regression effect
+6. Transposing a matrix. Compute by hand the transpose of $\mat{C}$,
+```{r transpose,echo=FALSE,results='asis'}
+xx("\\mat{C}^{\\transpose} = ",C,"^{T}", digits=0,mtype="bmatrix")
+```
+Then check your calculation using R. 
 
-We will look at a dataset on the heights of 928 children and their parents, taken from an 1886 article by [Francis Galton](https://en.wikipedia.org/wiki/Francis_Galton) on Regression Towards Mediocrity in Hereditary Stature (*Journal of the Anthropological Institute*, 15, 246-263).
-These data developed Galton's invention of the concept "regression to the mean."
-We can obtain them through the HistData library.
-
-```{r install_histdata,eval=F}
-install.packages("HistData")
+```{r linear_system,echo=F,results=F}
+set.seed(3)
+L <- randomMatrix(4,4)
 ```
 
-```{r histdata}
-library("HistData")
-data("Galton")
-head(Galton)
-```
-
-
-<!--data("father.son",library="UsingR")-->
-Here, ```parent``` is the mean of father and mother height, in inches. ```child``` is child's height, multiplied by 1.08 for daughters. 
-Galton rounded in a curious way, so that parent mid-heights usually end in .5 and child heights usually end in .2.
-We will simply call these quantities the parent and child heights. 
-
-What is the average height of the children (don’t round off)?
-
-What is the average height of children with parent height between 70.0 and 71.0 inches?
-
-Plot the data appropriately. You will have to decide is "appropriate." 
-
-Find some numbers to quantify Galton's observation that the children of tall parents tend to be taller than average, yet less tall than their parents. Conversely, the children of short parents tend to be shorter than average, yet taller than their parents. This is called the *regression effect*.
-
-A regression effect for midterm and final scores would be as follows: students who do well in the midterm tend to do above average on the final, yet less well than in the midterm; students who do badly in the midterm tend to do below average in the final, yet better than they did in the midterm. Do you expect to see this regression effect in exam scores? Explain.
-
-
-### What does it mean for a statistical model to be linear?
-
-We say a statistical model is a linear model when we can write it as a linear combination of parameters and known covariates, plus random error terms. In the choices below, $Y_i$ models an observation at a time $t_i$ for $i=1,\dots,n$. Unknown parameters are represented with letters $a,b,c,d$, and measurement error on the $i$th obserservation is represented by $\epsilon_i$. If $t_i$ is known, then any transformation of $t_i$ is also known. So, for example, both $Y_i=a+bt_i+\epsilon_i$ and $Y_i=a+bf(t_i)+\epsilon_i$ are linear models for any nonlinear function $f(t)$. Which of the following cannot be written as a linear model?
-
-A) $\quad Y_i=a+bt_i+\epsilon_i$
-B) $\quad Y_i=a+b\cos(t_i)+\epsilon_i$
-C) $\quad Y_i=a+b^{t_i}+\epsilon_i$
-D) $\quad Y_i=a+bt_i+ct_i^2+dt_i^3+\epsilon_i$
-
-### How do we interpret the error term in a linear model?
-
-Suppose you model the relationship between weight and height across individuals with a linear model. You assume that the height of individual $i$ with weight $x_i$ follows a linear model,  $Y_i=a+bx_i+\epsilon_i$. Which of the following do you feel best describes what $\epsilon_i$ represents?
-
-A) Measurement error: scales are not perfect.
-B) Within individual random fluctuations: you don’t weigh the same in the morning as in the afternoon.
-C) Round off error introduced by the computer we use to analyze the data.
-D) Between individual variability: people of the same height vary in their weight.
+7. Solve the following system of linear equations using R.
+$$\begin{array}{ccccccccc}
+-3w &+& x &+& y &&  &=& 2 \\
+3w &+& x &+& y &+& z &=& 1 \\
+-w &-& 3x && &+& 3z &=& -1 \\
+-2w &-& 2x &&&+& 3z &=& 4
+\end{array}$$
 
 ------
 
-Acknowledgement: this homework is derived from (http://genomicsclass.github.io/book)
+License: This material is provided under an [MIT license](https://ionides.github.io/401w18/LICENSE)<br>
+
 
 ------

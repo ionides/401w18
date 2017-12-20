@@ -658,7 +658,7 @@ w &+& 2x &-& 3y &+& 4z &=& 0 \\
 \end{array}}
 How do we do this using R?
 
-1. Write the system as a matrix equation $\mat{A}\vec{x}=\vec{b}$,
+1. Write the system as a matrix equation \m{\mat{A}\vec{x}=\vec{b}},
 
 \mydisplaymath{
 \left[
@@ -738,7 +738,7 @@ round(solve(A) * b,2)
 \item Sometimes we want to switch the rows and columns of a matrix. 
 \item For example, we usually suppose that each column of a data matrix is a measurement variable (say, height and weight) and each row of a data matrix is an object being measured (say, a row for each person). However, what if the data were stored in a matrix where columns corresponded to objects?
 \item Switching rows and columns is called \myemph{transposing} the matrix. 
-\item The \myemph{transpose} of \m{\mat{A}} is denoted mathematically by \m{\mat{A}^\transpose_{}} and in R by \code{t(A)}.
+\item The \myemph{transpose} of \m{\mat{A}} is denoted mathematically by \m{\mat{A}^\transpose} and in R by \code{t(A)}.
 \end{myitemize}
 \mydisplaymath{
 \mat{A}=\left[
@@ -761,9 +761,80 @@ round(solve(A) * b,2)
 }
 \begin{myitemize}
 \item
-If \m{\mat{A}} has dimension \m{n\times p}, then \m{\mat{A}^\transpose_{}} is \m{p\times n}.
+If \m{\mat{A}} has dimension \m{n\times p}, then \m{\mat{A}^\transpose} is \m{p\times n}.
 \end{myitemize}
 \end{frame}
+
+\begin{frame}[fragile]
+\frametitle{More properties of matrices}
+\begin{myitemize}
+\item The following material is not essential for this course.
+However, it may help reinforce understanding to see more ways in which matrix addition and multiplication behave similarly, or differently, from usual arithmetic.
+\end{myitemize}
+\myemph{Associative property}. We are used to the associative property of addition and multiplication for numbers: \m{a+(b+c)=(a+b)+c} and \m{a\times(b\times c) = (a\times b)\times c}. 
+You can check that matrix addition and multiplication also have the associative property: for matrices of appropriate size,
+\m{\mat{A}+(\mat{B}+\mat{C})=(\mat{A}+\mat{B})+\mat{C}} and \m{\mat{A}(\mat{B}\, \mat{C}) = (\mat{A}\, \mat{B})\mat{C}}.
+
+\myemph{Inverse of a product}. For square invertible matrices \m{\mat{A}} and \m{\mat{B}}, we can check that \m{(\mat{A}\mat{B})^{-1} = \mat{B}^{-1}\mat{A}^{-1}}. The change of order may seem weird.
+To demonstrate that this inverse works correctly,
+\mydisplaymath{
+(\mat{A}\, \mat{B})^{-1}(\mat{A}\, \mat{B}) = \mat{B}^{-1}\mat{A}^{-1}\mat{A}\, \mat{B} = \mat{B}^{-1}\mat{I}\, \mat{B} = \mat{B}^{-1}\mat{B} = \mat{I}.
+}
+Note that we have repeatedly used the associative property of matrix multiplication, and we have been careful not to accidentally commute (recall that, in general, \m{\mat{C}\, \mat{D} \neq \mat{D}\, \mat{C}}).
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{More properties of matrices, continued}
+\myemph{Transpose of a sum}. Convince yourself that \m{(\mat{A}+\mat{B})^\transpose = \mat{A}^\transpose + \mat{B}^\transpose}. If you like, calculate an example in R to check.
+
+\myemph{Transpose of a product}. The rule is
+\m{
+(\mat{A}\, \mat{B})^\transpose = \mat{B}^\transpose \mat{A}^\transpose
+}.
+
+\question: Suppose that \m{\mat{A}} has dimension \m{n\times p} and \m{\mat{B}} is \m{p\times q}. Check that this formula for \m{(\mat{A}\, \mat{B})^\transpose} has the right dimension.
+
+\vspace{10mm}
+
+\myexample:
+%\begin{columns}[T] 
+%\begin{column}{0.3\textwidth}
+%\myexample:
+%\end{column}
+%\begin{column}{0.6\textwidth}
+<<>>= 
+A <- matrix(1:3,4,3); B <- matrix(1:6,3,2)
+@
+%\end{column}
+%\end{columns}
+
+\vspace{3mm}
+
+\begin{columns}[T] 
+\begin{column}{0.45\textwidth}
+<<>>= 
+t(A %*% B)
+@
+\end{column}
+\begin{column}{0.45\textwidth}
+<<>>= 
+t(B) %*% t(A)
+@
+\end{column}
+\end{columns}
+
+
+
+
+
+
+
+
+
+\end{frame}
+
 
 \end{document}
 
