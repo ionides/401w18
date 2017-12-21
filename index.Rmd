@@ -69,9 +69,9 @@ The GSI may provide some feedback on correctness, but students are responsible f
 
 ## Class notes
 
-1. [Introduction](01/notes01.html). [(R script)](01/notes01.R)
+1. [Introduction](01/notes01.pdf). [(R script)](01/notes01.R)
 
-2. [Linear algebra for applied statistics]. [(R script)](01/notes01.R)
+2. [Linear algebra for applied statistics](02/notes02.pdf). [(R script)](01/notes01.R)
 
 --------
 
