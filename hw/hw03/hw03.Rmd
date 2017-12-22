@@ -14,7 +14,7 @@ csl: ecology.csl
 
 ### More swirl lessons
 
-Continuing from Homeworks 1 and 2, complete the following swirl modules: ```Lesson 12: Looking at Data```, ```Lesson 13: Simulation``` and ```Lesson 15: Base Graphics```. We will not need the material in lessons 10, 11 and 14 but you can do any or all of these too if you like.
+Continuing from Homeworks 1 and 2, complete the following swirl modules: ```Lesson 12: Looking at Data```, ```Lesson 13: Simulation``` and ```Lesson 15: Base Graphics```. 
 
 There is nothing to submit in your report for this. You will have a chance to ask in lab (on 1/18 or 1/19) if difficulties arise.
 

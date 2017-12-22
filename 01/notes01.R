@@ -1,3 +1,6 @@
+## ----plot_margins,echo=F-------------------------------------------------
+par(mai=c(1,0.5,0,0))
+
 ## ----read_e0-------------------------------------------------------------
 L <- read.table(file="life_expectancy.txt",header=TRUE)
 
@@ -105,9 +108,6 @@ length(apply(U,1,mean))
 ## ------------------------------------------------------------------------
 length(apply(U,2,mean))
 
-## ----plot_margins,echo=F-------------------------------------------------
-par(mai=c(1,0.5,0,0))
-
 ## ----fig_L,eval=F,echo=T-------------------------------------------------
 ## plot(L$Year,y,type="line",
 ##   xlab="Year",
@@ -127,4 +127,24 @@ plot(L$Year,y,type="line",
 plot(U$Year,u,
   xlab="Year",
   ylab="Unemployment")
+
+## ----lm------------------------------------------------------------------
+L_fit <- lm(Total~Year,data=L)
+
+## ----fig_L_code,eval=F,echo=T--------------------------------------------
+## plot(Total~Year,L,type="l")
+## lines(L$Year,L_fit$fitted.values,
+##   lty="dotted")
+
+## ----fig_L_plot,echo=F,fig.width=3.5,fig.height=3.5----------------------
+par(mai=c(0.9,0.9,0.1,0.1))
+plot(Total~Year,L,type="l")
+lines(L$Year,L_fit$fitted.values,
+  lty="dotted")
+
+## ------------------------------------------------------------------------
+class(L_fit)
+
+## ------------------------------------------------------------------------
+names(L_fit)
 

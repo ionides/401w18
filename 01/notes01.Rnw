@@ -44,6 +44,10 @@ opts_chunk$set(
 options(width = 60) # number of characters in R output before wrapping
 @
 
+<<plot_margins,echo=F>>=
+par(mai=c(1,0.5,0,0))
+@
+
 \begin{frame}
 \frametitle{STATS 401. Applied Statistical Methods II}
 
@@ -75,8 +79,8 @@ If you have a different background (AP Statistics, STATS 280, or some other intr
 
 We will work through a data analysis using a linear model, and then study the math and stats so that (i) we can command the computer to generate what we want; (ii) we can interpret what the computer tells us.
  \bi 
- \item Obtain the data from the internet
- \item Install R (\url{www.r-project.org}) and Rstudio (\url{www.r-project.org})
+ \item Obtain the data, usually from the internet
+ \item Install R (\url{www.r-project.org}) and Rstudio (\url{www.rstudio.com})
  \item Read the data into R
  \item Plot the data
  \item Develop a model
@@ -287,7 +291,7 @@ class(L_up_qualitative)
 Learning a computing language is sometimes frustrating.
 Please proceed in the following order
 \begin{enumerate}
-\item The R help, e.g., type \code{?ifelse}) for information on the syntax of \code{ifelse}.
+\item The R help, e.g., type \code{?ifelse} for information on the syntax of \code{ifelse}.
 \item The internet, e.g., google ``R ifelse''.
 \item Classmates. 
 \item Office hours, start-and-end of class, lab
@@ -307,7 +311,6 @@ For detailed email help, please construct and email a simple example demonstrati
 
 \begin{myitemize}
 
-%The mathematics of \myemph{linear algebra} uses numeric matrices and vectors.
 \item A matrix in R must have all entries of the same type. 
 The mathematics of fitting a linear statistical model will require type to be numeric.
 
@@ -486,7 +489,7 @@ u[1:6]
 @
 \begin{myitemize}
 \item
-\code{apply()} is a useful function for manipulating data matrices. Learn to use it!
+\code{apply()} carries out an operation (here, taking the mean) on rows or columns of matrices. We will learn more about it later.
 \item 
 The middle argument \code{1} to \code{apply()} asks for the function \code{mean()} to be applied to each row. 
 \item
@@ -514,9 +517,6 @@ length(apply(U,2,mean))
 
 \end{frame}
 
-<<plot_margins,echo=F>>=
-par(mai=c(1,0.5,0,0))
-@
 
 \begin{frame}[fragile]
 \frametitle{Plotting the data}
@@ -556,8 +556,103 @@ plot(U$Year,u,
 
 \begin{frame}[fragile]
 \frametitle{Detrending life expectancy}
-Life expectancy shows an \myemph{increasing trend}. We're interested in whether it is above or below trend. 
+\begin{myitemize}
+\item Life expectancy is generally increasing with time. We say it has an \myemph{increasing trend}. 
+\item We're interested in whether it is above or below trend during economic booms.
+\item Subtracting an estimate of the trend from each data point is called \myemph{detrending}. A basic way to do this is to fit a linear trend that fits the data best, by finding the line mimizing the sum of squares of distances to the data.
+\item Most of you have seen this done before:\\
+\url{https://open.umich.edu/sites/default/files/downloads/interactive_lecture_notes_12-regression_analysis.pdf}
+\item In this course, we're going to study linear models and their statistical properties in much more detail.
+\item First, let's see how to compute this \myemph{least squares} fitted line using the \code{lm()} function in R.
+\end{myitemize}
 \end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Fitting a linear model using \code{lm()}}
+<<lm>>=
+L_fit <- lm(Total~Year,data=L)
+@
+\begin{myitemize}
+\item Using \code{Total~Year} to model {\it Total depends on Year} in R is called a \myemph{formula}. Type \code{?lm} in R to see the function description.
+\item We could have said \code{lm(L$Total~L$Year)} or \code{lm(y=L$Total,x=L$Year)}. 
+\item Writing \code{data=L} tells \code{lm()} to look for the linear model variables in the dataframe \code{L} and makes the model easier to read.
+\end{myitemize}
+
+
+\begin{columns}[T] 
+\begin{column}{0.5\textwidth}
+<<fig_L_code,eval=F,echo=T>>=
+plot(Total~Year,L,type="l")
+lines(L$Year,L_fit$fitted.values,
+  lty="dotted")
+@
+\begin{myitemize}
+\item The \myemph{fitted values} in \code{L_fit$fitted.values} give the dotted line.
+
+\item We use formulas in \code{plot()} just like we did in \code{lm()}.
+\end{myitemize}
+
+\end{column}
+\begin{column}{0.4\textwidth}
+<<fig_L_plot,echo=F,fig.width=3.5,fig.height=3.5>>=
+par(mai=c(0.9,0.9,0.1,0.1))
+<<fig_L_code>> 
+@
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Exploring the output of \code{lm}}
+\begin{myitemize}
+\item We call \code{L_fit} a \myemph{fitted model object} since it is an R object that was created by fitting a model, in this case a linear model fitted using \code{lm}.
+\item
+First, let's check the class of the object 
+
+\vspace{3mm}
+
+<<>>=
+class(L_fit)
+@
+
+\vspace{3mm}
+
+\item 
+We see that \code{lm} is both the name of the function to fit a linear model and the class of the resulting fitted model object.
+\item
+Now, let's see what the fitted model object contains:
+
+
+\vspace{3mm}
+
+<<>>=
+names(L_fit)
+@
+
+\vspace{3mm}
+
+\item \code{L_fit} is a list with all the things R thinks we might want to know about the fitted linear model. Components are accessed using \code{$}. We have already seen the fitted values accessed using \code{L_fit$fitted.values}. We will use other components later in the course.
+
+\end{myitemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Computer software notation vs math notation}
+
+\begin{myitemize}
+\item Computers compute things. That's what they do. It seems obvious.
+\item A computer function takes numbers in and spits numbers out. It can't know whether the analysis is correct, or reasonable, or useful for some purpose, or complete nonsense. Artificial intelligence is not (yet) good at applied statistics!
+\item \myemph{For describing statistical assumptions, understanding the behavior of statistical tests, and defining statistical models, mathematics is a more appropriate language than computer code.}
+\item We have to learn to write about statistics using two different languages: mathematics and computing. We have to learn when each is appropriate.
+\item If all is well, the math helps us understand the computing and vice versa.
+\item We have already seen one example: matrices and vectors are simultaneously (i) mathematical objects, with certain mathematical rules and definitions; (ii) R objects which follow a set of rules inspired by the mathematics.
+\item How do we mathematically write down the statistical linear model that we fitted using \code{lm()}?
+\end{myitemize}
+
+\end{frame}
+
 
 \end{document}
 
