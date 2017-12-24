@@ -148,3 +148,10 @@ class(L_fit)
 ## ------------------------------------------------------------------------
 names(L_fit)
 
+## ----detrended_lm--------------------------------------------------------
+L_detrended <- L_fit$residuals
+U_detrended <- lm(u~U$Year)$residuals
+L_detrended <- subset(L_detrended,L$Year %in% U$Year)
+lm1(L_detrended~U_detrended)
+coef(lm1)
+
