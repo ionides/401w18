@@ -660,14 +660,14 @@ names(L_fit)
 \begin{myitemize}
 \item Suppose our data are \m{y_1,y_2,\dots,y_n} and on each individual \m{i} we have \m{p} explanatory variables \m{x_{i1}, x_{i2},\dots,x_{ip}}. A linear model is
 \end{myitemize}
-\altdisplaymath{(LM1) \hspace{10mm}
+\altdisplaymath{(\mathrm{LM1}) \hspace{10mm}
   y_i = b_1 x_{i1} + b_2 x_{i2} + \dots + b_p x_{ip} + e_i \quad\mbox{for $i=1,2,\dots,n$}
 }
 \begin{myitemize}
 \item 
 This is a model for a particular sample \m{y_1,\dots,y_n}. A basic task of statistics is to generalize from a sample to a population. We'll do that later.
 \item 
-The \myemph{residual error} terms \m{e_1,\dots,e_n} in equation \m{(LM1)} include everything about the data \m{y_1,y_2,\dots,y_n} that cannot be explained by the \myemph{linear combination} of the explanatory variables.
+The \myemph{residual error} terms \m{e_1,\dots,e_n} in equation \m{(\mathrm{LM1})} include everything about the data \m{y_1,y_2,\dots,y_n} that cannot be explained by the \myemph{linear combination} of the explanatory variables.
 \item 
 Using \myemph{summation notation} we can write the linear model for this sample in a more compact way,
 \end{myitemize}
@@ -675,7 +675,7 @@ Using \myemph{summation notation} we can write the linear model for this sample 
 \vspace{-1mm}
 
 \altdisplaymath{
-(LM2) \hspace{15mm}
+(\mathrm{LM2}) \hspace{15mm}
   y_i = \sum_{j=1}^p x_{ij} b_j + e_i \hspace{10mm} \mbox{for $i=1,2,\dots,n$}
 }
 
@@ -689,13 +689,13 @@ Using \myemph{summation notation} we can write the linear model for this sample 
 \begin{frame}[fragile]
 \frametitle{Applying the linear model to detrend life expectancy}
 \begin{myitemize}
-\item When we did \code{L_fit <- lm(Total~Year,data=L)} earlier, we fitted the linear model \m{(LM1)} with \m{y_i} being the total life expectancy for the \m{i}th year in the dataset (recall that total life expectancy means combining males and females) and \m{x_{i1}} being the corresponding year.
+\item When we did \code{L_fit <- lm(Total~Year,data=L)} earlier, we fitted the linear model \m{(\mathrm{LM1})} with \m{y_i} being the total life expectancy for the \m{i}th year in the dataset (recall that total life expectancy means combining males and females) and \m{x_{i1}} being the corresponding year.
 \item 
 To fit a linear trend, we also want an \myemph{intercept}, which we can write by setting \m{x_{i2}=1} for each year \m{i}. 
 \item 
-In this special case, with \m{p=2} variables and \m{x_{i2}=1}, the model \m{(LM1)} becomes
+In this special case, with \m{p=2} variables and \m{x_{i2}=1}, the model \m{(\mathrm{LM1})} becomes
 
-\altdisplaymath{(LM3) \hspace{10mm}
+\altdisplaymath{(\mathrm{LM3}) \hspace{10mm}
   y_i = b_1 x_{i1} + b_2 + e_i \quad\mbox{for $i=1,2,\dots,n$}
 }
 
@@ -712,7 +712,7 @@ In this special case, with \m{p=2} variables and \m{x_{i2}=1}, the model \m{(LM1
 \begin{myitemize}
 \item
 Now, we'll fit another linear model to see if the detrended life expectancy can be explained by the level of economic activity, quantified by the unemployment rate.
-\item We have seen that \code{residuals} is one of the components of an \code{lm} object, by looking at \code{names{L_fit}}. 
+\item We have seen that \code{residuals} is one of the components of an \code{lm} object, by looking at \code{names(L_fit)}. 
 \item \myemph{Residual} is a more polite name than \myemph{residual error}. That is appropriate here, since the ``error'' \m{e_i} is exactly the deviation from trend which we are most interested in. Interpretation of \m{e_i} depends on the exact situation under consideration.
 \item First, let's set up the variables for the regression. Since we detrended life expectancy, we should also detrend unemployment. Then, we have some work to do to make sure that the years for these two datasets match!
 \end{myitemize}
