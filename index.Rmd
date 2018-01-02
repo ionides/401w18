@@ -23,22 +23,19 @@ STATS 280, STATS 412 and ECON 451 are more advanced and therefore entirely adequ
 
 ## Course information
 
-* Class meets Monday/Wednesday 1:00-2:30 in 1360 East Hall.
-
+* Class meets Monday/Wednesday 1:00-2:30 in 1360 East Hall
 * Contact information:
     + Office: 453 West Hall 
     + Phone: 647 5457 
     + E-mail: ionides@umich.edu 
     + Web: dept.stat.lsa.umich.edu/~ionides
     + Office hours:  TBA
-
-Final exam:
-Office hours: TBA.
-Labs: Thursdays and Fridays
-
+* Final exam: Tuesday April 24, 4:00-6:00pm
+* Instructor office hours: Monday 4-5pm, Wednesday 3-4pm
+* Labs: Thursday 11:30am-1:00pm and 7:00-8:30pm, and Friday 1:00-2:30pm
 * GSI:
     + Computing support: inquire by email, with a detailed description of the problem, what you did, and any error message you obtained. It can be helpful to provide a minimal example that can be run to demonstrate the problem.
-    + E-mail: 
+    + E-mail: Please email your section GSI
 * Textbook: S. Sheather ``A Modern Approach to Regression with R''. A pdf is available from the UM Library.
 
 -----------

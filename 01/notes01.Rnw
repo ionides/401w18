@@ -204,7 +204,8 @@ However, \code{<-} is slightly better coding practice than \code{=}. Why?
 \frametitle{Vectors in R}
 
 For R, vectors are not matrices. 
-The dimension of length  \code{1} is dropped, and the vector has a \code{length} but not a \code{dim}.
+A vector has a \code{length} but not a \code{dim}.
+When subsetting a matrix, the dimension of length  \code{1} is \myemph{dropped}. 
 \begin{columns}[T] 
 \begin{column}{.3\textwidth}
 <<dim_for_vec>>=
@@ -713,11 +714,18 @@ In this special case, with \m{p=2} variables and \m{x_{i2}=1}, the model \m{(LM1
 Now, we'll fit another linear model to see if the detrended life expectancy can be explained by the level of economic activity, quantified by the unemployment rate.
 \item We have seen that \code{residuals} is one of the components of an \code{lm} object, by looking at \code{names{L_fit}}. 
 \item \myemph{Residual} is a more polite name than \myemph{residual error}. That is appropriate here, since the ``error'' \m{e_i} is exactly the deviation from trend which we are most interested in. Interpretation of \m{e_i} depends on the exact situation under consideration.
+\item First, let's set up the variables for the regression. Since we detrended life expectancy, we should also detrend unemployment. Then, we have some work to do to make sure that the years for these two datasets match!
 \end{myitemize}
-<<detrended_lm>>=
+<<detrended_variables>>=
 L_detrended <- L_fit$residuals
 U_detrended <- lm(u~U$Year)$residuals
 L_detrended <- subset(L_detrended,L$Year %in% U$Year)
+@
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{A linear model linking mortality and unemployment}
+<<detrended_lm>>= 
 lm1 <- lm(L_detrended~U_detrended)
 coef(lm1)
 @
