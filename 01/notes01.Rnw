@@ -399,7 +399,7 @@ L[g<0,"Year"]
 
 \begin{frame}[fragile]
 \frametitle{Building matrices and vectors in R}
-The \code{c()} function concatenates numbers into vectors, and also concatenates vectors into longer vectors.
+The \code{c()} function combines numbers into vectors, and also combines vectors into longer vectors.
 \begin{columns}[T] 
 \begin{column}{.2\textwidth}
 <<>>=

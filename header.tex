@@ -4,12 +4,11 @@
 
 \newcommand\code[1]{\url{#1}}
 \newcommand\question{{\bf Question}}
+\newcounter{Qcounter}
+\newcommand\myquestion{{\stepcounter{Qcounter} \bf Question \CHAPTER.\theQcounter}}
 \newcommand\myexample{{\bf Example}}
 \newcommand\mydot{{\,\cdot\,}}
-%\newcommand\seq[2]{{#1}\!:\!{#2}}
-
-%\usepackage{mathrsfs}
-%\newcommand\Rspace{\mathscr{R}}
+\newcommand\myref[1]{\m{#1}}
 \newcommand\Rspace{\mathcal{R}}
 
 \usepackage{amsmath}
@@ -66,7 +65,7 @@
 \newcommand\cov{\mathrm{Cov}}
 \newcommand\given{{\, | \,}}
 \newcommand\param{\,;}
-\newcommand\transpose{{\raisebox{0.5mm}{\mbox{\tiny \textsc{t}}}}}
+\newcommand\transpose{{\raisebox{0.5mm}{\mbox{\scriptsize \textsc{t}}}}}
 \newcommand\mycolon{{\hspace{0.5mm}:\hspace{0.5mm}}}
 \newcommand\myemph[1]{{\textbf{#1}}}
 \newcommand\mymathenv[1]{\textcolor{blue}{#1}}

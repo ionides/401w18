@@ -2,6 +2,11 @@
 \documentclass{beamer}
 
 \input{../header.tex}
+\newcommand\CHAPTER{2}
+\newcommand\Li{\mathrm{(L1)}}
+\newcommand\Lii{\mathrm{(L2)}}
+\newcommand\Liiia{\mathrm{(L3.1)}}
+\newcommand\Liiib{\mathrm{(L3.2)}}
 
 % used for \utilde in alternative vector notation
 \usepackage{undertilde}
@@ -57,7 +62,7 @@ n <- length(e0)
 @
 
 \begin{frame}
-\frametitle{Linear algebra for applied statistics}
+\frametitle{\CHAPTER. Linear algebra for applied statistics}
 
 \vspace{-2mm}
 
@@ -81,11 +86,14 @@ n <- length(e0)
 \begin{frame}[fragile]
 \frametitle{More perspectives on vectors}
 
-\question: You may or may not have seen vectors in other contexts. In physics, a vector is a quantity with magnitude and direction. How does that fit in with our definition?
+
+{\myquestion}. 
+You may or may not have seen vectors in other contexts. In physics, a vector is a quantity with magnitude and direction. How does that fit in with our definition?
 
 \vspace{25mm}
 
-\question: How can I distinguish vectors using handwriting, when a bold font is not possible?
+{\myquestion}. 
+How can I distinguish vectors in my own handwriting, since I can't handwrite in a bold font?
 
 \uncover<2->{
 An underscore is a conventional handwritten alternative to a bold font, so \m{\vec{x}} is equivalent to \m{\utilde{x}}.
@@ -99,7 +107,7 @@ In physics and mathematics, vectors are sometimes written as \m{\stackrel{\to}{x
 
 
 \begin{frame}[fragile]
-\frametitle{Adding vectors and multiplying by a scalar: Example}
+\frametitle{Adding vectors and multiplying by a scalar}
 \begin{myitemize}
 \item
 For a dataset, the \myemph{index} \m{i} of the component \m{y_i} of the vector \m{y} might correspond to a measurement on the \m{i}th member of a population, the outcome of the \m{i}th group in an experiment, or the \m{i}th observation out of a sequence of observations on a system.
@@ -125,10 +133,11 @@ Keep track of whether each object is a scalar, a vector (what is its length?) or
 \begin{frame}[fragile]
 \frametitle{Adding vectors and multiplying by a scalar: Example}
 
-%\myexample: 
 An ecologist measures the pH of ten Michigan lakes at two points in the summer. Set up vector notation to describe her data. Write a vector calculation to find the average pH in each lake.
 
 \uncover<2->{
+{\bf Solution}. 
+
 First, set up notation. 
 
 Let \mymath{x_i} be the first pH measurement in lake \mymath{i}, for \mymath{i\in\{1,2,\dots,10\}}.
@@ -138,11 +147,12 @@ Then, \mymath{\vec{x}=(x_1,\dots,x_{10})} is the vector of the first pH measurem
 Let \mymath{\vec{y}=(y_1,\dots,y_{10})} be the vector of second measurements. 
 
 Let \mymath{\vec{\mu}=(\mu_1,\dots,\mu_{10})} be the average pH for each of the 10 lakes.
-}
 
-\uncover<3->{
 For each lake \mymath{i}, the mean is \mymath{\mu_i = \frac{1}{2}(x_i+y_i)}. In vector notation,
-this is \mymath{\vec{\mu} = \frac{1}{2}(\vec{x}+\vec{y})}.
+this is 
+
+\mydisplaymath{
+\vec{\mu} = \frac{1}{2}(\vec{x}+\vec{y})}.
 }
 \end{frame}
 
@@ -199,7 +209,7 @@ x+2
 
 \vspace{-2mm}
 
-\question: Why does R break the usual rules of mathematics here?
+\myquestion. Why does R break the usual rules of mathematics here?
 
 \vspace{10mm}
 
@@ -235,13 +245,13 @@ A linear system of \m{n} equations with \m{p} unknown variables, \m{x_1,\dots,x_
 \mydisplaymath{
 \left.
 \begin{array}{ccccccccc}
-a_{11}x_1 &+& a_{12}x_2 &+& \dots &+& a_{1p}x_p &=& b_1 \\
-a_{21}x_1 &+& a_{22}x_2 &+& \dots &+& a_{2p}x_p &=& b_2 \\
+a_{11}x_1 &+& a_{12}\, x_2 &+& \dots &+& a_{1p}\, x_p &=& b_1 \\
+a_{21}x_1 &+& a_{22}\, x_2 &+& \dots &+& a_{2p}\, x_p &=& b_2 \\
 \vdots    & &           & &       & & \vdots    & & \vdots \\
-a_{n1}x_1 &+& a_{n2}x_2 &+& \dots &+& a_{np}x_p &=& b_n 
+a_{n1}x_1 &+& a_{n2}\, x_2 &+& \dots &+& a_{np}\, x_p &=& b_n 
 \end{array}
 \hspace{12mm}
-\right\} \hspace{2mm} (\mathrm{L1})
+\right\} \hspace{2mm}   \Li
 }
 We define matrix multiplication \m{\mat{A}\vec{x}=\vec{b}} to match this linear system. So,
 \mydisplaymath{
@@ -251,9 +261,9 @@ We define matrix multiplication \m{\mat{A}\vec{x}=\vec{b}} to match this linear 
 \myvector{b}{n}
 %\hfill (2)
 }
-is exactly equivalent to the collection of \m{p} linear equations in (L1) above.
+is exactly equivalent to the collection of \m{p} linear equations in \myref{\Li} above.
 \item
-Mechanically, the \m{i}th component of \m{\mat{A}\vec{x}} is found by multiplying each term in the \m{i}th row of \m{\mat{A}} with corresponding terms in the \myemph{column vector} \m{\vec{x}}, and adding these contributions.  See homework for practice!
+Mechanically, the \m{i}th component of \m{\mat{A}\vec{x}} is found by multiplying each term in the \m{i}th row of \m{\mat{A}} with corresponding terms in the \myemph{column vector} \m{\vec{x}}, and adding these contributions.  See Homework~2 for practice!
 \end{myitemize}
 
 \end{frame}
@@ -280,18 +290,18 @@ is(x,"matrix")
 is(x,"vector")
 @
 \end{column}
-\begin{column}{0.35\textwidth}
+\begin{column}{0.3\textwidth}
 <<>>=
-A <- matrix(
-  c(1,0,0,-1), nrow=2)
+A<-matrix(
+ c(1,0,0,-1),nrow=2)
 A %*% x
 @
 \end{column}
-\begin{column}{0.33\textwidth}
+\begin{column}{0.3\textwidth}
 <<>>=
-xx <- matrix(x,ncol=2)
+xx<-matrix(x,nrow=2)
 
-A %*% x
+A %*% xx
 @
 \end{column}
 \end{columns}
@@ -377,7 +387,8 @@ For the matrix product to exist, the number of columns of the first matrix must 
 \begin{frame}[fragile]
 \frametitle{A matrix product example}
 
-\question: Let \m{\mat{U}=\left[\begin{array}{cc} 2& 2 \\ 1 & -1 \end{array}\right]} and
+\myquestion.
+Let \m{\mat{U}=\left[\begin{array}{cc} 2& 2 \\ 1 & -1 \end{array}\right]} and
 \m{\mat{V}=\left[\begin{array}{cc} 3& 1 \\ 1 & 2 \end{array}\right]}. Calculate \m{\mat{U}\mat{V}}.
 
 \vspace{30mm}
@@ -387,7 +398,7 @@ We can check our working in R.
 \begin{column}{0.3\textwidth}
 <<>>=
 U <- matrix(
-   c(2,2,1,-1),2)
+   c(2,1,2,-1),2)
 U
 @
 \end{column}
@@ -400,7 +411,7 @@ V
 \end{column}
 \begin{column}{0.3\textwidth}
 <<>>=
-U %*% V
+U %*% V 
 
 @
 \end{column}
@@ -497,7 +508,8 @@ s\, a_{p1} & \dots & s\, a_{pq}
 
 \vspace{-2mm}
 
-\question. Suppose \m{\mat{B}} is a \m{n\times q} matrix and \m{\mat{I}} is an identity matrix.
+\myquestion. 
+Suppose \m{\mat{B}} is a \m{n\times q} matrix and \m{\mat{I}} is an identity matrix.
 
 \vspace{-2mm}
 
@@ -524,14 +536,14 @@ cx &+& dy &=& v
 \hspace{12mm}
 \right\}
 \hspace{6mm} 
-(\mathrm{L2})
+\Lii
 }
 \item Recall that the inverse \m{\mat{A}^{-1}} should solve this linear system, i.e., 
  \mydisplaymath{\mytwovector{x}{y}=\mat{A}^{-1}\mytwovector{u}{v}}.
 
 \vspace{-3mm}
 
-\item We can solve a pair of linear equations by hand. First, we solve for \m{x} by eliminating \m{y}. We can rewrite (L2) as 
+\item We can solve a pair of linear equations by hand. First, we solve for \m{x} by eliminating \m{y}. We can rewrite \myref{\Lii} as
 
 \vspace{-4mm}
 
@@ -540,10 +552,10 @@ cx &+& dy &=& v
 adx &+& bdy &=& du \\
 bcx &+& bdy &=& bv
 \end{array}
-\hspace{20mm}\begin{array}{c} (\mathrm{L3.1}) \\ (\mathrm{L3.2}) \end{array}
+\hspace{20mm}\begin{array}{c} \Liiia \\ \Liiib \end{array}
 }
 \item
-Subtracting (L3.2) from (L3.1) gives \m{(ad-bc)x = du-bv} and so \m{x=\frac{1}{ad-bc}(du-bv)}. 
+Subtracting \myref{\Liiib} from \myref{\Liiia} gives \m{(ad-bc)x = du-bv} and so \m{x=\frac{1}{ad-bc}(du-bv)}. 
 \end{myitemize}
 \end{frame}
 
@@ -551,7 +563,7 @@ Subtracting (L3.2) from (L3.1) gives \m{(ad-bc)x = du-bv} and so \m{x=\frac{1}{a
 \frametitle{Inverting a $2\times 2$ matrix, Continued...}
 \begin{myitemize}
 \item
-Next, we can find \m{y} by eliminating \m{x}. We rewrite (L2) as
+Next, we can find \m{y} by eliminating \m{x}. We rewrite \myref{\Lii} as
 \mydisplaymath{
 \begin{array}{ccccc}
 acx &+& bcy &=& cu \\
@@ -582,12 +594,14 @@ This gives us the formula for \m{ \mat{A}^{-1}},
 \item Recall that \m{ \mat{A}^{-1}={\mytwomatrix{a}{b}{c}{d}}^{-1} = \frac{1}{ad-bc}\mytwomatrix{d}{-b}{-c}{a} }
 \item We call \m{ad-bc} the \myemph{determinant} of \m{\mat{A}}, and we write
 \mydisplaymath{\mathrm{det}(A) = ad-bc.}
-\item We can see from the formula for \m{ \mat{A}^{-1}} that the inverse of $\mat{A}$ exists if and only if \m{ad-bc \neq 0}.
+\item We can see from the formula for \m{ \mat{A}^{-1}} that the inverse of \m{\mat{A}} exists if and only if \m{ad-bc \neq 0}.
 \end{myitemize}
-\question: What does it mean geometrically for \m{ad-bc = 0}?
+\myquestion. 
+What does it mean geometrically for \m{ad-bc = 0}?
 
 \hspace{10mm}
-Hint: the slope of the line \m{ax+by=u} is \m{-a/b}. The slope of \m{cx+dy=v} is \m{-c/d}. 
+
+Hint: the slope of the line \m{ax+by=u} is \m{-a/b}, and the slope of \m{cx+dy=v} is \m{-c/d}. 
 
 \end{frame}
 
@@ -603,7 +617,6 @@ set.seed(1)
 \begin{myitemize}
 \item The R function \code{det()} finds the determinant of a square matrix, and \code{solve()} finds
  the inverse if it exists. 
-%Numerical inaccuracies may arise, especially when the determinant is close to zero.
 \end{myitemize}
 
 \vspace{-2mm}
@@ -640,7 +653,8 @@ det(A) ; det(A_inv)
 
 \vspace{3mm}
 
-\question: Why is \url{M %*% M_inv} not exactly equal to the identity matrix?
+\myquestion. 
+Why is \url{A %*% A_inv} not exactly equal to the identity matrix?
  
 \vspace{5mm}
 
@@ -649,7 +663,8 @@ det(A) ; det(A_inv)
 
 \begin{frame}[fragile]
 \frametitle{Using R to solve a set of linear equations}
-\question: Suppose we want to solve
+\myquestion.
+Suppose we want to solve
 \mydisplaymath{\begin{array}{ccccccccc}
 w &+& 2x &-& 3y &+& 4z &=& 0 \\
 2w &-& 2x &+& y &+& z &=& 1 \\
@@ -713,8 +728,13 @@ b <- c(0,1,2,3)
 
 \vspace{2mm}
 
-3. Compute the matrix solution to the linear system, \m{\vec{x}=\mat{A}^{-1}\vec{b}}.\\
-\question: Which of these correctly computes \m{\vec{x}} and why?
+3. Compute the matrix solution to the linear system, \m{\vec{x}=\mat{A}^{-1}\vec{b}}.
+
+
+\vspace{1mm}
+
+\myquestion.
+Which of these correctly computes \m{\vec{x}} and why?
 \begin{columns}[T] 
 \begin{column}{0.4\textwidth}
 <<>>=
@@ -730,7 +750,6 @@ round(solve(A) * b,2)
 
 \end{frame}
 
-%\end{document}
 
 \begin{frame}[fragile]
 \frametitle{The transpose of a matrix}
@@ -794,21 +813,15 @@ Note that we have repeatedly used the associative property of matrix multiplicat
 (\mat{A}\, \mat{B})^\transpose = \mat{B}^\transpose \mat{A}^\transpose
 }.
 
-\question: Suppose that \m{\mat{A}} has dimension \m{n\times p} and \m{\mat{B}} is \m{p\times q}. Check that this formula for \m{(\mat{A}\, \mat{B})^\transpose} has the right dimension.
+\myquestion. 
+Suppose that \m{\mat{A}} has dimension \m{n\times p} and \m{\mat{B}} is \m{p\times q}. Check that this formula for \m{(\mat{A}\, \mat{B})^\transpose} has the right dimension.
 
 \vspace{10mm}
 
 \myexample:
-%\begin{columns}[T] 
-%\begin{column}{0.3\textwidth}
-%\myexample:
-%\end{column}
-%\begin{column}{0.6\textwidth}
 <<>>= 
 A <- matrix(1:3,4,3); B <- matrix(1:6,3,2)
 @
-%\end{column}
-%\end{columns}
 
 \vspace{3mm}
 
