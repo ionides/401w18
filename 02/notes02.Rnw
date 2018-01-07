@@ -131,9 +131,9 @@ Keep track of whether each object is a scalar, a vector (what is its length?) or
 %\end{document}
 
 \begin{frame}[fragile]
-\frametitle{Adding vectors and multiplying by a scalar: Example}
+\frametitle{Adding vectors and multiplying by a scalar}
 
-An ecologist measures the pH of ten Michigan lakes at two points in the summer. Set up vector notation to describe her data. Write a vector calculation to find the average pH in each lake.
+{\bf Worked example}. An ecologist measures the pH of ten Michigan lakes at two points in the summer. Set up vector notation to describe her data. Write a vector calculation to find the average pH in each lake.
 
 \uncover<2->{
 {\bf Solution}. 
@@ -339,7 +339,7 @@ have a unique solution where the lines \m{ax+by=u} and \m{cx+dy=v} intersect, so
 \item Two planes that are not parallel will meet along a line, and give a family of solutions.
 \item Four or more planes will typically not all meet at any point.
 \item In higher dimensions, we can't visualize but the pattern remains true.
-\item The general linear system we wrote previously in (L1) has \m{n} equations with \m{p} unknowns. 
+\item The general linear system we wrote previously in \myref{\Li} has \m{n} equations with \m{p} unknowns. 
 We expect a unique solution when \m{p=n}, no
 solution when \m{p<n} and a family of solutions when \m{p>n}.
 \end{myitemize}
@@ -422,7 +422,7 @@ U %*% V
 \frametitle{Matrix multiplication is not commutative}
 \begin{myitemize}
 \item
-Scalar multiplication (i.e., the usual multiplication of two real numbers) has the \myemph{commutative} property, \m{uv=vu}.
+Scalar multiplication (i.e., the usual multiplication of two numbers) has the \myemph{commutative} property, \m{uv=vu}.
 \item
 Matrix multiplication does not usually have this property, e.g., 
 \end{myitemize}
@@ -599,7 +599,7 @@ This gives us the formula for \m{ \mat{A}^{-1}},
 \myquestion. 
 What does it mean geometrically for \m{ad-bc = 0}?
 
-\hspace{10mm}
+\vspace{20mm}
 
 Hint: the slope of the line \m{ax+by=u} is \m{-a/b}, and the slope of \m{cx+dy=v} is \m{-c/d}. 
 
@@ -663,7 +663,8 @@ Why is \url{A %*% A_inv} not exactly equal to the identity matrix?
 
 \begin{frame}[fragile]
 \frametitle{Using R to solve a set of linear equations}
-\myquestion.
+
+{\bf Worked example}.
 Suppose we want to solve
 \mydisplaymath{\begin{array}{ccccccccc}
 w &+& 2x &-& 3y &+& 4z &=& 0 \\
@@ -710,14 +711,12 @@ z
 \frametitle{Using R to solve a set of linear equations, continued...}
 2. Enter the matrix \m{\mat{A}} and vector \m{\vec{b}} into R.
 \begin{columns}[T] 
-\begin{column}{0.4\textwidth}
+\begin{column}{0.5\textwidth}
 <<>>=
-A <- rbind(
-c( 1, 2,-3, 4),
-c( 2,-2, 1, 1),
-c(-1,-1, 4,-1),
-c( 3,-1,-8, 2))
-
+A <- rbind( c( 1, 2,-3, 4),
+            c( 2,-2, 1, 1),
+            c(-1,-1, 4,-1),
+            c( 3,-1,-8, 2))
 b <- c(0,1,2,3)
 @
 \end{column}

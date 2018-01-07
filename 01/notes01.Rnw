@@ -2,6 +2,7 @@
 \documentclass{beamer}
 
 \input{../header.tex}
+\newcommand\CHAPTER{1}
 
 \renewenvironment{knitrout}{\vspace{-3mm}}{\vspace{-5mm}}
 
@@ -49,7 +50,10 @@ par(mai=c(1,0.5,0,0))
 @
 
 \begin{frame}
-\frametitle{STATS 401. Applied Statistical Methods II}
+\frametitle{STATS 401. Applied Statistical Methods II
+\\
+\vspace{3mm}
+\CHAPTER. Introduction}
 
 \vspace{-5mm}
 
@@ -132,7 +136,8 @@ The two rising stars in statistical computing are R and Python (\url{http://r4st
 L <- read.table(file="life_expectancy.txt",header=TRUE)
 @
 
-\question: Why should we prefer to use the command line form of R rather than a menu option, say in R Commander?
+\myquestion.
+Why should we prefer to use the command line form of R rather than a menu option, say in R Commander?
 
 \vspace{10mm}
 
@@ -191,7 +196,8 @@ y <- L[,4]
 y[1:3]
 @
 
-\question: We read the assignment operator \code{<-} as ``\code{y} gets \code{L[,4]}''.
+\myquestion.
+We read the assignment operator \code{<-} as ``\code{y} gets \code{L[,4]}''.
 We could have written \code{y=L[,4]}. 
 However, \code{<-} is slightly better coding practice than \code{=}. Why?
 
@@ -386,7 +392,8 @@ options(op)
 
 \vspace{3mm}
 
-{\bf Example}: What is computed below. Can you find any interpretation?
+\myquestion.
+What is computed below. Can you find any interpretation?
 
 <<subsetting_using_logical>>=
 L[g<0,"Year"]

@@ -84,4 +84,4 @@ The GSI may provide some feedback on correctness, but students are responsible f
 ------------
 ## Lab materials
 
-* [Lab 1 slides](lab/lab01.pdf).
+* [Lab 1 slides](lab/lab01/lab01.pdf).
