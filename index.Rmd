@@ -86,6 +86,7 @@ The GSI may provide some feedback on correctness, but students are responsible f
 
 * [Homework 1. Introduction to R](hw/hw01/hw01.html). Due in your lab on 1/11 or 1/12. 
 
+* [Homework 2. More swirl and matrix exercises](hw/hw02/hw02.html). Due in your lab on 1/18 or 1/19. 
 
 ------------
 

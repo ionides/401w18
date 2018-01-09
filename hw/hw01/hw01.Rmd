@@ -12,7 +12,7 @@ csl: ecology.csl
 ### Work through an R tutorial
 
 You should have R and RStudio installed (that was homework zero). 
-If you have never used R before, the following [swirl](http://swirlstats.com/) tutorial will get you started. 
+If you have never used R before, the following [swirl](https://swirlstats.com/) tutorial will get you started. 
 If you have used some R before, it is likely a good idea to work through the tutorial to make sure you have the required background for this course.
 More experienced users can help newer users get started.
 
@@ -66,7 +66,7 @@ If you don't know Rmarkdown yet, working it out may be too much for this homewor
 ------
 
 License: This material is provided under an [MIT license](https://ionides.github.io/401w18/LICENSE)<br>
-Acknowledgement: This homework is derived from http://genomicsclass.github.io/book
+Acknowledgement: This homework is derived from https://genomicsclass.github.io/book
 
 
 ------
