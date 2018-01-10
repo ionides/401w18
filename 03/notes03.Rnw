@@ -1,0 +1,124 @@
+%\documentclass[handout]{beamer}
+\documentclass{beamer}
+
+\input{../header.tex}
+\newcommand\CHAPTER{3}
+\newcommand\LMi{\mathrm{(LM1)}}
+\newcommand\LMii{\mathrm{(LM2)}}
+\newcommand\LMiii{\mathrm{(LM3)}}
+\newcommand\LMiv{\mathrm{(LM4)}}
+
+
+
+\begin{document}
+
+% knitr set up
+<<knitr_opts,echo=F,cache=F,purl=F>>=
+library(knitr)
+opts_chunk$set(
+#  cache=FALSE,
+  cache=TRUE,
+  eval=TRUE,
+  include=TRUE,
+  echo=TRUE,
+  purl=TRUE,
+  cache.path=paste0("tmp/cache"),
+  dev='png',
+  dev.args=list(bg='transparent'),
+  dpi=300,
+  error=FALSE,
+  fig.pos="h!",
+  fig.align='center',
+  fig.height=4,fig.width=6.83,
+  fig.lp="fig:",
+  fig.path=paste0("tmp/figure"),
+  fig.show='asis',
+  highlight=TRUE,
+  message=FALSE,
+  progress=TRUE,
+  prompt=FALSE,
+#  results='asis',
+  results="markup",
+  size='small',
+  strip.white=TRUE,
+  tidy=FALSE,
+  warning=FALSE
+#  comment=NA # to remove ## on output
+)
+options(width = 60) # number of characters in R output before wrapping
+@
+
+% other set up
+<<setup,echo=F,results=F,cache=F>>=
+library(broman) # used for myround 
+@
+
+
+\begin{frame}
+\frametitle{\CHAPTER. Fitting a linear model to a sample by least squares}
+
+\vspace{-1mm}
+
+\begin{myitemize}
+\item Recall the sample version of the linear model. 
+Data are \m{y_1,y_2,\dots,y_n} and on each individual \m{i} we have \m{p} explanatory variables \m{x_{i1}, x_{i2},\dots,x_{ip}}. 
+\end{myitemize}
+
+\vspace{-1mm}
+
+\altdisplaymath{\LMi \hspace{10mm}
+  y_i = b_1 x_{i1} + b_2 x_{i2} + \dots + b_p x_{ip} + e_i \quad\mbox{for $i=1,2,\dots,n$}
+}
+\begin{myitemize}
+\item Using summation notation, we can equivalently write
+\end{myitemize}
+
+\vspace{-1.5mm}
+
+\altdisplaymath{
+\LMii \hspace{15mm}
+  y_i = \sum_{j=1}^p x_{ij} b_j + e_i \hspace{10mm} \mbox{for $i=1,2,\dots,n$}
+}
+\vspace{-1mm}
+\begin{myitemize}
+\item We can also use matrix notation. 
+Define column vectors \m{\vec{y}=(y_1,y_2,\dots,y_n)}, \m{\vec{e}=(e_1,e_2,\dots,e_n)} and \m{\vec{b}=(b_1,b_2,\dots,b_p)}. 
+Define the matrix of explanatory variables, \m{\mat{X}=[x_{ij}]_{n\times p}}.
+%\item
+In matrix notation, \myref{\LMi} and \myref{\LMii} is exactly
+\end{myitemize}
+\framebox{
+\altdisplaymath{
+\LMiii \hspace{16mm}
+ \vec{y} = \mat{X}\, \vec{b} + \vec{e}
+}
+\hspace{10mm}\rule[-3mm]{0mm}{9mm}
+}
+\begin{myitemize}
+\item Matrices give a compact way to write the linear model, and also a good way to carry out the necessary computations. 
+\end{myitemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The least squares formula}
+\begin{myitemize}
+\item We seek the \myemph{least squares} value of \m{\vec{b}} that minimizes the sum of squared error, \m{\sum_{i=1}^n e_i^2}.
+\item Since \m{n} is usually much bigger than \m{p}, there is usually no value of \m{\vec{b}} for which we can exactly explain the data using the explanatory matrix \m{\mat{X}}. 
+\item In other words, there is no choice of \m{\vec{b}} which solves \m{\mat{X}\,\vec{b}=\vec{y}}.
+\item The least squares choice of \m{\vec{b}} turns out to be
+\framebox{
+\altdisplaymath{
+\LMiv \hspace{16mm} 
+ \vec{b} = \big( \mat{X}^\transpose \mat{X} \big) ^{-1} \mat{X}^\transpose \vec{y}
+}
+\hspace{10mm}\rule[-3mm]{0mm}{9mm}
+}
+\item We will gain understanding of \myref{\LMiv} by studying the \myemph{simple linear regression} model with \m{p=2}.
+\end{myitemize}
+\end{frame}
+
+\end{document}
+
+\begin{frame}[fragile]
+\frametitle{}
+\end{frame}
