@@ -353,7 +353,7 @@ solution when \m{p<n} and a family of solutions when \m{p>n}.
 We've seen how matrices can represent a system of linear equations as \m{\mat{A}\vec{x}=\vec{b}}.
 \item
 For a basic linear algebra equation \m{ax=b} we would divide through by \m{a}, or equivalently multiply through by \m{a^{-1}}, to find \m{x=a^{-1}b} when \m{a\neq 0}.
-\item Is there a \myemph{matrix inverse} \m{\mat{A}^{-1}} such that \m{\vec{x}=\mat{A}^{-1}\vec{b}}?
+\item Is there a \myemph{matrix inverse} \m{\mat{A}^{-1}} such that \m{\vec{x}=\mat{A}^{-1}\vec{b}} solves the system of linear equations \m{\mat{A}\vec{x}=\vec{b}}?
 \item We will see that there is an inverse \m{\mat{A}^{-1}} when the system of linear equations has a unique solution. Since software can compute this inverse, we can solve systems of linear equations easily. 
 This is useful in statistics for fitting linear models to datasets.
 Understanding when this inverse exists, and what to do when it doesn't, will help us develop appropriate models for data analysis.
@@ -579,11 +579,39 @@ Then subtraction gives \m{(ad-bc)y = av-cu}.
 \item
 This gives us the formula for \m{ \mat{A}^{-1}}, 
 \mydisplaymath{
-%\box{
  {\mytwomatrix{a}{b}{c}{d}}^{-1} = \frac{1}{ad-bc}\mytwomatrix{d}{-b}{-c}{a} 
-%}
 }
 
+\end{myitemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{The identity $\mat{A}^{-1}\mat{A}=\mat{I}$}
+\begin{myitemize}
+\item We constructed \m{\mat{A}^{-1}} so that \m{\mat{A}\vec{x}=\vec{b}} has solution \m{\vec{x}=\mat{A}^{-1}\vec{b}}.
+\item Formally, this amounts to multiplying both sides of the equation \m{\mat{A}\vec{x}=\vec{b}} by
+ \m{\mat{A}^{-1}}.
+
+\item This gives us 
+\mydisplaymath{\mat{A}^{-1}\mat{A}\vec{x}=\mat{A}^{-1}\vec{b}.}
+
+\item Mathematically, it must be true that
+
+\vspace{1mm}
+
+\centerline{
+\framebox{
+\hspace{10mm}
+\altdisplaymath{\mat{A}^{-1}\mat{A}=\mat{I}} 
+\hspace{10mm}\rule[-2mm]{0mm}{7mm}
+}}
+
+\vspace{1mm}
+
+so that 
+\mydisplaymath{\mat{A}^{-1}\mat{A}\vec{x}=\mat{I}\vec{x}=\vec{x}.}
+\item This matches usual arithmetic, where we have the identity \m{a^{-1} a = 1}.
 \end{myitemize}
 
 \end{frame}
@@ -837,16 +865,55 @@ t(B) %*% t(A)
 \end{column}
 \end{columns}
 
-
-
-
-
-
-
-
-
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{More properties of matrices, continued}
+
+{\bf A matrix commutes with its inverse}: \m{\mat{A}^{-1}\mat{A} = \mat{A}\mat{A}^{-1} = \mat{I}}.
+
+\begin{myitemize}
+\item Recall that, in general, matrix multiplication does not commute \m{(\mat{A}\mat{B}\neq \mat{B}\mat{A}}).
+
+\item We can check, using R, that a matrix does commute with its inverse.
+
+\end{myitemize}
+
+<<,echo=F>>=
+set.seed(2)
+@
+
+\vspace{-2mm}
+
+\begin{columns}[T] 
+\begin{column}{0.4\textwidth}
+<<>>= 
+A <- matrix(runif(9),3,3)
+@
+\end{column}
+\begin{column}{0.4\textwidth}
+<<>>= 
+A_inv <- solve(A)
+@
+\end{column}
+\end{columns}
+
+\vspace{5mm}
+
+\begin{columns}[T] 
+\begin{column}{0.4\textwidth}
+<<>>= 
+round( A %*% A_inv, 3)
+@
+\end{column}
+\begin{column}{0.4\textwidth}
+<<>>= 
+round( A_inv %*% A, 3)
+@
+\end{column}
+\end{columns}
+
+\end{frame}
 
 \end{document}
 
