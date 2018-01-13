@@ -1,0 +1,292 @@
+---
+title: "Stats 401 Lab 2"
+author: "401 GSI team"
+date: "1/9/2018"
+output:
+  beamer_presentation:
+    colortheme: dolphin
+    incremental: no
+  ioslides_presentation:
+    incremental: no
+  slidy_presentation:
+    incremental: no
+---
+# GSI Office hour
+
+At 2165 USB, the Science Learning Center Annex
+
+- Yuan Sun. Mon 9-11 am
+- Sanjana Gupta. Tue 9-11 am
+- Naomi Giertych. Thu 9-11 am
+
+# Homework
+
+- Out of 10 points
+- 1 point for the statement of sources
+- 1 point for feedback
+- Provide the code if the question request
+
+# Swirl tutorial
+
+We have finished lesson 1/3/4 in HW1.
+
+- Any techical difficulties encountered working with swirl?
+
+- Any questions about materials introduced in the tutorial?
+
+
+# Swirl tutorial
+
+You are asked to complete lesson 5/6/7/9 for HW2 and lesson 9 can be a little bit harder. 
+
+- We can go through parts of it together at the end of this lab (if we have time).
+
+- You can always go to our office hour for help.
+ 
+# Basic matrix computation
+
+- Addition
+- Scalar multiplication
+- Transpose
+- Matrix multiplication
+- Inverse
+- Solving linear equations
+
+# Addition
+
+Let $\mathbb{A}=[a_{ij}]_{n\times p}$ and $\mathbb{B}=[b_{ij}]_{n\times p}$, then $\mathbb{A} + \mathbb{B}=[a_{ij} + b_{ij}]_{n\times p}$
+
+For example, 
+$$\mathbb{A}=
+\begin{bmatrix}
+    a_{11} &  a_{12}\\
+    a_{21} &  a_{22}
+\end{bmatrix}
+$$
+and 
+$$\mathbb{B}=
+\begin{bmatrix}
+    b_{11} &  b_{12}\\
+    b_{21} &  b_{22}
+\end{bmatrix}
+$$
+
+Then
+$$
+\mathbb{A}+\mathbb{B}=
+\begin{bmatrix}
+    a_{11}+b_{11} &  a_{12}+b_{12}\\
+    a_{21}+b_{21} &  a_{22}+b_{22}
+\end{bmatrix}
+$$
+
+# Addition
+```{r, eval = T}
+# generate matrix A and B
+A = matrix(c(3,-2,-1,4,1,2),nrow=2);A
+
+B = matrix(1:6,nrow=2);B
+
+A + B
+```
+# Scalar multiplication
+Let $\mathbb{A}=[a_{ij}]_{n\times p}$, s be a scalar, then $s\mathbb{A}=[sa_{ij}]_{n\times p}$.
+
+For example, 
+$$\mathbb{A}=
+\begin{bmatrix}
+    a_{11} &  a_{12}\\
+    a_{21} &  a_{22}
+\end{bmatrix}
+$$
+
+Then
+$$
+s\mathbb{A}=
+\begin{bmatrix}
+    sa_{11} &  sa_{12}\\
+    sa_{21} &  sa_{22}
+\end{bmatrix}
+$$
+
+# Scalar multiplication
+```{r, eval = T}
+# Use same matrix A
+A
+
+# 5 time A
+5 * A
+```
+# Transpose
+Let $\mathbb{A}=[a_{ij}]_{n\times p}$, then $\mathbb{A}^{\top}=[a_{ji}]_{p\times n}$
+
+For example, 
+$$\mathbb{A}=
+\begin{bmatrix}
+    a_{11} &  a_{12}\\
+    a_{21} &  a_{22}
+\end{bmatrix}
+$$
+
+
+Then
+$$\mathbb{A}^{\top}=
+\begin{bmatrix}
+    a_{11} &  a_{21}\\
+    a_{12} &  a_{22}
+\end{bmatrix}
+$$
+
+# Transpose
+```{r, eval = T}
+# Recall we have matrix A
+A
+
+# A transpose
+C = t(A);C
+```
+
+# Matrix multiplication
+Let $\mathbb{A}=[a_{ij}]_{n\times p}$ and $\mathbb{B}=[b_{ij}]_{p\times q}$, then $\mathbb{A}\mathbb{B}=[c_{ij}]_{n\times q}$ where $c_{ij} = \sum_{k=1}^p a_{ik}b_{kj}$
+
+For example, 
+$$\mathbb{A}=
+\begin{bmatrix}
+    a_{11} &  a_{12}\\
+    a_{21} &  a_{22}
+\end{bmatrix}
+$$
+and 
+$$\mathbb{B}=
+\begin{bmatrix}
+    b_{11} &  b_{12}\\
+    b_{21} &  b_{22}
+\end{bmatrix}
+$$
+
+Then
+$$
+\mathbb{A}\mathbb{B}=
+\begin{bmatrix}
+    a_{11}b_{11}+a_{12}b_{21} &  a_{11}b_{12}+a_{12}b_{22}\\
+    a_{21}b_{11}+a_{22}b_{21} &  a_{21}b_{12}+a_{22}b_{22}
+\end{bmatrix}
+$$
+
+# Matrix multiplication
+```{r, eval = T}
+# Recall we have matrix B and C
+B
+
+C
+# Let's caculate BC by hand
+```
+# Matrix multiplication
+```{r, eval = T}
+# Check with R
+B %*% C
+
+# notice that matrix multiplication is not commutative
+C %*% B
+```
+# Inverse
+$$\mathbb{A}=
+\begin{bmatrix}
+    a_{11} &  a_{12}\\
+    a_{21} &  a_{22}
+\end{bmatrix}
+$$
+
+Then
+$$\mathbb{A}^{-1}=\frac{1}{a_{11}a_{22}-a_{12}a_{21}}
+\begin{bmatrix}
+    a_{22} &  -a_{12}\\
+    -a_{21} &  a_{11}
+\end{bmatrix}
+$$
+
+$det(\mathbb{A}) = a_{11}a_{22}-a_{12}a_{21}$ is called the determinant of $\mathbb{A}$. 
+
+Need $det(\mathbb{A}) \neq 0$ for $\mathbb{A}$ to be invertible.
+
+We only need to caculate the inverse a 2 by 2 matrix by hand 
+
+# Inverse
+```{r, eval = T}
+# We can inverse higher dimensional matrix using R
+# Produce a 3 by 3 matrix
+set.seed(2018)
+D = matrix(rnorm(9), nrow=3);D
+
+# Inverse of D
+solve(D)
+
+```
+
+# Solving linear equation
+Suppose we want to solve $\mathbb{A}\mathbf{x} = \mathbf{b}$, then $\mathbf{x} = \mathbb{A}^{-1} \mathbf{b}$. (Assuming $\mathbb{A}$ is invertible)
+
+As a example question, we want to solving the following linear equations in R
+$$
+\begin{array}{ccccccc}
+x &+& y &&  &=& 2 \\
+x &+& 2y &+& z &=& 1 \\
+3x && &+& 2z &=& -3 \\
+\end{array}$$
+
+```{r, eval = T}
+# This is the A we what
+A = matrix(c(1,1,3,1,2,0,0,1,2),nrow=3);A
+
+```
+
+# Solving linear equations
+```{r, eval = T}
+# This is the b we what
+b = c(2,1,-3)
+
+# solve for x
+x = solve(A) %*% b;x
+```
+
+# In lab activity
+```{r, eval = FALSE}
+# We generate the data similar as the homework
+randomMatrix <- function(p,q,values=-4:4){
+   matrix(sample(values,size=p*q,replace=TRUE),p,q)
+}
+set.seed(2018) 
+A <- randomMatrix(2,2)
+B <- randomMatrix(2,2)
+```
+1. Caculate the following by hand and check your results with R
+- $\mathbb{A} + \mathbb{B}$
+- $\mathbb{A}\mathbb{B}$
+- $\mathbb{A}^{-1}$
+
+2. Solve the following linear equations with R
+$$
+\begin{array}{ccccccc}
+-x &+& y &+& z &=& 1.5 \\
+x &+& 2y &-& z &=& -2 \\
+3x && &+& 2z &=& -3 \\
+\end{array}$$
+
+# Lab ticket
+1. Suppose $\mathbb{A}$ is a $4 \times 6$ matrix and $\mathbb{B}$ is a $3 \times 6$ matrix. What is the dimension of $\mathbb{A}\mathbb{B}^{\top}$?
+
+2. Let $$\mathbb{A}=
+\begin{bmatrix}
+    1 &  3 & -2\\
+    1 &  -1& 2
+\end{bmatrix}
+$$
+and 
+$$\mathbb{B}=
+\begin{bmatrix}
+    1 &  0\\
+   -1 & 1\\
+    2 & 1
+\end{bmatrix}.
+$$
+Caculate $2\mathbb{A}\mathbb{B}$ by hand.
