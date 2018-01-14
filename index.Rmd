@@ -94,4 +94,6 @@ The GSI may provide some feedback on correctness, but students are responsible f
 
 * [Lab 1. Introduction to R](lab/lab01/lab01.pdf). Slides for 1/4 and 1/5.
 
+* [Lab 2. Practicing matrix operations](lab/lab02/lab02.pdf). Slides for 1/11 and 1/12.
+
 ------------
