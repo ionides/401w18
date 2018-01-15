@@ -3,7 +3,7 @@
 
 \input{../header.tex}
 \newcommand\CHAPTER{3}
-
+\newcommand\LSi{\mathrm{(LS1)}}
 
 
 \begin{document}
@@ -291,34 +291,257 @@ Learn about the \code{abline()} and \code{lines()} functions. Explain to yoursel
 
 
 \begin{frame}[fragile]
+\frametitle{Review of summation signs}
+
+\begin{myitemize}
+\item To do statistics, we often want to sum things up over all data points so the \myemph{summation sign} \m{\sum_{i=1}^n} comes up frequently.
+\item The basic trick to understand \m{\sum_{i=1}^n} is that anything written using a summation sign can be written as a usual sum. 
+\item As long as you can expand from \m{\sum_{i=1}^n z_i} to \m{z_1+z_2+\dots+z_n}, and then contract back again from \m{z_1+z_2+\dots+z_n} to \m{\sum_{i=1}^n z_i}, then you can use what you already know about \m{+} to work with \m{\sum_{i=1}^n}.
+\end{myitemize}
+
+{\bf Worked example 1}.  Can we take a constant outside a sum sign? Is it true that 
+
+\vspace{-8mm}
+
+\mydisplaymath{
+\sum_{i=1}^n \intercept y_i = \intercept \sum_{i=1}^n y_i.}
+
+{\bf Solution 1}. Expand the sum, apply the distributive rule, and contract again.
+
+\vspace{-6mm}
+
+\mydisplaymath{
+\sum_{i=1}^n \intercept y_i 
+\hspace{1.5mm} = \hspace{1.5mm}
+\intercept y_1 + \intercept y_2 + \dots + \intercept y_n
+\hspace{1.5mm} = \hspace{1.5mm}
+\intercept(y_1+\dots+y_n) 
+\hspace{1.5mm} = \hspace{1.5mm}
+ \intercept \sum_{i=1}^n y_i.
+}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{More worked examples using summation signs}
+
+{\bf Worked example 2}.  What happens if we sum a constant? Show that
+
+\vspace{-5mm}
+
+\mydisplaymath{
+\sum_{i=1}^n \intercept  = n\intercept.
+}
+
+{\bf Solution 2}. Expand the sum, and apply basic addition.
+
+\vspace{-6mm}
+
+\mydisplaymath{
+\sum_{i=1}^n \intercept
+\hspace{1.5mm} = \hspace{1.5mm}
+\intercept + \intercept + \dots + \intercept \hspace{1.5mm}
+\mbox{($n$ times)}
+\hspace{1.5mm} = \hspace{1.5mm}
+n \intercept
+}
+
+\vspace{1mm}
+
+
+\hrule
+
+\vspace{3mm}
+
+{\bf Worked example 3}. Can we take a derivative through a sum sign? Is it true that 
+
+\vspace{-7mm}
+
+\mydisplaymath{
+\frac{d}{d\slope} \Big( \sum_{i=1}^n \slope^2 x_i^2\Big) = \sum_{i=1}^n 2\slope x_i^2
+}
+
+{\bf Solution}. Start by expanding the sum sign. 
+
+\vspace{-5mm}
+
+\mydisplaymath{
+%\frac{d}{d\slope} 
+\Big( 
+\sum_{i=1}^n \slope^2 x_i^2 
+\Big) 
+= 
+%\frac{d}{d\slope}
+%\Big( 
+\slope^2 x^2_1 + \slope^2 x^2_2 + \dots+ \slope^2 x^2_n 
+%\Big)
+.
+}
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Worked example 3 continued}
+
+The derivative of a sum is the sum of the derivatives (from Calc I?) so we differentiate both sides of the previous expression to give
+
+\vspace{-5mm}
+
+\mydisplaymath{
+\frac{d}{d\slope} \Big( \sum_{i=1}^n \slope^2 x_i^2 \Big) = 
+2 \slope x^2_1 + 2 \slope x^2_2 + \dots+ 2 \slope x^2_n.
+}
+
+Now, we must recognize that the \m{+} expression can be rewritten using \m{\sum_{i=1}^n}.
+This gives two possible contractions, one of which includes an application of the distributive rule:
+
+\vspace{-5mm}
+
+\mydisplaymath{
+2 \slope x^2_1 + 2 \slope x^2_2 + \dots+ 2 \slope x^2_n
+= \sum_{i=1}^n 2\slope x_i^2 =  2\slope \sum_{i=1}^n x_i^2 .
+}
+
+Putting these steps together, we obtain
+
+\vspace{-5mm}
+
+\mydisplaymath{
+\frac{d}{d\slope} \Big( \sum_{i=1}^n \slope^2 x_i^2\Big) = \sum_{i=1}^n 2\slope x_i^2 = 2\slope \sum_{i=1}^n x_i^2 .
+}
+
+We have checked that we can pass \m{d/d\slope} through the summation sign.
+
+\end{frame}
+
+
+\begin{frame}[fragile]
 \frametitle{Deriving the formula for the least squares coefficient vector}
 
+\vspace{-2mm}
+
 {\bf This material will not be tested in the exam. It is presented to show you an application of differentiation and to explain where the formula \myref{\LMiv} for \m{\vec{b}} comes from.}
+
+\vspace{-2mm}
 
 \begin{myitemize}
 \item We derive \myref{\LMiv} for the simple linear regression model \myref{\SLRi}. 
 
 \item The \myemph{sum of squared error} is also the \myemph{sum of the squared residuals} and is known as the \myemph{residual sum of squares (RSS)}. For simple linear regression, this is
 
+\vspace{-7mm}
+
 \mydisplaymath{ 
-\mathrm{RSS} = \sum_{i=1}^n (y_i -  a x_i - b)^2
+\mathrm{RSS} = \sum_{i=1}^n \Big(y_i -  (\slope x_i +\intercept) \Big)^2
 }
 
-\item To find \m{a} and \m{b} minimizing RSS, we differentiate with respect to \m{a} and \m{b} and set the derivatives equal to zero.
+\item To find \m{\slope} and \m{\intercept} minimizing  \m{\mathrm{RSS}}, we differentiate with respect to \m{\slope} and \m{\intercept} and set the derivatives equal to zero.
 
-\question. Check that
+\item When we differentiate \m{\mathrm{RSS}} with respect to \m{\slope} treating \m{\intercept} as a constant, this is called a \myemph{partial derivative} and is written as \m{\partial \mathrm{RSS}/\partial \slope}.
+
+\item If we can find \m{\slope} and \m{\intercept} with \m{\partial \mathrm{RSS}/\partial \slope=0} and \m{\partial \mathrm{RSS}/\partial \intercept=0} we have found a \myemph{minimum or maximum} of \m{\mathrm{RSS}}.
+\item
+\m{\mathrm{RSS}} is non-negative and can get arbitrarily large for bad choices of \m{\slope} and \m{\intercept}. It must have a minimum but not a maximum.
+\end{myitemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Expanding the square in the definition of RSS}
+\begin{myitemize}
+\item It may be helpful to first expand the square in the definition of \m{\mathrm{RSS}} to give
+\end{myitemize}
+\vspace{-7mm}
+
 \mydisplaymath{ 
-\frac{\partial}{\partial a} \mathrm{RSS} = 2a \sum_{i=1}^n x_i^2 - 2\sum_{i=1}^n x_i(y_i -  b)
+\mathrm{RSS} = \sum_{i=1}^n y_i^2 +\slope^2 \sum_{i=1}^n x_i^2 + n\intercept^2 - 2\slope\sum_{i=1}^n x_iy_i - 2\intercept \sum_{i=1}^n y_i + 2\slope\intercept\sum_{i=1}^n x_i
 }
 
+\myquestion. Check that you can work out the expansion of the square. This is an exercise in working with summation signs, similar to worked examples 1 and 2 above.
+
+\vspace{4cm}
+
+\end{frame}
 
 
+
+\begin{frame}[fragile]
+\frametitle{Differentiating RSS with respect to $\slope$ and $\intercept$}
+
+\vspace{-1mm}
+
+\myquestion. Check that
+\altdisplaymath{ 
+\frac{\partial}{\partial \slope} \mathrm{RSS} = 2\slope \sum_{i=1}^n x_i^2 - 2\sum_{i=1}^n x_iy_i + 2 \intercept \sum_{i=1}^n x_i.
+}
+
+\vspace{8mm}
+
+\myquestion. Check that
+\altdisplaymath{ 
+\frac{\partial}{\partial \intercept} \mathrm{RSS} = 2n\intercept - 2\sum_{i=1}^n y_i + 2 \slope \sum_{i=1}^n x_i.
+}
+
+\vspace{10mm}
+
+Now to minimize RSS, giving the least squares values of \m{\slope} and \m{\intercept}, we set the derivatives to zero and solve the resulting simultaneous linear equations for \m{\slope} and \m{\intercept}. Canceling the common factor of 2, we get
+
+%\vspace{-4mm}
+
+%\mydisplaymath{ 
+\m{
+\LSi \hspace{2mm} \left\{ \hspace{18mm}
+\begin{array}{ccccc}
+%\displaystyle 
+\slope \sum_{i=1}^n x_i^2  &+&  \intercept \sum_{i=1}^n x_i &=&  \sum_{i=1}^n x_iy_i 
+\rule[-4mm]{0mm}{3mm}
+\\
+ \slope \sum_{i=1}^n x_i &+& \intercept n &=& \sum_{i=1}^n y_i
+\end{array}
+\right.
+}
+
+%\vspace{-2mm}
+
+Let's write the \myemph{least squares equations} \myref{\LSi} in matrix form.
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{The least squares equations in matrix form for simple linear regression}
+
+\begin{myitemize}
+\item The matrix form of \m{y_i = \slope x_i + \intercept+e_i}, for \m{i=1,\dots,n}, is \m{\vec{y}=\mat{X}\vec{b}+\vec{e}} where \m{\vec{y}=(y_1,\dots,y_n)}, \m{\vec{b}=(\slope,\intercept)}, \m{\vec{e}=(e_1,\dots,e_n)}, \m{\vec{x}=(x_1,\dots,x_n)} and \m{\vec{1}=(1,1,\dots,1)} are column vectors, and \m{\mat{X}=[\, \vec{x} \hspace{1mm} \vec{1}\, ]}.
+\item Written out in full, this is
+\mydisplaymath{
+\myvector{y}{n} =
+\left[
+\begin{array}{cc}
+x_1 & 1 \\
+x_2 & 1 \\
+\vdots & \vdots \\
+x_n & 1
+\end{array}
+\right]
+\raisebox{5mm}{$\displaystyle
+\left[
+\begin{array}{c} \slope \\ \intercept \end{array}
+\right]$
+}
++
+\myvector{e}{n}
+}
 
 \end{myitemize}
 
 \end{frame}
 
 \end{document}
+
+
+\end{frame}
 
 \begin{frame}[fragile]
 \frametitle{}
