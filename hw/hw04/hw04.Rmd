@@ -41,7 +41,7 @@ Solve the following problems, giving explanation for your answer. The explanatio
 
 We will look at a dataset on the heights of 928 children and their parents, taken from an 1886 article by [Francis Galton](https://en.wikipedia.org/wiki/Francis_Galton) on Regression Towards Mediocrity in Hereditary Stature (*Journal of the Anthropological Institute*, 15, 246-263).
 Galton was interested in investigating how the height of parents explains the heights of their children.
-These data developed Galton's invention of the concept "regression to the mean" which led to the name "regression" for fitting a linear model. 
+These data motivated Galton's invention of a mathematical framework for [Darwin's](https://en.wikipedia.org/wiki/Charles_Darwin) concept of "regression to the mean" which led to the name "regression" for fitting a linear model. 
 We can obtain them through the HistData library.
 
 ```{r install_histdata,eval=F}
