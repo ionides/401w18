@@ -4,7 +4,10 @@
 \input{../header.tex}
 \newcommand\CHAPTER{3}
 \newcommand\LSi{\mathrm{(LS1)}}
-
+\newcommand\LSii{\mathrm{(LS2)}}
+\newcounter{tXX}
+\newcounter{tXy}
+\newcounter{matrixLSi}
 
 \begin{document}
 
@@ -384,7 +387,7 @@ n \intercept
 \begin{frame}[fragile]
 \frametitle{Worked example 3 continued}
 
-The derivative of a sum is the sum of the derivatives (from Calc I?) so we differentiate both sides of the previous expression to give
+The derivative of a sum is the sum of the derivatives (from Calc I) so we differentiate both sides of the previous expression to give
 
 \vspace{-5mm}
 
@@ -502,15 +505,15 @@ Now to minimize RSS, giving the least squares values of \m{\slope} and \m{\inter
 \right.
 }
 
-%\vspace{-2mm}
-
-Let's write the \myemph{least squares equations} \myref{\LSi} in matrix form.
+We want to know if the \myemph{least squares equations} \myref{\LSi} match \myref{\LMiv}.
 
 \end{frame}
 
 
 \begin{frame}[fragile]
-\frametitle{The least squares equations in matrix form for simple linear regression}
+\frametitle{Simple linear regression in matrix form}
+
+\vspace{-2mm}
 
 \begin{myitemize}
 \item The matrix form of \m{y_i = \slope x_i + \intercept+e_i}, for \m{i=1,\dots,n}, is \m{\vec{y}=\mat{X}\vec{b}+\vec{e}} where \m{\vec{y}=(y_1,\dots,y_n)}, \m{\vec{b}=(\slope,\intercept)}, \m{\vec{e}=(e_1,\dots,e_n)}, \m{\vec{x}=(x_1,\dots,x_n)} and \m{\vec{1}=(1,1,\dots,1)} are column vectors, and \m{\mat{X}=[\, \vec{x} \hspace{1mm} \vec{1}\, ]}.
@@ -534,9 +537,82 @@ x_n & 1
 \myvector{e}{n}
 }
 
+
+\end{myitemize}
+
+\myquestion. \setcounter{tXX}{\theQcounter}
+For this \m{\mat{X}}, check that \m{\mat{X}^\transpose\mat{X} = 
+\left[ \begin{array}{cc}
+\sum_{i=1}^n x_i^2 & \sum_{i=1}^n x_i \\
+\sum_{i=1}^n x_i   & n 
+\end{array}\right]
+}
+
+\vspace{10mm}
+
+\myquestion. \setcounter{tXy}{\theQcounter}
+Also, check that \m{\mat{X}^\transpose\vec{y} = 
+\left[ \begin{array}{c}
+\sum_{i=1}^n x_iy_i\\
+\sum_{i=1}^n y_i    
+\end{array}\right]
+}
+
+\vspace{10mm}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The least squares equations in matrix form}
+
+\vspace{-2mm}
+
+\begin{myitemize}
+\item Rather than directly showing that \myref{\LSi} has solution \m{\vec{b}=\big(\mat{X}^\transpose\mat{X}\big)^{-1}\mat{X}^\transpose \vec{y}}, it is easier to check that \myref{\LSi} is written in matrix form as 
+
+\vspace{2mm}
+
+\hspace{-3mm} \myref{\LSii} \hspace{20mm} \m{\big(\mat{X}^\transpose\mat{X}\big) \vec{b} = \mat{X}^\transpose \vec{y}}.
+
+\vspace{1mm}
+
+
+\end{myitemize}
+
+\myquestion. \setcounter{matrixLSi}{\theQcounter}
+Check that \myref{\LSi} in matrix form is
+
+\vspace{1mm}
+
+\hspace{15mm}\m{
+\left[ \begin{array}{cc}
+\sum_{i=1}^n x_i^2 & \sum_{i=1}^n x_i \\
+\sum_{i=1}^n x_i   & n 
+\end{array}\right]
+\left[ \begin{array}{c}
+\slope\\
+\intercept
+\end{array}\right]
+=
+\left[ \begin{array}{c}
+\sum_{i=1}^n x_iy_i\\
+\sum_{i=1}^n y_i    
+\end{array}\right]
+}
+
+\vspace{15mm}
+
+\begin{myitemize}
+\item 
+Combining Questions {\CHAPTER.\thetXX}, {\CHAPTER.\thetXy} and {\CHAPTER.\thematrixLSi} together, we have found that \myref{\LSii} and \myref{\LSi} are the same equations.
+Therefore they must have the same solution, which is \m{\vec{b}=\big(\mat{X}^\transpose\mat{X}\big)^{-1}\mat{X}^\transpose \vec{y}}.
+
+\item We have proved, using differentiation, that \m{\vec{b}=\big(\mat{X}^\transpose\mat{X}\big)^{-1}\mat{X}^\transpose \vec{y}} is the least squares coefficient vector for simple linear regression.
+
 \end{myitemize}
 
 \end{frame}
+
 
 \end{document}
 
