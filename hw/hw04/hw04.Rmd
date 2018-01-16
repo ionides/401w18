@@ -1,0 +1,91 @@
+---
+title: "Homework 4, STATS 401 W18"
+author: "Due in your lab on 2/1 or 2/2"
+output:
+  html_document:
+    theme: flatly
+    toc: yes
+csl: ecology.csl
+---
+
+\newcommand\mat[1]{\mathbb{#1}}
+\renewcommand\vec[1]{\boldsymbol{\mathrm{#1}}}
+\newcommand\xtranspose{{\mbox{\tiny \textsc{t}}}}
+\newcommand\transpose{{\scriptscriptstyle \mathrm{T}}}
+
+**For your homework report this week, you do not need to submit solutions to the swirl lessons. 
+Please report whether you successfully completed them, and discuss any issues that arose in the  _Sources_ and _Please explain_ statements. 
+For the data analysis exercise, write a brief report including the output you are asked to compute and the R code you used to generate it.
+Recall that you are permitted to collaborate, or to use any internet resources, but you must list all sources that make a substantial contribution to your report.**
+
+--------------
+
+### Practicing $\Sigma$ notation for sums.
+
+Solve the following problems, giving explanation for your answer. The explanation should involve expanding a $\sum_{i=1}^n$ expression into all $n$ terms of a sum, or contracting such a sum into a $\Sigma_{i=1}^n$ expression.
+
+1. Evaluate $\sum_{a=b}^c d$, where $b$ and $c$ are whole numbers with $c\ge b$.
+
+2. Evaluate $\sum_{i=1}^n \big(x_i - \bar x\big)$, where $\bar x = \frac{1}{n}\sum_{i=1}^n x_i$
+
+3. Show that $\frac{1}{n}\sum_{i=1}^n \big(x_i-\bar x\big)\big(y_i - \bar y\big) = \frac{1}{n}\Big(\sum_{i=1}^n x_iy_i\Big) - \bar x\bar y$,  where $\bar x = \frac{1}{n}\sum_{i=1}^n x_i$ and $\bar y = \frac{1}{n}\sum_{i=1}^n y_i$.
+
+4. Let $\vec{1}=(1,1,\dots,1)$ and $\vec{x}=(x_1,x_2,\dots,x_n)$ be two vectors treated as $n\times 1$ matrices. Use $\Sigma$ notation to evaluate the matrix product $\vec{1}^\transpose\vec{x}$.
+
+5. Let $\vec{u}=(u_1,\dots,u_n)$ and $\vec{v}=(v_1,\dots,v_n)$ be two vectors, and let $\mat{X}=[\,\vec{u}\,\,\vec{v}\,]$ be an $n\times 2$ matrix binding together $\vec{u}$ and $\vec{v}$. Use $\Sigma$ notation to evaluate the matrix product $\mat{X}^\transpose \mat{X}$.
+
+
+---------------
+
+### Investigating the regression effect
+
+We will look at a dataset on the heights of 928 children and their parents, taken from an 1886 article by [Francis Galton](https://en.wikipedia.org/wiki/Francis_Galton) on Regression Towards Mediocrity in Hereditary Stature (*Journal of the Anthropological Institute*, 15, 246-263).
+Galton was interested in investigating how the height of parents explains the heights of their children.
+These data developed Galton's invention of the concept "regression to the mean" which led to the name "regression" for fitting a linear model. 
+We can obtain them through the HistData library.
+
+```{r install_histdata,eval=F}
+install.packages("HistData")
+```
+
+```{r histdata}
+library("HistData")
+data("Galton")
+head(Galton)
+```
+
+Here, `parent` is the mean of father and mother height in inches, and `child` is child's height, multiplied by 1.08 for daughters. 
+Galton rounded in a curious way, so that parent mid-heights usually end in .5 and child heights usually end in .2.
+We will simply call these quantities the parent and child heights. 
+
+1. What is the average height of the children to three significant figures?
+
+2. What is the average height of children with parent height between 70.0 and 71.0 inches?
+
+3. Plot the data appropriately. You will have to decide what is "appropriate." 
+
+4. Write down mathematically a linear model to quantify Galton's observation that the children of tall parents tend to be taller than average yet less tall than their parents and, conversely, the children of short parents tend to be shorter than average yet taller than their parents. 
+This is called the *regression effect*. 
+Find the least squares coefficients of the linear model using R. 
+You can use `lm()` rather than writing out the model using matrices. 
+Interpret the estimated coefficients in terms of the regression effect.
+
+5. A regression effect for midterm and final scores would be as follows: students who do well in the midterm tend to do above average on the final, yet less well than in the midterm; students who do badly in the midterm tend to do below average in the final, yet better than they did in the midterm. Do you expect to see this regression effect in exam scores? Explain.
+
+6. Which of the following do you feel best describes the residual error in explaining the child's height by the parent's height? Select one of the following choices and explain briefly.
+
+A) Measurement error: two scientists measuring the same person at the same time would get slightly different answers.
+B) Within individual random fluctuations: how tall you stand depends on how tired you are.
+C) Shoes: individuals were not asked to remove their shoes.
+C) Round off error introduced in Galton's data analysis.
+D) Between individual variability: other factors beyond genetics play a role in determining height.
+
+
+
+--------------
+
+
+License: This material is provided under an [MIT license](https://ionides.github.io/401w18/LICENSE)<br>
+Acknowledgement: The second part of this homework draws on material from from https://genomicsclass.github.io/book
+
+------
