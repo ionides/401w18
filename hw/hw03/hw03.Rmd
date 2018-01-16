@@ -61,8 +61,11 @@ This model can be written mathematically as
 <br><br>
 where $z_{i,1}$ takes the value $1$ when row $i$ of the data corresponds to kicker 1 (i.e., for $i=1,2,3,4$) and $0$ otherwise, $z_{i,2}$ takes the value $1$ when $i$ corresponds to kicker 2 (i.e., for $i=5,6,7,8$) and $0$ otherwise, and so on.
 This means that $c_k$ is the intercept of a linear model for kicker $k$, for $k=1,\dots,19$, where the lines for all the kickers share the same slope, $m$.
-To write model (LM) in the form $\vec{y} = \mat{X}\vec{b} + \vec{e}$, we need $\mat{X}=[\vec{x},\vec{z_1},\dots,\vec{z_{19}}]$ where $\vec{x}$ is a column vector containing $(x_1,\dots,x_{76})$ and $\vec{z_k}$ is a column vector containing $(z_{1,k},\dots,z_{76,k})$ for $k=1,\dots,19$.
-Construct this matrix in R. 
+To write model (LM) in the form $\vec{y} = \mat{X}\vec{b} + \vec{e}$, we need $\mat{X}=[\vec{x},\vec{z}_1,\dots,\vec{z}_{19}]$ where $\vec{x}$ is a column vector containing $(x_1,\dots,x_{76})$ and $\vec{z}_k$ is a column vector containing $(z_{1,k},\dots,z_{76,k})$ for $k=1,\dots,19$.
+The vector $\vec{z}_k$ can be called a dummy variable for kicker $k$. 
+Dummy variables are explanatory variables that we construct in order to allow a coefficient (here, the intercept) to be estimated separately for different subsets of the data (here, the intercept is estimated separately for each kicker).
+<br><br>
+Construct the $\mat{X}$ matrix for model (LM) in R. 
 A direct way is to build each of the twenty columns, with the help of `rep()`, and glue them together with `cbind()`. 
 There are other succinct ways to construct this matrix, and you can look for them if you wish. 
 Report whether your least squares estimate of $m$, constructed using the design matrix $\mat{X}$,
