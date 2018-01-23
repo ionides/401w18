@@ -1,0 +1,1 @@
+Evaluate $\sum_{a=b}^c d$, where $b$ and $c$ are whole numbers with $c\ge b$.

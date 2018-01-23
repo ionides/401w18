@@ -1,0 +1,1 @@
+Show that $\frac{1}{n}\sum_{i=1}^n \big(x_i-\bar x\big)\big(y_i - \bar y\big) = \frac{1}{n}\Big(\sum_{i=1}^n x_iy_i\Big) - \bar x\bar y$,  where $\bar x = \frac{1}{n}\sum_{i=1}^n x_i$ and $\bar y = \frac{1}{n}\sum_{i=1}^n y_i$.
