@@ -1,0 +1,69 @@
+---
+title: "Homework 2 Solutions, STATS 401 W18"
+author: "Due in your lab on 1/18 or 1/19"
+output:
+  pdf_document
+---
+
+### Matrix exercises
+
+```{r}
+A <- matrix(c(-2,-1,1,4),nrow=2)
+B <- matrix(c(-3,4,4,1),nrow=2)
+A
+B
+```
+
+1. Addition. 
+```{r,echo=TRUE}
+A+B
+```
+
+2. Scalar multiplication.
+```{r scalar_mult}
+2*A
+```
+ 
+
+3. Multiplying two square matrices. 
+```{r}
+A%*%B
+```
+
+
+4. Multiplying two rectangular matrices.
+```{r}
+set.seed(2)
+C <- matrix(sample(-10:10,6),nrow=2)
+D <- matrix(sample(-10:10,6),nrow=3)
+C;D;C%*%D
+```
+
+
+5. Inverting a $2\times 2$ matrix.
+```{r,echo=TRUE}
+solve(A)
+```
+
+
+6. Transposing a matrix.
+```{r}
+C <- matrix(c(-3,1,4,2,-3,4),nrow=2)
+C; t(C)
+```
+
+
+7. Solve the following system of linear equations using R.
+$$\begin{array}{ccccccccc}
+-3w &+& x &+& y &&  &=& 2 \\
+3w &+& x &+& y &+& z &=& 1 \\
+-w &-& 3x && &+& 3z &=& -1 \\
+-2w &-& 2x &&&+& 3z &=& 4
+\end{array}$$
+```{r}
+A <- matrix(c(-3,3,-1,2,1,1,-3,-2,1,1,0,0,0,1,3,3),nrow=4)
+b <- c(2,1,-1,4)
+x = solve(A)%*%b
+x
+```
+
