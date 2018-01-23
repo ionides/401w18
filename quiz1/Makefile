@@ -1,6 +1,6 @@
 default: html-docs
 
-html-docs: quiz1_generator.html
+html-docs: quiz1.html
 
 %.html: %.Rmd
 	Rscript --vanilla -e "rmarkdown::render(\"$*.Rmd\",output_format=\"html_document\")"

@@ -36,24 +36,24 @@ A <- randomMatrix(3,2,values=-2:3)
 B <- randomMatrix(2,2,values=-2:3)
 ```
 
-1. Evaluate $\mat{A}\mat{B}$ when 
+M1. Evaluate $\mat{A}\mat{B}$ when 
 ```{r M1,echo=F,results='asis',cache=FALSE}
 xx("\\mat{A}=",A,", \\quad \\mat{B} = ",B,mtype="bmatrix",digits=0)
 ```
 
-2. For $\mat{A}$ as above, write down $\mat{A}^\transpose$.
+M2. For $\mat{A}$ as above, write down $\mat{A}^\transpose$.
 
-3. For $\mat{B}$ as above, find $\mat{B}^{-1}$ if it exists.  If $\mat{B}^{-1}$ doesn't exist, explain how you know this.
+M3. For $\mat{B}$ as above, find $\mat{B}^{-1}$ if it exists.  If $\mat{B}^{-1}$ doesn't exist, explain how you know this.
 
 ------------
 
 ### Summation exercises
 
-1. A basic example.
+S1. A basic example.
 ```{r s1, child = sample(list.files(path="s1",full.names=T),size=1)}
 ```
 
-2. An example involving sums of squares and products.
+S2. An example involving sums of squares and products.
 ```{r s2, child = sample(list.files(path="s2",full.names=T),size=1)}
 ```
 
@@ -61,17 +61,18 @@ xx("\\mat{A}=",A,", \\quad \\mat{B} = ",B,mtype="bmatrix",digits=0)
 
 ### R exercises
 
-1. Using `rep()` and `matrix()`. 
+R1. Using `rep()` and `matrix()`. 
 ```{r r1, child = sample(list.files(path="r1",full.names=T),size=1)}
 ```
 
-2. Using `lm()`.
+R2. Using `lm()`.
 ```{r r2, child = sample(list.files(path="r2",full.names=T),size=1)}
 ```
 
 ------
 
 ### Fitting a linear model by least squares 
+
 
 
 ------
