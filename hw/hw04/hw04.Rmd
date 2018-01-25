@@ -13,10 +13,12 @@ csl: ecology.csl
 \newcommand\xtranspose{{\mbox{\tiny \textsc{t}}}}
 \newcommand\transpose{{\scriptscriptstyle \mathrm{T}}}
 
-**For your homework report this week, you do not need to submit solutions to the swirl lessons. 
-Please report whether you successfully completed them, and discuss any issues that arose in the  _Sources_ and _Please explain_ statements. 
-For the data analysis exercise, write a brief report including the output you are asked to compute and the R code you used to generate it.
-Recall that you are permitted to collaborate, or to use any internet resources, but you must list all sources that make a substantial contribution to your report.**
+**For the summation questions, write solutions by hand or typed.
+For the data analysis exercise, write a brief report addressing the questions.
+For Question 4, writing down a model mathematically means writing a relevant equation, and defining the quantities in the equation --- it is probably best not to use matrix notation for this.
+Include, as an appendix, the R code you used to generate your analysis.
+Recall that you are permitted to collaborate, or to use any internet resources, but you must list all sources that make a substantial contribution to your report.
+As usual, please include  _Sources_ and _Please explain_ statements.**
 
 --------------
 
@@ -60,7 +62,7 @@ We will simply call these quantities the parent and child heights.
 
 1. What is the average height of the children to three significant figures?
 
-2. What is the average height of children with parent height between 70.0 and 71.0 inches?
+2. What is the average height of children with parent height between 69.0 and 71.0 inches?
 
 3. Plot the data appropriately. You will have to decide what is "appropriate." 
 
