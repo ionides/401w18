@@ -1,0 +1,14 @@
+Suppose we define an R vector by `y <- c(3,NA,-1,4,NA,-2)`. What will `y[y>0]` give you?
+
+(a). A vector of the positive elements and NA values of `y`.
+
+(b). A vector of the negative elements of `y`.
+
+(c). A vector of all `NA`s.
+
+(d). A vector of `TRUE`s and `FALSE`s.
+
+(e). A vector of `TRUE`s and `FALSE`s and `NA`s.
+
+
+---------------

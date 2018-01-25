@@ -1,1 +1,0 @@
- Evaluate $\sum_{i=1}^n \big(x_i - \bar x\big)$, where $\bar x = \frac{1}{n}\sum_{i=1}^n x_i$.

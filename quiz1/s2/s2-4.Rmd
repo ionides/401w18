@@ -1,0 +1,4 @@
+Calculate $\frac{d}{dm}\sum_{i=1}^{n} (y_i -m x_i)^2$. (This will not be on the quiz, since the notes said differentiation to get the linear model will not be tested.)
+
+-------------------
+

@@ -1,0 +1,12 @@
+Which of the following code successfully construct the matrix 
+$\mathbb{A} = \begin{bmatrix}1 & 1\\2 & 2\\3 & 3\end{bmatrix}$
+
+(a). $\quad$ `A <- matrix(c(1,1,2,2,3,3) ,nrow=3)`
+
+(b). $\quad$ `A <- cbind(c(1,1),c(2,2),c(3,3))`
+
+(c). $\quad$ `A <- t(matrix(c(1,1,2,2,3,3) ,nrow=2))`
+
+(d). $\quad$ `A <- c(c(1:3),c(1:3))`
+
+----------------

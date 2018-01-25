@@ -1,0 +1,32 @@
+F1. Recall the dataset `uswages` containing ten variables on 2000 subjects from the 1988 Current Population Survey.
+```{r, eval = T, echo=F}
+library(faraway)
+data("uswages")
+```
+```{r, eval = T, echo=T}
+head(uswages, n=4)
+```
+Suppose we want to fit a linear model using wage as response, with years of education and years of experience as predictors.
+Which of the following code succesfully construct the matrix $\mathbb{X}$ for a representation $\vect{y}=\mat{X}\vect{b}+\vect{e}$.
+
+(a). `X <- matrix(uswages\$educ, uswages\$exper)`
+
+(b). `X <- matrix(rep(1,nrow(uswages)), uswages\$educ, uswages\$exper)`
+
+(c). `X <- cbind(rep(1,nrow(uswages)), uswages\$educ, uswages\$exper)`
+
+(d). `X <- cbind(uswages\$educ, uswages\$exper)`
+
+--------------
+
+F2. If we want to fit the model using R function `lm()`, which of the following call is correct?
+
+(a). `lm(wage ~ ., data = uswages)`
+
+(b). `lm(y ~ x, data = uswages)`
+
+(c). `lm(wage = educ + exper, data = uswages)`
+
+Explain briefly how you would check whether your proposed solution is correct. 
+
+---------------

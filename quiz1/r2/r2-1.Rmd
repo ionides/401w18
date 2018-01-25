@@ -1,4 +1,14 @@
-Consider the linear model in the notes where detrended life expectancy is explained by detrended unemployment. We fitted the model ```lm1 <- lm(L_detrended~U_detrended)``` where `L_detrended` and `U_detrended` are vectors of length  68. Writing `L_detrended` as $y_1,\dots,y_n$ and  `U_detrended` as $x_1,\dots,x_n$ with $n=68$, explain (using equations where possible) how the quantity ```coef(lm1)``` is computed.
+Suppose `X` is a matrix in R. Which of the following is NOT equivalent to `X`?
+
+(a). `t(t(X))`
+
+(b). `X %*% matrix(1,ncol(X)`
+
+(c). `X*1`
+
+(d). `X%*%diag(ncol(X))`
+
+-------------
 
 
 
