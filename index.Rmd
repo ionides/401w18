@@ -100,6 +100,10 @@ Due in your lab on 1/18 or 1/19. [Solutions, as a pdf file](hw/hw02/Hw2_Solution
 * [Homework 3. More swirl and fitting a linear model via matrix computations](hw/hw03/hw03.html). 
 Due in your lab on 1/25 or 1/26. 
 
+* [Homework 4. Summation exercises and a historic data analysis](hw/hw04/hw04.html). 
+Due in your lab on 2/1 or 2/2. 
+
+
 
 ------------
 
