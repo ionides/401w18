@@ -1,0 +1,190 @@
+---
+title: "Stats 401 Lab 4"
+author: "401 GSI team"
+
+output:
+  beamer_presentation:
+  colortheme: dolphin
+incremental: no
+ioslides_presentation:
+  incremental: no
+slidy_presentation:
+  incremental: no
+---
+# Outline
+
+- Homework feedback
+- Review on summation sign
+- Sample quiz
+
+# Homework feedback - mad_libs in swirl
+```{r, eval = T, echo=T}
+mad_libs <- function(...){
+  # unpacking argument
+  args <- list(...) 
+  
+  # assign them to variables
+  place <- args[["place"]]
+  adjective <- args[["adjective"]]
+  noun <- args[["noun"]]
+  
+  paste("News from", place, "today where", adjective, 
+        "students took to the streets in protest of the new", 
+        noun, "being installed on campus.")
+}
+```
+
+# Homework feedback - NA and 0
+
+NA stands for not available, which means the value is missing. NA is not equal to 0. (Suppose x=0, then the value of 0 is known, hence not missing).
+```{r, eval = T, echo=T}
+X = cbind(c(NA,0),c(1,2));X
+Y = matrix(1:4, nrow = 2);Y
+
+```
+
+# Homework feedback - NA and 0
+```{r, eval = T, echo=T}
+# NA plus/time other value will give us NA
+X + Y
+X %*% Y
+
+# can use is.na() to check for NA
+is.na(X)
+```
+# Homework feedback
+
+Any other questions about the homework?
+
+# Review - summation sign
+  
+$\sum_{i=1}^n x_i = x_1 + x_2 + ... + x_n$. You can always do this expansion if 
+you are uncertain what to do.
+
+Useful results to remember:
+
+  - $\sum_{i=1}^n c x_i = c \sum_{i=1}^n x_i$
+  - $\sum_{i=1}^n c = nc$
+  - $\frac{d}{dc}\sum_{i=1}^n f(x_i,c) = \sum_{i=1}^n \frac{d}{dc} f(x_i,c)$
+  
+# Review - summation sign
+
+Example : Calculate 
+$\frac{1}{n} \sum_{i=1}^n (x_i - \bar x)^2$ where $\bar x = \frac{1}{n} \sum_{i=1}^n x_i$.
+
+# Review - summation sign
+
+Example : Calculate 
+$\frac{1}{n} \sum_{i=1}^n (x_i - \bar x)^2$ where $\bar x = \frac{1}{n} \sum_{i=1}^n x_i$.
+
+Solution:
+
+\begin{equation}
+\begin{aligned}
+    \frac{1}{n} \sum_{i=1}^n (x_i - \bar x)^2 & = \frac{1}{n} \sum_{i=1}^n (x_i^2 - 2x_i \bar x + \bar x ^2)\\
+    & = \frac{1}{n} \sum_{i=1}^n x_i^2 - \frac{2}{n}\bar x \sum_{i=1}^n x_i  + \frac{1}{n}\sum_{i=1}^n \bar x ^2)\\
+    & = \frac{1}{n} \sum_{i=1}^n x_i^2 - 2 (\bar x)^2 + (\bar x)^2\\
+    & = \frac{1}{n} \sum_{i=1}^n x_i^2 - (\bar x)^2
+\end{aligned}
+\end{equation}
+
+
+# Review - summation sign
+
+Example : Suppose $\mathbf{c} = (c_1,...,c_p)$ and $\mathbf{v} = (v_1,...,v_p)$, Use $\Sigma$ notation to evaluate the matrix product $\mathbf{c}^{\top}\mathbf{v}$
+
+# Review - summation sign
+Example : Suppose $\mathbf{c} = (c_1,...,c_p)$ and $\mathbf{v} = (v_1,...,v_p)$, Use $\Sigma$ notation to evaluate the matrix product $\mathbf{c}^{\top}\mathbf{v}$
+
+Solution:
+$\mathbf{c}^{\top}\mathbf{v} = \sum_{i=1}^p c_i v_i$
+
+# Quiz outline
+- Test the skills covered in HW 1 to 4
+- 50 minutes; start at the beginning of next lab
+- Closed book
+- In today's lab we will do a sample quiz, which will be similar to the real quiz next week
+
+# Sample quiz - Matrix exercises
+
+Suppose we define $\mathbb{A}$ and $\mathbb{B}$ as follows,
+```{r, eval = T, echo=F}
+randomMatrix <- function(p,q,values=-4:4){
+   matrix(sample(values,size=p*q,replace=TRUE),p,q)
+}
+
+set.seed(999)
+A <- randomMatrix(3,2,values=-2:3)
+B <- randomMatrix(2,2,values=-2:3)
+```
+```{r, eval = T, echo=T}
+A
+B
+```
+
+Calculate the matrices returned by following r command:
+
+1. A %*% B
+
+2. t(A)
+
+3. solve(B)
+
+# Sample quiz - Summation exercises
+
+1. Calculate $\sum_{i=k}^{k+5} (i+3)$
+
+\vspace{10mm}
+
+2. Calculate $\frac{d}{dm}\sum_{i=1}^{n} (y_i -m x_i)^2$
+
+# Sample quiz - R exercises
+
+Which of the following code successfully construct the matrix 
+$\mathbb{A} = \begin{bmatrix}1 & 1\\2 & 2\\3 & 3\end{bmatrix}$
+
+A. A <- matrix(c(1,1,2,2,3,3) ,nrow=3)
+
+B. A <- cbind(c(1,1),c(2,2),c(3,3))
+
+\textbf{C. A <- t(matrix(c(1,1,2,2,3,3) ,nrow=2))}
+
+D. A <- c(c(1:3),c(1:3))
+
+# Sample quiz - Fitting a linear model by least squares
+
+We look at the uswage data. Recall that
+```{r, eval = T, echo=F}
+library(faraway)
+data("uswages")
+```
+```{r, eval = T, echo=T}
+head(uswages, n=4)
+```
+We want to fit a linear model using wage as response, educ and exper as predictors.
+
+# Sample quiz - Fitting a linear model by least squares
+Which of the following code succesfully construct the matrix $\mathbb{X}$.
+
+A. X <- matrix(uswages\$educ, uswages\$exper)
+
+B. X <- matrix(rep(1,nrow(uswages)), uswages\$educ, uswages\$exper)
+
+\textbf{C. X <- cbind(rep(1,nrow(uswages)), uswages\$educ, uswages\$exper)}
+
+D. X <- cbind(uswages\$educ, uswages\$exper)
+
+# Sample quiz - Fitting a linear model by least squares
+If we want to fit the model using R function lm(), which of the following call is correct?
+
+A. lm(wage ~ ., data = uswages)
+
+B. lm(y ~ x, data = uswages)
+
+C. lm(wage = educ + exper, data = uswages)
+
+\textbf{D. lm(wage ~ educ + exper, data = uswages)}
+
+\vspace{10mm}
+
+Explain briefly how you would check whether your proposed solution in is correct in R. 
