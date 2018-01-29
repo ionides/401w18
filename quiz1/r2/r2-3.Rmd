@@ -1,0 +1,19 @@
+Which of the following successfully select the first five odd elements of the vector  
+$x = c(1,2,3,4,5,6,7,8,9,10,11)$?
+(check all that apply. Do not check commands that will give an error)
+
+$\square$ $\quad$ `x[rep(c(TRUE,FALSE),each=5)]`
+
+$\square$ $\quad$ `x[rep(c(TRUE,FALSE),times=5)]`
+
+$\square$ $\quad$ `x[rep(c(TRUE,FALSE),length=9)]`
+
+$\square$ $\quad$ `x[rep(c(TRUE,FALSE)][1:5]`
+
+$\square$ $\quad$ `x[rep(c("TRUE","FALSE"),5)]`
+
+$\square$ $\quad$   None of the above
+
+$\square$ $\quad$   All of the above
+
+----------------
