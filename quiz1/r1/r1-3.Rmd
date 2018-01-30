@@ -1,0 +1,17 @@
+Which of the following successfully select the diagonal elements of the matrix  
+$\mathbb{A} = \begin{bmatrix}1 & 0\\2 & 3\end{bmatrix}$.
+(check all that apply)
+
+$\square$ $\quad$ `diag(A)`
+
+$\square$ $\quad$ `diag(nrow(A))*A`
+
+$\square$ $\quad$ `diag(nrow(A))%*%A`
+
+$\square$ $\quad$ `A[c(1,1),c(2,2)]`
+
+$\square$ $\quad$ `A[c(1,2),c(2,1)]`
+
+$\square$ $\quad$ `A[c(1,4)]`
+
+----------------
