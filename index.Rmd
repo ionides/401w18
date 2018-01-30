@@ -82,7 +82,7 @@ The GSI may provide some feedback on correctness, but students are responsible f
 4. [Toward a population version of the linear model](04/notes04.pdf).
 [Random variables (from 401W17)](04/401f17-chapter2.pdf).
 [Bivariate random variables (from 401W17)](04/401f17-chapter3.pdf).
-
+ 
 
 --------
 

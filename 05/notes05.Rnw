@@ -1,0 +1,201 @@
+%\documentclass[handout]{beamer}
+\documentclass{beamer}
+
+\input{../header.tex}
+\newcommand\CHAPTER{5}
+%\newcommand\LSi{\mathrm{(LS1)}}
+%\newcommand\LSii{\mathrm{(LS2)}}
+%\newcounter{tXX}
+%\newcounter{tXy}
+%\newcounter{matrixLSi}
+
+\begin{document}
+
+% knitr set up
+<<knitr_opts,echo=F,cache=F,purl=F>>=
+library(knitr)
+opts_chunk$set(
+#  cache=FALSE,
+  cache=TRUE,
+  eval=TRUE,
+  include=TRUE,
+  echo=TRUE,
+  purl=TRUE,
+  cache.path=paste0("tmp/cache"),
+  dev='png',
+  dev.args=list(bg='transparent'),
+  dpi=300,
+  error=FALSE,
+  fig.pos="h!",
+  fig.align='center',
+  fig.height=4,fig.width=6.83,
+  fig.lp="fig:",
+  fig.path=paste0("tmp/figure"),
+  fig.show='asis',
+  highlight=TRUE,
+  message=FALSE,
+  progress=TRUE,
+  prompt=FALSE,
+#  results='asis',
+  results="markup",
+  size='small',
+  strip.white=TRUE,
+  tidy=FALSE,
+  warning=FALSE
+#  comment=NA # to remove ## on output
+)
+options(width = 60) # number of characters in R output before wrapping
+@
+
+% other set up
+<<setup,echo=F,results=F,cache=F>>=
+library(broman) # used for myround 
+@
+
+
+\begin{frame}
+\frametitle{\CHAPTER. Bivariate and vector random variables}
+
+\vspace{-2mm}
+
+\begin{myitemize}
+\item
+If we have a collection of random variables \m{Y_1,Y_2,\dots,Y_n} we can gather them together into a vector random variable \m{\vec{Y}}.
+
+\item
+Suppose that, for each \m{i=1,\dots,n} we have \m{\E[Y_i]=\mu_i}. Then, we write \m{\E[\vec{Y}]=\vec{\mu}} for \m{\vec{\mu}=(\mu_1,\dots,\mu_n)}.
+
+\item
+Now, write \m{\cov(Y_i,Y_j)=V_{ij}} for \m{i\neq j} and  \m{\var(Y_i)=\cov(Y_i,Y_i)=V_{ij}}. We call \m{\mat{V}=[V_{ij}]_{n\times n}} the \myemph{variance-covariance matrix} for \m{\vec{Y}}.
+
+\item
+We can also call \m{\mat{V}} the \myemph{covariance matrix} or, more simply, just the \myemph{variance matrix}. We write \m{\mat{V}=\var(\vec{Y})}.
+
+\end{myitemize}
+
+{\bf Example}. Let \m{\vec{\epsilon}=(\epsilon_1,\epsilon_2,\dots,\epsilon_n)} be a vector consisting of \m{n} independent random variables, each with mean zero and variance \m{\sigma^2}. This is a common model for \myemph{measurement error} on \m{n} measurements. We have
+
+\vspace{-5mm}
+
+\mydisplaymath{\E[\vec{\epsilon}=\vec{0}],\hspace{2cm} \var(\vec{\epsilon})=\sigma^2 \mat{I}}
+
+\vspace{-2mm}
+
+where \m{\vec{0}=(0,\dots,0)} and \m{\mat{I}} is the \m{n\times n} identity matrix.
+The off-diagonal entries of \m{\var(\vec{\epsilon})} are zero since \m{\cov(\epsilon_i,\epsilon_j)=0} for \m{i\neq j}. For measurement error models, we break our usual rule of using upper case letters for random variables.
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Example. A population version of the linear model}
+
+\vspace{-2mm}
+
+\begin{myitemize}
+\item First recall the sample version, which is
+
+\altdisplaymath{
+\LMiii \hspace{16mm}
+ \vec{y} = \mat{X}\, \vec{b} + \vec{e},
+}
+
+where \m{\vec{y}} is the measured response, 
+\m{\mat{X}} is an \m{n\times p}  matrix of explanatory variables, \m{\vec{b}} is chosen by least squares, and \m{\vec{e}} is the resulting vector of residuals.
+
+\item We want to build a random vector \m{\vec{Y}} that provides a population model for the data \m{\vec{y}}. We write this as
+
+%\vspace{-2mm}
+
+\framebox{
+\altdisplaymath{
+\LMvi \hspace{16mm}
+ \vec{Y}=\mat{X}\vec{\beta}+\vec{\epsilon}
+}
+\hspace{10mm}\rule[-3mm]{0mm}{9mm}
+}
+
+%\vspace{-2mm}
+
+where \m{\mat{X}} is the same explanatory matrix as in \myref{\LMiii}, \m{\vec{\beta}=(\beta_1,\dots,\beta_p)} is an unknown coefficient vector (we don't know the true population coefficient!) and \m{\vec{\epsilon}} is measurement error with \m{\E[\vec{\epsilon}]=\vec{0}} and \m{\var(\vec{\epsilon})=\sigma^2\mat{I}}.
+
+\item Our model \myref{\LMvi} asserts that the process which generated the response data \m{\vec{y}} was like drawing a random vector \m{\vec{Y}} consructed using a random measurement error model with known matrix \m{\mat{X}} for some fixed but unknown value of \m{\vec{\beta}}.
+
+\end{myitemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Mean and variance of the least squares estimate for $\vec{Y}=\mat{X}\vec{\beta}+\vec{\epsilon}$}
+
+\begin{myitemize}
+\item Recall that the main purpose of having a probability model is so that we can investigate the chance variation due to picking the sample.
+\item Recall that for \myref{\LMiii}, the least squares estimate is \m{ \vec{b} = \big( \mat{X}^\transpose \mat{X} \big) ^{-1}\,  \mat{X}^\transpose \vec{y}
+}.
+\item This is a \myemph{statistic}, which means a function of the data and not a random variable. We cannot properly talk about the mean and variance of \m{\vec{b}}.
+\item We can work out the mean and variance of \m{\big( \mat{X}^\transpose \mat{X} \big) ^{-1}\,  \mat{X}^\transpose \vec{Y}}, as long as we know how to work out the mean and variance of linear combinations.
+\item As long as  \m{\vec{Y}=\mat{X}\vec{\beta}+\vec{\epsilon}} is a good \myemph{probability model} for the relationship between the response variable \m{\vec{y}} and the explanatory variable \m{\mat{X}}, calculations done with this model may be useful.
+
+\end{myitemize}
+
+\end{frame}
+
+%\end{document}
+
+
+\begin{frame}[fragile]
+\frametitle{Mean of a linear combination, in matrix form}
+
+\begin{myitemize}
+\item The linear property of expectation lets us take expectation through a summation sign, and we get
+\mydisplaymath{
+\E\left[\sum_{j=1}^n a_{ij}Y_j\right] = \sum_{j=1}^n a_{ij}\E[Y_j].
+}
+\item In matrix form, with \m{\mat{A}=[a_{ij}]}, this is 
+\mydisplaymath{
+\E\left[\mat{A}\vec{Y}\right] = \mat{A}\E[\vec{Y}].
+}
+\end{myitemize}
+
+%\end{frame}
+%\end{document}
+
+{\bf Example}. For \m{\vec{Y}=\mat{X}\vec{\beta}+\vec{\epsilon}},
+\mydisplaymath{
+\E[\vec{Y}] = \mat{X}\vec{\beta} + E[\vec{\epsilon}] = \mat{X}\vec{\beta}
+}
+
+{\bf Example}. 
+%For 
+\m{\vec{\hat\beta}= \big( \mat{X}^\transpose \mat{X} \big)^{-1}\, \mat{X}^\transpose \vec{Y}}, we have
+
+\end{frame}
+\end{document}
+
+\mydisplaymath{
+\begin{array}{rcl}
+\E[\hat\vec{\beta}] &=& \big( \mat{X}^\transpose \mat{X} \big) ^{-1}\,  \mat{X}^\transpose \E[\vec{Y}]
+\\
+&=&  \big( \mat{X}^\transpose \mat{X} \big) ^{-1}\,  \mat{X}^\transpose \mat{X}\vec{\beta}
+\\
+&=& \vec{\beta}
+\end{array}
+}
+
+\end{frame}
+
+
+
+\end{document}
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{}
+
+\begin{myitemize}
+\item 
+\end{myitemize}
+
+\end{frame}
