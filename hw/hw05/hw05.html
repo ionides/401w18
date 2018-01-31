@@ -131,7 +131,7 @@ $(document).ready(function () {
 </ul>
 </div>
 
-<p><strong>For your homework this week, write a brief report including the output you are asked to compute and the R code you used to generate it. Recall that you are permitted to collaborate, or to use any internet resources, but you must list all sources that make a substantial contribution to your report.</strong></p>
+<p><strong>For your homework this week, write a brief report including the results you are asked to obtain and the R code you used to generate it. Recall that you are permitted to collaborate, or to use any internet resources, but you must list all sources that make a substantial contribution to your report.</strong></p>
 <hr />
 <div id="self-paced-review-of-introductory-probability" class="section level3">
 <h3>Self-paced review of introductory probability</h3>
@@ -141,35 +141,35 @@ $(document).ready(function () {
 <div id="practicing-probability-and-random-variable-calculations." class="section level3">
 <h3>Practicing probability and random variable calculations.</h3>
 <ol style="list-style-type: decimal">
-<li>Let <span class="math inline">\(Z\)</span> be a standard normal random variable.
+<li>Let <span class="math inline">\(Z\)</span> be a standard normal random variable. Try out the R functions <code>rnorm()</code>, <code>pnorm()</code> and <code>qnorm()</code> which are basic tools for working with the normal distribution. Look at the documentation provided by typing <code>?pnorm</code>.
 <ol style="list-style-type: lower-roman">
-<li>Use R to find <span class="math inline">\({\mathcal{P}}(Z&gt;2.5)\)</span>.</li>
-<li>Use R to find a value <span class="math inline">\(\alpha\)</span> such that <span class="math inline">\({\mathcal{P}}(Z&gt;\alpha)=0.2\)</span>.</li>
-<li>Use R, and the symmetry of the standard normal distribution, to find a value <span class="math inline">\(\beta\)</span> such that <span class="math inline">\({\mathcal{P}}(|Z|&gt;\beta) = 0.1\)</span>.</li>
+<li>Use <code>pnorm()</code> to find <span class="math inline">\({\mathrm{P}}(Z&gt;2.5)\)</span>.</li>
+<li>Use <code>qnorm()</code> to find a value <span class="math inline">\(\alpha\)</span> such that <span class="math inline">\({\mathrm{P}}(Z&gt;\alpha)=0.2\)</span>.</li>
+<li>Use <code>qnorm()</code> and the symmetry of the standard normal distribution to find a value <span class="math inline">\(\beta\)</span> such that <span class="math inline">\({\mathrm{P}}(|Z|&gt;\beta) = 0.1\)</span>.</li>
 </ol></li>
 <li>Consider rolling two six-sided dice, colored maize and blue. We model possible outcomes of the dice roll as a pair <span class="math inline">\((i,j)\)</span> where <span class="math inline">\(i\in\{1,2,\dots,6\}\)</span> is the value of the maize die and <span class="math inline">\(j\in\{1,2,\dots,6\}\)</span> is the value of the blue die. All pairs of outcomes are modeled as equally likely, i.e., we consider the dice to be fair. We define three random variables as follows: <span class="math inline">\(M\)</span> is the value of the maize die, <span class="math inline">\(B\)</span> is the value of the blue die and <span class="math inline">\(S=M+B\)</span> is the sum of the two dice.
 <ol style="list-style-type: lower-roman">
 <li>Compute by hand the mean and variance of <span class="math inline">\(M\)</span>.</li>
-<li>Use R to generate a large sample (say, <span class="math inline">\(n=1000\)</span>) of realizations from the probability model for a single die. Use this sample to check your calculation by finding the sample mean and sample variance.</li>
+<li>Use <code>sample()</code> in R to generate a large sample (say, <span class="math inline">\(n=1000\)</span>) of realizations from the probability model for a single die. Use this sample to check your calculation by finding the sample mean and sample variance.</li>
 <li>Find the mean and variance of <span class="math inline">\(S\)</span> by using properties of the mean and variance of a sum.</li>
 <li>By generating two of the samples made in (ii), generate a large sample of realizations of <span class="math inline">\(S\)</span>.</li>
-<li>Use a normal approximation, with the mean and variance computed in (iii), to approximate <span class="math inline">\({\mathcal{P}}(S\ge 10)\)</span>.</li>
-<li>Use the large sample interpretation of probability, together with the realizations in (iv), to approximate <span class="math inline">\({\mathcal{P}}(S\ge 10)\)</span>.</li>
-<li>How many of the 36 possible outcomes <span class="math inline">\((i,j)\)</span> with <span class="math inline">\(i\in\{1,2,\dots,6\}\)</span> and <span class="math inline">\(j\in\{1,2,\dots,6\}\)</span> have a sum greater than or equal to 10? Hence, find the exact solution to <span class="math inline">\({\mathcal{P}}(S\ge 10)\)</span> for this model.</li>
+<li>Use a normal approximation, with the mean and variance computed in (iii), to approximate <span class="math inline">\({\mathrm{P}}(S\ge 10)\)</span>.</li>
+<li>Use the large sample interpretation of probability, together with the realizations in (iv), to approximate <span class="math inline">\({\mathrm{P}}(S\ge 10)\)</span>.</li>
+<li>How many of the 36 possible outcomes <span class="math inline">\((i,j)\)</span> with <span class="math inline">\(i\in\{1,2,\dots,6\}\)</span> and <span class="math inline">\(j\in\{1,2,\dots,6\}\)</span> have a sum greater than or equal to 10? Hence, find the exact solution to <span class="math inline">\({\mathrm{P}}(S\ge 10)\)</span> for this model.</li>
 </ol></li>
 </ol>
 <hr />
 </div>
 <div id="a-probability-model-for-a-randomized-experiment" class="section level3">
 <h3>A probability model for a randomized experiment</h3>
-<p>We consider a simple randomized experiment where an outcome is measured for each subject, half of which get treatment 1 and half get treatment 2. We suppose that treatments are assigned randomly. Suppose the experimenters have 24 subjects at their disposal, perhaps they label them <span class="math inline">\(\{1,2,\dots,24\}\)</span> and they type <code>sample(1:24,size=12)</code> in R to choose the subjects assigned to treatment 1. To see whether there is statistical evidence for an effect of the treatment on the outcome, we can work out probabilities under the null hypothesis that there is no effect. A natural test statistic is</p>
+<p>We consider a simple randomized experiment where an outcome is measured for each subject, half of which are assigned to get treatment 1, with the other half getting treatment 2. We suppose that individuals picked for treatment 1 are assigned randomly. Suppose the experimenters have 24 subjects at their disposal, perhaps they label them <span class="math inline">\(\{1,2,\dots,24\}\)</span> and they type <code>sample(1:24,size=12)</code> in R to choose the subjects assigned to treatment 1. To see whether there is statistical evidence for an effect of the treatment on the outcome, we can work out probabilities under the null hypothesis that there is no effect. A natural test statistic is</p>
 <p><span class="math display">\[T=\mbox{mean outcome of subjects getting treatment 2} - \mbox{mean outcome of subjects getting treatment 1}.\]</span></p>
 <p>Large values of this statistic suggest that treatment 2 has an effect of increasing the measured outcome compared to treatment 1. But how large does this statistic have to be to conclude that the observed effect is real, not just the result of chance variation when in fact the treatments are equivalent? Under the null hypothesis that the treatment has no effect, we can work out the distribution of <span class="math inline">\(T\)</span> by reassigning treaments randomly!</p>
-<p>Let’s revisit the mice from Homework 1. Your task is to draw 1000 hypothetical realizations for the statistic <span class="math inline">\(T\)</span> supposing a model where the mice are re-randomized to treatment 1 (regular chow) and treatment 2 (high fat diet) under the null hypothesis that treatment has no effect. Then, report for how many (if any) of these realizations the statistic <span class="math inline">\(T\)</span> is larger than the value obtained for the actual experimental assignment. Interpret your result as a statistical hypothesis test addressing a scientific question.</p>
+<p>Let’s revisit the mice from Homework 1. Your task is to draw 1000 hypothetical realizations for the statistic <span class="math inline">\(T\)</span> supposing a model where the mice are re-randomized to treatment 1 (regular chow) and treatment 2 (high fat diet) under the null hypothesis that treatment has no effect. Then, report what proportion of these realizations the statistic <span class="math inline">\(T\)</span> is larger than the value obtained for the actual experimental assignment. Interpret your result as a statistical hypothesis test addressing a scientific question.</p>
 <p>The following R hints may be useful:</p>
 <ol style="list-style-type: decimal">
 <li><p>Call the dataset <code>mice</code>. Then, <code>mice$Bodyweight</code> lists all the outcomes, and <code>sample(mice$Bodyweight,12)</code> draws twelve of these at random. Suppose these are hypothetically assigned to treatment 1 (regular chow).</p></li>
-<li><p>Using <code>replicate()</code> with argument <code>n=1000</code> allows you to generate 1000 hypothetical realizations. You should use a much smaller number of replicates, say <code>n=5</code> while developing and debugging your solution.</p></li>
+<li><p>Using <code>replicate(sample(mice$Bodyweight,12),n=1000)</code> allows you to generate <code>n=1000</code> hypothetical realizations of 12 bodyweights for mice assigned to treatment 1. (These are not the weights of mice assigned to treatment 1 in the actual experiment, but we are working under a hypothesis that their weights would have been the same whichever treatment they got.) You should use a much smaller number of replicates, say <code>n=5</code> while developing and debugging your solution.</p></li>
 <li><p>The function <code>apply()</code> gives a convenient way to find the mean bodyweight for each hypothetical treatment 1 sample.</p></li>
 <li><p>If you follow this approach, you’ll have to figure out how to compute the value of the <span class="math inline">\(T\)</span> statistic for these hypothetical samples, since <span class="math inline">\(T\)</span> includes both treatment 1 and treatment 2. For each hypothetical realization, all the mice that are not in the realization of treatment 1 get assigned treatment 2. Thus, the sum of the means for treatment 1 and treatment 2 is the same for every hypothetical realization.</p></li>
 <li><p>Recall that <code>sum(x&gt;a)/length(x)</code> gives the fraction of elements of the vector <code>x</code> that are larger than <code>a</code>.</p></li>

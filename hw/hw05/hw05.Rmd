@@ -12,9 +12,9 @@ csl: ecology.csl
 \renewcommand\vec[1]{\boldsymbol{\mathrm{#1}}}
 \newcommand\xtranspose{{\mbox{\tiny \textsc{t}}}}
 \newcommand\transpose{{\scriptscriptstyle \mathrm{T}}}
-\newcommand\prob{\mathcal{P}}
+\newcommand\prob{\mathrm{P}}
 
-**For your homework this week, write a brief report including the output you are asked to compute and the R code you used to generate it.
+**For your homework this week, write a brief report including the results you are asked to obtain and the R code you used to generate it.
 Recall that you are permitted to collaborate, or to use any internet resources, but you must list all sources that make a substantial contribution to your report.**
 
 --------------
@@ -30,14 +30,14 @@ Report back on anything that remains elusive.
 
 ### Practicing probability and random variable calculations.
 
-1. Let $Z$ be a standard normal random variable.
-    (i) Use R to find $\prob(Z>2.5)$.
-    (ii) Use R to find a value $\alpha$ such that $\prob(Z>\alpha)=0.2$.
-    (iii) Use R, and the symmetry of the standard normal distribution, to find a value $\beta$ such that $\prob(|Z|>\beta) = 0.1$.
+1. Let $Z$ be a standard normal random variable. Try out the R functions `rnorm()`, `pnorm()` and `qnorm()` which are basic tools for working with the normal distribution. Look at the documentation provided by typing `?pnorm`.
+    (i) Use `pnorm()` to find $\prob(Z>2.5)$.
+    (ii) Use `qnorm()` to find a value $\alpha$ such that $\prob(Z>\alpha)=0.2$.
+    (iii) Use `qnorm()` and the symmetry of the standard normal distribution to find a value $\beta$ such that $\prob(|Z|>\beta) = 0.1$.
 
 2. Consider rolling two six-sided dice, colored maize and blue. We model possible outcomes of the dice roll as a pair $(i,j)$ where $i\in\{1,2,\dots,6\}$ is the value of the maize die and $j\in\{1,2,\dots,6\}$ is the value of the blue die. All pairs of outcomes are modeled as equally likely, i.e., we consider the dice to be fair. We define three random variables as follows: $M$ is the value of the maize die, $B$ is the value of the blue die and $S=M+B$ is the sum of the two dice.
     (i) Compute by hand the mean and variance of $M$.
-    (ii) Use R to generate a large sample (say, $n=1000$) of realizations from the probability model for a single die. Use this sample to check your calculation by finding the sample mean and sample variance.
+    (ii) Use `sample()` in R to generate a large sample (say, $n=1000$) of realizations from the probability model for a single die. Use this sample to check your calculation by finding the sample mean and sample variance.
     (iii) Find the mean and variance of $S$ by using properties of the mean and variance of a sum.
     (iv) By generating two of the samples made in (ii), generate a large sample of realizations of $S$.
     (v) Use a normal approximation, with the mean and variance computed in (iii), to approximate $\prob(S\ge 10)$. 
@@ -48,8 +48,8 @@ Report back on anything that remains elusive.
 
 ### A probability model for a randomized experiment
 
-We consider a simple randomized experiment where an outcome is measured for each subject, half of which get treatment 1 and half get treatment 2.
-We suppose that treatments are assigned randomly. 
+We consider a simple randomized experiment where an outcome is measured for each subject, half of which are assigned to get treatment 1, with the other half getting treatment 2.
+We suppose that individuals picked for treatment 1 are assigned randomly. 
 Suppose the experimenters have 24 subjects at their disposal, perhaps they label them $\{1,2,\dots,24\}$ and they type `sample(1:24,size=12)` in R to choose the subjects assigned to treatment 1.
 To see whether there is statistical evidence for an effect of the treatment on the outcome, we can work out probabilities under the null hypothesis that there is no effect.
 A natural test statistic is 
@@ -60,13 +60,15 @@ Large values of this statistic suggest that treatment 2 has an effect of increas
 But how large does this statistic have to be to conclude that the observed effect is real, not just the result of chance variation when in fact the treatments are equivalent?
 Under the null hypothesis that the treatment has no effect, we can work out the distribution of $T$ by reassigning treaments randomly! 
 
-Let's revisit the mice from Homework 1. Your task is to draw 1000 hypothetical realizations for the statistic $T$ supposing a model where the mice are re-randomized to treatment 1 (regular chow) and treatment 2 (high fat diet) under the null hypothesis that treatment has no effect. Then, report for how many (if any) of these realizations the statistic $T$ is larger than the value obtained for the actual experimental assignment. Interpret your result as a statistical hypothesis test addressing a scientific question.
+Let's revisit the mice from Homework 1. Your task is to draw 1000 hypothetical realizations for the statistic $T$ supposing a model where the mice are re-randomized to treatment 1 (regular chow) and treatment 2 (high fat diet) under the null hypothesis that treatment has no effect. Then, report what proportion of these realizations the statistic $T$ is larger than the value obtained for the actual experimental assignment. Interpret your result as a statistical hypothesis test addressing a scientific question.
 
 The following R hints may be useful:
 
 1. Call the dataset `mice`. Then, `mice$Bodyweight` lists all the outcomes, and `sample(mice$Bodyweight,12)` draws twelve of these at random. Suppose these are hypothetically assigned to treatment 1 (regular chow).
 
-2. Using `replicate()` with argument `n=1000` allows you to generate 1000 hypothetical realizations. You should use a much smaller number of replicates, say `n=5` while developing and debugging your solution.
+2. Using `replicate(sample(mice$Bodyweight,12),n=1000)` allows you to generate `n=1000` hypothetical realizations of 12 bodyweights for mice assigned to treatment 1. 
+(These are not the weights of mice assigned to treatment 1 in the actual experiment, but we are working under a hypothesis that their weights would have been the same whichever treatment they got.)
+You should use a much smaller number of replicates, say `n=5` while developing and debugging your solution.
 
 3. The function `apply()` gives a convenient way to find the mean bodyweight for each hypothetical treatment 1 sample.
 
