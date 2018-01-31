@@ -1,0 +1,23 @@
+F1. Consider the following system X$\textbf{b}$=Y given as follows:
+$\begin{bmatrix}3 & 1\\2 & 1\end{bmatrix}\begin{bmatrix}m\\c\end{bmatrix} = \begin{bmatrix}9\\6\end{bmatrix}$
+
+(a). `Write this in system of equation form`
+
+(b). `Solve for m and c directly.
+This will give you the same solution as the least square solution to this poblem.`
+
+--------------
+
+F2. Fit a linear model to the model above using R function `lm()`.
+
+Hint: Break the task into the following steps:
+
+Step 1: `Define matrix containing all the data/ variables`
+
+Step 2: `Fit lm (write down the command)`
+
+Step 3: `Use correct command to get the values of m and c.`
+
+Step 4: `Write down your final linear function. (Recall F1 (b) )`
+
+---------------
