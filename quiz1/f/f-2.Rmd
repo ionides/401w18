@@ -1,4 +1,4 @@
-F1. Consider the linear model in the notes where detrended life expectancy is explained by detrended unemployment. We fitted the model `lm1 <- lm(L_detrended~U_detrended)` where `L_detrended` and `U_detrended` are vectors of length  68. Writing `L_detrended` as $y_1,\dots,y_n$ and  `U_detrended` as $x_1,\dots,x_n$ with $n=68$, specify the fitted model mathematically both by writing a separate equation for each year and by using matrix notation.
+F1. Consider the linear model in the notes where detrended life expectancy is explained by detrended unemployment. We fitted the model `lm1 <- lm(L_detrended~U_detrended)` where `L_detrended` and `U_detrended` are vectors of length  68. Writing `L_detrended` as $y_1,\dots,y_n$ and  `U_detrended` as $x_1,\dots,x_n$ with $n=68$, give the equations that define this model mathematically both by writing an equation for a generic year $i$ and by using matrix notation.
 
 -------
 

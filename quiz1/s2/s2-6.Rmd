@@ -1,0 +1,4 @@
+Show that $\frac{1}{n} \sum_{i=1}^n \big(x_i - \bar x\big)^2 = \Big(\frac{1}{n}\sum_{i=1}^n x_i^2\Big) -\bar x^2$, where $\bar x = \frac{1}{n}\sum_{i=1}^n x_i$.
+
+--------
+

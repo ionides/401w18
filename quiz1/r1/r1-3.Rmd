@@ -1,17 +1,21 @@
 Which of the following successfully select the diagonal elements of the matrix  
-$\mathbb{A} = \begin{bmatrix}1 & 0\\2 & 3\end{bmatrix}$.
-(check all that apply)
+$\mathbb{A} = \begin{bmatrix}1 & 0\\2 & 3\end{bmatrix}$ represented in R by `A<-matrix(c(1,2,0,3),2,2)`?
 
-$\square$ $\quad$ `diag(A)`
+(a) $\quad$ `A[c(1,1),c(2,2)]`
 
-$\square$ $\quad$ `diag(nrow(A))*A`
+(b) $\quad$ `A[rbind(c(1,1),c(2,2))]`
 
-$\square$ $\quad$ `diag(nrow(A))%*%A`
+(c) $\quad$  `A[cbind(c(1,1),c(2,2))]`
 
-$\square$ $\quad$ `A[c(1,1),c(2,2)]`
+(d) $\quad$ `A[matrix(c(TRUE,FALSE,FALSE,TRUE),2)]`
 
-$\square$ $\quad$ `A[c(1,2),c(2,1)]`
+(d) $\quad$ all of (a,b,c,d)
 
-$\square$ $\quad$ `A[c(1,4)]`
+(e) $\quad$ none of (a,b,c,d)
+
+(f) $\quad$ (b) and (d) only
+
+(g) $\quad$ (a) and (b) only
+
 
 ----------------

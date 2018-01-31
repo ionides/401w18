@@ -1,0 +1,7 @@
+Let $\mathbb{A} = \begin{bmatrix} x_{11} &  x_{12} & x_{13} \\  x_{21} &  x_{22} & x_{23} \end{bmatrix}$ and let $\vect{b}= \begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix}$.
+Use $\sum$ notation to evaluate the matrix product $\mathbb{A}\vect{b}$.
+Your solution should be a matrix for which each term is written as a summation.
+
+-----------------
+
+

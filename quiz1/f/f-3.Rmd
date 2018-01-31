@@ -1,0 +1,26 @@
+F1. Fitting a linear model by least squares.
+```{r}
+library(faraway)
+data("sat")
+head(sat)
+```
+Which of the following would produce the design matrix $\mathbb{X}$ for the model `lm(sat ~ ratio + expend, data = sat)`.
+
+(a) `X <- matrix(rep(1, length(ratio)), ratio, expend)`
+(a) `X <- matrix(1, ratio, expend)`
+(a) `X <- cbind(rep(1, length(ratio)), ratio, expend)`
+(a) `X <- cbind(1, ratio, expend)`
+(a) `X <- cbind(ratio, expend)`
+
+-------
+
+F2. Consider our kicker data from homework 3.
+
+```{r}
+data_nfl <- read.csv("FieldGoals2003to2006.csv",header = TRUE,skip=5)
+head(data_nfl)
+```
+
+Recall that we built the model $y_i=mx_i+c_1z_{i,1}+c_2z_{i,2}+ \dots + c_{19}z_{i,19}+e_i$ where where $x_i$ is FGtM1 and $z_{i,1}$ takes the value 1 when row i of the data corresponds to kicker 1 (i.e., for i=1,2,3,4) and 0 otherwise. Write the design matrix of the model. (You do not need to include specific values for $x_i$.)
+
+---------

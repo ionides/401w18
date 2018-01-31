@@ -19,7 +19,7 @@ Which of the following code succesfully construct the matrix $\mathbb{X}$ for a 
 
 --------------
 
-F2. If we want to fit the model using R function `lm()`, which of the following call is correct?
+F2. If we want to fit the model using R function `lm()`, which of the following calls is correct?
 
 (a). `lm(wage ~ ., data = uswages)`
 

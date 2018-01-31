@@ -64,6 +64,12 @@ s1_files <- list.files(path="s1",full.names=T,pattern="*.Rmd$")
 ```
 ```{r s1-3, child = s1_files[3],eval=ALL}
 ```
+```{r s1-4, child = s1_files[4],eval=ALL}
+```
+```{r s1-5, child = s1_files[5],eval=ALL}
+```
+```{r s1-6, child = s1_files[6],eval=ALL}
+```
 
 S2. An example involving sums of squares and products.
 ```{r s2-all-list,include=F}
@@ -79,6 +85,12 @@ s2_files <- list.files(path="s2",full.names=T,pattern="*.Rmd$")
 ```
 ```{r s2-4, child = s2_files[4],eval=ALL}
 ```
+```{r s2-5, child = s2_files[5],eval=ALL}
+```
+```{r s2-6, child = s2_files[6],eval=ALL}
+```
+```{r s2-7, child = s2_files[7],eval=ALL}
+```
 
 ### R exercises
 
@@ -92,6 +104,10 @@ r1_files <- list.files(path="r1",full.names=T,pattern="*.Rmd$")
 ```
 ```{r r1-2, child = r1_files[2],eval=ALL}
 ```
+```{r r1-3, child = r1_files[3],eval=ALL}
+```
+```{r r1-4, child = r1_files[4],eval=ALL}
+```
 
 R2. Manipulating vectors and matrices in R.
 ```{r r2-all-list,cache=F,include=F}
@@ -103,6 +119,10 @@ r2_files <- list.files(path="r2",full.names=T,pattern="*.Rmd$")
 ```
 ```{r r2-2, child = r2_files[2],eval=ALL}
 ```
+```{r r2-3, child = r2_files[3],eval=ALL}
+```
+```{r r2-4, child = r2_files[4],eval=ALL}
+```
 
 ### Fitting a linear model by least squares 
 ```{r f-all-list,include=F}
@@ -113,6 +133,8 @@ f_files <- list.files(path="f",full.names=T,pattern="*.Rmd$")
 ```{r f-1, child = f_files[1],eval=ALL}
 ```
 ```{r f-2, child = f_files[2],eval=ALL}
+```
+```{r f-3, child = f_files[3],eval=ALL}
 ```
 
 ------

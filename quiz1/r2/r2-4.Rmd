@@ -1,0 +1,8 @@
+Suppose we define a vector `x <- c(3,0,-1,4,0,-2)`. What will `which(x==0)` give you?
+
+(a) A vector of the 0 elements of x.
+(a) A vectors of 0's.
+(a) A vector of `TRUE`'s and `FALSE`'s.
+(a) The vector of the indices of the 0 values.
+
+------------

@@ -1,6 +1,7 @@
-Afew properties of summations are as follows:\\
-$\sum_{i=1}^n a_i b_i \neq \big(\sum_{i=1}^n a_i\big) \big(\sum_{i=1}^n b_i\big)$
-$\sum_{i=1}^n i = \frac{n(n+1)}{2}$.
-$\sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}{6}$
-Using the above properties, evaluate $\sum_{i=1}^{30} (2-3i)^2$.
+Two useful formulas for summations are
+$\sum_{i=1}^n i = \frac{n(n+1)}{2}$ and
+$\sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}{6}$.
+Using these formulas, evaluate $\sum_{i=1}^{10} (1-2i)^2$. It may be helpful to start by multiplying out the square. 
+
 -------------
+

@@ -122,5 +122,6 @@ Due in your lab on 2/1 or 2/2.
 ## Quiz materials
 
 * [Information and practice for quiz 1](quiz1/quiz1.html).
+ Also provided is a [list of all the questions in the quiz generator](quiz1/quiz1-all.html).
 
 ------------
