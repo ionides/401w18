@@ -1,0 +1,207 @@
+---
+title: "HW4 Solutions"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.width = 4, fig.width = 4)
+```
+
+\newcommand\mat[1]{\mathbb{#1}}
+\newcommand\vect[1]{\boldsymbol{\mathrm{#1}}}
+\newcommand\xtranspose{{\mbox{\tiny \textsc{t}}}}
+\newcommand\transpose{{\scriptscriptstyle \mathrm{T}}}
+
+**For the summation questions, write solutions by hand or typed. For the data analysis exercise, write a brief report addressing the questions. For Question 4, writing down a model mathematically means writing a relevant equation, and defining the quantities in the equation — it is probably best not to use matrix notation for this. Include, as an appendix, the R code you used to generate your analysis. Recall that you are permitted to collaborate, or to use any internet resources, but you must list all sources that make a substantial contribution to your report. As usual, please include _Sources_ and _Please explain_ statements.**
+
+---------------
+
+# Practicing $\sum$ notation for sums
+
+Solve the following problems, giving explanation for your answer. The explanation should involve expanding a $\sum_{i=1}^{n}$ expression into all n terms of a sum, or contracting such a sum into a $\sum_{i=1}^{n}$ expression.
+
+1. Evaluate $\sum_{a=b}^c d$, where $b$ and $c$ are whole numbers with $c\ge b$.
+
+Solution: $\sum_{a=b}^c d = d+d+\dots+d = (c-b+1)d$. To see that there are $(c-b+1)$ terms in the sum, check, for example, the case $b=1$ and $c=2$.
+
+
+2) Evaluate $\sum_{i=1}^{n}(x_i-\bar x)$, where $\bar x = \frac 1n \sum_{i=1}^n x_i$
+
+Solution:
+
+$$\sum_{i=1}^{n}(x_i-\bar x)$$
+
+We can distribute the summation sign to get
+
+$$\sum_{i=1}^{n}x_i-\sum_{i=1}^{n}\bar x$$
+
+Since $\bar x$ is a constant in the sum we are really summing $\bar x$ n times
+
+$$\sum_{i=1}^{n}x_i - n\bar x$$
+
+We replace $\bar x$ with $\frac 1n \sum_{i=1}^{n}x_i$. Thus,
+
+$$\sum_{i=1}^{n}x_i - n(\frac 1n) \sum_{i=1}^{n}x_i$$
+
+The n's cancel and we're left with
+
+$$\sum_{i=1}^{n}x_i - \sum_{i=1}^{n}x_i = 0$$
+
+3. Show that $\frac 1n \sum_{i=1}^{n}(x_i - \bar x)(y_i - \bar y) = \frac 1n(\sum_{i=1}^nx_iy_i)-\bar x \bar y$, where $\bar x = \frac 1n \sum_{i=1}^n x_i$ and $\bar y = \frac 1n \sum_{i=1}^n y_i$.
+
+Solution:
+
+$$\frac 1n \sum_{i=1}^{n}(x_i - \bar x)(y_i - \bar y)$$
+First, we multiply out the parentheses, sometimes called the [FOIL method](https://en.wikipedia.org/wiki/FOIL_method)
+
+$$\frac 1n \sum_{i=1}^{n}(x_i y_i - x_i\bar y - y_i\bar x + \bar x \bar y)$$
+
+We then distribute the summation and $\frac{1}{n}$
+
+$$\frac 1n \sum_{i=1}^{n}x_i y_i - \frac 1n \sum_{i=1}^{n}x_i\bar y - \frac 1n \sum_{i=1}^{n}y_i\bar x + \frac 1n \sum_{i=1}^{n}\bar x \bar y$$
+
+Now we can take the constants out of the summations,
+
+$$\frac 1n \sum_{i=1}^{n}x_i y_i - \frac 1n \bar y\sum_{i=1}^{n}x_i - \frac 1n\bar x \sum_{i=1}^{n}y_i + \frac 1n (n)\bar x \bar y).$$
+
+We now note that $\frac 1n \sum_{i=1}^n x_i = \bar x$ and $\frac 1n \sum_{i=1}^n y_i = \bar y$. This gives
+
+$$\frac 1n \sum_{i=1}^{n}x_i y_i -\bar x\bar y - \bar x \bar y + \bar x \bar y).$$
+
+Finally, canceling like terms gives the required equality,
+
+$$\frac 1n \sum_{i=1}^{n}x_i y_i -\bar x\bar y$$
+
+4. Let $\vect{1}= (1, 1, \dots, 1)$ and $\vect{x}= (x_1, x_2, \dots, x_n)$ be two vectors treated as  $n \times 1$ matrices. Use $\sum$ notation to evaluate the matrix product $\vect{1}^\transpose\vect{x}$.
+
+Solutions:
+$$
+\begin{bmatrix}
+    1 &  1 & \dots & 1
+\end{bmatrix}
+\begin{bmatrix}
+    x_1 \\
+    x_2 \\
+    \vdots \\
+    x_n
+\end{bmatrix}
+=
+\sum_{i=1}^n x_i$$
+
+5.  Let $\vect{u}=(u_1,\dots,u_n)$ and $\vect{v}=(v_1,\dots,v_n)$ be two vectors, and let $\mat{X}=[\,\vect{u}\,\,\vect{v}\,]$ be an $n\times 2$ matrix binding together $\vect{u}$ and $\vect{v}$. Use $\Sigma$ notation to evaluate the matrix product $\mat{X}^\transpose \mat{X}$.
+
+$$\mat{X}=
+\begin{bmatrix}
+    u_1 &  v_1\\
+    u_2 &  v_2\\
+    \vdots & \vdots\\
+    u_n & v_n
+\end{bmatrix}
+$$
+Therefore,
+$$\mat{X}^T\mat{X}=
+\begin{bmatrix}
+    u_1 &  u_2 & \dots & u_n \\
+    v_1 &  v_2 & \dots & v_n \\
+\end{bmatrix}
+\begin{bmatrix}
+    u_1 &  v_1\\
+    u_2 &  v_2\\
+    \vdots & \vdots\\
+    u_n & v_n
+\end{bmatrix}
+$$
+Writing out the matrix product definition, we get
+$$\mathbb{X}^T\mathbb{X}=
+\begin{bmatrix}
+    u_1^2 + u_2^2 + \dots + u_n^2 & u_1v_1 + u_2v_2 + \dots + u_nv_n \\
+    u_1v_1 + u_2v_2 + \dots + u_nv_n & v_1^2 + v_2^2 + \dots + v_n^2
+\end{bmatrix}
+$$
+Using $\sum$ summation notation, we write this as
+$$\mathbb{X}^T\mathbb{X}=
+\begin{bmatrix}
+    \sum_{i=1}^n u_i^2 & \sum_{i=1}^n u_i v_i \\
+    \sum_{i=1}^n u_i v_i & \sum_{i=1}^n v_i^2
+\end{bmatrix}
+$$
+\vspace{5mm}
+
+---------------
+
+# Investigating the regression effect
+
+```{r}
+
+#install.packages("HistData")
+library("HistData")
+data("Galton")
+head(Galton)
+
+```
+
+1. What is the average height of the children to three significant figures?
+
+```{r}
+round(mean(Galton$child), 3)
+```
+
+2. What is the average height of children with parent height between 69.0 and 71.0 inches?
+
+```{r}
+round(mean(Galton$child[which(Galton$parent >= 69.0 & Galton$parent <= 71.0)]),3)
+```
+
+3. Plot the data appropriately. You will have to decide what is "appropriate."
+
+```{r}
+
+# Scatterplot
+plot(Galton$parent, Galton$child, xlab = "Parent Height \n(inches)", 
+     ylab = "Child Height (inches)",
+     main = "Scatterplot of Child and Parent Heights")
+
+```
+
+The scatterplot above shows a general upward trend but it is difficult to see clear patterns since the eye can't see superimposed points. This suggests a different plot would be better.
+
+```{r}
+
+# boxplot
+boxplot(Galton$child ~ Galton$parent, xlab = "Parent Height \n(inches)", 
+        ylab = "Child Height (inches)",
+        main = "Boxplot of Child and Parent Heights")
+
+```
+
+The boxplots above confirms the general upward trend we saw from the scatterplot but it is much easier to see the pattern. We can also see the wide range of child heights from parents of the same height across many of the parent heights. In fact, there are a couple of outliers where the parents are tall but the children are short.
+
+4. Write down mathematically a linear model to quantify Galton’s observation that the children of tall parents tend to be taller than average yet less tall than their parents and, conversely, the children of short parents tend to be shorter than average yet taller than their parents. This is called the *regression effect*. Find the least squares coefficients of the linear model using R. You can use `lm()` rather than writing out the model using matrices. Interpret the estimated coefficients in terms of the regression effect.
+
+Let $x_i$ be the parent height and $y_i$ the child height for the $i$th child. We consider a linear model to the $n=928$ pairs,
+\[ 
+y_i = m x_i+c+e_i, \hspace{15mm}\mbox{for } i=1,\dots,n.
+\]
+We find the least squares fit for this model by
+```{r lm_fit}
+lm1 <- lm(child~parent,data=Galton) ; lm1
+```
+Since the slope, `r round(coef(lm1)["parent"],3)` is positive, parents with above-average height tend to have children of above-average height. 
+Since the slope is less than one, the children are (on average) less exceptional in height than their parents. 
+This may seem paradoxical; if every generation were more average than the preceeding one, all variation in the population would be quickly eliminated.
+However, it is made possible by chance variation, since even children of average height parents have a chance to be either notably short or notably tall.
+
+
+5. A regression effect for midterm and final scores would be as follows: students who do well in the midterm tend to do above average on the final, yet less well than in the midterm; students who do badly in the midterm tend to do below average in the final, yet better than they did in the midterm. Do you expect to see this regression effect in exam scores? Explain.
+
+Yes, we would expect to see this regression effect in exam scores because of a similar logic to the height of children of short and tall parents in number 4. 
+One way to think of this is in terms of measurement error (equivalently, chance variation) on the exam. 
+Students who do particularly well on the exam tend to be those who were both lucky and skilfull.
+The skill will help them in the final also, but the part of their performance that was due to their luck may change.
+
+6. Which of the following do you feel best describes the residual error in explaining the child’s height by the parent’s height? Select one of the following choices and explain briefly.
+
+E. Between individual variability: other factors beyond genetics play a role in determining height.
+It is unlikely that small fluctuations from measurement error from two different scientists or how tired individuals are would lead to the relatively large residuals that we see (ignoring the trend). Additionally, if participants were not asked to remove their shoes, it would only add some small amount of height to every participant so it evens out. 
+Finally, the round off error is relatively minimal so it also evens out across the board.
+More generally, we know that things like environment, diet, and other factors affect childhood development so it would make sense that these other factors also contribute to height of a child.
