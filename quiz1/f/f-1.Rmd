@@ -9,13 +9,13 @@ head(uswages, n=4)
 Suppose we want to fit a linear model using wage as response, with years of education and years of experience as predictors.
 Which of the following code succesfully construct the matrix $\mathbb{X}$ for a representation $\vect{y}=\mat{X}\vect{b}+\vect{e}$.
 
-(a). `X <- matrix(uswages\$educ, uswages\$exper)`
+(a). `X <- matrix(uswages$educ, uswages$exper)`
 
-(b). `X <- matrix(rep(1,nrow(uswages)), uswages\$educ, uswages\$exper)`
+(b). `X <- matrix(rep(1,nrow(uswages)), uswages$educ, uswages$exper)`
 
-(c). `X <- cbind(rep(1,nrow(uswages)), uswages\$educ, uswages\$exper)`
+(c). `X <- cbind(rep(1,nrow(uswages)), uswages$educ, uswages$exper)`
 
-(d). `X <- cbind(uswages\$educ, uswages\$exper)`
+(d). `X <- cbind(uswages$educ, uswages$exper)`
 
 --------------
 
