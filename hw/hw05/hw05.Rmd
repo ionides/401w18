@@ -42,7 +42,7 @@ Report back on anything that remains elusive.
     (iv) By generating two of the samples made in (ii), generate a large sample of realizations of $S$.
     (v) Use a normal approximation, with the mean and variance computed in (iii), to approximate $\prob(S\ge 10)$. 
     (vi) Use the large sample interpretation of probability, together with the realizations in (iv), to approximate $\prob(S\ge 10)$.
-    (v)  How many of the 36 possible outcomes $(i,j)$ with  $i\in\{1,2,\dots,6\}$ and $j\in\{1,2,\dots,6\}$ have a sum greater than or equal to 10? Hence, find the exact solution to $\prob(S\ge 10)$ for this model.
+    (v)  How many of the 36 possible outcomes $(i,j)$ with  $i\in\{1,2,\dots,6\}$ and $j\in\{1,2,\dots,6\}$ have a sum greater than or equal to 10? Draw a $6\times 6$ table of all possible pairs of outcomes and, hence, find the exact solution to $\prob(S\ge 10)$ for this model.
 
 ---------------
 
