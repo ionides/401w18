@@ -8,6 +8,8 @@
 %\newcounter{tXX}
 %\newcounter{tXy}
 %\newcounter{matrixLSi}
+\newcounter{CovSum}
+\newcounter{CovSumII}
 
 \begin{document}
 
@@ -54,35 +56,35 @@ library(broman) # used for myround
 
 
 \begin{frame}
-\frametitle{\CHAPTER. Bivariate and vector random variables}
+\frametitle{\CHAPTER. Vector random variables}
 
 \vspace{-2mm}
 
 \begin{myitemize}
 \item
-If we have a collection of random variables \m{Y_1,Y_2,\dots,Y_n} we can gather them together into a vector random variable \m{\vec{Y}}.
+If we have a collection of random variables \m{Y_1,Y_2,\dots,Y_n} we can gather them together into a vector random variable \m{\vect{Y}}.
 
 \item
-Suppose that, for each \m{i=1,\dots,n} we have \m{\E[Y_i]=\mu_i}. Then, we write \m{\E[\vec{Y}]=\vec{\mu}} for \m{\vec{\mu}=(\mu_1,\dots,\mu_n)}.
+Suppose that, for each \m{i=1,\dots,n} we have \m{\E[Y_i]=\mu_i}. Then, we write \m{\E[\vect{Y}]=\vect{\mu}} for \m{\vect{\mu}=(\mu_1,\dots,\mu_n)}.
 
 \item
-Now, write \m{\cov(Y_i,Y_j)=V_{ij}} for \m{i\neq j} and  \m{\var(Y_i)=\cov(Y_i,Y_i)=V_{ij}}. We call \m{\mat{V}=[V_{ij}]_{n\times n}} the \myemph{variance-covariance matrix} for \m{\vec{Y}}.
+Now, write \m{\cov(Y_i,Y_j)=V_{ij}} for \m{i\neq j} and  \m{\var(Y_i)=\cov(Y_i,Y_i)=V_{ij}}. We call \m{\mat{V}=[V_{ij}]_{n\times n}} the \myemph{variance-covariance matrix} for \m{\vect{Y}}.
 
 \item
-We can also call \m{\mat{V}} the \myemph{covariance matrix} or, more simply, just the \myemph{variance matrix}. We write \m{\mat{V}=\var(\vec{Y})}.
+We can also call \m{\mat{V}} the \myemph{covariance matrix} or, more simply, just the \myemph{variance matrix}. We write \m{\mat{V}=\var(\vect{Y})}.
 
 \end{myitemize}
 
-{\bf Example}. Let \m{\vec{\epsilon}=(\epsilon_1,\epsilon_2,\dots,\epsilon_n)} be a vector consisting of \m{n} independent random variables, each with mean zero and variance \m{\sigma^2}. This is a common model for \myemph{measurement error} on \m{n} measurements. We have
+{\bf Example}. Let \m{\vect{\epsilon}=(\epsilon_1,\epsilon_2,\dots,\epsilon_n)} be a vector consisting of \m{n} independent random variables, each with mean zero and variance \m{\sigma^2}. This is a common model for \myemph{measurement error} on \m{n} measurements. We have
 
 \vspace{-5mm}
 
-\mydisplaymath{\E[\vec{\epsilon}=\vec{0}],\hspace{2cm} \var(\vec{\epsilon})=\sigma^2 \mat{I}}
+\mydisplaymath{\E[\vect{\epsilon}=\vect{0}],\hspace{2cm} \var(\vect{\epsilon})=\sigma^2 \mat{I}}
 
 \vspace{-2mm}
 
-where \m{\vec{0}=(0,\dots,0)} and \m{\mat{I}} is the \m{n\times n} identity matrix.
-The off-diagonal entries of \m{\var(\vec{\epsilon})} are zero since \m{\cov(\epsilon_i,\epsilon_j)=0} for \m{i\neq j}. For measurement error models, we break our usual rule of using upper case letters for random variables.
+where \m{\vect{0}=(0,\dots,0)} and \m{\mat{I}} is the \m{n\times n} identity matrix.
+The off-diagonal entries of \m{\var(\vect{\epsilon})} are zero since \m{\cov(\epsilon_i,\epsilon_j)=0} for \m{i\neq j}. For measurement error models, we break our usual rule of using upper case letters for random variables.
 
 \end{frame}
 
@@ -96,29 +98,29 @@ The off-diagonal entries of \m{\var(\vec{\epsilon})} are zero since \m{\cov(\eps
 
 \altdisplaymath{
 \LMiii \hspace{16mm}
- \vec{y} = \mat{X}\, \vec{b} + \vec{e},
+ \vect{y} = \mat{X}\, \vect{b} + \vect{e},
 }
 
-where \m{\vec{y}} is the measured response, 
-\m{\mat{X}} is an \m{n\times p}  matrix of explanatory variables, \m{\vec{b}} is chosen by least squares, and \m{\vec{e}} is the resulting vector of residuals.
+where \m{\vect{y}} is the measured response, 
+\m{\mat{X}} is an \m{n\times p}  matrix of explanatory variables, \m{\vect{b}} is chosen by least squares, and \m{\vect{e}} is the resulting vector of residuals.
 
-\item We want to build a random vector \m{\vec{Y}} that provides a population model for the data \m{\vec{y}}. We write this as
+\item We want to build a random vector \m{\vect{Y}} that provides a population model for the data \m{\vect{y}}. We write this as
 
 %\vspace{-2mm}
 
 \framebox{
 \altdisplaymath{
 \LMvi \hspace{16mm}
- \vec{Y}=\mat{X}\vec{\beta}+\vec{\epsilon}
+ \vect{Y}=\mat{X}\vect{\beta}+\vect{\epsilon}
 }
 \hspace{10mm}\rule[-3mm]{0mm}{9mm}
 }
 
 %\vspace{-2mm}
 
-where \m{\mat{X}} is the same explanatory matrix as in \myref{\LMiii}, \m{\vec{\beta}=(\beta_1,\dots,\beta_p)} is an unknown coefficient vector (we don't know the true population coefficient!) and \m{\vec{\epsilon}} is measurement error with \m{\E[\vec{\epsilon}]=\vec{0}} and \m{\var(\vec{\epsilon})=\sigma^2\mat{I}}.
+where \m{\mat{X}} is the same explanatory matrix as in \myref{\LMiii}, \m{\vect{\beta}=(\beta_1,\dots,\beta_p)} is an unknown coefficient vector (we don't know the true population coefficient!) and \m{\vect{\epsilon}} is measurement error with \m{\E[\vect{\epsilon}]=\vect{0}} and \m{\var(\vect{\epsilon})=\sigma^2\mat{I}}.
 
-\item Our model \myref{\LMvi} asserts that the process which generated the response data \m{\vec{y}} was like drawing a random vector \m{\vec{Y}} consructed using a random measurement error model with known matrix \m{\mat{X}} for some fixed but unknown value of \m{\vec{\beta}}.
+\item Our model \myref{\LMvi} asserts that the process which generated the response data \m{\vect{y}} was like drawing a random vector \m{\vect{Y}} consructed using a random measurement error model with known matrix \m{\mat{X}} for some fixed but unknown value of \m{\vect{\beta}}.
 
 \end{myitemize}
 
@@ -126,16 +128,33 @@ where \m{\mat{X}} is the same explanatory matrix as in \myref{\LMiii}, \m{\vec{\
 
 
 \begin{frame}[fragile]
-\frametitle{Mean and variance of the least squares estimate for $\vec{Y}=\mat{X}\vec{\beta}+\vec{\epsilon}$}
+\frametitle{Motivation for finding the means and variances of linear combinations of random variables}
+%of the least squares estimate for $\vect{Y}=\mat{X}\vect{\beta}+\vect{\epsilon}$}
 
 \begin{myitemize}
 \item Recall that the main purpose of having a probability model is so that we can investigate the chance variation due to picking the sample.
-\item Recall that for \myref{\LMiii}, the least squares estimate is \m{ \vec{b} = \big( \mat{X}^\transpose \mat{X} \big) ^{-1}\,  \mat{X}^\transpose \vec{y}
+\item Recall that for \myref{\LMiii}, the least squares estimate is \m{ \vect{b} = \big( \mat{X}^\transpose \mat{X} \big) ^{-1}\,  \mat{X}^\transpose \vect{y}
 }.
-\item This is a \myemph{statistic}, which means a function of the data and not a random variable. We cannot properly talk about the mean and variance of \m{\vec{b}}.
-\item We can work out the mean and variance of \m{\big( \mat{X}^\transpose \mat{X} \big) ^{-1}\,  \mat{X}^\transpose \vec{Y}}, as long as we know how to work out the mean and variance of linear combinations.
-\item As long as  \m{\vec{Y}=\mat{X}\vec{\beta}+\vec{\epsilon}} is a good \myemph{probability model} for the relationship between the response variable \m{\vec{y}} and the explanatory variable \m{\mat{X}}, calculations done with this model may be useful.
+\item This is a \myemph{statistic}, which means a function of the data and not a random variable. We cannot properly talk about the mean and variance of \m{\vect{b}}.
+\item We can work out the mean and variance of \m{\big( \mat{X}^\transpose \mat{X} \big) ^{-1}\,  \mat{X}^\transpose \vect{Y}}, as long as we know how to work out the mean and variance of linear combinations.
+\item As long as  \m{\vect{Y}=\mat{X}\vect{\beta}+\vect{\epsilon}} is a \myemph{useful probability model} for the relationship between the response variable \m{\vect{y}} and the explanatory variable \m{\mat{X}}, calculations done with this model may be useful.
 
+\end{myitemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{A digression on ``useful'' models}
+
+``Now it would be very remarkable if any system existing in the real world could be exactly represented by any simple model. However, cunningly chosen parsimonious models often do provide remarkably useful approximations. For example, the law $PV = RT$ relating pressure $P$, volume $V$ and temperature $T$ of an \emph{ideal} gas via a constant $R$ is not exactly true for any real gas, but it frequently provides a useful approximation and furthermore its structure is informative since it springs from a physical view of the behavior of gas molecules.
+For such a model there is no need to ask the question `Is the model true?'. If \emph{truth} is to be the \emph{whole truth} the answer must be \emph{No}. The only question of interest is `Is the model illuminating and useful.' '' (Box, 1978)
+
+``\myemph{Essentially, all models are wrong, but some are useful.}'' \\ (Box and Draper, 1987)
+
+\begin{myitemize}
+\item Perhaps the most useful statistical model ever is \m{\vect{Y}=\mat{X}\vect{\beta}+\vect{\epsilon}}.
+\item Anything so widely used is also widely abused. Our task is to understand \m{\vect{Y}=\mat{X}\vect{\beta}+\vect{\epsilon}} so that we can be users and not abusers.
 \end{myitemize}
 
 \end{frame}
@@ -146,47 +165,271 @@ where \m{\mat{X}} is the same explanatory matrix as in \myref{\LMiii}, \m{\vec{\
 \begin{frame}[fragile]
 \frametitle{Mean of a linear combination, in matrix form}
 
+\vspace{-2mm}
+
 \begin{myitemize}
 \item The linear property of expectation lets us take expectation through a summation sign, and we get
+
+\vspace{-2mm}
+
 \mydisplaymath{
-\E\left[\sum_{j=1}^n a_{ij}Y_j\right] = \sum_{j=1}^n a_{ij}\E[Y_j].
+\E\Big[\sum_{j=1}^n a_{ij}Y_j\Big] = \sum_{j=1}^n a_{ij}\E[Y_j].
 }
+
+\vspace{-1mm}
+
 \item In matrix form, with \m{\mat{A}=[a_{ij}]}, this is 
-\mydisplaymath{
-\E\left[\mat{A}\vec{Y}\right] = \mat{A}\E[\vec{Y}].
+%\mydisplaymath{
+\framebox{
+ \m{
+ \E\left[\mat{A}\vect{Y}\right] = \mat{A}\E[\vect{Y}].
+ }
+\rule[-3mm]{0mm}{9mm}
 }
 \end{myitemize}
 
 %\end{frame}
 %\end{document}
 
-{\bf Example}. For \m{\vec{Y}=\mat{X}\vec{\beta}+\vec{\epsilon}},
-\mydisplaymath{
-\E[\vec{Y}] = \mat{X}\vec{\beta} + E[\vec{\epsilon}] = \mat{X}\vec{\beta}
+{\bf Example}. For \m{\vect{Y}=\mat{X}\vect{\beta}+\vect{\epsilon}}, we have
+%\mydisplaymath{
+\framebox{
+ \m{
+ \E[\vect{Y}] = \mat{X}\vect{\beta} + \E[\vect{\epsilon}] = \mat{X}\vect{\beta}
+ }
+\rule[-3mm]{0mm}{9mm}
 }
 
 {\bf Example}. 
-%For 
-\m{\vec{\hat\beta}= \big( \mat{X}^\transpose \mat{X} \big)^{-1}\, \mat{X}^\transpose \vec{Y}}, we have
+For 
+\m{\vect{\hat\beta}= \big( \mat{X}^\transpose \mat{X} \big)^{-1}\, \mat{X}^\transpose \vect{Y}}, we have
 
-\end{frame}
-\end{document}
-
-\mydisplaymath{
-\begin{array}{rcl}
-\E[\hat\vec{\beta}] &=& \big( \mat{X}^\transpose \mat{X} \big) ^{-1}\,  \mat{X}^\transpose \E[\vec{Y}]
-\\
-&=&  \big( \mat{X}^\transpose \mat{X} \big) ^{-1}\,  \mat{X}^\transpose \mat{X}\vec{\beta}
-\\
-&=& \vec{\beta}
-\end{array}
+\framebox{
+ \m{
+ \E[\vect{\hat\beta}]= \E\big[\big( \mat{X}^\transpose \mat{X} \big)^{-1}\, \mat{X}^\transpose \vect{Y}] = \big( \mat{X}^\transpose \mat{X} \big)^{-1}\, \mat{X}^\transpose \E[\vect{Y}]
+= \big( \mat{X}^\transpose \mat{X} \big)^{-1}\, \mat{X}^\transpose \mat{X}\vect{\beta}
+= \vect{\beta}
+ }
 }
 
+\begin{myitemize}
+\item Interpretation: If the data \m{\vect{y}} are well modeled as a draw from the probability model 
+\m{\vect{Y}=\mat{X}\vect{\beta}+\vect{\epsilon}}, then the least squares estimate \m{\vect{b}} is well modeled by a random vector centered around \m{\vect{\beta}}.
+\end{myitemize}
 \end{frame}
 
 
+\begin{frame}[fragile]
+\frametitle{Linearity of expectation}
+
+\vspace{-1mm}
+
+\begin{myitemize}
+\item We have seen several versions of the same property that expectations can be moved through sums and multiplicative constants:
+%\item For example, 
+\myeqnarray{
+\E[aX+b]&=&a\E[X]+b, 
+\\
+\E\left[\sum_{i=1}^n a_{i}Y_i\right] &=& \sum_{i=1}^n a_{i}\E[Y_i], 
+\\
+\E\left[\sum_{j=1}^n a_{ij}Y_j\right] &=& \sum_{j=1}^n a_{ij}\E[Y_j].
+\\
+\E[\mat{A}\vect{Y}] &=& \mat{A}\E[\vect{Y}]
+}
+
+\vspace{-5mm}
+
+\item These properties are collectively known as \myemph{linearity}.
+\item Why? Maybe because these properties mean that linear equations for random variables lead to linear equations for their expectations.
+%\item For example, for the linear relationship \m{\vect{Y}=\mat{X}\vect{\beta}+\vect{\epsilon}} we take expectations of both sides to get \m{\E[\vect{Y}]=\mat{X}\vect{\beta}+\E[\vect{\epsilon}]}, using the fact that \m{\mat{X}} and \m{\vect{\beta}} are constants. 
+
+\item The linearity property means \m{\E} follows a \myemph{distributive rule}. We can distribute \m{\E} across sums just as we are used to doing in basic arithmetic.
+
+\end{myitemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Exercises using linearity}
+
+\vspace{-1mm}
+
+\myquestion. Use basic properties of expectation, and the definition of covariance, to show that 
+\framebox{
+\m{\cov\big(aX+b,cY+d\big)=ac\,\cov(X,Y)}.
+\rule[-3mm]{0mm}{9mm}
+}
+
+\vspace{28mm}
+
+\myquestion. Similarly, show that \m{\cov\big(Y,\sum_{j=1}^n Z_j\big)=\sum_{j=1}^n\cov(Y,Z_j)}.
+
+\setcounter{CovSum}{\theQcounter}
+
+\vspace{28mm}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Moving sums through covariance}
+
+\vspace{-1mm}
+
+\myquestion. Using Question~\CHAPTER.\theCovSum, show that
+\framebox{
+\m{\cov\big(\sum_{i=1}^m Y_i,\sum_{j=1}^n Z_j\big)=\sum_{i=1}^{m}\sum_{j=1}^n \cov(Y_i,Z_j)}.
+\rule[-3mm]{0mm}{9mm}
+}
+
+\setcounter{CovSumII}{\theQcounter}
+
+\vspace{40mm}
+
+\begin{myitemize}
+\item This formula is sometimes called the \myemph{bilinearity} of covariance, since \m{\cov(Y,Z)} is linear in \m{Y} and linear in \m{Z}. 
+\item This is also our first use of double summation.
+\item Think of \m{\sum_{i=1}^m\sum_{j=1}^n} as summing all the entries in an \m{m\times n} table, or equivalently, summing entries in an \m{m\times n} matrix of covariances.
+\end{myitemize}
+
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Variance of a sum}
+
+\vspace{-1.5mm}
+
+\myquestion. Using Question~\CHAPTER.\theCovSumII, show that
+\framebox{
+\m{
+\var\big(\sum_{i=1}^n Y_i\big)=\sum_{i=1}^n\var(Y_i) + 2\sum_{i<j}\cov(X_i,X_j)
+}.
+\rule[-3mm]{0mm}{9mm}
+}
+
+\vspace{36mm}
+\begin{myitemize}
+\item Thinking of \m{\sum_{i=1}^n\sum_{j=1}^n} as summing all the entries in an \m{n\times n} table, \m{\sum_{i<j}} means summing over all the entries above the diagonal. 
+\item \myemph{Covariance is symmetric}, meaning \m{\cov(Y,Z)=\cov(Z,Y)}, and so the table of covariances is symmetric about its diagonal.
+\item Thinking of the table of covariances as a matrix, the covariance matrix is called a \myemph{symmetric matrix}.
+\end{myitemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{The covariance matrix of a linear combination}
+
+\begin{myitemize}
+\item Suppose the length \m{n} random vector \m{\vect{Y}} has variance matrix \m{\mat{V}_Y}.
+\item Let \m{\mat{A}=[a_{ij}]} be an \m{m\times n} matrix and let \m{\vect{Z}=\mat{A}\vect{Y}}.
+\item \m{\vect{Z}} is a length \m{m} random vector. Call its variance matrix \m{\mat{V}_Z}. 
+\item 
+Can we find \m{\mat{V}_Z} if we know \m{\mat{V}_Y} and \m{\mat{A}}?
+\item Doing this will let us find the variances and correlations between any collection of linear combinations of \m{\vect{Y}}, a useful thing for working with the linear model.
+\end{myitemize}
+
+\vspace{2mm}
+
+\hrule
+
+\vspace{1mm}
+
+\begin{myitemize}
+\item To find the entries in the \m{m\times m} covariance matrix \m{\mat{V}_Z}, we need to work out
+\m{\cov(Z_i,Z_j)} for each entry \m{(i,j)} in the matrix.
+\item Recall that \m{Z_i = \sum_{k=1}^n a_{ik}Y_k}. 
+\item Since \m{Z_i} and \m{Z_j} are linear combinations of \m{\vect{Y}}, we can use our formulas for bilinearity of covariance (a consequence of linearity of expectation combined with the definition of covariance) to find \m{\cov(Z_i,Z_j)}.
+\end{myitemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Covariance of $Z_i=[\mat{A}\vect{Y}]_i$ and $Z_j=[\mat{A}\vect{Y}]_j$}
+\myquestion. Show that \m{\cov(Z_i,Z_j) = \sum_{k=1}^n\sum_{\ell=1}^n a_{ij}a_{k\ell}[\mat{V}_Y]_{k\ell}}
+
+\vspace{30mm}
+
+\myquestion. Show that 
+\framebox{
+ \m{
+ \mat{V}_Z
+ = \mat{A}^\transpose \mat{V}_Y \mat{A}
+ }.
+\rule[-3mm]{0mm}{9mm}
+}
+
+\vspace{30mm}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Covariance of the least squares coefficients}
+
+\begin{myitemize}
+\item The covariance matrix formula we just developed can be written as
+\framebox{
+\m{\var(\mat{A}\vect{Y})
+= \mat{A}^\transpose \var(\vect{Y}) \mat{A}}.
+\rule[-3mm]{0mm}{9mm}
+}
+\end{myitemize}
+\myquestion.
+Consider the linear model \m{\vect{Y}=\mat{X}\vect{\beta}+\vect{\epsilon}} with \m{\E[\vect{\epsilon}]=\vect{0}} and \m{\var(\vect{\epsilon})=\sigma^2\mat{I}}.
+ Apply this variance formula to
+\m{\vect{\hat\beta}= \big( \mat{X}^\transpose \mat{X} \big)^{-1}\, \mat{X}^\transpose \vect{Y}} 
+to get
+\framebox{
+ \m{\var(\vect{\hat\beta})
+  =\sigma^2 \big( \mat{X}^\transpose \mat{X} \big)^{-1}
+ }
+\rule[-3mm]{0mm}{9mm}
+}
+
+\vspace{40mm}
+
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Standard errors for the linear model}
+
+\begin{myitemize}
+\item The formula  \m{\var(\vect{\hat\beta})
+  =\sigma^2 \big( \mat{X}^\transpose \mat{X} \big)^{-1}
+ } needs extra work to be useful for data analysis. 
+\item In practice, we know the model matrix \m{\mat{X}} but we don't know the measurement standard deviation \m{\sigma}.
+\item An estimate of the measurement error is the sample standard deviation of the residuals. 
+\item 
+For  \m{\vect{y} = \mat{X}\, \vect{b} + \vect{e}} with \m{\mat{X}} being \m{n\times p}, an estimate of \m{\sigma} is
+\framebox{
+\m{ 
+ s = 
+ \sqrt{\frac{1}{n-p} \sum_{i=1}^n \big(y_i - \hat y_i\big)^2}
+ =
+ \sqrt{\frac{1}{n-p} \sum_{i=1}^n \big(y_i - [\mat{X}\vect{b}]_i\big)^2}
+}
+\rule[-3mm]{0mm}{9mm}
+}
+\item We will discuss later why we choose to divide by \m{n-p}.
+\item The \myemph{standard error} of \m{b_k} for \m{k=1,\dots,p} is 
+\framebox{
+\m{ \SE(b_k) = s \, \sqrt{ \big[\big(\mat{X}^\transpose \mat{X} \big)^{-1} \big]_{kk} }
+}
+\rule[-3mm]{0mm}{9mm}
+}
+\item \m{SE(b_k)} is an estimate of \m{\sqrt{\big[\var(\vect{\hat\beta})\big]_{kk}}}.
+\item Let's check we now understand how \code{lm()} gets standard errors in R. 
+\end{myitemize}
+
+\end{frame}
+
 
 \end{document}
+
 
 
 \end{frame}

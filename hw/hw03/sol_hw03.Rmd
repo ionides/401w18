@@ -2,6 +2,10 @@
 title: "Hw3 Solutions"
 output: pdf_document
 ---
+\newcommand\mat[1]{\mathbb{#1}}
+\renewcommand\vec[1]{\boldsymbol{\mathrm{#1}}}
+\newcommand\xtranspose{{\mbox{\tiny \textsc{t}}}}
+\newcommand\transpose{{\scriptscriptstyle \mathrm{T}}}
 
 **For your homework report this week, you do not need to submit solutions to the swirl lessons. 
 Please report whether you successfully completed them, and discuss any issues that arose in the  _Sources_ and _Please explain_ statements. 

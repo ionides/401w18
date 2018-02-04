@@ -211,7 +211,7 @@ For our linear model, these fitted values are
 
 \vspace{-1mm}
 
-\mydisplaymath{ \hat y = b_1 x_{i1} + b_2 x_{i2} + \dots + b_p x_{ip}, \hspace{10mm}\mbox{for $i=1,2,\dots,n$}.}
+\mydisplaymath{ \hat y_i = b_1 x_{i1} + b_2 x_{i2} + \dots + b_p x_{ip}, \hspace{10mm}\mbox{for $i=1,2,\dots,n$}.}
 
 \vspace{-1mm}
 
