@@ -79,7 +79,7 @@ We can also call \m{\mat{V}} the \myemph{covariance matrix} or, more simply, jus
 
 \vspace{-5mm}
 
-\mydisplaymath{\E[\vect{\epsilon}=\vect{0}],\hspace{2cm} \var(\vect{\epsilon})=\sigma^2 \mat{I}}
+\mydisplaymath{\E[\vect{\epsilon}]=\vect{0},\hspace{2cm} \var(\vect{\epsilon})=\sigma^2 \mat{I}}
 
 \vspace{-2mm}
 
