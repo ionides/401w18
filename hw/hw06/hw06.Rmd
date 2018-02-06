@@ -1,0 +1,61 @@
+---
+title: "Homework 6, STATS 401 W18"
+author: "Due in your lab on 2/15 or 2/16"
+output:
+  html_document:
+    theme: flatly
+    toc: yes
+csl: ecology.csl
+---
+
+\newcommand\mat[1]{\mathbb{#1}}
+\renewcommand\vec[1]{\boldsymbol{\mathrm{#1}}}
+\newcommand\xtranspose{{\mbox{\tiny \textsc{t}}}}
+\newcommand\transpose{{\scriptscriptstyle \mathrm{T}}}
+\newcommand\prob{\mathrm{P}}
+
+**For your homework this week, write a brief report including the results you are asked to obtain and the R code you used to generate it.
+Recall that you are permitted to collaborate, or to use any internet resources, but you must list all sources that make a substantial contribution to your report.**
+
+--------------
+
+### Exercises calculating with covariance and the normal distribution
+
+1. Let $\vect{Z}=(Z_1,Z_2,Z_3)$ be multivariate normal white noise, with covariance matrix I=[...]. Let Y = (5 2 1) Z
+                        2 4 0)
+			1 0 3)
+Use R to find the covariance matrix of Y. Then, using R or calculating by hand, find the variance of Y_1-Y_2. Finally, use pnorm to find
+P[ Y_1-Y_2>1]
+
+
+
+-------------
+
+### Checking the standard errors produced by `lm()`
+
+We consider the data on newspaper circulation discussed in Section 1.2.2 of Sheather. It can be read into R from the course website by
+```{r read_data}
+```
+
+1. Transform the data. Add two new columns to the dataframe called `log_sunday` and `log_weekday` containing the natural logarithm of the corresponding columns. The R command `log()` gives this natural logarithm, also known as log to the base $e$.
+
+2. Build the model in R. Create a linear model called `lm1` by fitting log(weekday) circulation and the binary variable for tabloid competitor as explanatory variables for log(Sunday circulation). Your code may look something like
+```lm1 <- lm( ~ , data=circulation)
+
+3. Set `X` to be the design matrix using the `model.matrix()` command by typing
+`X <- model.matrix(lm1)`
+
+4. Use the design matrix and the response variable to compute the least squares coefficients and their standard errors.
+
+5. Check that these match the output of `summary(lm1)`.
+
+6. Write out in mathematical notation the probability model used to contruct these standard errors. Be careful to define the notation you use. Be explicit about what quantities are random vectors. If you define a measurement error model, be sure to specify the mean and variance of the error random vector. 
+
+
+--------------
+
+
+License: This material is provided under an [MIT license](https://ionides.github.io/401w18/LICENSE)<br>
+Acknowledgement: 
+
+------
