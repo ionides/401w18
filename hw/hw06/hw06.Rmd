@@ -8,54 +8,120 @@ output:
 csl: ecology.csl
 ---
 
-\newcommand\mat[1]{\mathbb{#1}}
-\renewcommand\vec[1]{\boldsymbol{\mathrm{#1}}}
-\newcommand\xtranspose{{\mbox{\tiny \textsc{t}}}}
-\newcommand\transpose{{\scriptscriptstyle \mathrm{T}}}
+\newcommand\E{\mathrm{E}}
+\newcommand\SE{\mathrm{SE}}
+\newcommand\var{\mathrm{Var}}
+\newcommand\cov{\mathrm{Cov}}
 \newcommand\prob{\mathrm{P}}
+\newcommand\mat[1]{\mathbb{#1}}
+\renewcommand\vect[1]{\boldsymbol{\mathrm{#1}}}
+\newcommand\transpose{{\scriptscriptstyle \mathrm{T}}}
+\usepackage{amsmath}
 
-**For your homework this week, write a brief report including the results you are asked to obtain and the R code you used to generate it.
-Recall that you are permitted to collaborate, or to use any internet resources, but you must list all sources that make a substantial contribution to your report.**
+
+**Write solutions to the exercises in the first half of the homework.
+For the data analysis, you do not have to report anything for questions 1--4. 
+For questions 5 and 6, report your code together with a brief explanation.
+Question 7 asks you to carefully write out the probability model you have used for the standard errors.
+Recall that you are permitted to collaborate, or to use any internet resources, but you must list all sources that make a substantial contribution to your report.
+As usual, following the syllabus, you are also requested to give some feedback in a "Please explain" statement.
+**
 
 --------------
 
-### Exercises calculating with covariance and the normal distribution
+### Exercises on variance, covariance and the normal distribution
 
-1. Let $\vect{Z}=(Z_1,Z_2,Z_3)$ be multivariate normal white noise, with covariance matrix I=[...]. Let Y = (5 2 1) Z
-                        2 4 0)
-			1 0 3)
-Use R to find the covariance matrix of Y. Then, using R or calculating by hand, find the variance of Y_1-Y_2. Finally, use pnorm to find
-P[ Y_1-Y_2>1]
+1. Suppose $X$ and $Y$ are bivariate random variables with means $\mu_X$ and $\mu_Y$ respectively.
+Use the linearity of expectation, together with the formulas 
+\[
+\var(X)=\E[X^2]-(\E[X])^2, \quad \cov(X,Y)=\E[XY]-\E[X]\, \E[Y], 
+\]
+to show that 
+\[
+\var(X+Y)=\var(X)+\var(Y) +2\cov(X,Y).
+\]
+This is similar to a calculation we did in class, but here it is a little easier since you can start from the above formulas for $\var(X)$ and $\cov(X,Y)$ rather than going all the way back to the basic definition
+\[
+\var(X)=\E\big[ (X- \E[X])^2\big], \quad \cov(X,Y)=\E\big[ (X-\E[X])(Y-\E[Y]) \big]. 
+\]
 
 
+2. Let $\vect{Z}=(Z_1,Z_2,Z_3)$ be a vector of independent, unit variance, mean zero random variables.
+In other words, suppose $\vect{Z}$ has $\E[\vect{Z}]=\vect{0}$ and variance matrix 
+$$\mat{I}=\begin{bmatrix}1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1\end{bmatrix}.$$
+    (a) Use R to find the variance matrix $\var(\vect{Y})$, when $\vect{Y}$ is defined by
+```{r AB,echo=F,results="asis"}
+A <- matrix(c(6,0,0,3,5,0,1,2,4),3,3)
+library(mat2tex)
+xx("\\vect{Y} = ",A,"\\vect{Z}",mtype="bmatrix",digits=0)
+```
+    (b) Calculating by hand, use your expression for $\var(\vect{Y})$ to find the variance of $Y_1-Y_2$. (Optionally, you can use R for this.) 
+    (c) Use `pnorm()` to find $\prob[ Y_1-Y_2>3]$.
+
+
+3. Let $\vect{X}=(X_1,\dots,X_n)$ be a random vector with expectation $\E[\vect{X}]=\vect{\mu}$ for $\vect{\mu}=(\mu_1,\dots,\mu_n)$. 
+Let $\mat{V}$ be the $n\times n$ variance matrix of $\vect{X}$, so $\mat{V}_{ij}=\cov(X_i,X_j)$ for $i=1,\dots,n$ and $j=1,\dots,n$. 
+    (a) Interpreting $\vect{X}$ and $\vect{\mu}$ as column vectors, show that 
+<br><br>
+$[\mathrm{Eq.~1}] \hspace{1.5cm}
+\mat{V}= \E[\vect{X}\vect{X}^\transpose]- \vect{\mu}\vect{\mu}^\transpose.$
+<br><br>
+    (b) Now let $\vect{Y}=(Y_1,\dots,Y_m)$ be a random vector with expectation $\E[\vect{Y}]=\vect{\nu}$ for $\vect{\nu}=(\nu_1,\dots,\nu_m)$. 
+Let $\mat{A}=[a_{ij}]_{n\times m}$ be an arbitrary constant $n\times m$ matrix.
+Apply [Eq. 1] with $\vect{X}=\mat{A}\vect{Y}$ and use the matrix linearity of expectation (i.e., summation and multiplication by a constant matrix can be moved through $\E$) to show that
+<br><br>
+$[\mathrm{Eq.~2}] \hspace{1.5cm}
+\var(\mat{A}\vect{Y}) = \mat{A}\var(\vect{Y})\mat{A}^\transpose.$
+<br><br>
+You will need the formula we gave earlier in the notes for the transpose of a matrix product, $\big(\mat{A}\vect{Y}\big)^\transpose = \vect{Y}^\transpose\mat{A}^\transpose$.
+This problem has given us another way to find the formula [Eq. 2] which we demonstrated earlier in class.
 
 -------------
 
-### Checking the standard errors produced by `lm()`
+### Understanding how `lm()` obtains standard errors
 
-We consider the data on newspaper circulation discussed in Section 1.2.2 of Sheather. It can be read into R from the course website by
+Read the analysis of newspaper circulation data in Section 1.2.2 of Sheather. This example is continued in Section 6.2.2 of Sheather. You are now in a position to read most of this section too, but you are not required to do so at this point. 
+
+1. Make a local copy of the data, available at https://ionides.github.io/401w18/hw/hw06/circulation.txt. The columns in this data file are separated by a tab, represented in R by `sep="\t"`. Since there are spaces within some newspaper names, `read.table(....,sep=" ")` does not work. Instead, use
 ```{r read_data}
+circulation <- read.table("circulation.txt",sep="\t",header=T)
 ```
 
-1. Transform the data. Add two new columns to the dataframe called `log_sunday` and `log_weekday` containing the natural logarithm of the corresponding columns. The R command `log()` gives this natural logarithm, also known as log to the base $e$.
+2. Transform the data. Add two new columns to the dataframe called `log_Sunday` and `log_Weekday` containing the natural logarithm of the corresponding columns. The R command `log()` gives this natural logarithm, also known as log to the base $e$. We'll discuss later in class how and why to choose a suitable transformation of the data, which is an important decision for data analysis.
 
-2. Build the model in R. Create a linear model called `lm1` by fitting log(weekday) circulation and the binary variable for tabloid competitor as explanatory variables for log(Sunday circulation). Your code may look something like
-```lm1 <- lm( ~ , data=circulation)
+```{r add_log, echo=F}
+circulation$log_Sunday <- log(circulation$Sunday)
+circulation$log_Weekday <- log(circulation$Weekday)
+```
 
-3. Set `X` to be the design matrix using the `model.matrix()` command by typing
-`X <- model.matrix(lm1)`
+3. Build the model in R. Create a linear model called `lm1` by fitting the logarithm of weekday circulation and the binary variable for tabloid competitor as explanatory variables for the logarithm of  Sunday circulation. Your code may look something like
+```{r fit}
+lm1 <- lm(log_Sunday~log_Weekday+Tabloid_with_serious_competitor,data=circulation)
+```
 
-4. Use the design matrix and the response variable to compute the least squares coefficients and their standard errors.
+4. Set `X` to be the design matrix using the `model.matrix()` command by typing
+```{r model.matrix}
+X <- model.matrix(lm1)
+```
 
-5. Check that these match the output of `summary(lm1)`.
+5. Use the design matrix and the response variable to compute the least squares coefficients and their standard errors by matrix calculations in R. It may be helpful to set
+```{r response}
+y <- circulation$log_Weekday
+```
 
-6. Write out in mathematical notation the probability model used to contruct these standard errors. Be careful to define the notation you use. Be explicit about what quantities are random vectors. If you define a measurement error model, be sure to specify the mean and variance of the error random vector. 
+6. Check that these match the output of `summary(lm1)`. Also, check that your calculation of the estimated standard deviation of the measurement error matches the `residual standard error` offered by `summary(lm1)`. Why do you think `summary(lm1)` says that this is computed `on 86 degrees of freedom`?
+
+7. Write out in mathematical notation the probability model used to contruct these standard errors. Be careful to define the notation you use. Specify a letter for each quantity - you can use words to help define the quantities in your equation, but you should usually avoid words in an equation. 
+You can write your equation either using vectors & matrices or by using subscripts to denote each unit $i$ and specifying the range of values of $i$ for which the equation holds. 
+Be explicit about what quantities are random vectors. 
+If you define a measurement error model, be sure to specify all means, variances and covariances for the error random variables. 
 
 
 --------------
 
+-------------
 
 License: This material is provided under an [MIT license](https://ionides.github.io/401w18/LICENSE)<br>
-Acknowledgement: 
+Acknowledgement: The linear model fitting problem develops an example from S. J. Sheather (2009) "A Modern Approach to Regression with R."
 
 ------
