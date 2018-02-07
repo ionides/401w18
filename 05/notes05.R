@@ -1,5 +1,5 @@
 ## ----setup,echo=F,results=F,cache=F--------------------------------------
-library(broman) # used for myround 
+# library(broman) # used for myround 
 
 ## ----reconstruct_variables,echo=F----------------------------------------
 L <- read.table(file="life_expectancy.txt",header=TRUE)
@@ -12,4 +12,18 @@ L_detrended <- subset(L_detrended,L$Year %in% U$Year)
 
 ## ----detrended_lm--------------------------------------------------------
 lm1 <- lm(L_detrended~U_detrended) ; summary(lm1)
+
+## ----summary-------------------------------------------------------------
+names(summary(lm1))
+summary(lm1)$coefficients
+
+## ----model_matrix--------------------------------------------------------
+X <- model.matrix(lm1)
+head(X)
+
+## ----se------------------------------------------------------------------
+s <- sqrt(sum(resid(lm1)^2)/(nrow(X)-ncol(X))) ; s
+V <- s^2 * solve(t(X)%*%X)
+sqrt(diag(V))
+summary(lm1)$coefficients
 

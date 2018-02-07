@@ -51,7 +51,7 @@ options(width = 60) # number of characters in R output before wrapping
 
 % other set up
 <<setup,echo=F,results=F,cache=F>>=
-library(broman) # used for myround 
+# library(broman) # used for myround 
 @
 
 
@@ -445,14 +445,48 @@ lm1 <- lm(L_detrended~U_detrended) ; summary(lm1)
 
 \end{frame}
 
+%\end{document}
 
 \begin{frame}[fragile]
 \frametitle{How does R obtain linear model standard errors?}
 
+\vspace{-1.5mm}
+
 \begin{myitemize}
 \item The previous slide shows output from our analysis of unemployment and mortality from Chapter~1.
-\item Let's first check how to extract the estimates and their standard errors from R. We can visually read them off the summary, but that's not satisfactory as a step in a reproducible research workflow.
+\item Let's first extract the estimates and their standard errors from R, a good step toward reproducible data analysis.
 \end{myitemize}
+
+\vspace{-1mm}
+
+<<summary>>=
+names(summary(lm1))
+summary(lm1)$coefficients
+@
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Extracting the design matrix}
+
+<<model_matrix>>=
+X <- model.matrix(lm1)
+head(X)
+@
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Computing the SE directly}
+
+\vspace{-1mm}
+
+<<se>>=
+s <- sqrt(sum(resid(lm1)^2)/(nrow(X)-ncol(X))) ; s
+V <- s^2 * solve(t(X)%*%X)
+sqrt(diag(V))
+summary(lm1)$coefficients
+@
 
 \end{frame}
 
