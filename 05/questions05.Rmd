@@ -1,0 +1,32 @@
+---
+title: "Questions on Homework 5, STATS 401 W18"
+author: "Feb 7"
+output:
+  html_document:
+    theme: flatly
+---
+
+
+-----
+
+--------
+
+I have a question about the first half of Homework 4. For the questions attached pertaining to question 2, I don't understand the difference between the two and how I am supposed to calculate the answer in two different ways. For question v), I used the formula Z = (x - mu)/sigma to calculate Z, then used the pnorm function in R to find the answer. But for question vi), I am lost as to what is the large sample interpretation of probability is and how to use that to estimate the same answer. Any help would be appreciated.
+
+* ANSWER: "Large sample interpretation" was intended to refer to the slide on _A definition of probability_: "The probability of an event is the long-run proportion of times that an
+event happens in a large number of realizations of the probability model."
+
+
+----------
+
+----------
+
+----------
+
+Regarding Homework 5, the practicing probability and random variable calculations section, when it says “let Z be a standard normal random variable,” are we to just assign Z any value and then answer the questions based off our assigned value (ie. “Z<-5”)?
+
+* ANSWER: The standard normal distribution has mean zero and variance 1, as defined on slide 35 of the notes on random variables. Beyond checking that definition, this question asks for discussion on what it means to be a random variable.
+
+----------
+
+----------

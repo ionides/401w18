@@ -13,6 +13,11 @@ REXE = R --vanilla
 RCMD = $(REXE) CMD
 RSCRIPT = Rscript --vanilla
 
+%.html: %.Rmd
+	Rscript --vanilla -e "rmarkdown::render(\"$*.Rmd\",output_format=\"html_document\")"
+
+%.html: %.md
+	pandoc $*.md > $*.html
 
 %.pdf: export R_QPDF=qpdf
 %.pdf: export R_GSCMD=gs
