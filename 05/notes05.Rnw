@@ -179,7 +179,6 @@ For such a model there is no need to ask the question `Is the model true?'. If \
 \vspace{-1mm}
 
 \item In matrix form, with \m{\mat{A}=[a_{ij}]}, this is 
-%\mydisplaymath{
 \framebox{
  \m{
  \E\left[\mat{A}\vect{Y}\right] = \mat{A}\E[\vect{Y}].
@@ -188,11 +187,8 @@ For such a model there is no need to ask the question `Is the model true?'. If \
 }
 \end{myitemize}
 
-%\end{frame}
-%\end{document}
 
 {\bf Example}. For \m{\vect{Y}=\mat{X}\vect{\beta}+\vect{\epsilon}}, we have
-%\mydisplaymath{
 \framebox{
  \m{
  \E[\vect{Y}] = \mat{X}\vect{\beta} + \E[\vect{\epsilon}] = \mat{X}\vect{\beta}
@@ -226,7 +222,6 @@ For
 
 \begin{myitemize}
 \item We have seen several versions of the same property that expectations can be moved through sums and multiplicative constants:
-%\item For example, 
 \myeqnarray{
 \E[aX+b]&=&a\E[X]+b, 
 \\
@@ -263,13 +258,17 @@ For
 
 \vspace{28mm}
 
-\myquestion. Similarly, show that \m{\cov\big(Y,\sum_{j=1}^n Z_j\big)=\sum_{j=1}^n\cov(Y,Z_j)}.
+\myquestion. Show that  \m{\cov(X,Y+Z)=\cov(X,Y)+\cov(X,Z)} and
+\m{\cov\big(X,\sum_{j=1}^n Y_j\big)=\sum_{j=1}^n\cov(X,Y_j)}.
 
 \setcounter{CovSum}{\theQcounter}
 
 \vspace{28mm}
 
+
 \end{frame}
+
+%\end{document}
 
 \begin{frame}[fragile]
 \frametitle{Moving sums through covariance}
@@ -296,6 +295,8 @@ For
 
 \end{frame}
 
+%\end{document}
+
 \begin{frame}[fragile]
 \frametitle{Variance of a sum}
 
@@ -317,6 +318,7 @@ For
 \end{myitemize}
 \end{frame}
 
+%\end{document}
 
 \begin{frame}[fragile]
 \frametitle{The covariance matrix of a linear combination}
@@ -347,7 +349,7 @@ Can we find \m{\mat{V}_Z} if we know \m{\mat{V}_Y} and \m{\mat{A}}?
 
 \begin{frame}[fragile]
 \frametitle{Covariance of $Z_i=[\mat{A}\vect{Y}]_i$ and $Z_j=[\mat{A}\vect{Y}]_j$}
-\myquestion. Show that \m{\cov(Z_i,Z_j) = \sum_{k=1}^n\sum_{\ell=1}^n a_{ij}a_{k\ell}[\mat{V}_Y]_{k\ell}}
+\myquestion. Show that \m{\cov(Z_i,Z_j) = \sum_{k=1}^n\sum_{\ell=1}^n a_{ik}a_{j\ell}[\mat{V}_Y]_{k\ell}}
 
 \vspace{30mm}
 
@@ -355,7 +357,7 @@ Can we find \m{\mat{V}_Z} if we know \m{\mat{V}_Y} and \m{\mat{A}}?
 \framebox{
  \m{
  \mat{V}_Z
- = \mat{A}^\transpose \mat{V}_Y \mat{A}
+ = \mat{A} \mat{V}_Y \mat{A}^\transpose
  }.
 \rule[-3mm]{0mm}{9mm}
 }
@@ -364,6 +366,7 @@ Can we find \m{\mat{V}_Z} if we know \m{\mat{V}_Y} and \m{\mat{A}}?
 
 \end{frame}
 
+%\end{document}
 
 \begin{frame}[fragile]
 \frametitle{Covariance of the least squares coefficients}
@@ -372,7 +375,7 @@ Can we find \m{\mat{V}_Z} if we know \m{\mat{V}_Y} and \m{\mat{A}}?
 \item The covariance matrix formula we just developed can be written as
 \framebox{
 \m{\var(\mat{A}\vect{Y})
-= \mat{A}^\transpose \var(\vect{Y}) \mat{A}}.
+= \mat{A}\var(\vect{Y}) \mat{A}^\transpose}.
 \rule[-3mm]{0mm}{9mm}
 }
 \end{myitemize}
