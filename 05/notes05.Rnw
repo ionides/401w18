@@ -168,7 +168,8 @@ For such a model there is no need to ask the question `Is the model true?'. If \
 \vspace{-2mm}
 
 \begin{myitemize}
-\item The linear property of expectation lets us take expectation through a summation sign, and we get
+\item The linear property of expectation lets us take expectation through a summation. 
+For any constants \m{a_{ij}}, with \m{1\le i\le n} and \m{1\le j\le n}, we get
 
 \vspace{-2mm}
 
