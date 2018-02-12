@@ -1,0 +1,75 @@
+%\documentclass[handout]{beamer}
+\documentclass{beamer}
+
+\input{../header.tex}
+\newcommand\CHAPTER{6}
+%\newcommand\LSi{\mathrm{(LS1)}}
+%\newcommand\LSii{\mathrm{(LS2)}}
+%\newcounter{tXX}
+%\newcounter{tXy}
+%\newcounter{matrixLSi}
+\newcounter{CovSum}
+\newcounter{CovSumII}
+
+\begin{document}
+
+% knitr set up
+<<knitr_opts,echo=F,cache=F,purl=F>>=
+library(knitr)
+opts_chunk$set(
+#  cache=FALSE,
+  cache=TRUE,
+  eval=TRUE,
+  include=TRUE,
+  echo=TRUE,
+  purl=TRUE,
+  cache.path=paste0("tmp/cache"),
+  dev='png',
+  dev.args=list(bg='transparent'),
+  dpi=300,
+  error=FALSE,
+  fig.pos="h!",
+  fig.align='center',
+  fig.height=4,fig.width=6.83,
+  fig.lp="fig:",
+  fig.path=paste0("tmp/figure"),
+  fig.show='asis',
+  highlight=TRUE,
+  message=FALSE,
+  progress=TRUE,
+  prompt=FALSE,
+#  results='asis',
+  results="markup",
+  size='small',
+  strip.white=TRUE,
+  tidy=FALSE,
+  warning=FALSE
+#  comment=NA # to remove ## on output
+)
+options(width = 60) # number of characters in R output before wrapping
+@
+
+% other set up
+<<setup,echo=F,results=F,cache=F>>=
+# library(broman) # used for myround 
+@
+
+
+\begin{frame}
+\frametitle{\CHAPTER. Hypothesis testing and confidence intervals}
+
+\vspace{-2mm}
+
+We have the following goals:
+\begin{myitemize}
+\item
+Understand how to construct confidence intervals for parameters in a linear model.
+\item Understand how to test statistical hypotheses about a linear model.
+\item In particular, to ask and answer the question: ``Are the data consistent with a hypothesis that a covariate, or a collection of covariates, are unimportant?'' (What is the fundamental scientific importance of the slightly contorted logical reasoning in this question?)
+\item Learn to use R to carry out these tasks.
+\item See how the linear model includes and extends basic tests for means of one and two samples.
+\end{myitemize}
+First, we'll review hypothesis testing by working through some notes on
+``Topics in comparing means of one or two samples.''
+\end{frame}
+\end{document}
