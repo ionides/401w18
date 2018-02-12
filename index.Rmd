@@ -138,3 +138,6 @@ Due in your lab on 2/15 or 2/16.
  Also provided is a [list of all the questions in the quiz generator](quiz1/quiz1-all.html).
 
 ------------
+
+-----------
+
