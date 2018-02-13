@@ -106,7 +106,7 @@ X <- model.matrix(lm1)
 
 5. Use the design matrix and the response variable to compute the least squares coefficients and their standard errors by matrix calculations in R. It may be helpful to set
 ```{r response}
-y <- circulation$log_Weekday
+y <- circulation$log_Sunday
 ```
 
 6. Check that these match the output of `summary(lm1)`. Also, check that your calculation of the estimated standard deviation of the measurement error matches the `residual standard error` offered by `summary(lm1)`. Why do you think `summary(lm1)` says that this is computed `on 86 degrees of freedom`?
