@@ -1,0 +1,133 @@
+---
+title: "Midterm exam information, STATS 401 W18"
+author: "To be discussed further in class on 2/14 and in lab on 2/15 or 2/16"
+output:
+  html_document:
+    theme: flatly
+    toc: no
+csl: ecology.csl
+---
+
+```{r preliminaries,echo=F,cache=F}
+ALL <- TRUE
+ALL <- FALSE
+SOL <- FALSE
+#SOL <- TRUE
+set.seed(12)
+library(mat2tex)
+```
+
+\newcommand\mat[1]{\mathbb{#1}}
+\newcommand\vect[1]{\mathbf{#1}}
+\newcommand\transpose{{\scriptscriptstyle \mathrm{T}}}
+\newcommand\prob{\mathrm{P}}
+\newcommand\E{\mathrm{E}}
+\newcommand\SE{\mathrm{SE}}
+\newcommand\var{\mathrm{Var}}
+\newcommand\cov{\mathrm{Cov}}
+
+-------------
+
+### Instructions
+
+**The midterm exam will test the skills covered in homeworks 1--6, lab 1--6, and material covered in class up to Wednesday 2/14.  You will have 80 minutes allocated.  The exam will be closed book. Any electronic devices in your possession must be turned off and remain in a bag on the floor. Technical skills tested will include both numerical and algebraic manipulation of variance and covariance, as well as the skills covered in quiz 1.  R coding will be tested by multiple choice questions and reading given code. The only time you may have to write code in the exam is to write a call to 'pnorm()' or 'qnorm()' to show how to evaluate a normal distribution calculation. There will be questions on explaining R output related to fitting linear models, as well as questions on writing linear models in matrix form and as equations with subscripts.**
+
+-----------
+
+### Formulas
+
+* You are not allowed to bring any notes into the exam. 
+
+* The following formulas will be provided. To use these formulas properly, you need to make appropriate definitions of the necessary quantities.
+\[
+\vect{b}= \big( \mat{X}^\transpose \mat{X} \big)^{-1}\, \mat{X}^\transpose \vect{y},
+\]
+\[
+\var(\hat\vect{\beta})= \sigma^2 \big( \mat{X}^\transpose \mat{X} \big)^{-1},
+\]
+\[ 
+\var(\mat{A}\vect{Y})=\mat{A}\var(\vect{Y})\mat{A}^\transpose
+\]
+From `?pnorm`:
+```
+pnorm(q, mean = 0, sd = 1)
+qnorm(p, mean = 0, sd = 1)
+q: vector of quantiles.
+p: vector of probabilities.
+```
+
+
+
+-----------
+
+### Question categories.
+
+All question categories from the quiz will be included except for the basic matrix exercises (M1,M2,M3).
+
+------
+
+#### Summation exercises
+
+S1. A basic exercise.
+
+S2. An example involving the summation representation of matrix multiplication.
+
+-------
+
+#### R exercises
+
+R1. Using `rep()` and `matrix()`. 
+
+R2. Manipulating vectors and matrices in R.
+
+---------
+
+#### Fitting a linear model by least squares 
+
+[This category is similar, but slightly different, from the F1 and F2 questions in the quiz.]
+
+F1. Write the sample version of a linear model in subscript form given the matrix form.
+
+F2. Write the sample version of a linear model in matrix form given the subscript form.
+
+F3. Write the sample version of a linear model in matrix form subscript form given a dataset and verbal description of the model OR writing the sample version of a linear model in matrix form given a dataset and verbal description of the model.
+
+F4. Explain how to obtain the least square value of the coefficients and the fitted values.
+
+--------
+
+#### Properties of variance and covariance
+
+V1. A numerical calculation to find the variance of a linear combination using matrix techniques.
+
+V2. An algebraic calculation using basic definitions of variance & covariance, together with the linearity of expectation.
+
+--------
+
+#### Normal probability calculations
+
+N1. A normal approximation to estimate a probability using the mean and variance.
+
+N2. A normal approximation to find a region with a given probability using the mean and variance.
+
+------
+
+#### The population version (or probability version) of the linear model
+
+P1. Describe a suitable probability model, in subscript form, to give a population version of a linear model.
+
+P2. Describe a suitable probability model, in matrix form, to give a population version of a linear model.
+
+P3. Explain how R produces standard errors for coefficients in a linear model. Interpret the standard errors using the probability model.
+
+
+--------
+
+--------
+
+License: This material is provided under an [MIT license](https://ionides.github.io/401w18/LICENSE)<br>
+
+
+
+
+------
