@@ -109,7 +109,7 @@ Due in your lab on 1/25 or 1/26. [Solutions](hw/hw03/sol_hw03.html).
 Due in your lab on 2/1 or 2/2. [Solutions](hw/hw04/sol_hw04.html).
 
 * [Homework 5. Probability exercises and an application to a randomized experiment](hw/hw05/hw05.html). 
-Due in your lab on 2/8 or 2/9.
+Due in your lab on 2/8 or 2/9. [Solutions](hw/hw05/sol_hw05.html).
 
 * [Homework 6. Variance, covariance and standard errors for fitting a linear model](hw/hw06/hw06.html). 
 Due in your lab on 2/15 or 2/16.
@@ -125,6 +125,10 @@ Due in your lab on 2/15 or 2/16.
 * [Lab 3. Using matrices for fitting a linear model by least squares ](lab/lab03/lab03.pdf). Slides for 1/18 and 1/19. [Solutions](lab/lab03/sol_lab03.pdf).
 
 * [Lab 4. Summation and quiz review](lab/lab04/lab04.pdf). Slides for 1/25 and 1/26. [Sample quiz](lab/lab04/sample_quiz.pdf). 
+
+* Lab 5. Quiz.
+
+* [Lab 6. Variance, covariance and standard errors for the linear model](lab/lab06/lab06.pdf). Slides for 2/8 and 2/9.
 
 <!--
 [Solutions](lab/lab04/sol_lab04.pdf)

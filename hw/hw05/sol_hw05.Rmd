@@ -1,0 +1,165 @@
+---
+title: "Homework 5, STATS 401 W18"
+author: "Due in your lab on 2/8 or 2/9"
+output:
+  html_document:
+    theme: flatly
+    toc: yes
+csl: ecology.csl
+---
+
+\newcommand\mat[1]{\mathbb{#1}}
+\renewcommand\vec[1]{\boldsymbol{\mathrm{#1}}}
+\newcommand\xtranspose{{\mbox{\tiny \textsc{t}}}}
+\newcommand\transpose{{\scriptscriptstyle \mathrm{T}}}
+\newcommand\prob{\mathrm{P}}
+
+**For your homework this week, write a brief report including the results you are asked to obtain and the R code you used to generate it.
+Recall that you are permitted to collaborate, or to use any internet resources, but you must list all sources that make a substantial contribution to your report.**
+
+--------------
+
+### Self-paced review of introductory probability
+
+Go through the STATS 250 materials on probability and random variables at 
+https://open.umich.edu/find/open-educational-resources/statistics/statistics-250-introduction-statistics-data-analysis.
+If anything is unclear, spend some time working on figuring it out. 
+Report back on anything that remains elusive.
+
+-------------
+
+### Practicing probability and random variable calculations.
+
+1. Let $Z$ be a standard normal random variable. Try out the R functions `rnorm()`, `pnorm()` and `qnorm()` which are basic tools for working with the normal distribution. Look at the documentation provided by typing `?pnorm`.
+
+(i) Use `pnorm()` to find $\prob(Z>2.5)$.
+    
+```{r}
+1 - pnorm(2.5)
+```    
+    
+(ii) Use `qnorm()` to find a value $\alpha$ such that $\prob(Z>\alpha)=0.2$.
+    
+```{r}
+qnorm(1-0.2)
+```    
+    
+(iii) Use `qnorm()` and the symmetry of the standard normal distribution to find a value $\beta$ such that $\prob(|Z|>\beta) = 0.1$.
+    
+```{r}
+qnorm(1-0.1/2)
+```
+
+2. Consider rolling two six-sided dice, colored maize and blue. We model possible outcomes of the dice roll as a pair $(i,j)$ where $i\in\{1,2,\dots,6\}$ is the value of the maize die and $j\in\{1,2,\dots,6\}$ is the value of the blue die. All pairs of outcomes are modeled as equally likely, i.e., we consider the dice to be fair. We define three random variables as follows: $M$ is the value of the maize die, $B$ is the value of the blue die and $S=M+B$ is the sum of the two dice.
+
+(i) Compute by hand the mean and variance of $M$.
+    
+$\mathbb{E}(M) = (1+2+3+4+5+6)*\frac{1}{6}=3.5$
+    
+$Var(M) = \mathbb{E}(M^2) - (\mathbb{E}(M))^2 = (1+4+9+16+25+36)*\frac{1}{6} - (3.5)^2 = 2.92$
+    
+(ii) Use `sample()` in R to generate a large sample (say, $n=1000$) of realizations from the probability model for a single die. Use this sample to check your calculation by finding the sample mean and sample variance.
+
+```{r}
+set.seed(2018)
+
+die = sample(1:6, 1000, replace = T)
+
+mean(die)
+
+var(die)
+```    
+    
+(iii) Find the mean and variance of $S$ by using properties of the mean and variance of a sum.
+    
+$\mathbb{E}(S) = \mathbb{E}(M) + \mathbb{E}(B) = 2\mathbb{E}(M) = 7$
+    
+$Var(S) = Var(M) + Var(B) = 2Var(M) = 5.84$
+    
+(iv) By generating two of the samples made in (ii), generate a large sample of realizations of $S$.
+
+```{r}
+set.seed(2018)
+
+die1 = sample(1:6, 1000, replace = T)
+
+die2 = sample(1:6, 1000, replace = T)
+
+die_sum = die1 + die2
+
+```      
+    
+(v) Use a normal approximation, with the mean and variance computed in (iii), to approximate $\prob(S\ge 10)$. 
+    
+```{r}
+1 - pnorm(q = 10, mean =7, sd = sqrt(5.84))
+```         
+
+(vi) Use the large sample interpretation of probability, together with the realizations in (iv), to approximate $\prob(S\ge 10)$.
+
+```{r}
+mean(die_sum>=10)
+```          
+
+(v)  How many of the 36 possible outcomes $(i,j)$ with  $i\in\{1,2,\dots,6\}$ and $j\in\{1,2,\dots,6\}$ have a sum greater than or equal to 10? Draw a $6\times 6$ table of all possible pairs of outcomes and, hence, find the exact solution to $\prob(S\ge 10)$ for this model.
+
+$\prob(S\ge 10) = \frac{6}{36} = 0.167$
+
+---------------
+
+### A probability model for a randomized experiment
+
+We consider a simple randomized experiment where an outcome is measured for each subject, half of which are assigned to get treatment 1, with the other half getting treatment 2.
+We suppose that individuals picked for treatment 1 are assigned randomly. 
+Suppose the experimenters have 24 subjects at their disposal, perhaps they label them $\{1,2,\dots,24\}$ and they type `sample(1:24,size=12)` in R to choose the subjects assigned to treatment 1.
+To see whether there is statistical evidence for an effect of the treatment on the outcome, we can work out probabilities under the null hypothesis that there is no effect.
+A natural test statistic is 
+
+$$T=\mbox{mean outcome of subjects getting treatment 2} - \mbox{mean outcome of subjects getting treatment 1}.$$
+
+Large values of this statistic suggest that treatment 2 has an effect of increasing the measured outcome compared to treatment 1.
+But how large does this statistic have to be to conclude that the observed effect is real, not just the result of chance variation when in fact the treatments are equivalent?
+Under the null hypothesis that the treatment has no effect, we can work out the distribution of $T$ by reassigning treaments randomly! 
+
+Let's revisit the mice from Homework 1. Your task is to draw 1000 hypothetical realizations for the statistic $T$ supposing a model where the mice are re-randomized to treatment 1 (regular chow) and treatment 2 (high fat diet) under the null hypothesis that treatment has no effect. Then, report what proportion of these realizations the statistic $T$ is larger than the value obtained for the actual experimental assignment. Interpret your result as a statistical hypothesis test addressing a scientific question.
+
+The following R hints may be useful:
+
+1. Call the dataset `mice`. Then, `mice$Bodyweight` lists all the outcomes, and `sample(mice$Bodyweight,12)` draws twelve of these at random. Suppose these are hypothetically assigned to treatment 1 (regular chow).
+
+2. Using `replicate(sample(mice$Bodyweight,12),n=1000)` allows you to generate `n=1000` hypothetical realizations of 12 bodyweights for mice assigned to treatment 1. 
+(These are not the weights of mice assigned to treatment 1 in the actual experiment, but we are working under a hypothesis that their weights would have been the same whichever treatment they got.)
+You should use a much smaller number of replicates, say `n=5` while developing and debugging your solution.
+
+3. The function `apply()` gives a convenient way to find the mean bodyweight for each hypothetical treatment 1 sample.
+
+4. If you follow this approach, you'll have to figure out how to compute the value of the $T$ statistic for these hypothetical samples, since $T$ includes both treatment 1 and treatment 2. For each hypothetical realization, all the mice that are not in the realization of treatment 1 get assigned treatment 2. Thus, the sum of the means for treatment 1 and treatment 2 is the same for every hypothetical realization.
+
+5. Recall that `sum(x>a)/length(x)` gives the fraction of elements of the vector `x` that are larger than `a`.
+```{r}
+set.seed(2018)
+
+mice = read.csv("https://ionides.github.io/401w18/hw/hw01/femaleMiceWeights.csv")
+
+T = mean(mice$Bodyweight[mice$Diet=="hf"]) - mean(mice$Bodyweight[mice$Diet=="chow"])
+
+group1 = replicate(sample(mice$Bodyweight,12),n=1000)
+
+group1_sum = apply(group1, 2, sum)
+
+group2_sum = sum(mice$Bodyweight) - group1_sum
+
+T_permutation = (group2_sum - group1_sum)/12
+
+sum(T_permutation > T)/length(T_permutation)
+
+```
+Since p-value=0.03<0.05, we reject the null hypothesis at 0.05 level. Namely we have enough evidence to say the bodyweight of mice using high fat diet is larger than he bodyweight of mice using regular chow on average.
+
+--------------
+
+
+License: This material is provided under an [MIT license](https://ionides.github.io/401w18/LICENSE)<br>
+Acknowledgement: The randomized experiment draws on material from from https://genomicsclass.github.io/book
+
+------
