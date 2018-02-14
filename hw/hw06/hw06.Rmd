@@ -55,8 +55,13 @@ A <- matrix(c(6,0,0,3,5,0,1,2,4),3,3)
 library(mat2tex)
 xx("\\vect{Y} = ",A,"\\vect{Z}",mtype="bmatrix",digits=0)
 ```
-    (b) Calculating by hand, use your expression for $\var(\vect{Y})$ to find the variance of $Y_1-Y_2$. (Optionally, you can use R for this.) 
-    (c) Use `pnorm()` to find $\prob[ Y_1-Y_2>3]$.
+    (b) Calculating by hand, use your expression for $\var(\vect{Y})$ to find the variance of $Y_1-Y_2$. You can do this using the formula $\var(X-Y)=\var(X)+\var(Y)- 2\cov(X,Y)$ or by writing 
+\[
+Y_1 - Y_2 = \begin{bmatrix} 1 & -1 & 0\end{bmatrix} \begin{bmatrix}Y_1 \\ Y_2 \\ Y_3 \end{bmatrix} = \mat{A} \vect{Y}
+\] 
+for $\mat{A} = \begin{bmatrix} 1 & -1 & 0\end{bmatrix}$, and then using the formula $\var(\mat{A}\vect{Y})= \mat{A}\var(\vect{Y})\mat{A}^\transpose$.
+(Optionally, you can use R for this, and if you do this then the matrix version is easier to code.) 
+    (c) Supposing that $Y_1-Y_2$ is normally distributed, use `pnorm()` to find $\prob[ Y_1-Y_2>3]$.
 
 
 3. Let $\vect{X}=(X_1,\dots,X_n)$ be a random vector with expectation $\E[\vect{X}]=\vect{\mu}$ for $\vect{\mu}=(\mu_1,\dots,\mu_n)$. 
