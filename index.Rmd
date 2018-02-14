@@ -141,6 +141,10 @@ Due in your lab on 2/15 or 2/16.
 * [Information and practice for quiz 1](quiz1/quiz1.html).
  Also provided is a [list of all the questions in the quiz generator](quiz1/quiz1-all.html).
 
+## Midterm exam materials
+
+* [Information and outline for the midterm](mt/info.html).
+
 ------------
 
 -----------

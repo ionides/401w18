@@ -125,6 +125,28 @@ P3. Explain how R produces standard errors for coefficients in a linear model. I
 
 --------
 
+
+#### Example: patient satisfaction in a hospital
+
+The following survey data on a collection of hospital patients measures self-reported satisfaction, age, a measure of case severity, and a measure of anxiety. The hospital managers want to see whether satisfaction can be explained by the other variables, and, if so, which variables are important.
+
+```{r read_data}
+patients <- read.table("patients.txt",header=T)
+dim(patients)
+head(patients)
+```
+
+(F1,F2,F3). Write the sample version of a linear model to address this question, in subscript form and matrix form.
+
+(P1,P2). Write a probability model that can be used to assess the chance variation in the coefficients of the sample linear model. What is the source of this chance variation?
+
+(P3) Explain how this probability model is used to obtain standard errors for the coefficient estimates.
+
+------
+
+------
+
+
 License: This material is provided under an [MIT license](https://ionides.github.io/401w18/LICENSE)<br>
 
 
