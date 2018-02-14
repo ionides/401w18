@@ -1,6 +1,5 @@
 ---
 title: "Midterm exam information, STATS 401 W18"
-author: "To be discussed further in class on 2/14 and in lab on 2/15 or 2/16"
 output:
   html_document:
     theme: flatly
@@ -25,6 +24,16 @@ library(mat2tex)
 \newcommand\SE{\mathrm{SE}}
 \newcommand\var{\mathrm{Var}}
 \newcommand\cov{\mathrm{Cov}}
+
+-----------
+
+### Scheduling
+
+* The midterm exam is in class on Wednesday 2/21, from 1:10 to 2:30.
+
+* Class is canceled on Monday 2/19, and there will be no lab on 2/22 or 2/23.
+
+* Midterm material will be discussed further in class on 2/14 and in lab on 2/15 or 2/16.
 
 -------------
 

@@ -1,6 +1,6 @@
 default: html-docs
 
-html-docs: review.html
+html-docs: info.html
 
 %.html: %.Rmd
 	Rscript --vanilla -e "rmarkdown::render(\"$*.Rmd\",output_format=\"html_document\")"
