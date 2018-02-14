@@ -153,6 +153,24 @@ head(patients)
 
 ------
 
+#### Exercise related to HW6: Working with a generic $(i,j)$ component of a matrix
+
+* A matrix quantity such as $\var(\vect{X})$ is really a collection of quantities for each row $i$ and column $j$.
+
+* Sometimes, when working with matrices, it is helpful to write equations for a generic $(i,j)$ component. Something that you work out for a generic $(i,j)$ component is necessarily true for the whole matrix.
+
+* On questions of the form "Show that $A=B$" you can in principle start from $B$ and show how to get $A$ or vice versa. Usually, people work left-to-right so the question is likely suggesting that it is simpler to start from $A$ and show how to get to $B$.
+
+* Here, we are considering questions of the form "Show that $\mat{A}=\mat{B}$". We can do this by showing that $[\mat{A}]_{ij}=[\mat{B}]_{ij}$ for an arbitrary $(i,j)$.
+
+**Example**. Let $\vect{X}=(X_1,\dots,X_n)$ and $\vect{Y}=(Y_1,\dots,Y_n)$ be independent vector random variables with $n\times n$ variance matrices $\mat{U}$ and $\mat{V}$ respectively. 
+Show that $\var(\vect{X}+\vect{Y})=\mat{U}+\mat{V}$. This is a version for vector random variables of the formula $\var(X_i+Y_i)=\var(X_i)+\var(Y_i)$, which we have already seen for the variance of a sum of two independent random variables.
+You can use the definitions of variance and covariance. You may also use the basic property of expectation of a product of independent random variables, that $\E[X_iY_j]=\E[X_i]\E[Y_j]$.
+
+
+------
+
+
 ------
 
 
