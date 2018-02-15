@@ -145,6 +145,8 @@ Due in your lab on 2/15 or 2/16.
 
 * [Information and outline for the midterm](mt/info.html).
 
+* [Practice midterm exam](mt/practice-mt.html).
+
 ------------
 
 -----------

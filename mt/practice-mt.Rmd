@@ -1,0 +1,222 @@
+---
+title: "Practice midterm exam, STATS 401 W18"
+output:
+  html_document:
+    theme: flatly
+    toc: no
+csl: ecology.csl
+---
+
+```{r preliminaries,echo=F,cache=F}
+ALL <- TRUE
+ALL <- FALSE
+SOL <- FALSE
+#SOL <- TRUE
+set.seed(12)
+library(mat2tex)
+```
+
+\newcommand\mat[1]{\mathbb{#1}}
+\newcommand\vect[1]{\mathbf{#1}}
+\newcommand\transpose{{\scriptscriptstyle \mathrm{T}}}
+\newcommand\prob{\mathrm{P}}
+\newcommand\E{\mathrm{E}}
+\newcommand\SE{\mathrm{SE}}
+\newcommand\var{\mathrm{Var}}
+\newcommand\cov{\mathrm{Cov}}
+
+-----------
+
+**These questions and instructions are a guide to what the midterm exam will look like. The actual exam format should be similar but may differ slightly. Formulas provided in the actual exam will include those listed here.**
+
+----------
+
+**Instructions. You have a time allowance of 80 minutes.  The exam is closed book. Any electronic devices in your possession must be turned off and remain in a bag on the floor. You can use as many sheets of paper as you need for your solutions. Please number the pages and put your name and UMID on each page.**
+
+-----------
+
+### Formulas
+
+* You are not allowed to bring any notes into the exam. 
+
+* The following formulas will be provided. To use these formulas properly, you need to make appropriate definitions of the necessary quantities.
+
+$(1) \quad \quad
+\vect{b}= \big( \mat{X}^\transpose \mat{X} \big)^{-1}\, \mat{X}^\transpose \vect{y}$
+
+$(2)\quad\quad
+\var(\hat\vect{\beta})= \sigma^2 \big( \mat{X}^\transpose \mat{X} \big)^{-1}$
+
+$(3)\quad\quad 
+\var(\mat{A}\vect{Y})=\mat{A}\var(\vect{Y})\mat{A}^\transpose$
+
+$(4)\quad\quad
+\var(X)=\E\big[ (X-\E[X])^2\big] = \E[X^2]-\big(\E[X]\big)^2$
+
+$(5)\quad\quad
+\cov(X,Y)=\E\big[ \big(X-\E[X]\big)\big(Y-\E[Y]\big)\big] = \E[XY]-\E[X]\,\E[Y]$
+
+From `?pnorm`:
+```
+pnorm(q, mean = 0, sd = 1)
+qnorm(p, mean = 0, sd = 1)
+q: vector of quantiles.
+p: vector of probabilities.
+```
+
+-----------
+
+#### Summation exercises
+
+S1. A basic exercise.
+
+Let $\mat{X}=[x_{ij}]$ be a $2\times 3$ matrix with $(i,j)$ entry given by $x_{ij}=i+j$.
+
+(a) Write out $\mat{X}$, evaluating each of the six entries of the matrix.
+
+(b) Hence, evaluate the sum $\sum_{i=1}^2\sum_{j=1}^3(i+j)$.
+
+S2. An example involving the summation representation of matrix multiplication.
+
+Let $\vect{x}=(x_1,x_2,\dots,x_n)$ interpreted as a column vector, i.e., an $n\times 1$ matrix. Find a matrix $\mat{A}$ such that $\mat{A}\vect{x} = \sum_{i=1}^n i x_i$. <br>
+Hint: $\sum_{i=1}^n i x_i$ is a number, considered here to be a matrix with dimension $1\times 1$. Start by working out what the dimensions of $\mat{A}$ must be so that $\mat{A}\vect{x}$ is a $1\times 1$ matrix.
+
+-------
+
+#### R exercises
+
+R1. Using `rep()` and `matrix()`. 
+
+Which of the following correctly constructs the matrix
+\[
+\mat{A}=
+\begin{bmatrix}
+    3 & 3 & 6 \\
+    3 & 6 & 0 \\
+    3 & 6 & 0
+\end{bmatrix}.
+\]
+List all the correct answers or say "none".
+
+a) `A <- matrix(c(rep(3,4), rep(6, 3), rep(0,2)), nrow = 3)`
+
+b) `A <- matrix(c(rep(3,3), rep(6, 3), rep(0,2)), nrow = 3)`
+
+c) `A <- matrix(c(3,3,6,3,6,0,3,6,0), nrow = 3)`
+
+d) `A <- t(matrix(c(3,3,6,3,6,0,3,6,0), nrow = 3))`
+
+
+R2. Manipulating vectors and matrices in R.
+
+Suppose
+
+```{r}
+y <- c(-3, -5, 6, -7, -9, -11, 12, -13, 15, -17, 18)
+```
+
+Which of the following successfully selects $(-5, -7, -11, -13, -17)$?
+List all the correct answers or say "none".
+
+```{r, eval = F}
+y[rep(c(FALSE,TRUE),each=5)]
+
+y[rep(c(FALSE,TRUE),times=5)]
+
+y[rep(c(FALSE,TRUE),length=9)]
+
+y[rep(c(FALSE,TRUE)][1:5]
+
+y[rep(c("FALSE","TRUE"),5)]
+```
+
+---------
+
+#### Properties of variance and covariance
+
+V1. A numerical calculation to find the variance of a linear combination using matrix techniques.
+
+Let $\vect{X} = (X_1, X_2)$ be a vector random variable with mean $(3,4)$ and variance matrix 
+\[
+\mat{V}=\begin{bmatrix}1 & 0 \\ 0 & 2 \end{bmatrix}.
+\]
+Find the variance matrix of $\vect{Y}$ where $\vect{Y}=\mat{A}\vect{X}$ with
+\[
+\mathbb{A}=
+\begin{bmatrix}
+    1 & 2 \\
+    0 & -1 \\
+\end{bmatrix}.
+\]
+
+
+V2. An algebraic calculation using basic definitions of variance & covariance, together with the linearity of expectation.
+
+Use formulas (4) and (5) above, together with the linearity of expectation, to show that $\var(X-2Y)=\var(X)+4\var(Y)-4\cov(X,Y)$.
+
+--------
+
+
+#### Fitting a linear model by least squares 
+
+The following survey data on a collection of hospital patients measures self-reported satisfaction, age, a measure of case severity, and a measure of anxiety. The hospital managers want to see whether satisfaction can be explained by the other variables, and, if so, which variables are important.
+
+```{r read_data}
+patients <- read.table("patients.txt",header=T)
+dim(patients)
+head(patients)
+```
+
+F1. Write the sample version of a linear model to address this question in subscript form.
+
+
+F2. Write the sample version of this linear model in matrix form. Some of the quantities you have to define may be the same as the quantities you defined previously. Nevertheless, please make this model description self-contained. 
+
+
+F3. The following output fits a linear model in R.
+```{r lm_patients}
+lm1 <- lm(Satisfaction~Age+Severity+Anxiety,data=patients) 
+summary(lm1)
+```
+Explain how the coefficient estimates and the residual standard error presented in this output were calculated.
+
+F4. Explain what the __fitted values__ are for a linear model. Comment briefly on what (if anything) you learn from the following plot of the satisfaction reported by each patient plotted against the fitted value.
+```{r fitted_patients}
+plot(x=fitted.values(lm1),y=patients$Satisfaction)
+abline(a=0,b=1)
+```
+
+--------
+
+#### The population version (or probability version) of the linear model
+
+P1. Write out a suitable probability model, in subscript form, to give a population version of the linear model for patient satisfaction in question F3. Some of the quantities you have to define may be the same as the quantities you defined previously. Nevertheless, please make this model description self-contained. 
+
+
+P2. Describe a suitable probability model, in matrix form, to give a population version of the linear model in question F3. Some of the quantities you have to define may be the same as the quantities you defined previously. Nevertheless, please make this model description self-contained. 
+
+
+P3. Explain how R produces standard errors for coefficients in a linear model. Also, describe in words how you interpret the standard error of 0.2148 for the coefficient of Age.
+
+--------------------
+
+#### Normal probability calculations
+
+N1. A normal approximation to estimate a probability using the mean and variance.
+
+Suppose $X$ is a binomial random variable counting the number of successes in $n = 200$ independent trials each having success with probability $p= 0.2$.  Find an expression for the probability that $X$ is greater than or equal to 140. Write your answer as a call to `pnorm()`. Your call to pnorm should involve specifying any necessary numerical calculations that you can't work out without access to a computer or calculator.
+
+N2. A normal approximation to find a region with a given probability using the mean and variance.
+
+Consider a hypothesis that the true coefficient for Age is zero in the above probability model for patient satisfaction in a hospital.  This hypothesis means that, other things being equal, age is irrelevant for predicting patient satisfaction. Construct an interval, using the output in the above summary table and a normal approximation, that will include 99\% of the least square coefficients for age in a large number of hypothetical datasets drawn from the model supposing this hypothesis about the true value is correct. Write your answer using a call to `qnorm()`. Does the least squares coefficient of age for the dataset fall into this interval?
+
+
+--------
+
+--------
+
+
+License: This material is provided under an [MIT license](https://ionides.github.io/401w18/LICENSE)<br>
+
+
+------
