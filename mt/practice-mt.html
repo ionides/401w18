@@ -138,6 +138,7 @@ $(document).ready(function () {
 <p><span class="math inline">\((3)\quad\quad {\mathrm{Var}}({\mathbb{A}}{\mathbf{Y}})={\mathbb{A}}{\mathrm{Var}}({\mathbf{Y}}){\mathbb{A}}^{{\scriptscriptstyle \mathrm{T}}}\)</span></p>
 <p><span class="math inline">\((4)\quad\quad {\mathrm{Var}}(X)={\mathrm{E}}\big[ (X-{\mathrm{E}}[X])^2\big] = {\mathrm{E}}[X^2]-\big({\mathrm{E}}[X]\big)^2\)</span></p>
 <p><span class="math inline">\((5)\quad\quad {\mathrm{Cov}}(X,Y)={\mathrm{E}}\big[ \big(X-{\mathrm{E}}[X]\big)\big(Y-{\mathrm{E}}[Y]\big)\big] = {\mathrm{E}}[XY]-{\mathrm{E}}[X]\,{\mathrm{E}}[Y]\)</span></p>
+<p><span class="math inline">\((6)\quad\quad\)</span>The binomial (<span class="math inline">\(n,p\)</span>) distribution has mean <span class="math inline">\(np\)</span> and variance <span class="math inline">\(np(1-p)\)</span>.</p>
 <p>From <code>?pnorm</code>:</p>
 <pre><code>pnorm(q, mean = 0, sd = 1)
 qnorm(p, mean = 0, sd = 1)
@@ -262,7 +263,7 @@ abline(a=0,b=1)</code></pre>
 <p>N1. A normal approximation to estimate a probability using the mean and variance.</p>
 <p>Suppose <span class="math inline">\(X\)</span> is a binomial random variable counting the number of successes in <span class="math inline">\(n = 200\)</span> independent trials each having success with probability <span class="math inline">\(p= 0.2\)</span>. Find an expression for the probability that <span class="math inline">\(X\)</span> is greater than or equal to 140. Write your answer as a call to <code>pnorm()</code>. Your call to pnorm should involve specifying any necessary numerical calculations that you can’t work out without access to a computer or calculator.</p>
 <p>N2. A normal approximation to find a region with a given probability using the mean and variance.</p>
-<p>Consider a hypothesis that the true coefficient for Age is zero in the above probability model for patient satisfaction in a hospital. This hypothesis means that, other things being equal, age is irrelevant for predicting patient satisfaction. Construct an interval, using the output in the above summary table and a normal approximation, that will include 99% of the least square coefficients for age in a large number of hypothetical datasets drawn from the model supposing this hypothesis about the true value is correct. Write your answer as a call to <code>qnorm()</code>. Does the least squares coefficient of age for the dataset fall into this interval?</p>
+<p>Consider a hypothesis that the true coefficient for Age is zero in the above probability model for patient satisfaction in a hospital. This hypothesis means that, other things being equal, age is irrelevant for predicting patient satisfaction. Construct an interval, using the output in the above summary table and a normal approximation, that will include 99% of the least square coefficients for age in a large number of hypothetical datasets drawn from the model supposing this hypothesis about the true value is correct. Write your answer using a call to <code>qnorm()</code>. Does the least squares coefficient of age for the dataset fall into this interval?</p>
 <hr />
 <hr />
 <p>License: This material is provided under an <a href="https://ionides.github.io/401w18/LICENSE">MIT license</a><br></p>

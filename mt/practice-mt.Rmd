@@ -56,7 +56,7 @@ $(4)\quad\quad
 $(5)\quad\quad
 \cov(X,Y)=\E\big[ \big(X-\E[X]\big)\big(Y-\E[Y]\big)\big] = \E[XY]-\E[X]\,\E[Y]$
 
-$(6)$. The binomial($n,p$) distribution has mean $np$ and variance $np(1-p)$.
+$(6)\quad\quad$The binomial ($n,p$) distribution has mean $np$ and variance $np(1-p)$.
 
 From `?pnorm`:
 ```
