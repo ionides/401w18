@@ -1,0 +1,123 @@
+---
+title: "Quiz1_Solutions"
+author: "Naomi Giertych"
+date: "2/17/2018"
+output: pdf_document
+---
+
+# Matrix Exercises
+
+M1. (2 points) Evaluate $\mathbb{AB}$ when
+
+\begin{center}
+$\mathbb{A} = \begin{bmatrix} -2 & 1 \\ 1 & 1 \\ -2 & 1 \end{bmatrix}$ $\mathbb{B} = \begin{bmatrix} -2 & -2 \\ 0 & 0 \end{bmatrix}$
+\end{center}
+
+$$
+\mathbb{AB} = {\begin{bmatrix} 4 & 4 \\ -2 & -2 \\ 4 & 4 \end{bmatrix}}
+$$
+
+M2. (2 points) For $\mathbb{A}$ as above, write down $\mathbb{A}^T$
+
+$$
+\mathbb{A} = \begin{bmatrix} -2 & 1 & -2 \\ 1 & 1 & 1 \end{bmatrix}
+$$
+
+M3. (2 points) For $\mathbb{B}$ as above, find $\mathbb{B}^{-1}$ if it exists. If $\mathbb{B}^{-1}$ doesn't exist, explain how you know this.
+
+(1 point) $\mathbb{B}^{-1}$ does not exist
+(1 point) $\mathbb{B}^{-1}$ does not exist because $\frac 1{0-0}$ is undefined.
+
+# Sumation exercises
+
+S1. (3 points) A basic exercise.
+
+Calculate $\sum_{i=k}^{k+4} (i+3)$, where $k$ is a whole number. Your answer should depend on k.
+
+(2 points) $(k+3)+(k+4)+(k+5)+(k+6)+(k+7)$
+(1 point) $5k + 25$
+
+S2. (3 points) An example involving sums of squares and products.
+
+Let $\mathbf{1} = (1,1, \dots, 1)$ and $\mathbf{x} = (x_1, x_2, \dots, x_n)$ be two vectors treated as $\mathbf{n \times 1}$ matrices. Use $\sum$ notation to evaluate teh matrix prodcut $\mathbf{1}^T\mathbf{x}$
+
+$$
+\sum_{i=1}^n x_i
+$$
+
+# R exercises
+
+R1. Using rep() and matrix()
+
+(3 points) Which of the following is the output of matrix(c(rep(0, times = 4), rep(1, times = 4)), ncol = 2)?
+
+\begin{center}
+(a) $\begin{bmatrix} 0 & 1 \\ 0 & 1 \\ 0 & 1 \\ 0 & 1 \end{bmatrix}$; (b) $\begin{bmatrix} 0 & 0 \\ 0 & 0 \\ 1 & 1 \\ 1 & 1 \end{bmatrix}$; (c) $\begin{bmatrix} 0 & 0 \\ 1 & 1 \\ 0 & 0 \\ 1 & 1 \end{bmatrix}$; (d) $\begin{bmatrix} 0 & 0 & 1 & 1 \\ 0 & 0 & 1 & 1 \end{bmatrix}$
+\end{center}
+
+A
+
+R2. Manipulating vectors and matrices in R.
+
+(3 points) Suppose x is a matrix in R. Which of the following is NOT equivalent to x?
+
+(a). t(t(x))
+(b). X %*% matrix(1,ncol(X))
+(c). X*1
+(d). X %*% diag(ncol(X))
+
+B
+
+# Fitting a linear model by least squares
+
+F1. Fitting a linear model by least squares.
+
+```{r}
+library(faraway)
+data("sat")
+head(sat)
+```
+
+(2 points) Which of the following would produce the design matrix $\mathbb{X}$ for the model lm(sat ~ ratio + expend, data = sat).
+
+(a) A <- matrix(rep(1, length(ratio)), ratio, expend)
+(b) A <- matrix(1, ratio, expend)
+(c) A <- cbind(rep(1, length(ratio)), ratio, expend)
+(d) A <- cbind(1, ratio, expend)
+(e) A <- cbind(ratio, expend)
+
+C.
+
+F2.(4 points) Consider our kicker data from homework 3.
+
+```{r}
+data_nfl <- read.csv("https://ionides.github.io/401w18/hw/hw03/FieldGoals2003to2006.csv",header = TRUE,skip=5)
+head(data_nfl)
+```
+
+Recall that we built the model $y_i=mx_i+c_1z_{i,1}+c_2z_{i,2}+ \dots + c_{19}z_{i,19}+e_i$ where where $x_i$ is FGtM1 and $z_{i,1}$ takes the value 1 when row i of the data corresponds to kicker 1 (i.e., for i=1,2,3,4) and 0 otherwise. Write the design matrix of the model. (You do not need to include specific values for $x_i$.)
+
+$$
+\begin{bmatrix}
+  x_1 & 1 & 0 & \dots & 0 \\
+  x_2 & 1 & 0 & \dots & 0 \\
+  x_3 & 1 & 0 & \dots & 0 \\
+  x_4 & 1 & 0 & \dots & 0 \\
+  x_5 & 0 & 1 & \dots & 0 \\
+  x_6 & 0 & 1 & \dots & 0 \\
+  x_7 & 0 & 1 & \dots & 0 \\
+  x_8 & 0 & 1 & \dots & 0 \\
+  \vdots & \vdots & \vdots & \dots & \vdots &\\
+  x_n & 0 & 0 & \dots & 1 \\
+\end{bmatrix}
+$$
+
+Points were allocated as follows:
+
+(2 points) $x_i$ column
+
+(1 point) for $z_{i,j}$'s correctly writen
+
+(1 point) for $x_i$'s and $z_{i,j}$'s correctly labeled/described somewhere
+
+(-1 point) for including 1 column for the intercept.
