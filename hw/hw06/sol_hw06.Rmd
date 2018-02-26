@@ -76,10 +76,10 @@ Hence we see that $Y$ is a vector containing 3 random variables, where $Y_1 = 6Z
 
 We then know that Var(Y) = Var(AZ) = A Var(Z) $\text{A}^T = \text{A}\mat{I}\text{A}^T = \text{AA}^T$. 
 
-Hence, Var(Y) = \text{A} $\text{A}^T$.
+Hence, Var(Y) = $\text{A} \text{A}^T$.
 ```{r}
 A <- matrix(c(6,0,0,3,5,0,1,2,4),nrow=3)
-VarY <- t(A)%*%A
+VarY <- A%*%t(A)
 VarY
 ```
 
@@ -87,9 +87,9 @@ VarY
 
 Var($Y_1 - Y_2$) = Var($Y_1$) + Var($Y_2$) - 2Cov($Y_1$,$Y_2$). 
 
-From the Var(Y) as obtained in the previous part, we know that Var($Y_1$) = 36, Var($Y_2$) = 34 and 2Cov($Y_1$,$Y_2$) = 2*18 = 36.
+From the Var(Y) as obtained in the previous part, we know that Var($Y_1$) = 46, Var($Y_2$) = 29 and 2Cov($Y_1$,$Y_2$) = 2*17 = 34.
 
-So, Var($Y_1 - Y_2$) = 36 + 34 - 36 = 34.
+So, Var($Y_1 - Y_2$) = 46 + 29 - 34 = 41.
 
 Doing it in matrix form, $\var(\mat{A}\vect{Y})= \mat{A}\var(\vect{Y})\mat{A}^\transpose$ where $\mat{A} = \begin{bmatrix} 1 & -1 & 0\end{bmatrix}$
 ```{r}

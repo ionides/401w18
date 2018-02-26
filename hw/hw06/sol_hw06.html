@@ -365,25 +365,25 @@ Define A such that <span class="math inline">\(Y+AZ\)</span> where <span class="
 \begin{bmatrix}6Z_1 +3Z_2 + Z_3 \\ 5Z_2 + 2Z_3 \\ 4Z_3\end{bmatrix}. \]</span> Hence we see that <span class="math inline">\(Y\)</span> is a vector containing 3 random variables, where <span class="math inline">\(Y_1 = 6Z_1 +3Z_2 + Z_3\)</span> , <span class="math inline">\(Y_2 = 5Z_2 + 2Z_3\)</span> and <span class="math inline">\(Y_3 = 4Z_3\)</span>.</li>
 </ol>
 <p>We then know that Var(Y) = Var(AZ) = A Var(Z) <span class="math inline">\(\text{A}^T = \text{A}\mathbb{I}\text{A}^T = \text{AA}^T\)</span>.</p>
-<p>Hence, Var(Y) =  <span class="math inline">\(\text{A}^T\)</span>.</p>
+<p>Hence, Var(Y) = <span class="math inline">\(\text{A} \text{A}^T\)</span>.</p>
 <pre class="r"><code>A &lt;- matrix(c(6,0,0,3,5,0,1,2,4),nrow=3)
-VarY &lt;- t(A)%*%A
+VarY &lt;- A%*%t(A)
 VarY</code></pre>
 <pre><code>##      [,1] [,2] [,3]
-## [1,]   36   18    6
-## [2,]   18   34   13
-## [3,]    6   13   21</code></pre>
+## [1,]   46   17    4
+## [2,]   17   29    8
+## [3,]    4    8   16</code></pre>
 <div id="b" class="section level4">
 <h4>(b)</h4>
 <p>Var(<span class="math inline">\(Y_1 - Y_2\)</span>) = Var(<span class="math inline">\(Y_1\)</span>) + Var(<span class="math inline">\(Y_2\)</span>) - 2Cov(<span class="math inline">\(Y_1\)</span>,<span class="math inline">\(Y_2\)</span>).</p>
-<p>From the Var(Y) as obtained in the previous part, we know that Var(<span class="math inline">\(Y_1\)</span>) = 36, Var(<span class="math inline">\(Y_2\)</span>) = 34 and 2Cov(<span class="math inline">\(Y_1\)</span>,<span class="math inline">\(Y_2\)</span>) = 2*18 = 36.</p>
-<p>So, Var(<span class="math inline">\(Y_1 - Y_2\)</span>) = 36 + 34 - 36 = 34.</p>
+<p>From the Var(Y) as obtained in the previous part, we know that Var(<span class="math inline">\(Y_1\)</span>) = 46, Var(<span class="math inline">\(Y_2\)</span>) = 29 and 2Cov(<span class="math inline">\(Y_1\)</span>,<span class="math inline">\(Y_2\)</span>) = 2*17 = 34.</p>
+<p>So, Var(<span class="math inline">\(Y_1 - Y_2\)</span>) = 46 + 29 - 34 = 41.</p>
 <p>Doing it in matrix form, <span class="math inline">\(\mathrm{Var}(\mathbb{A}\boldsymbol{\mathrm{Y}})= \mathbb{A}\mathrm{Var}(\boldsymbol{\mathrm{Y}})\mathbb{A}^{\scriptscriptstyle \mathrm{T}}\)</span> where <span class="math inline">\(\mathbb{A} = \begin{bmatrix} 1 &amp; -1 &amp; 0\end{bmatrix}\)</span></p>
 <pre class="r"><code>A &lt;- matrix(c(1,-1,0),nrow=1)
 VarAY &lt;- A %*% VarY %*% t(A)
 VarAY</code></pre>
 <pre><code>##      [,1]
-## [1,]   34</code></pre>
+## [1,]   41</code></pre>
 </div>
 <div id="c" class="section level4">
 <h4>(c)</h4>
