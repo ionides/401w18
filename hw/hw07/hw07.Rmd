@@ -1,0 +1,86 @@
+---
+title: "Homework 7, STATS 401 W18"
+author: "Due in your lab on 3/8 or 3/9"
+output:
+  html_document:
+    theme: flatly
+    toc: yes
+csl: ecology.csl
+---
+
+\newcommand\mat[1]{\mathbb{#1}}
+\renewcommand\vec[1]{\boldsymbol{\mathrm{#1}}}
+\newcommand\xtranspose{{\mbox{\tiny \textsc{t}}}}
+\newcommand\transpose{{\scriptscriptstyle \mathrm{T}}}
+\newcommand\prob{\mathrm{P}}
+
+**For your homework this week, write a brief report addressing the questions below, including the results you are asked to obtain and the R code you used to generate it.
+Recall that you are permitted to collaborate, or to use any internet resources, but you must list all sources that make a substantial contribution to your report.**
+
+--------------
+
+### Using a linear model to test equality of means
+
+Let's consider once more the mice from homework 1. Let $y_{ij}$ be the weight of the $j$th mouse receiving treatment $i$, where $i=1$ corresponds to regular chow, $i=2$ denotes high fat chow, and $j=1,\dots,n$ with $n=12$. In subscript form, we can write the sample version of the linear model as
+\[
+y_{ij} = m_{i} + e_{ij}, \quad i\in\{1,2\}, j=1,\dots,n.
+\]
+To put this model into the standard representation for a linear model, we can combine all $2n$ observations into a single vector,
+$\vect{y}=(y_{11},y_{12},\dots,y_{1n},y_{21},y_{22},\dots,y_{2n})$.
+
+1. Use the standard representation to write the linear model in matrix form.
+
+We can write a probability model for the mouse experiment in a similar way. Let $Y_{ij}$ be a random variable modeling the weights, with $i=1,2$ and $j=1,\dots,n$. Suppose group $i$ has expected weight $\mu_i$, and the weight of mouse $(i,j)$ is modeled as an independent measurement with $\epsilon_{ij}$ having mean zero and variance $\sigma^2$. A representation of the probability model in subscript form is
+\[
+Y_{ij} = \mu_{i} + \epsilon_{ij}, \quad i\in\{1,2\}, j=1,\dots,n.
+\]
+
+2. Construct the columns of the design matrix in R and call them `mu1` and `mu2`. Call the dataset `mice`. Then fit a linear model `lm1 <- lm(weight~mu1+mu2-1,data=mice)`.
+    (a) Why do we need to write `-1` in this formula?
+    (b) Use the output from `summary(lm1)` to construct a 95% confidence interval for each of $\mu_1$ and $\mu_2$.
+
+It is convenient to write the same model in a different way in order to compare the means between treatments. We can write
+\[
+\vect{Y}=
+\begin{bmatrix}
+1 & 0 \\
+1 & 0 \\
+\vdots & \vdots \\
+1 & 0 \\
+1 & 1 \\
+1 & 1 \\
+\vdots & \vdots \\
+1 & 1
+\end{bmatrix} \vect{\beta} + \vect{\epsilon}
+\]
+where $\vect{\beta}=(\beta_1,\beta_2)$ with $\beta_1$=\mu_1$ and $\beta_2=\mu_2-\mu_1$.
+
+3. Code the columns of this design matrix in R, calling them `mu1` and `mu_diff`. Then fit a linear model `lm2 <- lm(weight~mu1+mu_diff-1,data=mice)`.
+   (a) Convince yourself, by looking at `summary(lm2)` that you have really fitted the same model in (2) and (3). Explain your reasoning.
+   (b) Another way to see this is to compare `lm1$fitted.values` with `lm2$fitted.values`. What do you find?
+   (c) Use the output from `summary(lm2)` to find a 95% confidence interval for $\mu_2-\mu_1$. *[or test if the difference is zero?????]*
+
+5. Construct a two sample comparison of means, following the approach in STATS 250. Comment on how this approach compares to what we have done above. 
+
+-------
+
+### Simulations to explore the t distribution
+
+6. We usually make approximations using the normal distribution. Notice that the p-values provided by `summary(lm2)` use a t distribution approximation instead. The t distribution has longer tails than the normal distribution to allow for uncertainty in estimating the standard deviation.
+Follow the directions below to investigate how the normal distribution and the t distribution compare when used to describe the error when estimating the mean using a the sample average of $n=12$ measurements.
+
+    (a) Generate $m=1000$ normal samples each of size $n$. Specifically, use `rnorm()` and `matrix()` to generate a $m\times n$ matrix of normal random variables with mean $3$ and standard deviation $2$.
+    (b) Use `apply()` to compute the sample mean and sample standard deviation of each row. Subtract the model mean (i.e., 3) from the sample mean and divide by the standard deviation of the row to give an error on a standardized scale.
+    (c) Make a histogram of these $m$ standardized errors (not to be confused with standard errors!)
+    (d) Use `dnorm` and `dt` to add density curves for the standard normal (as a solid line) and the t distribution on $n-1$ degrees of freedom (as a dotted line). Make sure they are on a proper scale to be comparable to the histogram.
+    (e) Comment on how the normal and t distributions compare, and which better matches the simulated sample.
+    (f) Having done this, it should be quick to re-run your code to repeat the plot you have developed with differents choices of $m$ and $n$. Try a few things and comment on what discover. You don't have to show these plots in your report. 
+
+
+--------------
+
+
+License: This material is provided under an [MIT license](https://ionides.github.io/401w18/LICENSE)<br>
+Acknowledgement: The randomized experiment draws on material from from https://genomicsclass.github.io/book
+
+------
