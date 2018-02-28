@@ -1,0 +1,454 @@
+---
+title: "Midterm exam, STATS 401 W18"
+output:
+  pdf_document:
+  toc: no
+header-includes:
+   - \usepackage{ifthen}
+html_document:
+  theme: flatly
+toc: no
+word_document:
+  toc: no
+csl: ecology.csl
+---
+  
+
+```{r preliminaries,echo=F,cache=F}
+ALL <- TRUE
+ALL <- FALSE
+SOL <- FALSE
+#SOL <- TRUE
+set.seed(12)
+# library(mat2tex)
+```
+
+
+\ifthenelse{\isodd{1}}{
+ \newcommand\exam[1]{#1} %% exam paper
+ \newcommand\solution[1]{}
+}{ 
+ \newcommand\exam[1]{} %% solutions
+ \newcommand\solution[1]{{\bf Solution}. #1}
+} 
+
+\newcommand\mat[1]{\mathbb{#1}}
+\newcommand\vect[1]{\boldsymbol{\mathrm{#1}}}
+\newcommand\transpose{{\scriptscriptstyle \mathrm{T}}}
+\newcommand\prob{\mathrm{P}}
+\newcommand\E{\mathrm{E}}
+\newcommand\SE{\mathrm{SE}}
+\newcommand\var{\mathrm{Var}}
+\newcommand\cov{\mathrm{Cov}}
+
+
+\exam{
+$\quad\quad\quad$ \textbf{Name}:
+
+$\quad\quad\quad$ \textbf{UMID}:
+}
+
+-----------
+  
+**Instructions. You have a time allowance of 80 minutes.  The exam is closed book. Any electronic devices in your possession must be turned off and remain in a bag on the floor. If you need extra paper, please number the pages and put your name and UMID on each page.**
+  
+-----------
+  
+### Formulas
+  
+* You are not allowed to bring any notes into the exam. 
+
+* The following formulas will be provided. To use these formulas properly, you need to make appropriate definitions of the necessary quantities.
+
+(1)$\quad\quad\mathbf{b}=\big(\mathbb{X}^\top \mathbb{X} \big)^{-1}\, \mathbb{X}^\top\mathbf{y}$
+
+(2)$\quad\quad\var(\hat{\mathbf{\beta}})= \sigma^2 \big( \mathbb{X}^\top \mathbb{X} \big)^{-1}$
+
+(3)$\quad\quad\var(\mathbb{A}\mathbf{Y})=\mathbb{A}\var(\mathbf{Y})\mathbb{A}^\top$
+
+(4)$\quad\quad\var(X)=\E\big[ (X-\E[X])^2\big] = \E[X^2]-\big(\E[X]\big)^2$
+
+(5)$\quad\quad\cov(X,Y)=\E\big[ \big(X-\E[X]\big)\big(Y-\E[Y]\big)\big] = \E[XY]-\E[X]\,\E[Y]$
+
+(6)$\quad\quad$
+The binomial ($n,p$) distribution has mean $np$ and variance $np(1-p)$.
+
+\vspace{1cm}
+
+From `?pnorm`:
+```
+pnorm(q, mean = 0, sd = 1)
+qnorm(p, mean = 0, sd = 1)
+q: vector of quantiles.
+p: vector of probabilities.
+```
+
+\exam{\newpage}
+
+#### Summation exercises
+
+S1. A basic exercise.
+
+Let $\mat{X}=[x_{ij}]$ be a $3\times 2$ matrix with $(i,j)$ entry given by $x_{ij}=2i$.
+
+(a) Write out $\mat{X}$, evaluating each of the six entries of the matrix.
+
+\exam{\vspace{5cm}}
+
+\solution{[1 point]
+
+\[ \mat{X}=\begin{bmatrix} 2 & 2 \\ 4& 4 \\ 6 & 6 \end{bmatrix}\]
+}
+
+(b) Hence, evaluate the sum $\sum_{i=1}^3\sum_{j=1}^2 2i$.
+
+\exam{\vspace{5cm}}
+
+\solution{[1 point]
+
+$\sum_{i=1}^3\sum_{j=1}^2 2i = 24$.
+
+}
+
+S2. An example involving the summation representation of matrix multiplication.
+
+Evaluate $\mat{X}^\transpose\mat{X}$ where
+$$
+\mat{X}=
+\begin{bmatrix}
+x_1 & 1 \\
+x_2 & 1 \\
+\vdots & \vdots  \\
+x_n & 1
+\end{bmatrix}
+$$
+
+\solution{[2 points]
+
+\[\mat{X}^\transpose\mat{X} = \begin{bmatrix}
+\sum_{i=1}^n x_i^2 & \sum_{i=1}^n x_i \\
+\sum_{i=1}^n x_i & n
+\end{bmatrix}\]
+}
+
+\exam{\newpage}
+
+#### R exercises
+
+R1. Using `rep()` and `matrix()`. 
+
+Write the output of 
+```{r, eval = F}
+matrix(c(rep(1,2), rep(0, 2), rep(0,2), rep(1,2)), nrow = 4)
+```
+
+\solution{[2 points]
+\[
+\begin{bmatrix}
+1 & 0 \\
+1 & 0 \\
+0 & 1 \\
+0 & 1
+\end{bmatrix}
+\]
+}
+
+\exam{\vspace{9cm}}
+
+R2. Manipulating vectors and matrices in R.
+
+Which of the following is the output to `pnorm(c(-2,2))`
+
+a) 
+```
+[1] 0.02275013 0.97724987
+```
+
+b) 
+```
+Error in pnorm(c(-2,2)) : vector argument to scalar function
+```
+
+c) 
+```
+[1] 0.1586553 0.8413447
+```
+
+d) 
+```
+0.02275013
+Warning message:
+In pnorm(c(-2,2)) :
+Vector argument to scalar function. 
+Function applied to only the first vector component.
+```
+
+e) 
+```
+0.1586553
+Warning message:
+In pnorm(c(-2,2)) :
+Vector argument to scalar function. 
+Function applied to only the first vector component.
+```
+
+\solution{[1 point] (a)}
+
+\exam{\newpage}
+
+#### Properties of variance and covariance
+
+V1. A numerical calculation to find the variance of a linear combination using matrix techniques.
+
+Let $\vect{X} = (X_1, X_2)$ be a vector random variable with mean $(3,4)$ and variance matrix 
+\[
+\mat{V}=\begin{bmatrix}2 & 1 \\ 1 & 3 \end{bmatrix}.
+\]
+Let $Y=X_1-X_2$. Find a suitable matrix $\mat{A}$ for which $Y=\mat{A}\vect{X}$, noting that the random variable $Y$ can be considered as a $1\times 1$ matrix.
+Set up and solve a matrix calculation to find the variance of $Y$.
+
+\solution{ [2 points]
+
+Set $\mat{A} = [1 \; -1]$. Then,
+\[
+\var(X_1-X_2)=\var(\mat{A}\vect{X}) = \mat{A}\var(X)\mat{A}^\transpose
+= 3.
+\]
+Note that the mean of $\vect{X}$ is irrelevant for this question.
+}
+
+\exam{\vspace{9cm}}
+
+V2. An algebraic calculation using basic definitions of variance & covariance, together with the linearity of expectation.
+
+Use formulas (4) and (5) above, together with the linearity of expectation, to show that $$\var(3X+Y+4)=9\var(X)+\var(Y)+6\cov(X,Y)$$.
+
+\solution{[2 points]
+
+First note that, from (4), adding a constant doesn't change the variance so $\var(3X+Y+4)=\var(3X+Y)$. Therefore,
+\[\begin{array}{rcl}
+\var(3X+Y+4) &=& \E[(3X+Y)^2] - (\E[3X+Y])^2 \\
+&=& \E[ 9X^2 + Y^2+ 6XY] - (3\E[X]+\E[Y])^2 \\
+&=& 9\E[X^2]+\E[Y^2] + 6\E[XY] 
+- \big\{ 9\E[X]^2+\E[Y]^2 + 6\E[X]\, \E[Y] \big\}\\
+&=& 9\big\{ \E[X^2]-\E[X]^2\big\}
+   + \big\{ \E[Y^2]-\E[Y]^2\big\}
+   + 6\big\{\E[XY]-\E[X]\, \E[Y]\big\}\\
+&= &
+9\var(X)+\var(Y)+6\cov(X,Y)
+\end{array}\]
+}
+
+\exam{\vspace{9cm}}
+
+
+\exam{\newpage}
+
+#### Fitting a linear model by least squares 
+
+The director of admissions at a large state university wants to assess how well academic success can be predicted based on information available at admission. 
+She collects a dataset of 705 students.
+She decides to take freshman GPA as the response variable, and she has access to ACT exam scores and percentile ranking of each student within their high school. 
+
+```{r read_data}
+gpa <- read.table("gpa.txt",header=T)
+```
+
+```{r clean_data,echo=F}
+gpa <- gpa[,2:4]
+```
+
+```{r head}
+head(gpa)
+```
+
+
+
+
+
+F1. Write the sample version of a linear model to address this question in subscript form.
+
+\solution{[2 points]
+
+The model is
+\[ y_i=b_1x_{i1}+b_2x_{i2}+b_3+e_i,
+\quad i=1,\dots,n
+\]
+where $y_i$ is freshman GPA for as the response variable for student $i$, $x_{i1}$ is the ACT exam score for this student, $x_{i2}$ is the percentile ranking of the student within their high school, and $n=705$. $e_i$ is the residual error for student $i$. $b_1$, $b_2$ and $b_3$ are coefficients chosen by least squares. 
+}
+
+\exam{\newpage}
+
+F2. Write the sample version of this linear model in matrix form. Some of the quantities you have to define may be the same as the quantities you defined previously. Nevertheless, please make this model description self-contained. 
+
+\solution{[2 points]
+
+The model is
+\[ \vect{y}=\mat{X}\vect{b} + \vect{e},
+\]
+where
+
+\begin{itemize}
+\item $\vect{y}=(y_1,\dots,y_n)$ is a vector of freshman GPA scores with $n=705$
+
+\item $\mat{X}=[x_{ij}]$ is a $n\times 3$ matrix with $x_{i1}$ being the ACT exam score for student $i$, $x_{i2}$ being the percentile ranking of the student within their high school, and $x_{i3}=1$ for $i=1,\dots,n$.
+
+\item $\vect{b}=(b_1,b_2,b_3)$ is a vector of coefficients, chosen by least squares.
+
+\item $\vect{e}=(e_1,\dots,e_n)$ is a vector of residuals.
+
+\item All vectors are interpreted as column vectors.
+
+\end{itemize}
+
+}
+
+\exam{\vspace{11cm}}
+
+F3. The following output fits a linear model in R.
+```{r lm_patients}
+gpa_lm <- lm(GPA~ACT+High_School,data=gpa) 
+summary(gpa_lm)
+```
+Explain how the coefficient estimates and the residual standard error presented in this output were calculated.
+
+\solution{[2 points]
+
+The coefficient estimates are the vector $\vect{b}$ from F2, calculated by least squares using the formula
+\[
+\vect{b}=\big(\mat{X}^\transpose \mat{X}\big)^{-1} \mat{X}^\transpose \vect{y}.
+\]
+}
+
+\exam{\vspace{8cm}}
+
+F4. Explain what the __fitted values__ are for a linear model. Comment briefly on what the admissions director should learn (if anything) from the following plot of the freshman GPA of each patient plotted against the fitted value.
+```{r fitted_patients}
+plot(x=fitted.values(gpa_lm),y=gpa$GPA)
+abline(a=0,b=1)
+```
+
+\solution{[2 points]
+
+The fitted values are the values of the response variables with the rersidual errors removed. The vector $\vect{\hat y}=(\hat y_1,\dots,\hat y_n)$ of fitted values is calculated as
+\[
+\vect{\hat y}= \mat{X}\vect{b} = \mat{X}\big(\mat{X}^\transpose \mat{X}\big)^{-1} \mat{X}^\transpose \vect{y}.
+\]
+Plotting the response against the fitted values, we see that the explanatory variables can explain around 1 GPA point out of the total spread of around 3 GPA points. (We will see later that other things to look for are (a) there are no noticeable extreme points, known as outliers; (b) the points are roughly football shaped, but with somewhat higher variability at lower values of fitted GPA.)
+}
+
+\exam{\vspace{8cm}}
+
+#### The population version (or probability version) of the linear model
+
+P1. Write out a suitable probability model, in subscript form, to give a population version of the linear model for freshman GPA in question F3. Some of the quantities you have to define may be the same as the quantities you defined previously. Nevertheless, please make this model description self-contained. 
+
+\solution{[2 points]
+
+The probability model is
+\[ Y_i=\beta_1x_{i1}+\beta_2x_{i2}+\beta_3+\epsilon_i,
+\quad i=1,\dots,n
+\]
+where $Y_i$ models freshman GPA for student $i$, $x_{i1}$ is the ACT exam score for this student, $x_{i2}$ is the percentile ranking of the student within their high school, and $n=705$. The measurement error model is that $\epsilon_1,\dots,\epsilon_n$ are independent random variables with mean zero and variance $\sigma^2$. 
+$\beta_1$, $\beta_2$ and $\beta_3$ are unknown constants which model the relationship between the response and explanatory variables. 
+}
+
+\exam{\newpage}
+
+P2. Describe a suitable probability model, in matrix form, to give a population version of the linear model in question F3. Some of the quantities you have to define may be the same as the quantities you defined previously. Nevertheless, please make this model description self-contained. 
+
+\solution{[2 points]
+
+The probability model (also known as the population model) is
+\[ \vect{Y}=\mat{X}\vect{\beta} + \vect{\epsilon},
+\]
+where
+
+\begin{itemize}
+\item $\vect{Y}=(Y_1,\dots,Y_n)$ is a vector random variable modeling  freshman GPA scores, with $n=705$.
+
+\item $\mat{X}=[x_{ij}]$ is a $n\times 3$ matrix with $x_{i1}$ being the ACT exam score for student $i$, $x_{i2}$ being the percentile ranking of the student within their high school, and $x_{i3}=1$ for $i=1,\dots,n$. This exactly matches the definition in F2.
+
+\item $\vect{\beta}=(\beta_1,\beta_2,\beta_3)$ is the true but unknown vector of coefficients.
+
+\item $\vect{\epsilon}=(\epsilon_1,\dots,\epsilon_n)$ is a vector random variable modeling chance variation. It follows the measurement error model, with $\E[\vect{\epsilon}]=\vect{0}$ and $\var(\vect{\epsilon})= \sigma^2\mat{I}$ where $\mat{I}$ is the $n\times n$ identity matrix and $\sigma$ is the measurement standard deviation.
+
+\item All vectors are interpreted as column vectors.
+\end{itemize}
+
+}
+
+\exam{\vspace{12cm}}
+
+P3. Explain how R produces standard errors for coefficients in a linear model. Also, describe in words how you interpret the standard error of 0.037210 for the coefficient of ACT.
+
+\solution{[2 points]
+
+The estimated residual standard error is computed as
+\[
+s = \sqrt{\frac{1}{n-3}\sum_{i=1}^n (y_i -\hat y_i)^2}.
+\]
+The variance of $\vect{\hat\beta}$ is 
+\[
+\var(\vect{\hat\beta})= \sigma^2 \big(\mat{X}^\transpose \mat{X}\big)^{-1}
+\]
+which is estimated by
+\[
+\mat{V}= s^2 \big(\mat{X}^\transpose \mat{X}\big)^{-1}.
+\]
+Then, the standard error for $b_1$ is $\sqrt{\mat{V}_{11}}$.
+We interpret this as an estimate of the standard deviation of the estimates of the coefficient for ACT score in many draws from the probability model.
+}
+
+
+\exam{\newpage}
+
+#### Normal probability calculations
+
+N1. A normal approximation to estimate a probability using the mean and variance.
+
+Suppose that an analysis of a large dataset from another comparable university gave a coefficient of 0.03528 for the ACT variable when fitting a linear model using ACT score and high school rank. The admissions director is interested whether the difference could reasonably be chance variation due to having only a sample of 705 students, or whether the universities have differences beyond what can be explained by sample variation. Suppose that population value for this school is also 0.03528. Supposing the probability model in P1 and P2, and using a normal approximation, find an expression for the probability that the difference between the coefficient estimate for the data (0.03721) and the hypothetical true value (0.03528) is larger in magnitude than the observed value (0.03721-0.03528). Write your answer as a call to `pnorm()`. Your call to pnorm may involve specifying any necessary numerical calculations that you can't work out without access to a computer or calculator.
+
+
+
+\solution{[2 points]
+\texttt{1-pnorm(0.03721,mu=0.03538,sd=0.005939)}
+gives the probability of observing a bigger value of the estimated coefficient under the assumed model, making a normal approximation using the calculated standard error.
+By symmetry, the chance of the difference being larger in magnitude (i.e., too large or too small) is twice the chance of being bigger. So, the answer is
+\texttt{2(1-pnorm(0.03721,mu=0.03538,sd=0.005939))}
+}
+
+\exam{\vspace{6cm}}
+
+N2. A normal approximation to find a region with a given probability using the mean and variance.
+
+Let $X_1,X_2,\dots,X_n$ be independent random variables each of which take the value 0 with probability 0.5, 1 with probability 0.25 and -1 with probability 0.25. 
+Find the mean and variance of $X_1$. Use this to find the mean and variance of $\bar{X}=\frac{1}{n}\sum_{i=1}^n X_i$. 
+Now suppose $n=100$ and suppose that $\bar X$ is well approximated by a normal distribution. Find a number $c$ such that $\prob(-c<\bar X<c)$ is approximately 0.9. 
+Write your answer as a call to `qnorm()`. Your call to qnorm may involve specifying any necessary numerical calculations that you can't work out without access to a computer or calculator.
+
+\solution{ [3 points]
+\[\begin{array}{rcl}
+\E[X_1] &=& 0\times 0.5 + (-1)\times 0.25 + 1\times 0.25 = 0
+\\
+\E[X_1^2] &=& 0 \times 0.5 + (-1)^2\times 0.25 + 1^2\times 0.25 = 1
+\\
+\var(X_1) &=& \E[X_1^2] - \big(\E[X_1]\big)^2 = 1
+\\
+\E[\bar X] &=& \E[X_1]=0
+\\
+\var(\bar X) &=& \frac{1}{100^2}\times 100\var(X_1) = 0.01
+\end{array}\]
+Then, making a normal approximation, we can call
+\texttt{c <- qnorm(0.95,mu=0,sd=0.1)}
+to obtain a value $c$ with a probability of 0.05 to the right. By symmetry, this also has a probability of 0.05 to the left of -c, giving a probability of $0.9$ for $[-c,c]$.
+}
+
+\exam{\vspace{6cm}}
+
+
+
+--------
+License: This material is provided under an [MIT license] (https://ionides.github.io/401w18/LICENSE)
+
+
