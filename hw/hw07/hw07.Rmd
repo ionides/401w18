@@ -1,6 +1,6 @@
 ---
 title: "Homework 7, STATS 401 W18"
-author: "Due in your lab on 3/8 or 3/9"
+author: "Due in your lab on 3/15 or 3/16"
 output:
   html_document:
     theme: flatly
@@ -9,7 +9,7 @@ csl: ecology.csl
 ---
 
 \newcommand\mat[1]{\mathbb{#1}}
-\renewcommand\vec[1]{\boldsymbol{\mathrm{#1}}}
+\renewcommand\vect[1]{\boldsymbol{\mathrm{#1}}}
 \newcommand\xtranspose{{\mbox{\tiny \textsc{t}}}}
 \newcommand\transpose{{\scriptscriptstyle \mathrm{T}}}
 \newcommand\prob{\mathrm{P}}
@@ -19,27 +19,48 @@ Recall that you are permitted to collaborate, or to use any internet resources, 
 
 --------------
 
-### Using a linear model to test equality of means
+## Using a linear model for investigation of two populations
 
-Let's consider once more the mice from homework 1. Let $y_{ij}$ be the weight of the $j$th mouse receiving treatment $i$, where $i=1$ corresponds to regular chow, $i=2$ denotes high fat chow, and $j=1,\dots,n$ with $n=12$. In subscript form, we can write the sample version of the linear model as
+* You don't necessarily need a linear model to investigate the means in two populations, or to make statistical inferences on the difference between the means of based on a sample from each. However, it may be helpful to see how this relatively simple task fits into the linear model framework.
+
+-------------
+
+### Using a linear model to estimate means in two populations
+
+* Let's consider once more the mice from homework 1. Let $y_{ij}$ be the weight of the $j$th mouse receiving treatment $i$, where $i=1$ corresponds to regular chow, $i=2$ denotes high fat chow, and $j=1,\dots,n$ with $n=12$. In subscript form, we can write the sample version of the linear model as
 \[
-y_{ij} = m_{i} + e_{ij}, \quad i\in\{1,2\}, j=1,\dots,n.
+y_{ij} = m_{i} + e_{ij}, \quad \mbox{for $i=1,2$ and $j=1,\dots,n$}.
 \]
 To put this model into the standard representation for a linear model, we can combine all $2n$ observations into a single vector,
 $\vect{y}=(y_{11},y_{12},\dots,y_{1n},y_{21},y_{22},\dots,y_{2n})$.
 
-1. Use the standard representation to write the linear model in matrix form.
 
-We can write a probability model for the mouse experiment in a similar way. Let $Y_{ij}$ be a random variable modeling the weights, with $i=1,2$ and $j=1,\dots,n$. Suppose group $i$ has expected weight $\mu_i$, and the weight of mouse $(i,j)$ is modeled as an independent measurement with $\epsilon_{ij}$ having mean zero and variance $\sigma^2$. A representation of the probability model in subscript form is
+**Question 1**. Use this standard representation, with $\vect{y}=(y_{11},y_{12},\dots,y_{1n},y_{21},y_{22},\dots,y_{2n})$,  to find the design matrix $\mat{X}$ giving the sample version of this linear model in the matrix form $\vect{y}=\mat{X}\vect{b}+\vect{e}$ where $\vect{b}=(m_1,m_2)$, interpreted as a column vector.
+
+
+-------
+
+### Confidence intervals for the population means
+
+* We can build a probability model for the mouse experiment in a similar way. Let $Y_{ij}$ be a random variable modeling the weights, with $i=1,2$ and $j=1,\dots,n$. Suppose group $i$ has expected weight $\mu_i$, and the weight of mouse $(i,j)$ is modeled as an independent measurement with $\epsilon_{ij}$ having mean zero and variance $\sigma^2$. A representation of the probability model in subscript form is
 \[
-Y_{ij} = \mu_{i} + \epsilon_{ij}, \quad i\in\{1,2\}, j=1,\dots,n.
+Y_{ij} = \mu_{i} + \epsilon_{ij}, \quad \mbox{for $i=1,2$ and $j=1,\dots,n$}.
 \]
+For the corresponding matrix form $\vect{Y}=\mat{X}\vect{\beta}+\vect{\epsilon}$, we write $\vect{\beta}=(\mu_1,\mu_2)$ and note that $\mu_i$ is the model mean (also called the population mean) for group $i$.
 
-2. Construct the columns of the design matrix in R and call them `mu1` and `mu2`. Call the dataset `mice`. Then fit a linear model `lm1 <- lm(weight~mu1+mu2-1,data=mice)`.
-    (a) Why do we need to write `-1` in this formula?
-    (b) Use the output from `summary(lm1)` to construct a 95% confidence interval for each of $\mu_1$ and $\mu_2$.
+**Question 2**. Construct the columns of the design matrix in R and call them `mu1` and `mu2`. We follow the convention of assigning the column name of the design matrix to match the name of the corresponding linear model coefficient. This means that the names `mu1` and `mu2` will show up properly in the linear model output. Call the dataset `mice`. Then fit a linear model `lm1 <- lm(Bodyweight~mu1+mu2-1,data=mice)`.
 
-It is convenient to write the same model in a different way in order to compare the means between treatments. We can write
+(a) Why do we need to write `-1` in this R linear model formula?
+
+(b) Try without the `-1` to see what R gives you. Why do you think this happens?
+
+(c) Use the output from `summary(lm1)` to construct a 95% confidence interval for each of $\mu_1$ and $\mu_2$, using a normal distribution approximation for $\hat\mu_1$ and $\hat\mu_2$.
+
+----------
+
+### Comparison of the difference in means
+
+* It is convenient to write the same model in a different way in order to compare the means between treatments. We can write
 \[
 \vect{Y}=
 \begin{bmatrix}
@@ -51,30 +72,39 @@ It is convenient to write the same model in a different way in order to compare 
 1 & 1 \\
 \vdots & \vdots \\
 1 & 1
-\end{bmatrix} \vect{\beta} + \vect{\epsilon}
+\end{bmatrix} \vect{\gamma} + \vect{\epsilon}
 \]
-where $\vect{\beta}=(\beta_1,\beta_2)$ with $\beta_1$=\mu_1$ and $\beta_2=\mu_2-\mu_1$.
+where $\vect{\gamma}=(\gamma_1,\gamma_2)$ with $\gamma_1=\mu_1$ and $\gamma_2=\mu_2-\mu_1$. Here, we are calling the linear model coefficient vector $\vect{\gamma}$ instead of $\vect{\beta}$ since we already used $\vect{\beta}$ for a different purpose in Questions 1 and 2.
 
-3. Code the columns of this design matrix in R, calling them `mu1` and `mu_diff`. Then fit a linear model `lm2 <- lm(weight~mu1+mu_diff-1,data=mice)`.
-   (a) Convince yourself, by looking at `summary(lm2)` that you have really fitted the same model in (2) and (3). Explain your reasoning.
-   (b) Another way to see this is to compare `lm1$fitted.values` with `lm2$fitted.values`. What do you find?
-   (c) Use the output from `summary(lm2)` to find a 95% confidence interval for $\mu_2-\mu_1$. *[or test if the difference is zero?????]*
 
-5. Construct a two sample comparison of means, following the approach in STATS 250. Comment on how this approach compares to what we have done above. 
+**Question 3**. Code the columns of this design matrix in R, calling them `mu1` and `mu_diff`. Then fit a linear model `lm2 <- lm(weight~mu1+mu_diff-1,data=mice)`.
 
--------
+(a) Convince yourself, by looking at `summary(lm2)` that you have really fitted the same model in Questions 2 and 3. Explain your reasoning.
 
-### Simulations to explore the t distribution
+(b) Another way to see this is to compare `lm1$fitted.values` with `lm2$fitted.values`. What do you find?
 
-6. We usually make approximations using the normal distribution. Notice that the p-values provided by `summary(lm2)` use a t distribution approximation instead. The t distribution has longer tails than the normal distribution to allow for uncertainty in estimating the standard deviation.
-Follow the directions below to investigate how the normal distribution and the t distribution compare when used to describe the error when estimating the mean using a the sample average of $n=12$ measurements.
+(c) Use the output from `summary(lm2)` to find a 95% confidence interval for $\mu_2-\mu_1$. Also, write down a test of the null hypothesis that $\mu_1=\mu_2$, obtaining a p-value and drawing a conclusion at a suitable significance level.
 
-    (a) Generate $m=1000$ normal samples each of size $n$. Specifically, use `rnorm()` and `matrix()` to generate a $m\times n$ matrix of normal random variables with mean $3$ and standard deviation $2$.
-    (b) Use `apply()` to compute the sample mean and sample standard deviation of each row. Subtract the model mean (i.e., 3) from the sample mean and divide by the standard deviation of the row to give an error on a standardized scale.
-    (c) Make a histogram of these $m$ standardized errors (not to be confused with standard errors!)
-    (d) Use `dnorm` and `dt` to add density curves for the standard normal (as a solid line) and the t distribution on $n-1$ degrees of freedom (as a dotted line). Make sure they are on a proper scale to be comparable to the histogram.
-    (e) Comment on how the normal and t distributions compare, and which better matches the simulated sample.
-    (f) Having done this, it should be quick to re-run your code to repeat the plot you have developed with differents choices of $m$ and $n$. Try a few things and comment on what discover. You don't have to show these plots in your report. 
+--------
+
+### Using the specification in Question 2 to carry out inference on $\mu_2-\mu_1$. 
+
+* Using the notation of Questions 1 and 2, we can write $\mu_2-\mu_1 = \begin{bmatrix}1 & -1\end{bmatrix} \vect{\beta}$,  where $\vect{\beta}=\begin{bmatrix}\beta_1 \\ \beta_2\end{bmatrix}=\begin{bmatrix}\mu_1 \\ \mu_2\end{bmatrix}$. In the same way, 
+\[
+\hat\mu_2-\hat\mu_1 = \begin{bmatrix}-1 & 1\end{bmatrix} \vect{\hat\beta}
+=
+\begin{bmatrix}-1 & 1\end{bmatrix}
+\begin{bmatrix}\hat\beta_1 \\ \hat\beta_1\end{bmatrix}.
+\]
+
+
+**Question 4**. Type `names(summary(lm1))` to show all the components in the R linear model summary.
+One of these components is the estimated variance matrix for $\hat\vect{\beta}$ in Question 2. Assign it to a variable by typing something like `V <- summary(lm1)$cov.unscaled`. 
+
+(a) Use the matrix formula for the variance of $\begin{bmatrix}1 & -1\end{bmatrix} \vect{\hat\beta}$ to estimate the standard deviation of $\hat\mu_2-\hat\mu_1$.
+Does this match your answer to Question 3(c)?
+
+(b) Look at the covariance matrix from `summary(lm1)$cov.unscaled`. What is the correlation between $\hat\mu_1$ and $\hat\mu_2$? This is a special property of the design matrix for this simple experiment.
 
 
 --------------

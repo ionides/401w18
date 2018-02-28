@@ -1,0 +1,59 @@
+---
+title: "Homework 8, STATS 401 W18"
+author: "Due in your lab on 3/22 or 3/23"
+output:
+  html_document:
+    theme: flatly
+    toc: yes
+csl: ecology.csl
+---
+
+\newcommand\E{\mathrm{E}}
+\newcommand\SE{\mathrm{SE}}
+\newcommand\var{\mathrm{Var}}
+\newcommand\cov{\mathrm{Cov}}
+\newcommand\prob{\mathrm{P}}
+\newcommand\mat[1]{\mathbb{#1}}
+\renewcommand\vect[1]{\boldsymbol{\mathrm{#1}}}
+\newcommand\transpose{{\scriptscriptstyle \mathrm{T}}}
+\usepackage{amsmath}
+
+
+**Write solutions to the exercises in the first half of the homework.
+For the data analysis, you do not have to report anything for questions 1--4. 
+For questions 5 and 6, report your code together with a brief explanation.
+Question 7 asks you to carefully write out the probability model you have used for the standard errors.
+Recall that you are permitted to collaborate, or to use any internet resources, but you must list all sources that make a substantial contribution to your report.
+As usual, following the syllabus, you are also requested to give some feedback in a "Please explain" statement.
+**
+
+--------------
+
+
+### DRAFT Simulations to explore the t distribution
+
+**Question 5**. We usually make approximations using the normal distribution. Notice that the p-values provided by `summary(lm2)` use a t distribution approximation instead. The t distribution has longer tails than the normal distribution to allow for uncertainty in estimating the standard deviation.
+Follow the directions below to investigate how the normal distribution and the t distribution compare when used to describe the error when estimating the mean using a the sample average of $n=12$ measurements.
+
+(a) Generate $m=1000$ normal samples each of size $n$. Specifically, use `rnorm()` and `matrix()` to generate a $m\times n$ matrix of normal random variables with mean $3$ and standard deviation $2$.
+
+(b) Use `apply()` to compute the sample mean and sample standard deviation of each row. Subtract the model mean (i.e., 3) from the sample mean and divide by the sample standard deviation of the row to give an error on a standardized scale.
+
+(c) Make a histogram of these $m$ standardized errors (_standardized errors_ should not be confused with _standard errors_!)
+
+(d) Use `dnorm` and `dt` to add density curves for the standard normal (as a solid line) and the t distribution on $n-1$ degrees of freedom (as a dotted line). Make sure they are on a proper scale to be comparable to the histogram.
+
+(e) Comment on how the normal and t distributions compare, and which better matches the simulated sample.
+
+(f) Having done this, it is relatively quick to re-run your code to repeat the plot you have developed with differents choices of $m$ and $n$. Try a few things and comment on what discover. You don't have to show these plots in your report. 
+
+
+
+--------------
+
+-------------
+
+License: This material is provided under an [MIT license](https://ionides.github.io/401w18/LICENSE)<br>
+
+
+------
