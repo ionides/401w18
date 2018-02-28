@@ -72,4 +72,84 @@ Understand how to construct confidence intervals for parameters in a linear mode
 First, we'll review hypothesis testing by working through some notes on
 ``Topics in comparing means of one or two samples.''
 \end{frame}
+
+\begin{frame}
+\frametitle{Confidence intervals}
+
+\begin{myitemize}
+\item An interval \m{[u,v]} constructed using the data \m{\vect{y}} is said to \myemph{cover} a parameter \m{\theta} if \m{u\le \theta \le v}.
+
+\item \m{[u,v]} is a 95\% \myemph{confidence interval} (CI) for \m{\theta} if the same construction, applied to a large number of draws from the model, would cover \m{\theta} 95\% of the time.
+
+\item A \myemph{parameter} is a name for any unknown constant in a model. In linear models,each component \m{\beta_1,\dots,\beta_p} of the \myemph{coefficient vector} \m{\vect{\beta}} is a parameter. So is the variance \m{\sigma^2} of the measurement error.
+
+\item A confidence interval is the usual way to represent the amount of uncertainty in an estimated parameter.
+
+\item The parameter is not random. According to the model, it has a fixed but unknown value.The observed interval \m{[u,v]} is also not random. 
+An interval \m{[U,V]} constructed using a realization \m{\vect{Y}} from the model is random.
+\item If the model is appropriate, then it is reasonable to treat the data \m{\vect{y}} like a realization from the model.
+
+\end{myitemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+
+\frametitle{A confidence interval for the coefficient of a linear model}
+
+\vspace{-2mm}
+
+\begin{myitemize}
+
+
+\item Consider estimating \m{\beta_1} in the linear model \m{\vect{Y}=\mat{X}\vect{\beta}+\vect{\epsilon}}.
+\item Recall that \m{\E[\hat\beta_1] = \beta_1} and \m{\SD(\hat\beta_1) = \sigma \, \sqrt{ \big[\big(\mat{X}^\transpose \mat{X} \big)^{-1} \big]_{11} }}.
+
+\end{myitemize}
+
+\vspace{-1mm}
+
+\myquestion. Supposing we can make a normal approximation, show that \m{\prob\big[\, \hat\beta_1-1.96\, \SD(b_1) \le \beta_1 \le \hat\beta_1+1.96\, \SD(b_1) \, \big] = 0.95}
+
+\vspace{33mm}
+
+\begin{myitemize}
+\item Therefore, an approximate 95\% CI for \m{\beta_1} is 
+
+\framebox{
+\altdisplaymath{
+\big[\, b_1-1.96 \, \SE(b_1) \, , \, b_1+1.96\, \SE(b_1) \, \big]
+\rule[-3mm]{0mm}{9mm} }
+}
+
+where \m{\vect{y}=\mat{X}\vect{b}+\vect{e}} with
+\m{ \SE(b_1) = s \, \sqrt{ \big[\big(\mat{X}^\transpose \mat{X} \big)^{-1} \big]_{11} }}.
+\end{myitemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{A CI for association between unemployment and mortality}
+
+\begin{myitemize}
+\item 
+\end{myitemize}
+
+\end{frame}
+
+
 \end{document}
+
+-------
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{}
+
+\begin{myitemize}
+\item 
+\end{myitemize}
+
+\end{frame}
