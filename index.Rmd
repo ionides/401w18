@@ -86,7 +86,7 @@ The GSI may provide some feedback on correctness, but students are responsible f
 5. [Vector random variables](05/notes05.pdf). [(R script)](05/notes05.R).
 
 5. [Hypothesis testing and confidence intervals](06/notes06.pdf). 
-[Topics in comparing means of one or two samples](06/testing_means.pdf).
+[Log transformations](06/log_transform.pdf).
 [Reading Sheather and other texts](06/texts.html).
 
 --------

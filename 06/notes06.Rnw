@@ -69,8 +69,7 @@ Understand how to construct confidence intervals for parameters in a linear mode
 \item Learn to use R to carry out these tasks.
 \item See how the linear model includes and extends basic tests for means of one and two samples.
 \end{myitemize}
-First, we'll review hypothesis testing by working through some notes on
-``Topics in comparing means of one or two samples.''
+%First, we'll review hypothesis testing by working through some notes on ``Topics in comparing means of one or two samples.''
 \end{frame}
 
 \begin{frame}
@@ -86,8 +85,8 @@ First, we'll review hypothesis testing by working through some notes on
 \item A confidence interval is the usual way to represent the amount of uncertainty in an estimated parameter.
 
 \item The parameter is not random. According to the model, it has a fixed but unknown value.The observed interval \m{[u,v]} is also not random. 
-An interval \m{[U,V]} constructed using a realization \m{\vect{Y}} from the model is random.
-\item If the model is appropriate, then it is reasonable to treat the data \m{\vect{y}} like a realization from the model.
+An interval \m{[U,V]} constructed using a vector of random variables \m{\vect{Y}} defined in a probability model is random.
+\item If the model is appropriate, then it is reasonable to treat the data \m{\vect{y}} like a realization from the probability model.
 
 \end{myitemize}
 
@@ -128,20 +127,281 @@ where \m{\vect{y}=\mat{X}\vect{b}+\vect{e}} with
 
 \end{frame}
 
+<<reconstruct_variables,echo=F>>=
+L <- read.table(file="life_expectancy.txt",header=TRUE)
+L_fit <- lm(Total~Year,data=L)
+L_detrended <- L_fit$residuals
+U <- read.table(file="unemployment.csv",sep=",",header=TRUE)
+U_annual <- apply(U[,2:13],1,mean)
+U_detrended <- lm(U_annual~U$Year)$residuals
+L_detrended <- subset(L_detrended,L$Year %in% U$Year)
+lm1 <- lm(L_detrended~U_detrended)
+@
 
 \begin{frame}[fragile]
 \frametitle{A CI for association between unemployment and mortality}
 
+\vspace{-3mm}
+
+<<lm>>=
+c1 <- summary(lm(L_detrended~U_detrended))$coefficients ; c1
+beta_U <- c1["U_detrended","Estimate"]
+SE_U <- c1["U_detrended","Std. Error"]
+z <- qnorm(1-0.05/2) # for a 95% CI using a normal approximation
+cat("CI = [", beta_U - z * SE_U, ",", beta_U + z * SE_U, "]")
+@
+
+\vspace{-5mm}
+
+{\bf Interpretation}. We appear to have found evidence that each percentage point of unemployment above trend is associated with about 0.13 years of additional life expectancy. The 95\% CI doesn't include zero.
+
+\myquestion. Do you believe this discovery? How could you criticize it?
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Association is not causation}
+
+``Whatever phenomenon varies in any manner whenever another phenomenon varies in some particular manner, is either a cause or an effect of that phenomenon, or is connected with it through some fact of causation.'' {\it (John Stuart Mill, A System of Logic, Vol. 1. 1843. p. 470.}
+
 \begin{myitemize}
-\item 
+
+\item Put differently: If \m{A} and \m{B} are associated statistically, we can infer that either \m{A} causes \m{B}, or \m{B} causes \m{A}, or both have some common cause \m{C}.
+
+\item A useful mantra: \myemph{Association is not causation.}
+
+\item Writing a linear model where \m{A} depends on \m{B} can show association but we need extra work to argue for causation. We need to rule out \m{B} causing \m{A} and the possibility of any common cause \m{C}.
+
+\end{myitemize}
+
+\myquestion. Discuss the extent to which the association between detrended unemployment and life expectancy can and cannot be interpreted causally.
+
+\vspace{30mm}
+
+\end{frame}
+
+\newcommand\enumerateSpace{\hspace{2mm}}
+
+\begin{frame}[fragile]
+\frametitle{A review of progress so far in this course}
+
+\myemph{Producing and understanding this confidence interval for a linear model brought together all the things we've done so far in this course.}
+
+\begin{myitemize}
+\item We needed to get the data into a computer and run statistical software.
+
+\item To understand what the computer was doing for us, and help us to command it correctly, we needed to know about:
+ \begin{enumerate}
+   \item \enumerateSpace matrices
+   \item \enumerateSpace writing a linear model and fitting it by least squares
+   \item \enumerateSpace probability models 
+   \item \enumerateSpace expectation and variance
+   \item \enumerateSpace the normal distribution
+ \end{enumerate}
+\end{myitemize}
+
+\myemph{You could run computer code by learning to follow line-by-line instructions without understanding what the instructions do. But then you wouldn't be in control of your own data analysis.}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Hypothesis tests}
+
+\begin{myitemize}
+\item We try to see patterns in our data. We hope to discover phenomena that will advance science, or help the environment, or reduce sickness and poverty, or make us rich, $\dots$
+
+\item How can we tell whether our new theory is like seeing animals or faces in the clouds?
+
+\item From Wikipedia: ``\myemph{Pareidolia} is a psychological phenomenon in which the mind responds to a stimulus ... by perceiving a familiar pattern where none exists (e.g. in random data)''.
+
+\item The research community has set a standard: The evidence presented to support a new theory should be unlikely under a \myemph{null hypothesis} that the new theory is false. To quantify {\it unlikely} we need a probability model.
+
+ 
 \end{myitemize}
 
 \end{frame}
 
 
+\begin{frame}[fragile]
+\frametitle{Hypothesis tests and the scientific method}
+
+\begin{myitemize}
+\item From a different perspective, a standard view of scientific progress holds that scientific theories cannot be proved correct, they can only be falsified (\url{https://en.wikipedia.org/wiki/Falsifiability}). 
+
+%\item This view was developed by Karl Popper. 
+
+\item Accordingly, scientists look for evidence to refute the \myemph{null hypothesis} that data can be explained by current scientific understanding.
+
+\item If the null hypothesis is inadequate to explain data, the scientist may propose an \myemph{alternative hypothesis} which better explains these data. 
+
+\item
+The alternative hypothesis will subsequently be challenged with new data.
+
+\end{myitemize}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{The scientific method in statistical language}
+
+\vspace{-2mm}
+
+\begin{enumerate}
+
+\item \myemph{Ask a question}
+
+\item \myemph{Obtain relevant data}. 
+
+\item \myemph{Write a null and alternative hypothesis to represent your question in a probability model}. This may involve writing a linear model so that \m{\beta_1=0} corresponds to the null hypothesis of ``no effect'' and \m{\beta_1\neq 0} is a discovered ``effect.''
+
+\item \myemph{Calculate a test statistic}. The test statistic is a quantity computed using the data that summarizes the evidence against the null hypothesis. For our linear model example, the least squares coefficient \m{b_1} is a natural statistics to test the hypothesis \m{\beta_1=0}. 
+
+\item \myemph{Calculate the p-value}, which is the probability that the model generates a test statistic at least as extreme as that observed.  For our linear model example, the p-value is
+\m{\prob\big[ | \hat\beta_1 | > | b_1 | \big]}.
+We can find this probability, when \m{\beta_1=0}, using a normal approximation.
+
+
+\item \myemph{Conclusions}. A small p-value (often, \m{<0.05}) is evidence for \myemph{rejecting} the null hypothesis. The data analysis may suggest new questions: \myemph{Return to Step 1}.
+
+\end{enumerate}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Using confidence intervals to construct a hypothesis test}
+
+\begin{myitemize}
+\item It is often convenient to use the confidence interval as a test statistic.
+
+\item If the confidence interval doesn't cover the null hypothesis, then we have evidence to reject that null hypothesis.
+
+\item If we do this test using a 95\% confidence interval, we have a 5\% chance that we reject the null hypothesis if it is true. This follows from the definition of a confidence interval: whatever the true unknown value of the parameter, the confidence interval covers it with probability 0.95.
+
+\end{myitemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Some notation for hypothesis tests}
+
+\vspace{-2mm}
+
+
+\begin{myitemize}
+\item The null hypothesis is \m{H_0} and the alternative is \m{H_a}.
+
+\item We write \m{t} for the test statistic calculated using the data \m{\vect{y}}. We write \m{T} for the random variable constructed by calculating the test statistic using a random vector \m{\vect{Y}} drawn from the probability model under \m{H_0}.
+
+\item The p-value is \m{\pval=\prob\big[ |T| \ge |t| \big]}. Here, we are assuming ``extreme'' means ``large in magnitude.'' Occasionally, it may make more sense to use \m{\pval=\prob\big[ T \ge t \big]}.
+
+\item We reject \m{H_0} at \myemph{significance level} \m{\alpha} if \m{\pval<\alpha}. Common choices of \m{\alpha} are \m{\alpha=0.05}, \m{\alpha=0.01}, \m{\alpha=0.001}.
+
+\end{myitemize}
+
+\myquestion. When we report the results of a hypothesis test, we can either (i) give the p-value, or (ii) say whether \m{H_0} is rejected at a particular significance level. What are the advantages and disadvantages of each?
+
+\vspace{30mm}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{A hypothesis test for unemployment and mortality}
+
+\myquestion. Write a formal hypothesis test of the null hypothesis that there is no association between unemployment and mortality. Compute a p-value using a normal approximation. What do you think is an appropriate significance level \m{\alpha} for deciding whether to reject the null hypothesis?
+
+
+\vspace{60mm}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Normal approximations versus Student's t distribution}
+
+\begin{myitemize}
+\item Notice that `summary(lm(...))` gives `t value` and `Pr(>|t|)`. 
+
+\item The `t value` is the estimated coefficient divided by its standard error. This measures how many standard error units the estimated coefficient is from zero.
+
+\item `Pr(>|t|)` is similar, but slightly larger, than the p-value coming from the normal approximation.
+
+\item R is using Student's t distribution, which makes allowance for chance variation from using \m{s} as an approximation to \m{\sigma} when we compute the standard error.
+
+\item R uses a t random variable to model the distribution of the statistic \m{t}. Giving the full name (Student's t distribution) may add clarity.
+
+\item With sophisticated statistical methods, it is often hard to see if they work well just by reading about them. 
+Fortunately, it is often relatively easy to do a \myemph{simulation study} to see what is going on.
+
+\end{myitemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Simulating from Student's t distribution}
+
+\begin{myitemize}
+\item Suppose \m{X,X_1,\dots,X_d} are \m{d+1} independent identially distributed (iid) normal random variables with mean zero and standard deviation \m{\sigma}. 
+\item We write \m{X,X_1,\dots,X_d \sim \mathrm{iid } \; N[0,\sigma]}.
+\item Student's t distribution on \m{d} degrees of freedom is defined to be the distribution of 
+\m{T=X / \hat\sigma} where \m{\hat\sigma=\sqrt{\frac{1}{d}\sum_{i=1}^d X_i^2}}.
+\item A normal approximation would say \m{T} is approximately \m{N[0,1]} since \m{\hat\sigma} is an estiamte of \m{\sigma}.
+\item With a computer, we can simulate \m{T} many times, plot a histogram, and compare it to the probability density function of the normal distribution and Student's t distribution.  
+\item The goals in doing this:
+\begin{enumerate}
+\item Some practice working with Student's t distribution.
+\item Finding how the t distribution compares to the normal distribution as \m{d} varies.
+\item Practice the skill of designing a simulation experiment.
+\end{enumerate}
+
+\end{myitemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{}
+
+\begin{myitemize}
+\item Let's start by simulating a matrix \code{X} of iid normal random variables.
+<<sim>>=
+N <- 1000 ; sigma <- 1 ; d <- 10
+X <- matrix(rnorm(N*(d+1),mean=0,sd=sigma),nrow=N)
+@
+\item Now, we write a function that computes \m{T} given \m{X_1,\dots,X_{d},X}
+<<T_eval>>=
+T_evaluator <- function(x) x[d+1] / sqrt(sum(x[1:d]^2)/d) 
+@
+\item Then, use \code{apply()} to evaluate \m{T} on each row of `X`.
+<<T_sim>>=
+T_simulated <- apply(X,1,T_evaluator)
+@
+\item A histogram of these simulations can be compared with the normal density and the t density
+\begin{columns}[T] 
+\begin{column}{0.5\textwidth}
+<<T_plot,fig.width=4,fig.height=3,out.width="3in",echo=T,eval=F>>=
+hist(T_simulated)
+@
+\end{column}
+\begin{column}{0.5\textwidth}
+<<>>=
+<<T_plot,echo=F,eval=T>>
+@
+\end{column}
+\end{columns}
+
+
+\end{myitemize}
+\end{frame}
+
+
 \end{document}
 
--------
+------- This is just for copying to make new slides ---------
 
 \end{frame}
 
