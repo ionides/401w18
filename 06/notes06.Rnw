@@ -369,7 +369,7 @@ Fortunately, it is often relatively easy to do a \myemph{simulation study} to se
 \begin{myitemize}
 \item Let's start by simulating a matrix \code{X} of iid normal random variables.
 <<sim>>=
-N <- 1000 ; sigma <- 1 ; d <- 10
+N <- 50000 ; sigma <- 1 ; d <- 10 ; set.seed(23)
 X <- matrix(rnorm(N*(d+1),mean=0,sd=sigma),nrow=N)
 @
 \item Now, we write a function that computes \m{T} given \m{X_1,\dots,X_{d},X}
@@ -378,18 +378,27 @@ T_evaluator <- function(x) x[d+1] / sqrt(sum(x[1:d]^2)/d)
 @
 \item Then, use \code{apply()} to evaluate \m{T} on each row of `X`.
 <<T_sim>>=
-T_simulated <- apply(X,1,T_evaluator)
+Tsim <- apply(X,1,T_evaluator)
 @
 \item A histogram of these simulations can be compared with the normal density and the t density
 \begin{columns}[T] 
-\begin{column}{0.5\textwidth}
-<<T_plot,fig.width=4,fig.height=3,out.width="3in",echo=T,eval=F>>=
-hist(T_simulated)
+\begin{column}{0.4\textwidth}
+<<T_plot_code,echo=T,eval=F>>=
+hist(Tsim,freq=F,main="",
+  breaks=30,ylim=c(0,0.4))
+x <- seq(length=200,
+  min(Tsim),max(Tsim))
+lines(x,dnorm(x),
+  col="blue",
+  lty="dashed")
+lines(x,dt(x,df=d),
+  col="red")
 @
 \end{column}
-\begin{column}{0.5\textwidth}
-<<>>=
-<<T_plot,echo=F,eval=T>>
+\begin{column}{0.6\textwidth}
+<<T_plot,echo=F,eval=T,fig.width=4,fig.height=3,out.width="2.5in">>=
+par(mai=c(0.8,0.8,0.1,0.1))
+<<T_plot_code>>
 @
 \end{column}
 \end{columns}
@@ -398,6 +407,35 @@ hist(T_simulated)
 \end{myitemize}
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Comparing the normal and t distributions}
+
+\begin{myitemize}
+\item Even with as few as \m{d=\Sexpr{d}} degees of freedom to estimate \m{\sigma}, the Student's t density looks similar to the normal density.
+\item Student's t has fatter tails. This is important for the probability of rare extreme outcomes.
+\item Here, the largest and smallest of the \m{N=\Sexpr{N}} simulations are
+<<range>>=
+range(Tsim)
+@
+\item Let's check the chance of an outcome more than 5 (or 6) standard deviations from the mean for the normal distribution and the t on 10 degrees of freedom.
+\begin{columns}[T] 
+\begin{column}{0.45\textwidth}
+<<tail_z>>=
+2*(1-pnorm(5))
+2*(1-pnorm(6))
+@
+\end{column}
+\begin{column}{0.45\textwidth}
+<<tail_t>>=
+2*(1-pt(5,df=d))
+2*(1-pt(6,df=d))
+@
+\end{column}
+\end{columns}
+
+\end{myitemize}
+
+\end{frame}
 
 \end{document}
 
