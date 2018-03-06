@@ -186,7 +186,7 @@ Y_{ij} = \mu_{i} + \epsilon_{ij}, \quad \mbox{for $i=1,2$ and $j=1,\dots,n$}.
 </ul>
 <p><strong>Question 3</strong>. Code the columns of this design matrix in R, calling them <code>mu1</code> and <code>mu_diff</code>. Then fit a linear model <code>lm2 &lt;- lm(weight~mu1+mu_diff-1,data=mice)</code>.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Convince yourself, by looking at <code>summary(lm2)</code> that you have really fitted the same model in Questions 2 and 3. Explain your reasoning.</p></li>
+<li><p>Convince yourself, by looking at <code>summary(lm2)</code> that you have, in some sense, fitted the same model in Questions 2 and 3. Explain your reasoning.</p></li>
 <li><p>Another way to see this is to compare <code>lm1$fitted.values</code> with <code>lm2$fitted.values</code>. What do you find?</p></li>
 <li><p>Use the output from <code>summary(lm2)</code> to find a 95% confidence interval for <span class="math inline">\(\mu_2-\mu_1\)</span>. Also, write down a test of the null hypothesis that <span class="math inline">\(\mu_1=\mu_2\)</span>, obtaining a p-value and drawing a conclusion at a suitable significance level.</p></li>
 </ol>
@@ -195,7 +195,7 @@ Y_{ij} = \mu_{i} + \epsilon_{ij}, \quad \mbox{for $i=1,2$ and $j=1,\dots,n$}.
 <div id="using-the-specification-in-question-2-to-carry-out-inference-on-mu_2-mu_1." class="section level3">
 <h3>Using the specification in Question 2 to carry out inference on <span class="math inline">\(\mu_2-\mu_1\)</span>.</h3>
 <ul>
-<li>Using the notation of Questions 1 and 2, we can write <span class="math inline">\(\mu_2-\mu_1 = \begin{bmatrix}1 &amp; -1\end{bmatrix} {\boldsymbol{\mathrm{\beta}}}\)</span>, where <span class="math inline">\({\boldsymbol{\mathrm{\beta}}}=\begin{bmatrix}\beta_1 \\ \beta_2\end{bmatrix}=\begin{bmatrix}\mu_1 \\ \mu_2\end{bmatrix}\)</span>. In the same way, <span class="math display">\[
+<li>Having done Question 3, we don’t need to use the model specification from Questions 1 and 2 to carry out inference on <span class="math inline">\(\mu_2-\mu_1\)</span>. However, it may be useful to see how we could have done that. Using the notation of Questions 1 and 2, we can write <span class="math inline">\(\mu_2-\mu_1 = \begin{bmatrix}1 &amp; -1\end{bmatrix} {\boldsymbol{\mathrm{\beta}}}\)</span>, where <span class="math inline">\({\boldsymbol{\mathrm{\beta}}}=\begin{bmatrix}\beta_1 \\ \beta_2\end{bmatrix}=\begin{bmatrix}\mu_1 \\ \mu_2\end{bmatrix}\)</span>. In the same way, <span class="math display">\[
 \hat\mu_2-\hat\mu_1 = \begin{bmatrix}-1 &amp; 1\end{bmatrix} {\boldsymbol{\mathrm{\hat\beta}}}
 =
 \begin{bmatrix}-1 &amp; 1\end{bmatrix}
