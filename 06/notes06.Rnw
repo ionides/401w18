@@ -108,7 +108,7 @@ An interval \m{[U,V]} constructed using a vector of random variables \m{\vect{Y}
 
 \vspace{-1mm}
 
-\myquestion. Supposing we can make a normal approximation, show that \m{\prob\big[\, \hat\beta_1-1.96\, \SD(b_1) \le \beta_1 \le \hat\beta_1+1.96\, \SD(b_1) \, \big] = 0.95}
+\myquestion. Supposing we can make a normal approximation, show that \m{\prob\big[\, \hat\beta_1-1.96\, \SD(\hat\beta_1) \le \beta_1 \le \hat\beta_1+1.96\, \SD(\hat\beta_1) \, \big] = 0.95}
 
 \vspace{33mm}
 
@@ -171,7 +171,7 @@ cat("CI = [", beta_U - z * SE_U, ",", beta_U + z * SE_U, "]")
 
 \item A useful mantra: \myemph{Association is not causation.}
 
-\item Writing a linear model where \m{A} depends on \m{B} can show association but we need extra work to argue for causation. We need to rule out \m{B} causing \m{A} and the possibility of any common cause \m{C}.
+\item Writing a linear model where \m{A} depends on \m{B} can show association but we need extra work to argue \m{B} causes \m{A}. We need to rule out \m{A} causing \m{B} and the possibility of any common cause \m{C}.
 
 \end{myitemize}
 
@@ -258,9 +258,9 @@ The alternative hypothesis will subsequently be challenged with new data.
 
 \item \myemph{Write a null and alternative hypothesis to represent your question in a probability model}. This may involve writing a linear model so that \m{\beta_1=0} corresponds to the null hypothesis of ``no effect'' and \m{\beta_1\neq 0} is a discovered ``effect.''
 
-\item \myemph{Calculate a test statistic}. The test statistic is a quantity computed using the data that summarizes the evidence against the null hypothesis. For our linear model example, the least squares coefficient \m{b_1} is a natural statistics to test the hypothesis \m{\beta_1=0}. 
+\item \myemph{Choose a test statistic}. The \myemph{sample test statistic} is a quantity computed using the data summarizing the evidence against the null hypothesis. For our linear model example, the least squares coefficient \m{b_1} is a natural statistics to test the hypothesis \m{\beta_1=0}. 
 
-\item \myemph{Calculate the p-value}, which is the probability that the model generates a test statistic at least as extreme as that observed.  For our linear model example, the p-value is
+\item \myemph{Calculate the p-value}, the probability that a \myemph{model-generated test statistic} is at least as extreme as that observed.  For our linear model example, the p-value is
 \m{\prob\big[ | \hat\beta_1 | > | b_1 | \big]}.
 We can find this probability, when \m{\beta_1=0}, using a normal approximation.
 
@@ -276,11 +276,11 @@ We can find this probability, when \m{\beta_1=0}, using a normal approximation.
 \frametitle{Using confidence intervals to construct a hypothesis test}
 
 \begin{myitemize}
-\item It is often convenient to use the confidence interval as a test statistic.
+\item It is often convenient to use the confidence interval as a sample test statistic.
 
 \item If the confidence interval doesn't cover the null hypothesis, then we have evidence to reject that null hypothesis.
 
-\item If we do this test using a 95\% confidence interval, we have a 5\% chance that we reject the null hypothesis if it is true. This follows from the definition of a confidence interval: whatever the true unknown value of the parameter, the confidence interval covers it with probability 0.95.
+\item If we do this test using a 95\% confidence interval, we have a 5\% chance that we reject the null hypothesis if it is true. This follows from the definition of a confidence interval: whatever the true unknown value of a parameter \m{\theta}, a model-generated confidence interval covers \m{\theta} with probability 0.95.
 
 \end{myitemize}
 
@@ -295,7 +295,7 @@ We can find this probability, when \m{\beta_1=0}, using a normal approximation.
 \begin{myitemize}
 \item The null hypothesis is \m{H_0} and the alternative is \m{H_a}.
 
-\item We write \m{t} for the test statistic calculated using the data \m{\vect{y}}. We write \m{T} for the random variable constructed by calculating the test statistic using a random vector \m{\vect{Y}} drawn from the probability model under \m{H_0}.
+\item We write \m{t} for the sample test statistic calculated using the data \m{\vect{y}}. We write \m{T} for the model-generated test statistic, which is a random variable constructed by calculating the test statistic using a random vector \m{\vect{Y}} drawn from the probability model under \m{H_0}.
 
 \item The p-value is \m{\pval=\prob\big[ |T| \ge |t| \big]}. Here, we are assuming ``extreme'' means ``large in magnitude.'' Occasionally, it may make more sense to use \m{\pval=\prob\big[ T \ge t \big]}.
 
@@ -309,6 +309,32 @@ We can find this probability, when \m{\beta_1=0}, using a normal approximation.
 
 \end{frame}
 
+
+\begin{frame}[fragile]
+\frametitle{Careful terminology for test statistics}
+
+\vspace{-2mm}
+
+\begin{myitemize}
+\item Recall that a \myemph{sample test statistic} is a summary of the data,  constructed to test a hypothesis.
+\item A \myemph{model-generated test statistic} is the same summary applied to random variables drawn from a probability model. Usually, this probability model represents the null hypothesis. We can say ``model-generated test statistic under \m{H_0}'' to make this explicit.
+
+\item When we just say \myemph{test statistic} we are talking about the procedure used to obtain the summary.
+\item Data analysts don't always explicitly distinguish between sample test statistics and model-generated test statistics. However, the difference is critical to the logic of hypothesis testing.
+\end{myitemize}
+
+\vspace{2mm}
+
+{\bf Example}: testing whether \m{\beta_1=0} in the linear model \m{\vect{Y}=\mat{X}\vect{\beta}+\vect{\epsilon}},
+\begin{myitemize}
+\item The sample test statistic is \m{b_1=\big[\big(\mat{X}^\transpose\mat{X}\big)^{-1}\mat{X}^\transpose \vect{y}\big]_1}. 
+\item A model-generated test statistic is \m{\hat\beta_1=\big[\big(\mat{X}^\transpose\mat{X}\big)^{-1}\mat{X}^\transpose \vect{Y}\big]_1}.
+\item The test statistic is least-squares estimation of the coefficient.
+
+\end{myitemize}
+
+
+\end{frame}
 
 
 \begin{frame}[fragile]
@@ -325,11 +351,11 @@ We can find this probability, when \m{\beta_1=0}, using a normal approximation.
 \frametitle{Normal approximations versus Student's t distribution}
 
 \begin{myitemize}
-\item Notice that `summary(lm(...))` gives `t value` and `Pr(>|t|)`. 
+\item Notice that \code{summary(lm(...))} gives \code{t value} and \code{Pr(>|t|)}. 
 
-\item The `t value` is the estimated coefficient divided by its standard error. This measures how many standard error units the estimated coefficient is from zero.
+\item The \code{t value} is the estimated coefficient divided by its standard error. This measures how many standard error units the estimated coefficient is from zero.
 
-\item `Pr(>|t|)` is similar, but slightly larger, than the p-value coming from the normal approximation.
+\item \code{Pr(>|t|)} is similar, but slightly larger, than the p-value coming from the normal approximation.
 
 \item R is using Student's t distribution, which makes allowance for chance variation from using \m{s} as an approximation to \m{\sigma} when we compute the standard error.
 
@@ -350,7 +376,7 @@ Fortunately, it is often relatively easy to do a \myemph{simulation study} to se
 \item We write \m{X,X_1,\dots,X_d \sim \mathrm{iid } \; N[0,\sigma]}.
 \item Student's t distribution on \m{d} degrees of freedom is defined to be the distribution of 
 \m{T=X / \hat\sigma} where \m{\hat\sigma=\sqrt{\frac{1}{d}\sum_{i=1}^d X_i^2}}.
-\item A normal approximation would say \m{T} is approximately \m{N[0,1]} since \m{\hat\sigma} is an estiamte of \m{\sigma}.
+\item A normal approximation would say \m{T} is approximately \m{N[0,1]} since \m{\hat\sigma} is an estimate of \m{\sigma}.
 \item With a computer, we can simulate \m{T} many times, plot a histogram, and compare it to the probability density function of the normal distribution and Student's t distribution.  
 \item The goals in doing this:
 \begin{enumerate}
@@ -436,6 +462,196 @@ range(Tsim)
 \end{myitemize}
 
 \end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Hypothesis tests for groups of parameters}
+
+\begin{myitemize}
+\item We've seen how the least squares coefficient can be used as a test statistic for the null hypothesis that a parameter in a linear model is zero.
+
+\item Sometimes we want to test many parameters at the same time. For example, when analyzing the field goal kicking data, we must decide whether to have a separate intercept for each player. 
+
+\end{myitemize}
+
+\myquestion. There are 19 kickers in the dataset. How many extra parameters are needed if we add an intercept for each player?
+
+\vspace{15mm}
+
+\begin{myitemize}
+\item This type of question is called \myemph{model selection}. Our test statistic should compare \myemph{goodness of fit} with and without the additional parameters.
+
+\item We need to know the distribution of the model-generated test statistic under the null hypothesis to find the p-value for the test.
+
+\end{myitemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Residual sum of squares to quantify goodness of fit}
+
+\vspace{-2mm}
+
+Let \m{\vect{y}} be the data. Let \m{H_0} be a linear model, \m{\vect{Y}=\mat{X}\vect{\beta}+\vect{\epsilon}}. Let \m{H_a} extend \m{H_0} by adding \m{d} additional explanatory variables. 
+
+\vspace{-1mm}
+
+\begin{myitemize}
+\item Let \m{\RSS_0} be the residual sum of squares for \m{H_0}. The residual errors are \m{\vect{e}=\vect{y}-\mat{X}\vect{b}} where \m{\vect{b}=\big(\mat{X}^\transpose\mat{X}\big)^{-1}\mat{X}^\transpose \vect{y}}. So,
+\m{
+\RSS_0 = \sum_{i=1}^n e_i^2
+}.
+
+\vspace{2mm}
+
+\item Let \m{\RSS_a} be the residual sum of squares for \m{H_a}.
+
+\vspace{2mm}
+
+\item Residual sum of squares is a measure of goodness of fit. A small residual sum of squares suggests a model that fits the data well.
+
+\end{myitemize}
+\myquestion. It is always true that \m{\RSS_a \le \RSS_0}. Why?
+
+\vspace{15mm}
+
+
+\begin{myitemize}
+\item 
+We want to know how much smaller \m{\RSS_a} has to be than \m{\RSS_0} to give satisfactory evidence in support of adding the extra explanatory variables into our model. In other words, when should we reject \m{H_0} in favor of \m{H_a}?
+
+\end{myitemize}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{The f statistic for adding groups of parameters}
+
+\vspace{-1mm}
+
+Formally, we have \m{H_0: \vect{Y}=\mat{X}\vect{\beta}+\epsilon} and \m{H_a: \vect{Y}=\mat{X}_a\vect{\beta}_a+\epsilon}, where \m{\mat{X}} is an \m{n\times p} matrix and \m{\mat{X}_a=[\, \mat{X} \; \mat{Z}\, ]} is an \m{n\times q} matrix with \m{q=p+d}. Here, \m{\mat{Z}} is a \m{n\times d} matrix of additional explanatory variables for \m{H_a}. As usual, we model \m{\epsilon_1,\dots,\epsilon_n} as iid \m{N[0,\sigma]}.
+
+\vspace{-1.5mm}
+
+\begin{myitemize}
+\item Consider the following sample test statistic:
+\end{myitemize}
+\mydisplaymath{
+f = \frac{ (\RSS_0-\RSS_a)/d}{\RSS_a/(n-q)}.
+}
+
+\begin{myitemize}
+\item The denominator is an estimate of \m{\sigma^2} under \m{H_a}. Using this denominator \myemph{standardizes} the test statistic.
+\item The numerator \m{ (\RSS_0-\RSS_a)/d} is the \myemph{change in RSS per degree of freedom}. Parameters in linear models are often interpreted as degrees of freedom of the model.
+\item Let \m{F} be a model-generated version of \m{f}, with the data \m{\vect{y}} replaced by a random vector \m{\vect{Y}}. If \m{H_0} is true, then the RSS per degree of freedom should be about the same on the numerator and the denominator, so \m{F\approx 1}. Large values, \m{f\gg 1}, are therefore evidence against \m{H_0}. 
+\end{myitemize}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{The F test for model selection}
+
+\vspace{-2mm}
+
+\begin{myitemize}
+\item Under \m{H_0}, the \m{f} statistic has an F distribution on \m{d} and \m{n-q} degrees of freedom. 
+\item Because of the way we constructed the \m{f} statistic, its distribution under \m{H_0} doesn't depend on \m{\sigma}. It only depends on the dimension of \m{\mat{X}} and \m{\mat{X}_a}.
+
+\item We can obtain p-values for the F distribution in R using \code{pf()}. Try \code{?pf}. 
+
+\item Testing \m{H_0} verus \m{H_a} using this p-value is called the F test.
+
+\item When we add a single parameter, so \m{d=1} and \m{q=p+1}, the F test is equivalent to carrying out Student's t test using the estimated coefficient as the test statistic. 
+As homework, you are asked to check this using \code{pt()} and \code{pf()} in R.
+
+\item Degrees of freedom are mysterious. The mathematics for how they work involves matrix algebra beyond this course. An intuition is that fitting a parameter that is not in the model ``explains'' a share of the residual sum of squares; in an extreme case, fitting \m{n} parameters to \m{n} data points may give a perfect fit (residual sum of squares = zero) even if none of these parameters are in the true model.
+
+\end{myitemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{The F test is called ``analysis of variance''}
+
+\begin{myitemize}
+\item The F test was invented before computers existed.
+\item Working out the sums of squares efficiently, by hand, was a big deal!
+\item Sums of squares of residuals are relevant for estimating variance. 
+\item Building F tests is historically called \myemph{analysis of variance} or abbreviated to \myemph{ANOVA}.
+\item The sums of squares and corresponding F tests are presented in an \myemph{ANOVA table}. We will see one in the following data analysis.
+\end{myitemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{An F test for kickers. (i) Reviewing the data}
+<<data>>=
+goals <- read.table("FieldGoals2003to2006.csv",header=T,sep=",")
+goals[1:5,c("Name","Teamt","FGt","FGtM1")]
+lm0 <- lm(FGt~FGtM1+Name,data=goals)
+@
+\begin{myitemize}
+\item This is model syntax we have not seen before. 
+\item \code{Name} is a \myemph{factor}
+<<factor_class>>=
+class(goals$Name)
+@
+\item A factor is a vector with \myemph{levels}. Here, the levels are the kicker names.
+\end{myitemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{An F test for kickers. (ii) Checking the design matrix}
+
+\vspace{-2mm}
+
+%\begin{myitemize}
+%\item We can check the design matrix matches what we want
+%\end{myitemize}
+%\vspace{-2mm}
+
+<<design>>=
+X <- model.matrix(lm0)
+dim(X)
+unname(X[c(1,5,9,13,17),1:8])
+@
+
+\vspace{-3mm}
+
+\myquestion. Is this the design matrix that you want? Can we use our experience working with design matrices to understand what R is doing?
+
+\vspace{15mm}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{An F test for kickers. (ii) Interpreting the ANOVA table}
+
+\vspace{-2mm}
+
+<<anova>>=
+anova(lm0)
+@
+
+\vspace{-3mm}
+
+\myquestion. Focus on the row labeled \code{Name}. Explain what is being tested, how it is being tested, and what you conclude.
+
+\vspace{30mm}
+
+\end{frame}
+
 
 \end{document}
 
