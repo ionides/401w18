@@ -1,18 +1,18 @@
-default: html-docs
+default: pdf-docs
 
-html-docs: info.html
+pdf-docs:mt401w18.pdf
 
 %.html: %.Rmd
 	Rscript --vanilla -e "rmarkdown::render(\"$*.Rmd\",output_format=\"html_document\")"
+
+%.pdf: %.Rmd
+	Rscript --vanilla -e "rmarkdown::render(\"$*.Rmd\")"
 
 %.html: %.md
 	pandoc $*.md > $*.html
 
 %.R: %.Rmd
 	Rscript --vanilla -e "library(knitr); purl(\"$*.Rmd\",output=\"$*.R\")"
-
-%.pdf: %.Rmd
-	Rscript --vanilla -e "rmarkdown::render(\"$*.Rmd\")"
 
 clean:
 	$(RM) *.o *.so *.log *.aux *.out *.nav *.snm *.toc *.bak

@@ -24,7 +24,7 @@ set.seed(12)
 ```
 
 
-\ifthenelse{\isodd{1}}{
+\ifthenelse{\isodd{0}}{
  \newcommand\exam[1]{#1} %% exam paper
  \newcommand\solution[1]{}
 }{ 
@@ -431,16 +431,16 @@ Write your answer as a call to `qnorm()`. Your call to qnorm may involve specify
 \[\begin{array}{rcl}
 \E[X_1] &=& 0\times 0.5 + (-1)\times 0.25 + 1\times 0.25 = 0
 \\
-\E[X_1^2] &=& 0 \times 0.5 + (-1)^2\times 0.25 + 1^2\times 0.25 = 1
+\E[X_1^2] &=& 0 \times 0.5 + (-1)^2\times 0.25 + 1^2\times 0.25 = 0.5
 \\
-\var(X_1) &=& \E[X_1^2] - \big(\E[X_1]\big)^2 = 1
+\var(X_1) &=& \E[X_1^2] - \big(\E[X_1]\big)^2 = 0.5
 \\
 \E[\bar X] &=& \E[X_1]=0
 \\
-\var(\bar X) &=& \frac{1}{100^2}\times 100\var(X_1) = 0.01
+\var(\bar X) &=& \frac{1}{100^2}\times 100\var(X_1) = 0.005
 \end{array}\]
 Then, making a normal approximation, we can call
-\texttt{c <- qnorm(0.95,mu=0,sd=0.1)}
+\texttt{c <- qnorm(0.95,mu=0,sd=sqrt(0.005))}
 to obtain a value $c$ with a probability of 0.05 to the right. By symmetry, this also has a probability of 0.05 to the left of -c, giving a probability of $0.9$ for $[-c,c]$.
 }
 
