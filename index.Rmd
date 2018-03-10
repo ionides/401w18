@@ -85,7 +85,7 @@ The GSI may provide some feedback on correctness, but students are responsible f
  
 5. [Vector random variables](05/notes05.pdf). [(R script)](05/notes05.R).
 
-5. [Hypothesis testing and confidence intervals](06/notes06.pdf). 
+6. [Hypothesis testing and confidence intervals](06/notes06.pdf). 
 [Log transformations](06/log_transform.pdf).
 [Reading Sheather and other texts](06/texts.html).
 
@@ -135,6 +135,7 @@ Due in your lab on 2/15 or 2/16. [Solutions](hw/hw06/sol_hw06.html).
 
 * [Lab 7. Midterm review](lab/lab07/lab07.pdf). Slides for 2/15 and 2/16.
 
+* [Lab 8. Confidence intervals and hypothesis tests](lab/lab08/lab08.pdf). Slides for 3/8 and 3/9.
 
 ------------
 
