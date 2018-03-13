@@ -29,23 +29,64 @@ As usual, following the syllabus, you are also requested to give some feedback i
 
 --------------
 
+### Exploring the t and F distributions
+
+**Question 1**. Use the R functions `pt()` and `pf()` to provide convincing evidence that if $T$ is a random variable following Student's t distribution on $n$ degrees of freedom, and $F$ is a random variable following the F distribution on $1$ and $n$ degrees of freedom, then $T^2$ has the same distribution as $F$.
+
+**Question 2**. The random variable $T$ is defined to have the t distribution on $n$ degrees of freedom if
+\[
+T=X_0\Big/\Big(\frac{1}{n}\sum_{i=1}^n X_i^2\Big)
+\]
+where $X_0, X_1,\dots,X_n$ are independent identically distributed (iid) $N[0,1]$ random variables. Now consider the random variable
+\[
+\bar T = \sqrt{n} \bar X
+\Big/
+\sqrt{\frac{1}{n-1} \sum_{i=1}^n (X_i-\bar X)^2}
+\]
+where $\bar X = \frac{1}{n}\sum_{i=1}^n X_i$. $\bar T$ is the model-generated statistic corresponding to a sample statistic
+\[
+\bar t = \bar x \big/ \SE(\bar x)
+\]
+where $\SE(\bar x)= s/\sqrt{n}$ with $s^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i-\bar X)^2$. $\bar t$ is an appropriate statistic for testing whether it is reasonable to model a sample as having mean zero.
+
+(a) Simulate a large number of draws of $\bar T$ from the null hypothesis that $X_1,\dots,X_n$ are iid $N[0,1]$, with $n=8$.
+
+(b) Plot a histogram of these simulations and add a line corresponding to the t density of a $t$ distribution on 7 degrees of freedom. These should be similar. 
+
+(c) Explain why $\sum_{i=1}^n (X_i-\bar X)^2$ behaves like a sum of squares on $n-1$ degrees of freedom, not $n$. You are expected to make an intuitive explanation; you are not asked to show this mathematically. 
+
+(d) Check that $\cov(\bar X,X_i-\bar X)=0$ for each $i=1,2,\dots,n$, by using the bilinarity of covariance, which in its simplest form is $\cov(X,Y+Z)=\cov(X,Y)+\cov(X,Z)$ and in general is
+\[
+\cov\Big(\sum_{i=1}^na_iX_i,\sum_{j=1}^n\Big)=\sum_{i=1}^n\sum_{j=1}^n a_ib_i\cov(X_i,X_j).\]
+This means that each term $X_i-\bar X$ in the denominator of the formula for $\bar T$ is uncorrelated with the numerator. It is a fact that multivariate normal random variables that are uncorrelated are also independent. Thus, the numerator and denominator of $\bar T$ are independent, just as in the formula for $T$.
+
+--------
+
+### Making and interpreting an F test
+
+
+We consider again the data on freshman GPA, ACT exam scores and percentile ranking of each student within their high school for 705 students at a large state university.
+In addition, we now consider the year (1996 to 2000) in which the student entered college.
+There are many ways in which the predictive relationship between freshman GPA and the admission scores may, or may not, be stable over time.
+The director of admissions is interested in what ways, if any, there is evidence for changes larger than can be explained by chance variation. 
+Let the null hypothesis, $H_0$, be the probability model considered in the midterm exam, where freshman GPA is modeled to depend linearly on ACT score and high school ranking.
+
+```{r read_data}
+gpa <- read.table("gpa.txt",header=T)
+head(gpa)
+```
+
+**Question 3**. Let $H_1$ be the probability model where $H_0$ is extended to include year as a 
+
+
+
+
+
+
+
+
 
 ### DRAFT Simulations to explore the t distribution
-
-**Question 5**. We usually make approximations using the normal distribution. Notice that the p-values provided by `summary(lm2)` use a t distribution approximation instead. The t distribution has longer tails than the normal distribution to allow for uncertainty in estimating the standard deviation.
-Follow the directions below to investigate how the normal distribution and the t distribution compare when used to describe the error when estimating the mean using a the sample average of $n=12$ measurements.
-
-(a) Generate $m=1000$ normal samples each of size $n$. Specifically, use `rnorm()` and `matrix()` to generate a $m\times n$ matrix of normal random variables with mean $3$ and standard deviation $2$.
-
-(b) Use `apply()` to compute the sample mean and sample standard deviation of each row. Subtract the model mean (i.e., 3) from the sample mean and divide by the sample standard deviation of the row to give an error on a standardized scale.
-
-(c) Make a histogram of these $m$ standardized errors (_standardized errors_ should not be confused with _standard errors_!)
-
-(d) Use `dnorm` and `dt` to add density curves for the standard normal (as a solid line) and the t distribution on $n-1$ degrees of freedom (as a dotted line). Make sure they are on a proper scale to be comparable to the histogram.
-
-(e) Comment on how the normal and t distributions compare, and which better matches the simulated sample.
-
-(f) Having done this, it is relatively quick to re-run your code to repeat the plot you have developed with differents choices of $m$ and $n$. Try a few things and comment on what discover. You don't have to show these plots in your report. 
 
 
 
