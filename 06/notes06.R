@@ -78,3 +78,16 @@ unname(X[c(1,5,9,13,17),1:8])
 ## ----anova---------------------------------------------------------------
 anova(lm0)
 
+## ----read_data-----------------------------------------------------------
+gpa <- read.table("gpa.txt",header=T); gpa[1,]
+
+## ----gpa_lm--------------------------------------------------------------
+lm1 <- lm(GPA~ACT+High_School,data=gpa) 
+x <- c(1,20,40)
+pred <- x%*%coef(lm1)
+V <- summary(lm1)$cov.unscaled 
+SE_pred <-sqrt(x%*%V%*%x)
+c <- qnorm(0.975)
+cat("CI = [", round(pred-c*SE_pred,3),
+  ",", round(pred+c*SE_pred,3), "]")
+

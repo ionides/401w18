@@ -181,7 +181,6 @@ cat("CI = [", beta_U - z * SE_U, ",", beta_U + z * SE_U, "]")
 
 \end{frame}
 
-\newcommand\enumerateSpace{\hspace{2mm}}
 
 \begin{frame}[fragile]
 \frametitle{A review of progress so far in this course}
@@ -229,8 +228,6 @@ cat("CI = [", beta_U - z * SE_U, ",", beta_U + z * SE_U, "]")
 
 \begin{myitemize}
 \item From a different perspective, a standard view of scientific progress holds that scientific theories cannot be proved correct, they can only be falsified (\url{https://en.wikipedia.org/wiki/Falsifiability}). 
-
-%\item This view was developed by Karl Popper. 
 
 \item Accordingly, scientists look for evidence to refute the \myemph{null hypothesis} that data can be explained by current scientific understanding.
 
@@ -614,11 +611,6 @@ class(goals$Name)
 
 \vspace{-2mm}
 
-%\begin{myitemize}
-%\item We can check the design matrix matches what we want
-%\end{myitemize}
-%\vspace{-2mm}
-
 <<design>>=
 X <- model.matrix(lm0)
 dim(X)
@@ -652,6 +644,178 @@ anova(lm0)
 
 \end{frame}
 
+
+\begin{frame}[fragile]
+%\frametitle{Confidence intervals for fitted values in a linear model}
+\frametitle{Predicting future outcomes using a linear model}
+%The prediction mean and prediction interval for a linear model}
+
+\vspace{-2mm}
+
+\begin{myitemize}
+\item Consider the sample linear model \m{\vect{y}=\mat{X}\vect{b}+\vect{e}}, where \m{\mat{X}=[x_{ij}]_{n\times p}}.
+\item We might be interested in predicting outcomes at some new set of explanatory variables \m{\vect{x}^*=(x_1^*,\dots,x_p^*)}, treated as a \m{1\times p} \myemph{row vector}.
+\end{myitemize}
+
+\vspace{-2mm}
+
+\myquestion. Why do we want \m{\vect{x}^*} to be a row vector not a column vector?
+
+\vspace{10mm}
+
+\begin{myitemize}
+\item Making a prediction involves estimating (i) the expected value of a new outcome; (ii) its variability. In addition, we must make allowance for the statistical uncertainty in these estimates.
+%\item %
+%
+%\item The \myemph{sample fitted value} is 
+%
+%\item A natural estimate is the \myemph{sample fitted value} \m{\hat y^*=\sum_{j=1}^p x^*_j b_j}.
+%\item What is the statistical uncertainty in this estimate?
+%\item How do we make confidence intervals and hypothesis tests?
+\item To do inference, we need a probability model. 
+As usual, consider \m{\vect{Y}=\mat{X}\vect{\beta}+\vect{\epsilon}} where \m{\epsilon_1,\dots,\epsilon_n} are iid \m{N[0,\sigma]}. Also, model a new measurement at \m{\vect{x}^*} as
+\mydisplaymath{
+Y^* = \vect{x}^*\vect{\beta} + \epsilon^*
+}
+where \m{\epsilon^*} is another independent draw from the measurement model.
+
+\item Note that the dimension of \m{\vect{x}^*\vect{\beta}} is \m{(1\times p)\times(p\times 1)= 1\times 1}.
+\end{myitemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{The expected value of a new outcome and its uncertainty}
+
+\begin{myitemize}
+
+\item According to the model, the expected value of a new outcome at  \m{\vect{x}^*} is
+\mydisplaymath{
+\E[ Y^*] = \vect{x}^*\vect{\beta}.
+}
+\item But, we don't know \m{\vect{\beta}}. We estimate \m{\vect{\beta}} by the sample least squares coefficient 
+\m{\vect{b}=\big(\mat{X}^\transpose\mat{X}\big)^{-1}\mat{X}^\transpose \vect{y}}, 
+which is modeled as a realization of the model-generated least squares coefficient 
+\m{\vect{\hat\beta}=\big(\mat{X}^\transpose\mat{X}\big)^{-1}\mat{X}^\transpose \vect{Y}}.
+\item A \myemph{sample estimate of the expected value} is the \myemph{fitted value} at \m{\vect{x}^*}
+\mydisplaymath{\textstyle
+\hat y^* = \vect{x}^*\vect{b} =\sum_{j=1}^p x^*_j b_j.
+}
+\item The \myemph{model-generated estimate of the expected value} is
+\mydisplaymath{ \textstyle
+\hat Y^* = \vect{x}^*\vect{\hat\beta} =\sum_{j=1}^p x^*_j \hat\beta_j.
+}
+\item We can find the mean and variance of \m{\hat Y^*}. We can use these (together with a normal approximation) to find a confidence interval for \m{\E[Y^*]}. If the model is reasonable, this will tell us the uncertainty in using \m{\hat y^*} to estimate the sample average of many new outcomes collected at \m{\vect{x}^*}. 
+\end{myitemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+%\frametitle{}
+
+\vspace{-5mm}
+
+\myquestion. Show that \m{\E[\hat Y^*] = \vect{x}^*\vect{\beta}}
+
+\vspace{25mm}
+
+\myquestion. Show that \m{\var[\hat Y^*] = \sigma^2 \vect{x}^* \big(\mat{X}^\transpose\mat{X}\big)^{-1} \vect{x}^{*\transpose}}
+
+\vspace{35mm}
+
+\myquestion. Check the dimension of \m{\var[\hat Y^*]}. Is this correct?
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{A CI for the expected value of a new outcome}
+
+\begin{myitemize}
+\item We can get a confidence interval (CI) for the \myemph{linear combination of coefficients} \m{\vect{x}^*\vect{\beta}} in a similar way to what we did for a single coefficient.
+\item A standard error is \m{\SE(\vect{x}^*\vect{b})=s \, \sqrt{\vect{x}^* \big(\mat{X}^\transpose\mat{X}\big)^{-1} \vect{x}^{*\transpose}}}.
+\item Then, making a normal approximation, a 95\% CI is \m{[\vect{x}^*\vect{b} - 1.96\,\SE(\vect{x}^*\vect{b}) \, , \, \vect{x}^*\vect{b} + 1.96\,\SE(\vect{x}^*\vect{b})]}.
+\end{myitemize}
+
+\myexample. We consider again the data on freshman GPA, ACT exam scores and percentile ranking of each student within their high school for 705 students at a large state university.
+We seek to predict using the probability model considered in the midterm exam, where freshman GPA is modeled to depend linearly on ACT score and high school ranking.
+
+<<read_data>>=
+gpa <- read.table("gpa.txt",header=T); gpa[1,]
+@
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\question. Find a 95\% confidence interval for the expected freshman GPA among students with an ACT score of 20 ranking at the 40th percentile in his/her high school.  
+
+\vspace{-2mm}
+
+\mysolution
+
+\vspace{-4mm}
+
+<<gpa_lm>>=
+lm1 <- lm(GPA~ACT+High_School,data=gpa) 
+x <- c(1,20,40)
+pred <- x%*%coef(lm1)
+V <- summary(lm1)$cov.unscaled 
+SE_pred <-sqrt(x%*%V%*%x)
+c <- qnorm(0.975)
+cat("CI = [", round(pred-c*SE_pred,3),
+  ",", round(pred+c*SE_pred,3), "]")
+@
+
+\vspace{-5mm}
+
+\begin{myitemize}
+\item Notice how R guesses whether to interpret a vector as a row or column, depending on the situation.
+\end{myitemize}
+
+\vspace{-2mm}
+
+\myquestion. How would you check whether your answer is plausible? How would you check the R calculation has done what you want it to do?
+
+\vspace{5mm}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{A prediction interval for a new outcome}
+
+\vspace{-2mm}
+
+\begin{myitemize}
+\item A 95\% \myemph{prediction interval} for a new outcome of a linear model with explanatory variables \m{\vect{x}^*} covers the outcome with probability 95\%.
+\item The prediction interval allows for the uncertainty around the mean, usually called \myemph{measurement error}, in the outcome.
+\item Formally, the prediction interval aims to cover \m{Y^*=\vect{x}^*\vect{\beta}+\epsilon^*} whereas the confidence interval for the mean only aims to cover \m{\E[Y^*]=\vect{x}^*\vect{\beta}}.
+\item Since \m{\epsilon^*} is independent of \m{\vect{x}^*\vect{\hat\beta}} (why?), we have
+\myeqnarray{
+\var[Y^*-\vect{x}^*\vect{\hat\beta}]
+&=&
+\var[Y^*-\vect{x}^*\vect{\beta}] + \var[\vect{x}^*\vect{\beta}-\vect{x}^*\vect{\hat\beta}]
+\\
+&=& \quad \sigma^2 \quad + \sigma^2 \vect{x}^* \big(\mat{X}^\transpose\mat{X}\big)^{-1} \vect{x}^{*\transpose}
+}
+
+\vspace{-5mm}
+
+\item
+This suggests using a standard error for prediction of
+\mydisplaymath{
+\SE_{\mathrm{pred}}= s \, \sqrt{1 + \vect{x}^* \big(\mat{X}^\transpose\mat{X}\big)^{-1} \vect{x}^{*\transpose} }
+}
+\item A 95\% prediction interval, using a normal approximation, is
+\m{[\vect{x}^*\vect{b} - 1.96\,\SE_{\mathrm{pred}} \, , \, \vect{x}^*\vect{b} + 1.96\,\SE_{\mathrm{pred}}]}.
+
+\item We could use a t quantile. With 705 observations, the normal quantile \code{1.96=qnorm(0.975)} is equivalent to \code{\Sexpr{round(qt(0.975,df=702),2)}=qt(0.975,df=702)}
+
+\end{myitemize}
+
+\end{frame}
 
 \end{document}
 
