@@ -86,7 +86,8 @@ lm1 <- lm(GPA~ACT+High_School,data=gpa)
 x <- c(1,20,40)
 pred <- x%*%coef(lm1)
 V <- summary(lm1)$cov.unscaled 
-SE_pred <-sqrt(x%*%V%*%x)
+s <- summary(lm1)$sigma 
+SE_pred <-sqrt(x%*%V%*%x)*s
 c <- qnorm(0.975)
 cat("CI = [", round(pred-c*SE_pred,3),
   ",", round(pred+c*SE_pred,3), "]")
@@ -108,7 +109,7 @@ x <- c(1,20,40)
 pred <- x%*%coef(lm1)
 V <- summary(lm1)$cov.unscaled
 s <- summary(lm1)$sigma 
-SE_pred <-sqrt(x%*%V%*%x + s^2)
+SE_pred <-sqrt(x%*%V%*%x + 1)*s
 c <- qnorm(0.975)
 cat("prediction interval = [", round(pred-c*SE_pred,3),
   ",", round(pred+c*SE_pred,3), "]")
