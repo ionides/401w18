@@ -19,10 +19,7 @@ csl: ecology.csl
 \usepackage{amsmath}
 
 
-**Write solutions to the exercises in the first half of the homework.
-For the data analysis, you do not have to report anything for questions 1--4. 
-For questions 5 and 6, report your code together with a brief explanation.
-Question 7 asks you to carefully write out the probability model you have used for the standard errors.
+**Write a report answering the questions below, and including your R code.
 Recall that you are permitted to collaborate, or to use any internet resources, but you must list all sources that make a substantial contribution to your report.
 As usual, following the syllabus, you are also requested to give some feedback in a "Please explain" statement.
 **
@@ -35,19 +32,19 @@ As usual, following the syllabus, you are also requested to give some feedback i
 
 **Question 2**. The random variable $T$ is defined to have the t distribution on $n$ degrees of freedom if
 \[
-T=X_0\Big/\Big(\frac{1}{n}\sum_{i=1}^n X_i^2\Big)
+T=\frac{X_0}{\Big(\frac{1}{n}\sum_{i=1}^n X_i^2\Big)}
 \]
 where $X_0, X_1,\dots,X_n$ are independent identically distributed (iid) $N[0,1]$ random variables. Now consider the random variable
 \[
-\bar T = \sqrt{n} \bar X
-\Big/
+\bar T = \frac{\sqrt{n} \, \bar X}{
 \sqrt{\frac{1}{n-1} \sum_{i=1}^n (X_i-\bar X)^2}
+}
 \]
-where $\bar X = \frac{1}{n}\sum_{i=1}^n X_i$. $\bar T$ is the model-generated statistic corresponding to a sample statistic
+where $\bar X = \frac{1}{n}\sum_{i=1}^n X_i$. Here, $\bar T$ is the model-generated statistic corresponding to a sample statistic
 \[
 \bar t = \bar x \big/ \SE(\bar x)
 \]
-where $\SE(\bar x)= s/\sqrt{n}$ with $s^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i-\bar X)^2$. $\bar t$ is an appropriate statistic for testing whether it is reasonable to model a sample as having mean zero.
+where $\SE(\bar x)= \frac{s}{\sqrt{n}}$ with $s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i-\bar x)^2$. Note that $\bar t$ is a test statistic for a one-sample t-test investigating whether a sample can reasonably be modeled as having mean zero.
 
 (a) Simulate a large number of draws of $\bar T$ from the null hypothesis that $X_1,\dots,X_n$ are iid $N[0,1]$, with $n=8$.
 
@@ -57,37 +54,34 @@ where $\SE(\bar x)= s/\sqrt{n}$ with $s^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i-\bar
 
 (d) Check that $\cov(\bar X,X_i-\bar X)=0$ for each $i=1,2,\dots,n$, by using the bilinarity of covariance, which in its simplest form is $\cov(X,Y+Z)=\cov(X,Y)+\cov(X,Z)$ and in general is
 \[
-\cov\Big(\sum_{i=1}^na_iX_i,\sum_{j=1}^n\Big)=\sum_{i=1}^n\sum_{j=1}^n a_ib_i\cov(X_i,X_j).\]
+\cov\Big(\sum_{i=1}^na_iX_i,\sum_{j=1}^nb_jX_j\Big)=\sum_{i=1}^n\sum_{j=1}^n a_ib_i\cov(X_i,X_j).\]
 This means that each term $X_i-\bar X$ in the denominator of the formula for $\bar T$ is uncorrelated with the numerator. It is a fact that multivariate normal random variables that are uncorrelated are also independent. Thus, the numerator and denominator of $\bar T$ are independent, just as in the formula for $T$.
 
 --------
 
 ### Making and interpreting an F test
 
-
 We consider again the data on freshman GPA, ACT exam scores and percentile ranking of each student within their high school for 705 students at a large state university.
 In addition, we now consider the year (1996 to 2000) in which the student entered college.
-There are many ways in which the predictive relationship between freshman GPA and the admission scores may, or may not, be stable over time.
-The director of admissions is interested in what ways, if any, there is evidence for changes larger than can be explained by chance variation. 
-Let the null hypothesis, $H_0$, be the probability model considered in the midterm exam, where freshman GPA is modeled to depend linearly on ACT score and high school ranking.
-
 ```{r read_data}
 gpa <- read.table("gpa.txt",header=T)
 head(gpa)
 ```
+There are many ways in which the predictive relationship between freshman GPA and the admission scores may, or may not, be stable over time.
+The director of admissions is interested in what ways, if any, there is evidence for changes larger than can be explained by chance variation. 
+Let the null hypothesis, $H_0$, be the probability model considered in the midterm exam, where freshman GPA is modeled to depend linearly on ACT score and high school ranking.
+Let $H_a$ be the probability model where $H_0$ is extended to include year as a factor, as fitted in R by
+```{r lm}
+lm_gpa <- lm(GPA~High_School+ACT+factor(Year),data=gpa)
+```
 
-**Question 3**. Let $H_1$ be the probability model where $H_0$ is extended to include year as a 
+**Question 3**.
 
+(a) Write out the null and alternative hypotheses by completely specifying the probability models. Sometimes in class, to save time and space, we don't write the complete details of each model. Here, you are asked to do that. Looking at `model.matrix(lm_gpa)` may help you to understand the model that R has fitted. You can write the models in either matrix or subscript form.
 
+(b) Interpret the results in `summary(lm_gpa)`. Is there any evidence that some year, or years, may have different intercept? Why is there no row in the results table for `factor(Year)1997`?
 
-
-
-
-
-
-
-### DRAFT Simulations to explore the t distribution
-
+(c) Interpret the results in `anova(lm_gpa)`. Write out in detail an F test to test $H_0$ against $H_a$, explaining how the sample test statistic is constructed, giving the distribution of the model-generated test statistic under $H_0$, and saying how the resulting p-value is calculated and interpreted.
 
 
 --------------
