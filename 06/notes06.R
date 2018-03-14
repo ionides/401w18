@@ -91,3 +91,25 @@ c <- qnorm(0.975)
 cat("CI = [", round(pred-c*SE_pred,3),
   ",", round(pred+c*SE_pred,3), "]")
 
+## ----plot_args,echo=F----------------------------------------------------
+par(mai=c(0.8,0.8,0.1,0.1))
+
+## ----plot_gpa_code,eval=F------------------------------------------------
+## plot(x=fitted.values(lm1),y=gpa$GPA,ylab="GPA")
+## abline(a=0,b=1)
+
+## ----plot_gpa,echo=F,fig.width=4,fig.height=4,out.width="2.5in"----------
+plot(x=fitted.values(lm1),y=gpa$GPA,ylab="GPA")
+abline(a=0,b=1)
+
+## ----gpa_lm_pred---------------------------------------------------------
+lm1 <- lm(GPA~ACT+High_School,data=gpa) 
+x <- c(1,20,40)
+pred <- x%*%coef(lm1)
+V <- summary(lm1)$cov.unscaled
+s <- summary(lm1)$sigma 
+SE_pred <-sqrt(x%*%V%*%x + s^2)
+c <- qnorm(0.975)
+cat("prediction interval = [", round(pred-c*SE_pred,3),
+  ",", round(pred+c*SE_pred,3), "]")
+

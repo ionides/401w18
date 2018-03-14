@@ -817,6 +817,64 @@ This suggests using a standard error for prediction of
 
 \end{frame}
 
+\begin{frame}[fragile]
+%\frametitle{}
+<<plot_args,echo=F>>=
+par(mai=c(0.8,0.8,0.1,0.1))
+@
+
+<<plot_gpa_code,eval=F>>=
+plot(x=fitted.values(lm1),y=gpa$GPA,ylab="GPA")
+abline(a=0,b=1)
+@
+
+\vspace{-15mm}
+
+<<plot_gpa,echo=F,fig.width=4,fig.height=4,out.width="2.5in">>=
+<<plot_gpa_code>>
+@
+
+\vspace{-5mm}
+
+\myquestion. Is the linear model a good fit for the data? What cautions do you recommend when using this model for prediction?
+
+\vspace{30mm}
+
+%\begin{myitemize}
+%\item 
+%\end{myitemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\question. Find a 95\% prediction interval for the freshman GPA of an incoming student with an ACT score of 20 ranking at the 40th percentile in his/her high school.  
+
+\vspace{-2mm}
+
+\mysolution
+
+\vspace{-4mm}
+
+<<gpa_lm_pred>>=
+lm1 <- lm(GPA~ACT+High_School,data=gpa) 
+x <- c(1,20,40)
+pred <- x%*%coef(lm1)
+V <- summary(lm1)$cov.unscaled
+s <- summary(lm1)$sigma 
+SE_pred <-sqrt(x%*%V%*%x + s^2)
+c <- qnorm(0.975)
+cat("prediction interval = [", round(pred-c*SE_pred,3),
+  ",", round(pred+c*SE_pred,3), "]")
+@
+
+\vspace{-5mm}
+
+\myquestion. Where does this calculation differ from the confidence interval? 
+
+\vspace{15mm}
+
+\end{frame}
+
 \end{document}
 
 ------- This is just for copying to make new slides ---------

@@ -79,6 +79,8 @@ What if the model describes some parts of the data okay, but not other parts?
 
 \end{frame}
 
+\end{document}
+
 \begin{frame}[fragile]
 \frametitle{}
 
