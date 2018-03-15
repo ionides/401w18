@@ -100,8 +100,8 @@ Using the notation of Questions 1 and 2, we can write $\mu_2-\mu_1 = \begin{bmat
 \]
 
 
-**Question 4**. Type `names(summary(lm1))` to show all the components in the R linear model summary.
-One of these components is the estimated variance matrix for $\hat\vect{\beta}$ in Question 2. Assign it to a variable by typing something like `V <- summary(lm1)$cov.unscaled`. 
+**Question 4**. First, let's calculate the estimated covariance matrix of $\vect{\hat\beta}$. Type `names(summary(lm1))` to show all the components in the R linear model summary.
+ The component `cov.unscaled` is the matrix $\big(\mat{X}^\transpose\mat{X}\big)^{-1}$ which must then be scaled by $s^2$, where $s$ comes from the `sigma` component. Thus, the full estimated covariance matrix can be found by something like `V <- summary(lm1)$cov.unscaled * summary(lm1)$sigma^2`. 
 
 (a) Use the matrix formula for the variance of $\begin{bmatrix}1 & -1\end{bmatrix} \vect{\hat\beta}$ to estimate the standard deviation of $\hat\mu_2-\hat\mu_1$.
 Does this match your answer to Question 3(c)?

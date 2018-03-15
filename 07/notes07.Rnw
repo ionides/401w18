@@ -1,0 +1,113 @@
+%\documentclass[handout]{beamer}
+\documentclass{beamer}
+
+\input{../header.tex}
+\newcommand\CHAPTER{7}
+
+\begin{document}
+
+% knitr set up
+<<knitr_opts,echo=F,cache=F,purl=F>>=
+library(knitr)
+opts_chunk$set(
+#  cache=FALSE,
+  cache=TRUE,
+  eval=TRUE,
+  include=TRUE,
+  echo=TRUE,
+  purl=TRUE,
+  cache.path=paste0("tmp/cache"),
+  dev='png',
+  dev.args=list(bg='transparent'),
+  dpi=300,
+  error=FALSE,
+  fig.pos="h!",
+  fig.align='center',
+  fig.height=4,fig.width=6.83,
+  fig.lp="fig:",
+  fig.path=paste0("tmp/figure"),
+  fig.show='asis',
+  highlight=TRUE,
+  message=FALSE,
+  progress=TRUE,
+  prompt=FALSE,
+#  results='asis',
+  results="markup",
+  size='small',
+  strip.white=TRUE,
+  tidy=FALSE,
+  warning=FALSE
+#  comment=NA # to remove ## on output
+)
+options(width = 60) # number of characters in R output before wrapping
+@
+
+% other set up
+<<setup,echo=F,results=F,cache=F>>=
+# library(broman) # used for myround 
+@
+
+
+\begin{frame}
+\frametitle{\CHAPTER. Model diagnostics}
+
+\vspace{-2mm}
+
+\begin{myitemize}
+\item
+We know how to estimate parameters and make hypothesis tests for linear models.
+\item 
+We know how to make predictions, with uncertainty estimates, using linear models. 
+\begin{enumerate}
+\item \enumerateSpace
+What if our conclusions depend on our choice of model? 
+\item \enumerateSpace
+What if our model is a poor description of the data?
+\item \enumerateSpace
+What if a much better model exists? 
+\item \enumerateSpace
+What if the model describes some parts of the data okay, but not other parts?
+\end{enumerate}
+\item How can we answer these questions?
+\begin{enumerate}
+\item \enumerateSpace
+\myemph{Graphical investigations}. Make informative plots.
+\item \enumerateSpace
+\myemph{Quantitative investigations}. Find informative tests, or other interpretable statistics.
+\end{enumerate}
+\end{myitemize}
+
+\end{frame}
+
+\end{document}
+
+\begin{frame}[fragile]
+\frametitle{}
+
+\begin{myitemize}
+\item One way to see if a model can be improved is to look for a better one. 
+We already saw how to add new parameters and assess whether they improve model fit.
+\item
+
+\end{myitemize}
+
+
+
+
+\end{frame}
+
+
+\end{document}
+
+------- This is just for copying to make new slides ---------
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{}
+
+\begin{myitemize}
+\item 
+\end{myitemize}
+
+\end{frame}
