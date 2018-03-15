@@ -79,7 +79,7 @@ lm_gpa <- lm(GPA~High_School+ACT+factor(Year),data=gpa)
 
 (a) Write out the null and alternative hypotheses by completely specifying the probability models. Sometimes in class, to save time and space, we don't write the complete details of each model. Here, you are asked to do that. Looking at `model.matrix(lm_gpa)` may help you to understand the model that R has fitted. You can write the models in either matrix or subscript form.
 
-(b) Interpret the results in `summary(lm_gpa)`. Is there any evidence that some year, or years, may have different intercept? Why is there no row in the results table for `factor(Year)1997`?
+(b) Interpret the results in `summary(lm_gpa)`. Is there any evidence that some year, or years, may have different intercept? Why is there no row in the results table for `factor(Year)1996`?
 
 (c) Interpret the results in `anova(lm_gpa)`. Write out in detail an F test to test $H_0$ against $H_a$, explaining how the sample test statistic is constructed, giving the distribution of the model-generated test statistic under $H_0$, and saying how the resulting p-value is calculated and interpreted.
 
