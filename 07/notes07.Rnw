@@ -79,6 +79,120 @@ What if the model describes some parts of the data okay, but not other parts?
 
 \end{frame}
 
+
+\begin{frame}[fragile]
+\frametitle{Looking for patterns in the residuals}
+
+\begin{myitemize}
+\item Recall that the \myemph{residuals} for a linear model are \m{e_1,\dots,e_n} in the linear model \m{\vect{y}=\mat{X}\vect{b}+\vect{e}}.
+\item Residuals are also known as \myemph{residual errors} or \myemph{errors}.
+\item Residuals estimate the measurement errors \m{\epsilon_1,\dots,\epsilon_n} in the model \m{\vect{Y}=\mat{X}\vect{\beta}+\vect{\epsilon}}.
+\item Statistical properties of \m{\vect{Y}=\mat{X}\vect{\beta}+\vect{\epsilon}} are usually carried out using a probability model that \m{\epsilon_1,\dots,\epsilon_n} are independent identically distributed (iid) \m{N[0,\sigma]}.
+\item iid random variables have no pattern.
+\item Any pattern, or association with some other variable, that we can find in the residuals contradicts the model and could lead to improvements.
+\item The search for patterns in the residuals can take creativity and persistence.
+\end{myitemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Outliers}
+
+\begin{myitemize}
+\item Sometimes one, or a few, points are inconsistent with a model that explains the rest of the data nicely.
+\item These points are called \myemph{outliers}.
+\item Our first responsibility is to notice them.
+\item Our second responsibility is to work out whether they affect the conclusions of the analysis (if they don't, the issue becomes less urgent).
+\end{myitemize}
+\myquestion. It is tempting to remove clear outliers from the data analysis on the assumption that they are errors. When is that reasonable? When is it dangerous?
+
+\vspace{30mm}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Outliers and responsible scientific conduct}
+
+\begin{myitemize}
+\item According to the National Science Foundation, \myemph{falsification} is the manipulation of research materials, equipment, or processes or changing or omitting data or results such that the research is not accurately represented in the research record (\url{https://en.wikipedia.org/wiki/Scientific_misconduct}).
+\end{myitemize}
+\myquestion. How could inappropriate treatment of outliers lead to charges of falsification? What can a careful data analyst do to avoid that?
+
+\vspace{40mm}
+
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Leverage and influence}
+
+\begin{myitemize}
+\item A data point has high \myemph{leverage} if its explanatory variables are distant from much of the rest of the data, so the point plays a relatively large role in determining the fitted values.
+\item Leverage of a point \m{i} depends only on the design matrix \m{\mat{X}=[x_{ij}]_{n\times p}}, and primarily on  \m{x_{i1},\dots,x_{ip}}.
+\item A point has high \myemph{influence} if removing that point leads to large changes in the parameter estimates and fitted values.
+\item Influence depends on both $\mat{X}$ and $\vect{y}$.
+\item An outlier with high leverage is a point of very high influence. 
+\end{myitemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+%\frametitle{}
+
+%\begin{myitemize}
+%\item 
+%\end{myitemize}
+\myquestion. Sketch a scatterplot (i.e., a plot of \m{\vect{y}} against a single explanatory vector \m{\vect{x}} that has a point of high leverage, but not high influence.
+
+\vspace{40mm}
+
+\end{frame}
+
+\begin{frame}[fragile]
+%\frametitle{}
+
+%\begin{myitemize}
+%\item 
+%\end{myitemize}
+\myquestion. Sketch a scatterplot that has a point of high leverage which also has high influence.
+
+\vspace{40mm}
+
+\end{frame}
+
+\begin{frame}[fragile]
+%\frametitle{}
+
+%\begin{myitemize}
+%\item 
+%\end{myitemize}
+\myquestion. Sketch a scatterplot that has an outlier which is not influential.
+
+\vspace{40mm}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{Residuals for unemployment vs life expectancy}
+
+
+\begin{myitemize}
+\item A fairly common type of data has points collected through time. Such data are called a \myemph{time series}.
+\item For example, the annual data we investigated on  unemployment and life expectancy are both time series.
+\item Time series might be expected to have measurements at points close in time that are more similar than those distant in time. If this is true of residuals, the pattern is inconsistent with the iid measurement error model.
+
+\end{myitemize}
+\question. How can we look for temporal patterns in the residuals? Think of (at least) two plots to make.
+\vspace{30mm}
+
+\end{frame}
+
 \end{document}
 
 \begin{frame}[fragile]
@@ -90,8 +204,6 @@ We already saw how to add new parameters and assess whether they improve model f
 \item
 
 \end{myitemize}
-
-
 
 
 \end{frame}
