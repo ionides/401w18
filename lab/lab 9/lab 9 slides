@@ -1,0 +1,131 @@
+---
+title: "Stats 401 Lab 9"
+author: "401 GSI team"
+date: "3/15/2018 and 3/16/2018"
+output:
+  beamer_presentation:
+  colortheme: dolphin
+incremental: no
+ioslides_presentation:
+  incremental: no
+slidy_presentation:
+  incremental: no
+fontsize: 10pt
+---
+
+# Outline
+
+- Quick Reminder: If you are thinking about withdrawing from the course, the deadline is Monday! (**March 19th**)
+- Quiz Information
+- Review of F tests and ANOVA
+- Lab Activity
+- Lab Ticket
+
+# Quiz Information
+- Next quiz will be on **March 29th** and **March 30th**
+- It will cover:
+    - hardest/most missed questions on the midterm
+    - new material since the midterm
+
+# F Test/ANOVA Motivation
+
+Why perform the F test?
+    - Want to know if additional variables are statistically significant.
+
+How is this different from looking at the regression output?
+    - Regression output is testing each $b_i$ with all other $b_j$ fixed
+    - F test/ANOVA lets us test multiple variables for significance at once
+
+# F Test Review
+Recall from lecture:
+
+- $H_0:Y= \mathbb{X}\beta + \epsilon$
+- $H_a:Y= \mathbb{X}_a\beta_a + \epsilon$
+
+  $$f = \frac {(RSS_0 - RSS_a)/d}{RSS_a/(n-q)}$$
+    
+- $RSS_0$ and $RSS_a$ are the residual sum of squares for the null and alternative models
+- $d$ is the difference in the degrees of freedom between the two models
+- $n-q$ is the degrees of freedom in the alternative model
+
+# Examining the F Test in R
+
+We will be examining a subset of the National Education Longitudinal Study of 1988 which examined schoolchildren's performance on a math test score in 8th grade. "ses" is the socioeconomic status of parents and "paredu" is the parents highest level of education achieved (less than high school, high school, college, BA, MA, PhD).
+
+```{r, warning = F}
+library(faraway)
+data(nels88)
+head(nels88)
+```
+
+# Examining the F Test in R
+
+Suppose we want to know whether the parents' level of education and socioeconomic status affect a student's performance.
+
+Write out the linear model (sample version) in matrix form and subscript form.
+
+# Examining the F Test in R
+
+```{r, height = 40}
+ses_edu_lm <- lm(math ~ ses + paredu, data = nels88)
+summary(ses_edu_lm) # run this in R to show full output
+```
+
+- How do we interpret the intercept of our model?
+- Is there evidence that the parents' level of education affects a student's performance?
+
+# Examining the F Test in R (Calc by Hand)
+
+First, we need to find our null hypothesis:
+
+```{r}
+ses_lm <- lm(math ~ ses, data = nels88)
+summary(ses_lm) # run this in R to show full output
+```
+
+# Calculate the F Statistic by Hand
+
+```{r}
+
+rss_0 <- sum(residuals(ses_lm)^2); rss_0
+rss_a <- sum(residuals(ses_edu_lm)^2); rss_a
+
+```
+\begin{equation}
+\begin{aligned}
+f = \frac {(RSS_0 - RSS_a)/d}{RSS_a/(n-q)} \\
+f = \frac {(19725.18 - 18082.73)/ (258 - 253)}{18082.73/253} \\
+f = \frac {(1642.45)/5}{18082.73/253} \\
+f = 4.595986
+\end{aligned}
+\end{equation}
+
+# Check using R
+
+First find the p-value from the F that we calculated before. Then check using ANOVA.
+
+```{r}
+
+pf(4.595986, 5, 253, lower.tail = F)
+anova(ses_edu_lm)
+
+```
+
+
+# Lab Activity
+
+Q1) Write out the $H_0$ and $H_a$ for the F test shown in the summary info of the linear regression.
+
+Q2) We just saw that level of parents' education does infact affect students' test performance. Suppose we now want to know whether the sex of the student affects their performance along with their parents' level of education and socioeconomic status.
+That is, $H_0$ is the probability model where a students performance depends on parents' level of education and socioeconomic status and $H_a$ is the model that includes sex.
+-(2a) Write out $H_0$ and $H_a$ for this test and fit the models using lm().
+(Clearly describe all the paameters in your formulae)
+-(2b) Find the F-statistic using the formula ($f = \frac {(RSS_0 - RSS_a)/d}{RSS_a/(n-q)}$) and the corresponding p-value using pf(). Report your conclusion.
+-(2c) Confirm your result by finding the p-value using anova(). 
+
+# Lab Ticket
+Use pt() and pf() to show that if $T$ has a t-distribution with $n$ degrees of freedom, then $T^2$ follows the F-distribution with $1$ and $n$ degrees of freedom.
+Hint: Start with a specific value for $n$, say $n=5$ and later exted to multiple values using a for-loop.
+
+
+
