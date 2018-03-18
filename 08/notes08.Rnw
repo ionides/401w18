@@ -1,0 +1,92 @@
+%\documentclass[handout]{beamer}
+\documentclass{beamer}
+
+\input{../header.tex}
+\newcommand\CHAPTER{8}
+
+\begin{document}
+
+% knitr set up
+<<knitr_opts,echo=F,cache=F,purl=F>>=
+library(knitr)
+opts_chunk$set(
+#  cache=FALSE,
+  cache=TRUE,
+  eval=TRUE,
+  include=TRUE,
+  echo=TRUE,
+  purl=TRUE,
+  cache.path=paste0("tmp/cache"),
+  dev='png',
+  dev.args=list(bg='transparent'),
+  dpi=300,
+  error=FALSE,
+  fig.pos="h!",
+  fig.align='center',
+  fig.height=4,fig.width=6.83,
+  fig.lp="fig:",
+  fig.path=paste0("tmp/figure"),
+  fig.show='asis',
+  highlight=TRUE,
+  message=FALSE,
+  progress=TRUE,
+  prompt=FALSE,
+#  results='asis',
+  results="markup",
+  size='small',
+  strip.white=TRUE,
+  tidy=FALSE,
+  warning=FALSE
+#  comment=NA # to remove ## on output
+)
+options(width = 60) # number of characters in R output before wrapping
+@
+
+% other set up
+<<setup,echo=F,results=F,cache=F>>=
+# library(broman) # used for myround 
+par(mai=c(0.8,0.8,0.1,0.1))
+@
+
+
+\begin{frame}
+\frametitle{\CHAPTER. Additional topics in linear modeling}
+
+\vspace{-2mm}
+
+\myemph{Outline}
+\begin{myitemize}
+\item We now have practical skills to 
+\begin{enumerate}
+\item \enumerateSpace
+Write down linear models,
+\item \enumerateSpace
+Fit them in R,
+\item \enumerateSpace 
+Interpret the output in terms of parameter estimates, confidence intervals and hypothesis tests,
+\item \enumerateSpace
+Check that R is fitting the model that we intend,
+\item \enumerateSpace
+Check that the model we intend is appropriate for the data.
+\end{enumerate}
+\item These skills provide a foundation for many extensions helpful for particuluar situations.
+\end{myitemize}
+
+\end{frame}
+
+
+\end{document}
+
+------- This is just for copying to make new slides ---------
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{}
+
+\begin{myitemize}
+\item 
+\end{myitemize}
+
+\end{frame}
+
