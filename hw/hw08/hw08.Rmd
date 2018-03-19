@@ -61,7 +61,7 @@ This means that each term $X_i-\bar X$ in the denominator of the formula for $\b
 
 ### Making and interpreting an F test
 
-We consider again the data on freshman GPA, ACT exam scores and percentile ranking of each student within their high school for 705 students at a large state university.
+We consider again the data on freshman GPA, ACT exam scores and percentile ranking of each student within their high school for 705 students at a large state university in the file [gpa.txt](gpa.txt).
 In addition, we now consider the year (1996 to 2000) in which the student entered college.
 ```{r read_data}
 gpa <- read.table("gpa.txt",header=T)
