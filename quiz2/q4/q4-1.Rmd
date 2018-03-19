@@ -1,0 +1,3 @@
+The following model was fitted to a dataset ...  Write out the null and alternative hypothesis, the test statistic, the p-value and your conclusion.
+
+--------------

@@ -41,93 +41,86 @@ library(mat2tex)
 
 **Instructions. You have a time allowance of 50 minutes, though the quiz may take you much less time and you can leave lab once you are done.  The quiz is closed book. Any electronic devices in your possession must be turned off and remain in a bag on the floor.**
 
+### Formulas
+  
+* You are not allowed to bring any notes into the exam. 
+
+* The following formulas will be provided. To use these formulas properly, you need to make appropriate definitions of the necessary quantities.
+
+(1)$\quad\quad\mathbf{b}=\big(\mathbb{X}^\top \mathbb{X} \big)^{-1}\, \mathbb{X}^\top\mathbf{y}$
+
+(2)$\quad\quad\var(\hat{\mathbf{\beta}})= \sigma^2 \big( \mathbb{X}^\top \mathbb{X} \big)^{-1}$
+
+(3)$\quad\quad\var(\mathbb{A}\mathbf{Y})=\mathbb{A}\var(\mathbf{Y})\mathbb{A}^\top$
+
+(4)$\quad\quad\var(X)=\E\big[ (X-\E[X])^2\big] = \E[X^2]-\big(\E[X]\big)^2$
+
+(5)$\quad\quad\cov(X,Y)=\E\big[ \big(X-\E[X]\big)\big(Y-\E[Y]\big)\big] = \E[XY]-\E[X]\,\E[Y]$
+
+(6)$\quad\quad$
+The binomial ($n,p$) distribution has mean $np$ and variance $np(1-p)$.
+
+\vspace{1cm}
+
+From `?pnorm`:
+```
+pnorm(q, mean = 0, sd = 1)
+qnorm(p, mean = 0, sd = 1)
+q: vector of quantiles.
+p: vector of probabilities.
+```
+
 ---------------
 
-### Definitions
 
-D1. What is a p-value? What is a 95% confidence interval? 
+### Q1. Calculating means and variances, and making a normal approximation
 
-------------
-
-### Mean and variance calculations
-
-S1. A basic exercise.
-```{r s1-all-list,include=F}
-s1_files <- list.files(path="s1",full.names=T,pattern="*.Rmd$") 
+```{r q1-all-list,include=F}
+q1_files <- list.files(path="q1",full.names=T,pattern="*.Rmd$") 
 ```
-```{r s1, child = sample(s1_files,size=1),eval=!ALL}
+```{r q1, child = sample(q1_files,size=1),eval=!ALL}
 ```
-```{r s1-1, child = s1_files[1],eval=ALL}
+```{r q1-1, child = q1_files[1],eval=ALL}
 ```
-```{r s1-2, child = s1_files[2],eval=ALL}
-```
-```{r s1-3, child = s1_files[3],eval=ALL}
-```
-```{r s1-4, child = s1_files[4],eval=ALL}
-```
-```{r s1-5, child = s1_files[5],eval=ALL}
-```
-```{r s1-6, child = s1_files[6],eval=ALL}
-```
-
-S2. An example involving sums of squares and products.
-```{r s2-all-list,include=F}
-s2_files <- list.files(path="s2",full.names=T,pattern="*.Rmd$")
-```
-```{r s2, child = sample(s2_files,size=1),eval=!ALL}
-```
-```{r s2-1, child = s2_files[1],eval=ALL}
-```
-```{r s2-2, child = s2_files[2],eval=ALL}
-```
-```{r s2-3, child = s2_files[3],eval=ALL}
-```
-```{r s2-4, child = s2_files[4],eval=ALL}
-```
-```{r s2-5, child = s2_files[5],eval=ALL}
-```
-```{r s2-6, child = s2_files[6],eval=ALL}
-```
-```{r s2-7, child = s2_files[7],eval=ALL}
+```{r q1-2, child = q1_files[2],eval=ALL}
 ```
 
 
-###  Confidence intervals for linear models
-
-You are expected to be able to construct a confidence interval for a coefficient in a linear model, and to give a correct technical description of how the interval is contructed and what the interval means.
-
-C1. Constructing a confidence interval for a parameter using R output.
-
-
-C2. Explaining the construction and interpretation of the confidence interval.
-
-Which of the following is a correct interpretation of a CI?
-
-Which of the following is a correct construction of a CI for a linear model?
-
-### Prediction for linear models
-
-```{r f-all-list,include=F}
-f_files <- list.files(path="f",full.names=T,pattern="*.Rmd$")
+### Q2. Prediction using a linear model
+```{r q2-all-list,include=F}
+q2_files <- list.files(path="q2",full.names=T,pattern="*.Rmd$")
 ```
-```{r f, child = sample(f_files,size=1),eval=!ALL}
+```{r q2, child = sample(q2_files,size=1),eval=!ALL}
 ```
-```{r f-1, child = f_files[1],eval=ALL}
-```
-```{r f-2, child = f_files[2],eval=ALL}
-```
-```{r f-3, child = f_files[3],eval=ALL}
+```{r q2-1, child = q2_files[1],eval=ALL}
 ```
 
-### Hypothesis tests for a single parameter
 
-H1. Set up and make a hypothesis test for a single parameter, with help from R
+### Q3. Comparing means using a linear model
 
-H2. Set up and make a hypothesis test for a group of parameters.
+This question will be based on HW7. It will involve either confidence interval construction or making a  hypothesis testing when comparing means of two samples in the context of a linear model.
 
-### F tests for groups of parameters
 
-F1. The following model was fitted to a dataset  Write out the null and alternative hypothesis, the test statistic, the p-value and your conclusion.
+```{r q3-all-list,include=F}
+q3_files <- list.files(path="q3",full.names=T,pattern="*.Rmd$")
+```
+```{r q3, child = sample(q3_files,size=1),eval=!ALL}
+```
+```{r q3-1, child = q3_files[1],eval=ALL}
+```
+```{r q3-2, child = q3_files[2],eval=ALL}
+```
+
+### Q4. Making and interpreting an F test
+
+
+```{r q4-all-list,include=F}
+q4_files <- list.files(path="q4",full.names=T,pattern="*.Rmd$")
+```
+```{r q4, child = sample(q4_files,size=1),eval=!ALL}
+```
+```{r q4-1, child = q4_files[1],eval=ALL}
+```
 
 ------
 
