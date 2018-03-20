@@ -411,6 +411,43 @@ We already saw how to add new parameters and assess whether they improve model f
 
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Practical strategies for influence and leverage}
+
+\begin{myitemize}
+\item A small collection of points with unusual and extreme values of the explanatory variables will likely have high leverage and may also have high influence.
+\item Try removing these points to see if that changes the conclusions of your data analysis. If it does, then hard thought is required.
+\item A measure of influence is \myemph{Cook's distance}, which is computed for a model \code{lm1} by \code{cooks.distance(lm1)}.
+\item We are not going to study Cook's distance carefully. You can investigate the points which have the highest Cook's distance. For example, you can see the effect of removing these points on your conclusions.
+
+\end{myitemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Normality}
+
+\begin{myitemize}
+\item If the number of points is fairly large (say, more than 30) the estimates of the coefficients in the linear model have a \myemph{central limit theorem}.
+\item A basic central limit theorem says that the average of many independent identically distributed (iid) random variables approximately follows a normal distribution.
+\item 
+
+\end{myitemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{}
+
+\begin{myitemize}
+\item 
+\end{myitemize}
+
+\end{frame}
+
+
 
 \end{document}
 
