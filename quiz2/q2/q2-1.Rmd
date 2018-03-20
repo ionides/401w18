@@ -3,7 +3,7 @@ Consider the following fitted linear model for ...
 # lm1 <- lm()
 # summary(lm1)$coef
 ```
-We write the sample linear model as $\vect{y}=\mat{X}\vect{b}+\vect{e} where \mat{X} is ... [I'M THINKING THERE WON'T BE TIME FOR WRITING OUT MANY MODELS. WE'LL HAVE THEM WRITE OUT THE PROBABILITY MODEL IN THE F-TEST QUESTION AND GIVE THEM THE MODEL WHEN NEEDED ELSEWHERE]
+We write the sample linear model as $\vect{y}=\mat{X}\vect{b}+\vect{e}$ where $\mat{X}$ is ... [I'M THINKING THERE WON'T BE TIME FOR WRITING OUT MANY MODELS. WE'LL HAVE THEM WRITE OUT THE PROBABILITY MODEL IN THE F-TEST QUESTION AND GIVE THEM THE MODEL WHEN NEEDED ELSEWHERE]
 
 Suppose we're interested in predicting the value of a new observation at [explanatory variable values] together with a measure of our prediction uncertainty.
 
