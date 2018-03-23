@@ -1,0 +1,29 @@
+
+Consider the birth weight data set we have seen in lab.
+For this question, we will look at columns `bwt` (birth weight), `lwt` (mother's weight), `age` (mother's age) and `race` (mother's race, 1 for white, 2 for black and 3 for other).
+```{r}
+library(MASS)
+data(birthwt)
+```
+
+```{r}
+head(birthwt)
+```
+We want to study the relationship between birthweight and race using an F test, while mother's weight and age are included as additional explanatory variables. Let the null hypothesis, $H_0$, be the probability model where birth weight is modeled to depend linearly on mother's weight and age. Let $H_a$ be the probability model where $H_0$ is extended to include race as a factor, as fitted in R by
+```{r}
+lm_bw <- lm(bwt ~ lwt + age +factor(race), data = birthwt)
+```
+The results from summary(lm_bw) and anova(lm_bw) are as follows
+```{r}
+summary(lm_bw)
+```
+```{r}
+anova(lm_bw)
+```
+(a). Write out the null and alternative hypotheses of the F test by completely specifying the probability models.
+
+(b). Interpret the results in `anova(lm_gpa)`. Specifically, 
+read the sample test statistic from R output, give the distribution of the model-generated test statistic under $H_0$, and explain how the resulting p-value is calculated and interpreted.
+
+---------
+

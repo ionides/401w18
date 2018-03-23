@@ -9,5 +9,6 @@ Suppose we're interested in predicting the value of a new observation at [explan
 
 (a) Specify the values in a row matrix $\vect{x}^*$ so that $\vect{y}^*=\vect{x}^*\vect{b}$ gives a least squares prediction of the new observation.
 
-(b) Give a matrix 
+(b) Give a matrix...
 
+-------

@@ -82,6 +82,8 @@ q1_files <- list.files(path="q1",full.names=T,pattern="*.Rmd$")
 ```
 ```{r q1-2, child = q1_files[2],eval=ALL}
 ```
+```{r q1-3, child = q1_files[3],eval=ALL}
+```
 
 
 ### Q2. Prediction using a linear model
@@ -91,6 +93,8 @@ q2_files <- list.files(path="q2",full.names=T,pattern="*.Rmd$")
 ```{r q2, child = sample(q2_files,size=1),eval=!ALL}
 ```
 ```{r q2-1, child = q2_files[1],eval=ALL}
+```
+```{r q2-2, child = q2_files[2],eval=ALL}
 ```
 
 
@@ -108,6 +112,8 @@ q3_files <- list.files(path="q3",full.names=T,pattern="*.Rmd$")
 ```
 ```{r q3-2, child = q3_files[2],eval=ALL}
 ```
+```{r q3-3, child = q3_files[3],eval=ALL}
+```
 
 ### Q4. Making and interpreting an F test
 
@@ -118,6 +124,8 @@ q4_files <- list.files(path="q4",full.names=T,pattern="*.Rmd$")
 ```{r q4, child = sample(q4_files,size=1),eval=!ALL}
 ```
 ```{r q4-1, child = q4_files[1],eval=ALL}
+```
+```{r q4-2, child = q4_files[2],eval=ALL}
 ```
 
 ------

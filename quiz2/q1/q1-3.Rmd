@@ -1,0 +1,11 @@
+Let $X_1,X_2,\dots,X_n$ be independent random variables following a Uniform(0,1) distribution. 
+
+(a) Set up and solve integrals to find the mean and variance of $X_1$.
+
+(b) Use these results to find the mean and variance of $\bar{X}=\frac{1}{n}\sum_{i=1}^n X_i$.
+
+(c) Now suppose $n=50$ and suppose that $\bar X$ is well approximated by a normal distribution. Find $\prob(0.45<\bar X<0.55)$.
+Write your answer as a call to `pnorm()`. Your call to pnorm may involve specifying any necessary numerical calculations that you can't work out without access to a computer or calculator.
+
+--------
+
