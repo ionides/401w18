@@ -91,10 +91,8 @@ The GSI may provide some feedback on correctness, but students are responsible f
 
 7. [Model diagnostics](07/notes07.pdf). [(R script)](07/notes07.R).
 
-<!--
 8. [Additional topics in linear modeling](08/notes08.pdf). [(R script)](08/notes08.R).
 
--->
 
 --------
 
