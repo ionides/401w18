@@ -86,6 +86,46 @@ Check that the model we intend is appropriate for the data.
 
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{The R model formula notation}
+
+\begin{myitemize}
+\item A \myemph{formula} in `lm()` is something that looks like `y~x`.
+\item The R formula notation has various conventions that are designed to make it easy to specify useful models.
+\item `?formula` tells you more that you need to know.
+\item The R formula for `lm()` is a way of constructing a design matrix.
+\item Inspect the resulting design matrix using `model.matrix()` and check you understand what R has produced. If you can do this, you can safely use the power of the formula notation.
+\end{myitemize}
+\myquestion. In a report, the model should be written in mathematical notation, not as an R formula. Why?
+
+\vspace{20mm}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Experimenting with the R formula notation}
+
+\begin{myitemize}
+\item Consider the freshman GPA data
+```{r gpa_data}
+
+head(gpa,3)
+```
+\item We can play the game of trying out various things in R formula notation, inspecting the resulting design matrix, and figuring out how to write the model efficiently in mathematical notation.
+\item You can also think about whether the different models give any new insights into the data.
+
+\end{myitemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{}
+
+\begin{myitemize}
+\item 
+\end{myitemize}
+
+\end{frame}
 
 
 \end{document}
