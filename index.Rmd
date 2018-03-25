@@ -152,6 +152,8 @@ Due in your lab on 2/15 or 2/16. [Solutions](hw/hw06/sol_hw06.html).
 * [Information and practice for quiz 1](quiz1/quiz1.html).
  Also provided is a [list of all the questions in the quiz generator](quiz1/quiz1-all.html).
 
+* Quiz 2 will have 4 questions, with one question of each type (normal approximations; prediction; estimates and confidence intervals; F-tests) drawn randomly from the [list of questions in the quiz generator](quiz2/quiz2.pdf). The quiz generator, which should be essentially complete by Tues 3/27, will have at least four questions of each type.
+
 -----------
 
 ## Midterm exam materials
