@@ -1,0 +1,121 @@
+---
+html_document:
+  theme: flatly
+title: "Sample Quiz 2"
+output:
+  html_document: default
+  pdf_document: null
+  toc: no
+csl: ecology.csl
+toc: no
+word_document:
+  toc: no
+---
+  
+\newcommand\E{\mathrm{E}}
+\newcommand\SE{\mathrm{SE}}
+\newcommand\var{\mathrm{Var}}
+\newcommand\cov{\mathrm{Cov}}
+\newcommand\prob{\mathrm{P}}
+\newcommand\mat[1]{\mathbb{#1}}
+\renewcommand\vect[1]{\boldsymbol{\mathrm{#1}}}
+\newcommand\transpose{{\scriptscriptstyle \mathrm{T}}}
+\usepackage{amsmath}
+  
+### Formulas
+  
+* You are not allowed to bring any notes into the exam. 
+
+* The following formulas will be provided. To use these formulas properly, you need to make appropriate definitions of the necessary quantities.
+
+(1)$\quad\quad\mathbf{b}=\big(\mathbb{X}^\top \mathbb{X} \big)^{-1}\, \mathbb{X}^\top\mathbf{y}$
+
+(2)$\quad\quad\var(\hat{\mathbf{\beta}})= \sigma^2 \big( \mathbb{X}^\top \mathbb{X} \big)^{-1}$
+
+(3)$\quad\quad\var(\mathbb{A}\mathbf{Y})=\mathbb{A}\var(\mathbf{Y})\mathbb{A}^\top$
+
+(4)$\quad\quad\var(X)=\E\big[ (X-\E[X])^2\big] = \E[X^2]-\big(\E[X]\big)^2$
+
+(5)$\quad\quad\cov(X,Y)=\E\big[ \big(X-\E[X]\big)\big(Y-\E[Y]\big)\big] = \E[XY]-\E[X]\,\E[Y]$
+
+(6)$\quad\quad$
+The binomial ($n,p$) distribution has mean $np$ and variance $np(1-p)$.
+
+\vspace{1cm}
+
+From `?pnorm`:
+```
+pnorm(q, mean = 0, sd = 1)
+qnorm(p, mean = 0, sd = 1)
+q: vector of quantiles.
+p: vector of probabilities.
+```
+
+### Q1. Calculating mean and variance, and making a normal approximation
+Let $X_1,X_2,\dots,X_n$ be independent random variables follows Uniform(0,1) distribution. 
+Find the mean and variance of $X_1$. Use this to find the mean and variance of $\bar{X}=\frac{1}{n}\sum_{i=1}^n X_i$. 
+Now suppose $n=50$ and suppose that $\bar X$ is well approximated by a normal distribution. Find $\prob(0.45<\bar X<0.55)$. 
+Write your answer as a call to `pnorm()`. Your call to pnorm may involve specifying any necessary numerical calculations that you can't work out without access to a computer or calculator.
+
+### Q2. Comparing means using linear model
+Let's consider the crabs data set we studied in lab. Recall that species(sp) is a factor with 2 levels Blue(B) and Orange(O). We want to study the difference of frontal lobe size(FL) of two species. 
+
+```{r}
+library(MASS)
+data(crabs)
+```
+```{r}
+head(crabs)
+```
+
+Consider the model $Y_i = \mu_1x_{Bi} + \mu_2x_{Oi} + \epsilon_i$,$i=1,...,200$. $Y_i$ is the FL of observation i. $x_{Bi}$ is 1 if $sp=B$ for obervation i and 0 otherwise. Similarly, $x_{Oi}$ is 1 if $sp=O$ for obervation i and 0 otherwise. $\epsilon_i$ are i.i.d with mean 0 and variance $\sigma^2$. This model is fitted in R using lm() function and the summary is provided as below.
+```{r}
+lm_crab <- lm(FL~sp-1, data=crabs)
+summary(lm_crab)
+```
+
+
+(a). What do $\mu_1$ and $\mu_2$ measure in the above probability model?
+
+(b). Build a 95% confidence interval for $\mu_1$ using normal approximation
+
+(c). Recall in homework we know that the full estimated covariance matrix of $\mathbf{\hat{\mu}} = (\hat{\mu}_1,\hat{\mu}_2)$ can be found by  
+```{r}
+V <- summary(lm_crab)$cov.unscaled * summary(lm_crab)$s^2
+V
+```
+Use V and information provided in summary(lm_crab) to build a 95% confidence interval for $\mu_1-\mu_2$
+
+### Q3. Making and interpreting an F-test
+
+Consider the birth weight data set we have seen in lab For this question, we will look at columns bwt(birth weight), lwt(mother's weight), age(mother's age) and race(mother's race, 1 for white, 2 for black and 3 for other).
+```{r}
+library(MASS)
+data(birthwt)
+```
+
+```{r}
+head(birthwt)
+```
+We want to study the relationship bwt and race using F test, while lwt and age are provided as confounding variables. Let the null hypothesis, $H_0$, be the probability model where bwt is modeled to depend linearly on lwt and age. Let $H_a$ be the probability model where $H_0$ is extended to include race as a factor, as fitted in R by
+```{r}
+lm_bw <- lm(bwt ~ lwt + age +factor(race), data = birthwt)
+```
+The results from summary(lm_bw) and anova(lm_bw) are as follows
+```{r}
+summary(lm_bw)
+```
+```{r}
+anova(lm_bw)
+```
+(a). Write out the null and alternative hypotheses of the F test by completely specifying the probability models.
+
+(b). Interpret the results in `anova(lm_gpa)`. Specifically, 
+read the sample test statistic from R output, give the distribution of the model-generated test statistic under $H_0$, and explain how the resulting p-value is calculated and interpreted.
+
+### Q4. Prediction using a linear model
+We still look at the birthwt data in Q3. Consider the model fitted at $H_a$. Suppose we are interested in predicting the birthweight of a baby who has a 30-year-old white mother with weight 130. 
+
+Specify a row matrix $\mathbf{x}^*$ so that $y^*=\mathbf{x}^*\mathbf{b}$ gives the least square predictor. Use summary(lm_bw) from Q3 to find $y^*$.
+
+ 
