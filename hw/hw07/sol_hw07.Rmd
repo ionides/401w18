@@ -1,0 +1,94 @@
+---
+title: "Homework 8 Solution"
+output:
+  html_document:
+    theme: flatly
+    toc: yes
+csl: ecology.csl
+---
+### Question 1
+
+```{r}
+x1 = c(rep(1,12),rep(0,12))
+x2 = c(rep(0,12),rep(1,12))
+
+X = cbind(x1,x2)
+X
+```
+
+
+### Question 2
+
+```{r}
+mice = read.csv("https://ionides.github.io/401w18/hw/hw01/femaleMiceWeights.csv")
+
+mice$mu1 = (mice$Diet == "chow")*1
+mice$mu2 = (mice$Diet == "hf")*1
+
+lm1 <- lm(Bodyweight~mu1+mu2-1,data=mice);summary(lm1)
+```
+
+We do not want to include the intercept in this model. Thus we need -1 in the lm call since otherwise R will automatically include the intercept.
+
+```{r}
+lm <- lm(Bodyweight~mu1+mu2,data=mice);summary(lm)
+```
+If we do not write -1, R produce NA for estimates associated with mu2. This is because there is parameter redundancy when trying to estimate an intercept and a mean for both groups.
+
+95% confidence interval for $\mu_1$
+```{r}
+c(23.813-1.96*1.039,23.813+1.96*1.039)
+```
+
+95% confidence interval for $\mu_2$
+```{r}
+c(26.834-1.96*1.039,26.834+1.96*1.039)
+```
+
+### Question 3
+```{r}
+mice$mu1 = 1
+mice$mu_diff = (mice$Diet == "hf")*1
+lm2 <- lm(Bodyweight~mu1+mu_diff-1,data=mice);summary(lm2)
+```
+Comparing summart(lm1) and summary(lm2), we notice that mu1 in lm2 has same estimate and standard error as mu1 in lm1. mu_diff in lm2 is equal to mu2 - mu1 in lm1. Also notice that lm1 and lm2 have same residual standard error 3.6.
+
+```{r}
+all.equal(lm1$fitted.values, lm2$fitted.values)
+```
+Thus fitted value in lm1 is (approximately) equal to fitted value in lm2 (they might be slightly different due to rounding errors).This again indicates that lm1 and lm 2 are essentially the same model.
+
+95% confidence interval for $\mu_2-\mu_1$
+```{r}
+# use normal approximation
+c(3.021-1.96*1.470,3.021+1.96*1.470)
+```
+
+```{r}
+c(3.021-qt(0.975,df=22)*1.470,3.021+qt(0.975,df=22)*1.470)
+```
+
+
+To see this as a hythothesis problem, we want to test $H_0:\mu_1 = \mu_2$ against $H_1: \mu_1 \neq \mu_2$. From summary(lm2), the associated test statistics is 2.055 with p-value 0.0519. Thus we fail to reject $H_0$ at 0.05 level. Namely we do not have enough evidence to conclude the mean of bodyweight under diet chow and hf is different. (If we choose significant level to be 0.1, we can reject $H_0$)
+
+### Question 4
+```{r}
+V <- summary(lm1)$cov.unscaled
+
+a = c(1,-1)
+V_diff = (a %*% V %*% a)
+sd_diff = sqrt(V_diff)*summary(lm1)$sigma # we need to time sigma here since cov.unscaled does not include sigma
+sd_diff
+```
+This is consistent with the standard error given in summary(lm2).
+
+```{r}
+summary(lm1)$cov.unscaled
+```
+The correlation between $\hat{\mu}_1$ and $\hat{\mu}_2$ is 0. This is because $\mu_1$ is estimated using $y_{1j}$,$j=1,...,12$ while $\mu_2$ is estimated using $y_{2j}$,$j=1,...,12$. Thus $\hat{\mu}_1$ and $\hat{\mu}_2$ are independent since $y_{ij}$ are assumed to be independent.
+
+
+License: This material is provided under an [MIT license](https://ionides.github.io/401w18/LICENSE)<br>
+Acknowledgement: The randomized experiment draws on material from from https://genomicsclass.github.io/book
+
+------
