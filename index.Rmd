@@ -41,7 +41,7 @@ STATS 280, STATS 412 and ECON 451 are more advanced and therefore entirely adequ
     + Sanjana Gupta. Tue 9-11 am
     + Naomi Giertych. Thu 9-11 am
     + You may prefer to visit your Section GSI, but you're welcome to go to any office hours
-* Open office hours. You are also welcome to ask STATS 401 questions to any available Statistics GSI at USB during the open hours: Mon 9-11 am & 1-10 pm; Tue to Thu 9 am â€? 10 pm;  Friday 9â€?11 am & 1â€?4 pm;  Sat CLOSED; Sunday 12 pm â€? 10 pm.
+* Open office hours. You are also welcome to ask STATS 401 questions to any available Statistics GSI at USB during the open hours: Mon 9-11 am & 1-10 pm; Tue to Thu 9 am â€“ 10 pm;  Friday 9â€“11 am & 1â€“4 pm;  Sat CLOSED; Sunday 12 pm â€“ 10 pm.
 * Computing support: inquire by email, with a detailed description of the problem, what you did, and any error message you obtained. It can be helpful to provide a minimal example that can be run to demonstrate the problem. Please email your Section GSI.
 * Textbook: S. Sheather ``A Modern Approach to Regression with R''. A pdf is available from the UM Library.
 
@@ -93,7 +93,6 @@ The GSI may provide some feedback on correctness, but students are responsible f
 
 8. [Additional topics in linear modeling](08/notes08.pdf). [(R script)](08/notes08.R).
 
-
 --------
 
 ## Homework assignments
@@ -119,7 +118,7 @@ Due in your lab on 2/8 or 2/9. [Solutions](hw/hw05/sol_hw05.html).
 * [Homework 6. Variance, covariance and standard errors for fitting a linear model](hw/hw06/hw06.html). 
 Due in your lab on 2/15 or 2/16. [Solutions](hw/hw06/sol_hw06.html).
 
-* [Homework 7. Using a linear model for investigation of two populations](hw/hw07/hw07.html). Due in your lab on 3/15 or 3/16. [Solutions](hw/hw07/sol_hw07.html).
+* [Homework 7. Using a linear model for investigation of two populations](hw/hw07/hw07.html). Due in your lab on 3/15 or 3/16. [Solutions](hw/hw07/sol_hw07.html)
 
 * [Homework 8. Making an F test, and exploring the t and F distributions](hw/hw08/hw08.html). Due in your lab on 3/22 or 3/23.
 

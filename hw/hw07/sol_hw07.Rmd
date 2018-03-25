@@ -1,5 +1,5 @@
 ---
-title: "Homework 8 Solution"
+title: "Homework 7 Solution"
 output:
   html_document:
     theme: flatly

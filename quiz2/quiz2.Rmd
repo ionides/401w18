@@ -112,11 +112,8 @@ q3_files <- list.files(path="q3",full.names=T,pattern="*.Rmd$")
 ```
 ```{r q3-2, child = q3_files[2],eval=ALL}
 ```
-```{r q3-3, child = q3_files[3],eval=ALL}
-```
 
 ### Q4. Making and interpreting an F test
-
 
 ```{r q4-all-list,include=F}
 q4_files <- list.files(path="q4",full.names=T,pattern="*.Rmd$")
