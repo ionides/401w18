@@ -79,6 +79,7 @@ Check that the model we intend is appropriate for the data.
 
 \begin{myitemize}
 \item  The linear model formula notation in R, as a third model representation to join the subscript format and matrix format.  
+\item Interactions between explanatory variables.
 \item The \m{R^2} statistic to assess model fit.
 \item  Fitting polynomial relationships using linear models.
 \item  Multicolinearity: What happens when two or more explanatory variables are highly correlated. How to notice it, and what to do about it.
