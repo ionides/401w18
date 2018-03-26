@@ -23,6 +23,12 @@ lm3 <- lm(GPA~ACT*High_School,data=gpa)
 coef(summary(lm3))[,1:2]
 
 ## ------------------------------------------------------------------------
+ACT_centered <- gpa$ACT-mean(gpa$ACT)
+HS_centered <- gpa$Hi - mean(gpa$Hi)
+lm3b <- lm(GPA~ACT_centered*HS_centered,data=gpa)
+signif(coef(summary(lm3b))[,c(1,2,4)],3)
+
+## ------------------------------------------------------------------------
 s3 <- summary(lm3)$sigma
 lm4 <- lm(GPA~ACT+High_School,data=gpa)
 s4 <- summary(lm4)$sigma

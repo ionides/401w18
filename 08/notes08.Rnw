@@ -206,6 +206,32 @@ coef(summary(lm3))[,1:2]
 
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Marginal effects when there is an interaction}
+
+\vspace{-2mm}
+
+\begin{myitemize}
+\item Notice in `lm3` that the coefficients for ACT score and high school percentile are negative. That is surprising!
+\end{myitemize}
+
+\vspace{-2mm}
+
+<<>>=
+ACT_centered <- gpa$ACT-mean(gpa$ACT)
+HS_centered <- gpa$Hi - mean(gpa$Hi)
+lm3b <- lm(GPA~ACT_centered*HS_centered,data=gpa)
+signif(coef(summary(lm3b))[,c(1,2,4)],3)
+@
+
+\vspace{-3mm}
+
+\myquestion. After centering the variables, the interaction effect stays the same, but the marginal effects change sign. What is happening? Why?
+
+\vspace{30mm}
+
+\end{frame}
+
 
 \begin{frame}[fragile]
 \frametitle{Quantifying the improvement in the model}
