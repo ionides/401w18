@@ -20,10 +20,12 @@ summary(lm_bw)
 ```{r}
 anova(lm_bw)
 ```
-(a). Write out the null and alternative hypotheses of the F test by completely specifying the probability models.
 
-(b). Interpret the results in `anova(lm_gpa)`. Specifically, 
-read the sample test statistic from R output, give the distribution of the model-generated test statistic under $H_0$, and explain how the resulting p-value is calculated and interpreted.
+(a) Write out the null and alternative hypotheses of the F test by completely specifying the probability models.
+
+(b) Interpret the results in `anova(lm_gpa)`. Specifically, 
+read the sample test statistic from R output, give the distribution of the model-generated test statistic under $H_0$, and explain how the resulting p-value is calculated and interpreted. Your answer should givie relevant formulas, though you may define a residual sum of squares in words without explicitly saying how it is constructed.
+
 
 ---------
 

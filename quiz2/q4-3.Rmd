@@ -8,7 +8,7 @@ anova(lm_vg3)
 
 (a) Let $\pi_j$ be a factor for publisher, where $j=1,2$ specifies Electronic Arts and Activision, respectively. Let $\gamma_k$ be a factor for genre, where $k=1,2,3$ specifies shooter, sports and action respectively. Let $y_{ijk}$ be the sales for the $i$th game having publisher $j$ and genre $k$, and let $Y_{ijk}$ be a probability model for $y_{ijk}$. Using this notation, complete the explicit specification of a the null and alternative hypothesis for an F-test that evaluates whether there is a statistically significant difference between sales of different genres. 
 
-(b) Explain how the test statistic and p-value are constructed for this F-test.
+(b) Explain how the test statistic and p-value are constructed for this F-test, giving relevant formulas. You may define a residual sum of squares in words, without writing out an explicit formula for this.
 
 (c) Interpret the results of this test, as given in the above ANOVA table. 
 
