@@ -1,0 +1,176 @@
+---
+title: "Homework 8 Solutions"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+**Write a report answering the questions below, and including your R code.
+Recall that you are permitted to collaborate, or to use any internet resources, but you must list all sources that make a substantial contribution to your report.
+As usual, following the syllabus, you are also requested to give some feedback in a "Please explain" statement.
+**
+
+--------------
+
+### Exploring the t and F distributions
+
+**Question 1.** Use the R functions `pt()` and `pf()` to provide convincing evidence that if $T$ is a random variable following Student’s t distribution on n degrees of freedom, and $F$ is a random variable following the F distribution on 1 and n degrees of freedom, then $T^2$ has the same distribution as $F$.
+
+```{r}
+
+library(ggplot2)
+
+# Explore using pt() and pf()
+
+pt(-3, 10)
+pt(9, 10)
+pf(9, 1, 10)
+
+pt(-2, 10)
+pt(4, 10)
+pf(4, 1, 10)
+
+```
+
+For a more complete exploration, I graphed the $T$ distribution on 10 degrees of freedom, $T^2$ and the $F$ distribution. You were not expected to do this.
+
+```{r}
+
+# Graphing as "proof"
+
+m = 10000
+
+t = matrix(c(seq.int(-3*m, 3*m)))
+colnames(t) <- "t"
+t = t/m
+t <- as.data.frame(t)
+t$prob <- dt(t$t, 10)
+
+plot(t$t, t$prob, main = "T distribution with 10 df", xlab = "t", ylab = "Density", type = "l")
+
+t$t2 <- t$t^2
+t$t2_prob <- dt(t$t, 10)
+t$f_prob <- df(t$t2, 1, 10)
+
+f <- t[, 3:5]
+f <- unique(f)
+
+ggplot() + geom_line(aes(x= f$t2, y = f$t2_prob)) + ylim(0,0.4) + labs(x = "t^2", y = "Density", title = "T distribution with t^2 and 10 degrees of freedom")
+ggplot() + geom_line(aes(x= f$t2, y = f$f_prob)) + ylim(0,0.4) + labs(x = "t^2", y = "Density", title = "F distribution with t^2 and (1, 10) degrees of freedom")
+
+
+```
+
+We note that the approximations are not exact.
+
+**Question 2.** The random variable *T* is defined to have the t distribution on *n* degrees of freedom if $$T = \frac {X_0}{(\frac 1n \sum_{i=1}^n X_i^2)}$$ where $X_0, X_1, \dots, X_n$ are independent identically distributed (iid) *N[0,1]* random variables. Now consider the random variable $$\bar T = \frac {\sqrt{n} \bar X}{\frac 1{n-1} \sum_{i=1}^n (X_i - \bar X)^2}$$ where $\bar X = \frac 1n \sum_{i=1}^n X_i$. Here, *$\bar T$* is the model generated statistic corresponding to a sample statistic $$\bar t = \bar x/ SE(\bar x)$$ where $SE(\bar x)= \frac{s}{\sqrt{n}}$ with $s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i-\bar x)^2$. Note that $\bar t$ is a test statistic for a one-sample t-test investigating whether a sample can reasonably be modeled as having mean zero.
+
+(a) Simulate a large number of draws of $\bar T$ from the null hypothesis that $X_1,\dots,X_n$ are iid $N[0,1]$, with $n=8$.
+
+(b) Plot a histogram of these simulations and add a line corresponding to the t density of a $t$ distribution on 7 degrees of freedom. These should be similar.
+
+Solution to (a) and (b):
+
+```{r}
+
+N <- 50000 ; sigma <- 1 ; d <- 7 ; set.seed(23)
+X <- matrix(rnorm(N*(d+1),mean=0,sd=sigma),nrow=N)
+T_evaluator <- function(x) x[d+1] / sqrt(sum(x[1:d]^2)/d)
+Tsim <- apply(X,1,T_evaluator)
+hist(Tsim,freq=F,main="", breaks=30,ylim=c(0,0.4))
+x <- seq(length=200,min(Tsim),max(Tsim))
+lines(x,dt(x,df=d), col="red")
+
+```
+
+(c) Explain why $\sum_{i=1}^n (X_i-\bar X)^2$ behaves like a sum of squares on $n-1$ degrees of freedom, not $n$. You are expected to make an intuitive explanation; you are not asked to show this mathematically. 
+
+Solution:
+
+$X_i$ and $\bar X$ are not independent because $\bar X = \frac 1n \sum_{i=1}^n X_i$ which is dependent on $X_i$.
+
+(d) Check that $Cov(\bar X,X_i-\bar X)=0$ for each $i=1,2,\dots,n$, by using the bilinarity of covariance, which in its simplest form is $Cov(X,Y+Z)=Cov(X,Y)+Cov(X,Z)$ and in general is
+\[
+Cov\Big(\sum_{i=1}^na_iX_i,\sum_{j=1}^nb_jX_j\Big)=\sum_{i=1}^n\sum_{j=1}^n a_ib_iCov(X_i,X_j).\]
+This means that each term $X_i-\bar X$ in the denominator of the formula for $\bar T$ is uncorrelated with the numerator. It is a fact that multivariate normal random variables that are uncorrelated are also independent. Thus, the numerator and denominator of $\bar T$ are independent, just as in the formula for $T$.
+
+Solution:
+
+Consider n = 3 and $X_i = X_1$
+
+\begin{equation*}
+Cov(\bar X, X_i - \bar X) \\
+Cov(\frac 13 (X_1 + X_2 + X_3), X_1 - \frac 13 (X_1 + X_2 + X_3))\\
+Cov(\frac 13 X_1 + \frac 13 X_2 + \frac 13 X_3), (1 - \frac 13)X_1 - \frac 13 X_2 - \frac 13 X_3)\\
+\end{equation*}
+
+We don't need to consider $Cov(X_1, X_2), Cov(X_1, X_3),$ or $Cov(X_2, X_3)$ because $X_1, X_2$, and $X_3$ are independent. Thus $Cov(X_1, X_2), Cov(X_1, X_3),$ or $Cov(X_2, X_3)$ are equal to 0. Therefore,
+
+\begin{equation*}
+Cov(\frac 13 X_1 + \frac 13 X_2 + \frac 13 X_3), (1 - \frac 13)X_1 - \frac 13 X_2 - \frac 13 X_3)\\
+Cov(\frac 13 X_1, (1- \frac 13) X_1) + Cov(\frac 13 X_2, -\frac 13 X_2) + Cov(\frac 13 X_3, -\frac 13 X_3) \\
+\frac 13 {(1- \frac 13) Cov(X_1, X_1) + \frac 13 Cov(X_2, X_2) + \frac 13 Cov(X_3, X_3)} \\
+\frac 13 {(1- \frac 13) *1 + \frac 13 *1 + \frac 13 *1} \\
+\frac 13 (0) \\
+0
+\end{equation*}
+
+Since this same argument works for any value of $n$, $Cov(\bar X,X_i-\bar X)=0$. Similarly, we don't need to consider $Cov(\bar X,X_2-\bar X), Cov(\bar X,X_3-\bar X),etc.$ because $X_1, X_2, etc.$ are iid.
+
+--------
+
+### Making and interpreting an F test
+
+We consider again the data on freshman GPA, ACT exam scores and percentile ranking of each student within their high school for 705 students at a large state university in the file [gpa.txt](gpa.txt).
+In addition, we now consider the year (1996 to 2000) in which the student entered college.
+
+```{r, echo = F}
+library(readxl)
+gpa <- read_excel("~/Documents/UMich/Classes/2018 Spring/STATS 401/gpa.xlsx")
+head(gpa)
+```
+
+```{r read_data, echo = T, eval = F}
+gpa <- read.table("gpa.txt",header=T)
+head(gpa)
+```
+There are many ways in which the predictive relationship between freshman GPA and the admission scores may, or may not, be stable over time.
+The director of admissions is interested in what ways, if any, there is evidence for changes larger than can be explained by chance variation. 
+Let the null hypothesis, $H_0$, be the probability model considered in the midterm exam, where freshman GPA is modeled to depend linearly on ACT score and high school ranking.
+Let $H_a$ be the probability model where $H_0$ is extended to include year as a factor, as fitted in R by
+```{r lm}
+lm_gpa <- lm(GPA~High_School+ACT+factor(Year),data=gpa)
+```
+
+**Question 3**.
+
+(a) Write out the null and alternative hypotheses by completely specifying the probability models. Sometimes in class, to save time and space, we don't write the complete details of each model. Here, you are asked to do that. Looking at `model.matrix(lm_gpa)` may help you to understand the model that R has fitted. You can write the models in either matrix or subscript form.
+
+Solution:
+
+$Y_i = \beta_0 + \beta_1X_{i,1} + \beta_2X_{i,2} + \beta_3X_{i,3} + \beta_4X_{i,4} + \beta_5X_{i,5} + \beta_6X_{i,6}$
+
+wher $Y_i$ is the GPA of freshman i, $X_1$ is the percentile ranking of each student within their high school, $X_2$ is the ACT score, and $X_3, \dots X_6$ are indicators for the year in which the student entered college.
+
+(b) Interpret the results in `summary(lm_gpa)`. Is there any evidence that some year, or years, may have different intercept? Why is there no row in the results table for `factor(Year)1996`?
+
+```{r}
+summary(lm_gpa)
+```
+
+Based on the summary, the percentile ranking of the student in their high school and their ACT score are significant in determining a student's freshman GPA in college. However, there is no evidence that any of the years have a different intercept because none of coefficients are statistically signficant.
+
+There is no row for `factor(Year)1996` because it is contained in the intercept.
+
+(c) Interpret the results in `anova(lm_gpa)`. Write out in detail an F test to test $H_0$ against $H_a$, explaining how the sample test statistic is constructed, giving the distribution of the model-generated test statistic under $H_0$, and saying how the resulting p-value is calculated and interpreted.
+
+```{r}
+anova(lm_gpa)
+```
+$$H_0: Y_i = \beta_0 + \beta_1X_{i,1} + \beta_2X_{i,2}$$
+$$H_a: Y_i = \beta_0 + \beta_1X_{i,1} + \beta_2X_{i,2} + \beta_3X_{i,3} + \beta_4X_{i,4} + \beta_5X_{i,5} + \beta_6X_{i,6}$$
+
+$$f = \frac {(RSS_0 - RSS_a)/d}{RSS_a/(n-q)}$$
+where $f$ ~ $F_{4, 698}$. The p-value was calculated as the $P(f^* > f = 0.824)$. Since the p-value is equal to 0.505 we fail to reject the null hypothesis at an $\alpha = 0.05$. The ANOVA agrees with what we saw in the regression output: the year a student enters college is not signficant.
