@@ -18,52 +18,16 @@ As usual, following the syllabus, you are also requested to give some feedback i
 
 **Question 1.** Use the R functions `pt()` and `pf()` to provide convincing evidence that if $T$ is a random variable following Student’s t distribution on n degrees of freedom, and $F$ is a random variable following the F distribution on 1 and n degrees of freedom, then $T^2$ has the same distribution as $F$.
 
-```{r}
-
-library(ggplot2)
-
-# Explore using pt() and pf()
-
-pt(-3, 10)
-pt(9, 10)
-pf(9, 1, 10)
-
-pt(-2, 10)
-pt(4, 10)
-pf(4, 1, 10)
-
-```
-
-For a more complete exploration, I graphed the $T$ distribution on 10 degrees of freedom, $T^2$ and the $F$ distribution. You were not expected to do this.
+To understand the code provided below, note that if $T$ follows the t-distributoin (with n degrees of freedom), then $T^2$ follows the F Distribution (with 1 and n degrees of freedom). Note that, if $T^2<x$ this means that $ -\sqrt{x} < T < \sqrt{x}$. This means that pf(x,1,n) = $P(T^2<x) = P(-\sqrt{x}<T<\sqrt{x}) = P(T< \sqrt{x}) - P(T< - \sqrt{x})$ = pt($\sqrt{x}$,n) - pt($-\sqrt{x}$,n). Let us confirm this using R.
+We will compare the probability values from the two distributions for a series of values for X. Fix the degrees of freedom of the t-distribution to be any number (n=10 in this case).
 
 ```{r}
+# Fix degrees of freedom of t distribution
+n=10
 
-# Graphing as "proof"
-
-m = 10000
-
-t = matrix(c(seq.int(-3*m, 3*m)))
-colnames(t) <- "t"
-t = t/m
-t <- as.data.frame(t)
-t$prob <- dt(t$t, 10)
-
-plot(t$t, t$prob, main = "T distribution with 10 df", xlab = "t", ylab = "Density", type = "l")
-
-t$t2 <- t$t^2
-t$t2_prob <- dt(t$t, 10)
-t$f_prob <- df(t$t2, 1, 10)
-
-f <- t[, 3:5]
-f <- unique(f)
-
-ggplot() + geom_line(aes(x= f$t2, y = f$t2_prob)) + ylim(0,0.4) + labs(x = "t^2", y = "Density", title = "T distribution with t^2 and 10 degrees of freedom")
-ggplot() + geom_line(aes(x= f$t2, y = f$f_prob)) + ylim(0,0.4) + labs(x = "t^2", y = "Density", title = "F distribution with t^2 and (1, 10) degrees of freedom")
-
-
+for(x in c(1,5,9,16,25,36)){print(c(pf(x,1,n), pt(sqrt(x),n)-pt(-sqrt(x),n)))}
 ```
 
-We note that the approximations are not exact.
 
 **Question 2.** The random variable *T* is defined to have the t distribution on *n* degrees of freedom if $$T = \frac {X_0}{(\frac 1n \sum_{i=1}^n X_i^2)}$$ where $X_0, X_1, \dots, X_n$ are independent identically distributed (iid) *N[0,1]* random variables. Now consider the random variable $$\bar T = \frac {\sqrt{n} \bar X}{\frac 1{n-1} \sum_{i=1}^n (X_i - \bar X)^2}$$ where $\bar X = \frac 1n \sum_{i=1}^n X_i$. Here, *$\bar T$* is the model generated statistic corresponding to a sample statistic $$\bar t = \bar x/ SE(\bar x)$$ where $SE(\bar x)= \frac{s}{\sqrt{n}}$ with $s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i-\bar x)^2$. Note that $\bar t$ is a test statistic for a one-sample t-test investigating whether a sample can reasonably be modeled as having mean zero.
 
