@@ -3,17 +3,19 @@ Recall the nels88 dataset from lab. In this, they examined a subset of the Natio
 ```{r lm_example}
 library(faraway)
 data(nels88)
-head(nels88,4)
+head(nels88,5)
+```
+We fit a regression model to the data. The rounded co-efficients for the model are provided below:
+```{r}
 fit <- lm(math ~ ses + paredu, data = nels88)
 round(summary(fit)$coef)
-summary(fit)
 ```
 
 (a)  Describe a suitable probability model, in matrix form, to give a sample version of the linear model that has been fit above.
 
 (b) Find the predicted math score for a student whose family has an ses value of -0.5 and whose parents' highest education level is high school (hs).
 
-(c) How do you calculate the residual standard error of this model? (Give the formula). Assume the actual math score of the student (that you just predicted above) is 50. Is the prediction error (mean squared error) less than, greater than or equal to the residual standard error of the model?
+(c) How do you calculate the residual standard error of this model? (Give the formula).
 
 -------
 
