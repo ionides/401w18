@@ -14,8 +14,7 @@ ALL <- TRUE
 #ALL <- FALSE
 SOL <- FALSE
 #SOL <- TRUE
-set.seed(12)
-library(mat2tex)
+set.seed(1)
 ```
 
 \ifthenelse{\isodd{0}}{

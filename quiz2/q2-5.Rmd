@@ -14,7 +14,7 @@ round(summary(fit)$coef)
 
 (b) Find the predicted math score for a student whose family has an ses value of -0.5 and whose parents' highest education level is high school (`hs`).
 
-(c) How do you calculate the residual standard error of this model? (Give the formula).
+(c) How is the residual standard error calculated for this model? (Give a formula).
 
 -------
 
