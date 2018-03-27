@@ -1,0 +1,36 @@
+Recall the crabs dataset used in lab. Here, "BD" refers to the body depth of the crabs. 'sp' denotes the colour of the crabs, which is one of blue or orange.
+
+```{r}
+data(crabs)
+head(crabs)
+crabs$mu1 <- (crabs$sp == "B")*1
+crabs$mu2 <- (crabs$sp == "O")*1
+crabs$mu3 <- 1
+crabs$mu4 <- 1-crabs$mu1
+crabs$mu_diff <- crabs$mu2
+
+fit1 <- lm(BD~mu1+mu2-1, data = crabs)
+fit2 <- lm(BD ~ mu3 + mu_diff - 1, data = crabs)
+fit3 <- lm(BD ~ mu2, data = crabs)
+fit4 <- lm(BD ~ 1-mu1, data = crabs)
+fit5 <- lm(BD ~ mu4, data = crabs)
+fit6 <- lm(BD~mu1+mu2, data = crabs)
+```
+(a) Would any of the models (fit1-fit5) give the same co-efficients? If yes, list them.
+
+Consider the model $Y_i = b_1\mu_{Bi} + b_2\mu_{Oi} + \epsilon_i$,$i=1,...,200$. $Y_i$ is the Body weight of observation i. $\mu_{Bi}$ is 1 if $sp=B$ for obervation i and 0 otherwise. Similarly, $\mu_{Oi}$ is 1 if $sp=O$ for obervation i and 0 otherwise. $\epsilon_i$ are i.i.d with mean 0 and variance $\sigma^2$. This model can be fitted to the `crabs` dataset in R using the `lm()` function. The resulting summary is provided below.
+```{r}
+summary(fit1)
+```
+
+(b1) What do $b_1$ and $b_2$ measure in the above model?
+
+(b2) Recall from homework that the matrix $\mathbf{\hat{b}} = (\hat{b}_1,\hat{b}_2)$ can be found by  
+```{r}
+V <- summary(lm_crab)$cov.unscaled * summary(lm_crab)$s^2; V
+```
+
+Construct the 95% confidence interval for $b_1-b_2$ using normal approximation. Based on this, do we have sufficient evidence to conclude that $b_1=b_2$ (at 95% level)?
+
+----------- 
+

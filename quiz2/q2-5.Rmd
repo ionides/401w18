@@ -1,0 +1,20 @@
+Recall the nels88 dataset from lab. In this, they examined a subset of the National Education Longitudinal Study of 1988 which examined schoolchildren’s performance on a math test score in 8th grade. “ses” is the socioeconomic status of parents and “paredu” is the parents highest level of education achieved (less than high school, high school, college, BA, MA, PhD).The data was as follows
+
+```{r lm_example}
+library(faraway)
+data(nels88)
+head(nels88,4)
+fit <- lm(math ~ ses + paredu, data = nels88)
+round(summary(fit)$coef)
+summary(fit)
+```
+
+(a)  Describe a suitable probability model, in matrix form, to give a sample version of the linear model that has been fit above.
+
+(b) Find the predicted math score for a student whose family has an ses value of -0.5 and whose parents' highest education level is high school (hs).
+
+(c) How do you calculate the residual standard error of this model? (Give the formula). Assume the actual math score of the student (that you just predicted above) is 50. Is the prediction error (mean squared error) less than, greater than or equal to the residual standard error of the model?
+
+-------
+
+
