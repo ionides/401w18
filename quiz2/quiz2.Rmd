@@ -74,27 +74,26 @@ p: vector of probabilities.
 ### Q1. Calculating means and variances, and making a normal approximation
 
 ```{r q1-all-list,include=F}
-q1_files <- list.files(path="q1",full.names=T,pattern="*.Rmd$") 
+q1_files <- list.files(full.names=T,pattern="^q1") 
+file.create("tmp1.Rmd")
+file.append("tmp1.Rmd",q1_files)
 ```
 ```{r q1, child = sample(q1_files,size=1),eval=!ALL}
 ```
-```{r q1-1, child = q1_files[1],eval=ALL}
+```{r q1-all, child = "tmp1.Rmd",eval=ALL}
 ```
-```{r q1-2, child = q1_files[2],eval=ALL}
-```
-```{r q1-3, child = q1_files[3],eval=ALL}
-```
+
 
 
 ### Q2. Prediction using a linear model
 ```{r q2-all-list,include=F}
-q2_files <- list.files(path="q2",full.names=T,pattern="*.Rmd$")
+q2_files <- list.files(full.names=T,pattern="^q2")
+file.create("tmp2.Rmd")
+file.append("tmp2.Rmd",q2_files)
 ```
 ```{r q2, child = sample(q2_files,size=1),eval=!ALL}
 ```
-```{r q2-1, child = q2_files[1],eval=ALL}
-```
-```{r q2-2, child = q2_files[2],eval=ALL}
+```{r q2-all, child = "tmp2.Rmd",eval=ALL}
 ```
 
 
@@ -104,25 +103,25 @@ This question will be based on HW7. It will involve either confidence interval c
 
 
 ```{r q3-all-list,include=F}
-q3_files <- list.files(path="q3",full.names=T,pattern="*.Rmd$")
+q3_files <- list.files(full.names=T,pattern="^q3")
+file.create("tmp3.Rmd")
+file.append("tmp3.Rmd",q3_files)
 ```
 ```{r q3, child = sample(q3_files,size=1),eval=!ALL}
 ```
-```{r q3-1, child = q3_files[1],eval=ALL}
-```
-```{r q3-2, child = q3_files[2],eval=ALL}
+```{r q3-all, child = "tmp3.Rmd" ,eval=ALL}
 ```
 
 ### Q4. Making and interpreting an F test
 
 ```{r q4-all-list,include=F}
-q4_files <- list.files(path="q4",full.names=T,pattern="*.Rmd$")
+q4_files <- list.files(full.names=T,pattern="^q4")
+file.create("tmp4.Rmd")
+file.append("tmp4.Rmd",q4_files)
 ```
 ```{r q4, child = sample(q4_files,size=1),eval=!ALL}
 ```
-```{r q4-1, child = q4_files[1],eval=ALL}
-```
-```{r q4-2, child = q4_files[2],eval=ALL}
+```{r q4-all, child="tmp4.Rmd",eval=ALL}
 ```
 
 ------

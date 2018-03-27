@@ -12,5 +12,5 @@ anova(lm_kickers)
 
 (c) Interpret the outcome of this test.
 
-
 --------------
+
