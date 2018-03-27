@@ -9,9 +9,9 @@ summary(lm_bw)$coef
 ```
 Now suppose we are interested in predicting the birthweight of a baby who has a 30-year-old white mother with weight 130. 
 
-(a) Specify a row matrix $\mathbf{x}^*$ so that $\hat y^*=\mathbf{x}^*\mathbf{b}$ gives the least square predictor.
+(a) Specify a row matrix $\vect{x}^*$ so that $\hat y^*=\vect{x}^*\vect{b}$ gives the least square predictor.
 
-(b) Write an expression for the variance of $\hat Y^*=\mathbf{x}^*\mathbf{\hat\beta}$ where $\mathbf{\hat\beta}$ is the least squares fit on model-generated data, i.e., $\mathbf{\hat\beta}=(\mat{X}^\transpose\mat{X})^{-1}\mat{X}^\transpose \vect{Y}$.
+(b) Write a matrix expression for the variance of $\hat Y^*=\vect{x}^*\vect{\hat\beta}$ where $\vect{\hat\beta}$ is the least squares fit on model-generated data, i.e., $\vect{\hat\beta}=(\mat{X}^\transpose\mat{X})^{-1}\mat{X}^\transpose \vect{Y}$.
 
 ------------
 
