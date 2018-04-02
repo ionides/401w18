@@ -1,0 +1,38 @@
+---
+title: "Homework 9, STATS 401 W18"
+author: "Due in your lab on 4/12 or 4/13"
+output:
+  html_document:
+    theme: flatly
+    toc: yes
+csl: ecology.csl
+---
+
+\newcommand\E{\mathrm{E}}
+\newcommand\SE{\mathrm{SE}}
+\newcommand\var{\mathrm{Var}}
+\newcommand\cov{\mathrm{Cov}}
+\newcommand\prob{\mathrm{P}}
+\newcommand\mat[1]{\mathbb{#1}}
+\renewcommand\vect[1]{\boldsymbol{\mathrm{#1}}}
+\newcommand\transpose{{\scriptscriptstyle \mathrm{T}}}
+\usepackage{amsmath}
+
+
+**Write a report analyzin the following dataset. Include R code as an appendix.
+Recall that you are permitted to collaborate, or to use any internet resources, but you must list all sources that make a substantial contribution to your report.
+As usual, following the syllabus, you are also requested to give some feedback in a "Please explain" statement.
+**
+
+**This capstone homework will be graded on completeness, as for other homeworks. In this case, completeness will be measured by how many of the ideas we have developed in the course you consider in your report.**
+
+
+
+--------------
+
+-------------
+
+License: This material is provided under an [MIT license](https://ionides.github.io/401w18/LICENSE)<br>
+
+
+------
