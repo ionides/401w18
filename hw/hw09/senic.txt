@@ -1,10 +1,19 @@
-# Data on 113 hospitals from the Study on the Efficacy of Nosocomial Infection Control (SENIC)
+# Data on 113 hospitals from the Study on the Efficacy of Nosocomial Infection Control (SENIC) 
+# From Kutner, Nachtscheim, Neter and Li
+# Applied Linear Statistical Models, 5th Edition, Appendix C1
 # Hospital: index from 1 to 113
 # Length of stay: average duration (in days) for all patients
 # Age: average age (in years) for all patients
 # Infection risk: estimated percentage of patients acquiring an infection in hospital
 # Culture: average number of cultures for each patient without signs or symptoms of hospital-acquired infection, times 100
-"Hospital" "Length of stay" "Age" "Infection risk" "Culture" "Xray" "Beds" "Med school" "Region" "Patients" "Nurses" "Facilities"
+# X-ray: number of X-ray procedures divided by number of patients without signs or symptoms of pneumonia, times 100
+# Beds: average number of beds in the hospital
+# Med school: does the hospital have an affiliated medical school (1=Yes;2=No)
+# Region: geographic region (1=North-East, 2=North-Central, 3=South, 4=West)
+# Patients: average daily census of number of patients in the hospital
+# Nurses: average number of full-time equivalent registed and licensed nurses
+# Facilities: percent of 35 specific facilities and services which are provided by the hospital
+"Hospital" "Length of stay" "Age" "Infection risk" "Culture" "X-ray" "Beds" "Med school" "Region" "Patients" "Nurses" "Facilities"
   1   7.13  55.7  4.1   9.0   39.6  279  2  4  207  241  60.0
   2   8.82  58.2  1.6   3.8   51.7   80  2  2   51   52  40.0
   3   8.34  56.9  2.7   8.1   74.0  107  2  3   82   54  20.0
