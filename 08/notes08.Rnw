@@ -463,6 +463,67 @@ det(t(X2)%*%X2)
 
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Using linear models to fit polynomial relationships}
+
+\begin{myitemize}
+\item Recall the basic linear trend model from Chapter~1 for data \m{y_1,\dots,y_n} with \m{y_i} measured at time \m{t_i},
+\altdisplaymath{
+\mathrm{[M1]} \quad y_i = b_0 + b_1 t_i + e_i, \quad i=1,\dots,n
+}
+\item What if the data have a trend that is not linear?
+\item The next thing we might consider is a quadratic trend model,
+\altdisplaymath{
+\mathrm{[M2]} \quad y_i = b_0 + b_1 t_i + b_2 t_i^2 + e_i, \quad i=1,\dots,n
+}
+\item [M1] and [M2] are both linear models, with respectiv design matrices
+\mydisplaymath{
+\mat{X}^{[1]}=\begin{bmatrix}
+1 & t_1 \\
+1 & t_2 \\
+\vdots & \vdots \\
+1 & t_n
+\end{bmatrix}
+\quad\quad
+\mat{X}^{[1]}=\begin{bmatrix}
+1 & t_1 & t_1^2 \\
+1 & t_2 & t_2^2 \\
+\vdots & \vdots \\
+1 & t_n & t_n^2
+\end{bmatrix}
+}
+\end{myitemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The order $p$ polynomial model}
+
+\begin{myitemize}
+\item We can get additional flexibility in modeling trend by choosing a large \m{p} in the general order $p$ polynomial trend model,
+\end{myitemize}
+\altdisplaymath{
+\mathrm{[M3]} \quad y_i = b_0 + b_1 t_i + b_2 t_i^2 + b_3 t_i^3 + \dots + b_pt_i^p + e_i, \quad i=1,\dots,n
+}
+\item [M1] and [M2] are both linear models, with respectiv design matrices
+\mydisplaymath{
+\mat{X}^{[1]}=\begin{bmatrix}
+1 & t_1 \\
+1 & t_2 \\
+\vdots & \vdots \\
+1 & t_n
+\end{bmatrix}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{}
+
+\begin{myitemize}
+\item 
+\end{myitemize}
+
+\end{frame}
 
 \end{document}
 
