@@ -18,16 +18,16 @@ As usual, following the syllabus, you are also requested to give some feedback i
 
 **Question 1.** Use the R functions `pt()` and `pf()` to provide convincing evidence that if $T$ is a random variable following Student’s t distribution on n degrees of freedom, and $F$ is a random variable following the F distribution on 1 and n degrees of freedom, then $T^2$ has the same distribution as $F$.
 
-To understand the code provided below, note that if $T$ follows the t-distributoin (with n degrees of freedom), then $T^2$ follows the F Distribution (with 1 and n degrees of freedom). Note that, if $T^2<x$ this means that $ -\sqrt{x} < T < \sqrt{x}$. This means that pf(x,1,n) = $P(T^2<x) = P(-\sqrt{x}<T<\sqrt{x}) = P(T< \sqrt{x}) - P(T< - \sqrt{x})$ = pt($\sqrt{x}$,n) - pt($-\sqrt{x}$,n). Let us confirm this using R.
-We will compare the probability values from the two distributions for a series of values for X. Fix the degrees of freedom of the t-distribution to be any number (n=10 in this case).
-
 ```{r}
+
 # Fix degrees of freedom of t distribution
 n=10
 
 for(x in c(1,5,9,16,25,36)){print(c(pf(x,1,n), pt(sqrt(x),n)-pt(-sqrt(x),n)))}
+
 ```
 
+We note that the approximations are not exact.
 
 **Question 2.** The random variable *T* is defined to have the t distribution on *n* degrees of freedom if $$T = \frac {X_0}{(\frac 1n \sum_{i=1}^n X_i^2)}$$ where $X_0, X_1, \dots, X_n$ are independent identically distributed (iid) *N[0,1]* random variables. Now consider the random variable $$\bar T = \frac {\sqrt{n} \bar X}{\frac 1{n-1} \sum_{i=1}^n (X_i - \bar X)^2}$$ where $\bar X = \frac 1n \sum_{i=1}^n X_i$. Here, *$\bar T$* is the model generated statistic corresponding to a sample statistic $$\bar t = \bar x/ SE(\bar x)$$ where $SE(\bar x)= \frac{s}{\sqrt{n}}$ with $s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i-\bar x)^2$. Note that $\bar t$ is a test statistic for a one-sample t-test investigating whether a sample can reasonably be modeled as having mean zero.
 
@@ -41,10 +41,11 @@ Solution to (a) and (b):
 
 N <- 50000 ; sigma <- 1 ; d <- 7 ; set.seed(23)
 X <- matrix(rnorm(N*(d+1),mean=0,sd=sigma),nrow=N)
-T_evaluator <- function(x) x[d+1] / sqrt(sum(x[1:d]^2)/d)
-Tsim <- apply(X,1,T_evaluator)
-hist(Tsim,freq=F,main="", breaks=30,ylim=c(0,0.4))
-x <- seq(length=200,min(Tsim),max(Tsim))
+T_bar_evaluator <- function(x) sqrt(d+1)*mean(x)/sqrt(sum((x[1:d+1]-mean(x))^2)/d)
+T_bar_sim <- apply(X,1, T_bar_evaluator)
+
+hist(T_bar_sim,freq=F,main="", breaks=30,ylim=c(0,0.4))
+x <- seq(length=200,min(T_bar_sim),max(T_bar_sim))
 lines(x,dt(x,df=d), col="red")
 
 ```
@@ -137,4 +138,4 @@ $$H_0: Y_i = \beta_0 + \beta_1X_{i,1} + \beta_2X_{i,2}$$
 $$H_a: Y_i = \beta_0 + \beta_1X_{i,1} + \beta_2X_{i,2} + \beta_3X_{i,3} + \beta_4X_{i,4} + \beta_5X_{i,5} + \beta_6X_{i,6}$$
 
 $$f = \frac {(RSS_0 - RSS_a)/d}{RSS_a/(n-q)}$$
-where $f$ ~ $F_{4, 698}$. The p-value was calculated as the $P(f^* > f = 0.824)$. Since the p-value is equal to 0.505 we fail to reject the null hypothesis at an $\alpha = 0.05$. The ANOVA agrees with what we saw in the regression output: the year a student enters college is not signficant.
+where $RSS_0$ and $RSS_a$ are the residual sum of squares ($\sum_{i=1}^n (y_i - \hat y_i)^2$) for the null and alternative models, $d$ is the difference in the degrees of freedom between the null and alternative models, $n-q$ is the degrees of freedom in the altnerative model, and $f$ ~ $F_{4, 698}$. The p-value was calculated as the $P(f^* > f = 0.824)$. Since the p-value is equal to 0.505 we fail to reject the null hypothesis at an $\alpha = 0.05$ and conclude that the year a student enters college is not significant in determining their freshman GPA. The ANOVA agrees with what we saw in the regression output: the year a student enters college is not signficant.
