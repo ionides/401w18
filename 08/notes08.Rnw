@@ -468,15 +468,17 @@ det(t(X2)%*%X2)
 
 \begin{myitemize}
 \item Recall the basic linear trend model from Chapter~1 for data \m{y_1,\dots,y_n} with \m{y_i} measured at time \m{t_i},
+
 \altdisplaymath{
 \mathrm{[M1]} \quad y_i = b_0 + b_1 t_i + e_i, \quad i=1,\dots,n
 }
 \item What if the data have a trend that is not linear?
 \item The next thing we might consider is a quadratic trend model,
+
 \altdisplaymath{
 \mathrm{[M2]} \quad y_i = b_0 + b_1 t_i + b_2 t_i^2 + e_i, \quad i=1,\dots,n
 }
-\item [M1] and [M2] are both linear models, with respectiv design matrices
+\item M1 and M2 are both linear models, with respective design matrices
 \mydisplaymath{
 \mat{X}^{[1]}=\begin{bmatrix}
 1 & t_1 \\
@@ -485,7 +487,7 @@ det(t(X2)%*%X2)
 1 & t_n
 \end{bmatrix}
 \quad\quad
-\mat{X}^{[1]}=\begin{bmatrix}
+\mat{X}^{[2]}=\begin{bmatrix}
 1 & t_1 & t_1^2 \\
 1 & t_2 & t_2^2 \\
 \vdots & \vdots \\
