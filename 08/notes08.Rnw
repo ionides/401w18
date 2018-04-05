@@ -734,6 +734,58 @@ coef(summary(lm_loess))
 
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{R-squared and adjusted R-squared}
+
+\begin{myitemize}
+\item \m{R^2} is the square of the correlation between the data and the fitted values.
+\item It can also be computed as
+\mydisplaymath{
+R^2 = 1- \frac{RSS}{SST} = \frac{SST-RSS}{SST}
+}
+where \m{RSS} is the residual sum of squares and \m{SST} is the total sum of squares, defined as
+\mydisplaymath{
+SST = \sum_{i=1}^n \big(y_i-\bar y\big)^2, \quad \mbox{ where } \bar y = \frac{1}{n}\sum_{i=1}^n y_i.
+}
+\item \m{R^2} is sometimes described as the fraction of the variation in the data explained by the linear model.
+\item \m{1-R^2} is the fraction of the variation in the data left unexplained by the model.
+\end{myitemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Uses and abuses of R-squared}
+
+\begin{myitemize}
+\item Sheather (p. 30) describes \m{R^2} as ``arguably one of the most commonly misused statistics.''
+
+\item This raises questions: what are the proper uses? What are the lurking dangers?
+
+\item A low \m{R^2} sends a clear signal: the model doesn't explain the data much better than the sample mean. 
+
+\item Sometimes a small, but statistically significant, correlation is of interest. 
+If you are monitoring data on the operation of an aircraft jet engine, you want to know about evidence suggesting a malfunction as soon as it is statistically significant. 
+\myemph{Interpretation of R-squared depends on context}. 
+
+\item 
+
+\end{myitemize}
+
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{}
+
+\begin{myitemize}
+\item 
+\end{myitemize}
+
+\end{frame}
+
+
 \end{document}
 
 ------- This is just for copying to make new slides ---------
