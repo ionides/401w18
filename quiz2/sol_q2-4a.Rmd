@@ -1,0 +1,17 @@
+**Solution**:
+
+$\mathbf{Y} = \mathbb{X} \beta + \epsilon$
+
+where
+
+* $\mathbf{Y} =(Y_1, \dots, Y_n)$ is a vector random variable modeling schoolchildren's performance on a math test in 8th grade.
+  
+* $\mathbb{X} = [x_{ij}]$ is a $n \times 7$ matrix with $x_{i1}=1$ for $i = 1, \dots, n$, $x_{i2}$ is the parents' socioeconomic status for student $i$, $x_{i3}$ equals 1 if 'paredu' = college and 0 otherwise, $x_{i4}$ equals 1 if 'paredu' = high school and 0 otherwise, $x_{i5}$ equals 1 if 'paredu' = below high school and 0 otherwise, $x_{i6}$ equals 1 if 'paredu' = MA and 0 otherwise, and $x_{i7}$ equals 1 if 'paredu' = PhD and 0 otherwise.
+  
+* $\beta = (\beta_1, \dots, \beta_7)$ are the true but unknown vector of coefficients.
+  
+* $\epsilon = (\epsilon_1, \dots, \epsilon_n)$ is a vector random variable modeling chance variation. It follows the measurement error model, with $E[\epsilon] = 0$ and $Var(\epsilon) = \sigma^2 \mathbb{I}$ where $\mathbb{I}$ is the $n \times n$ identity matrix and $\sigma$ is the measurement standard deviation.
+  
+* All vectors are interpreted as column vectors.
+
+

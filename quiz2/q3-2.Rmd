@@ -1,4 +1,4 @@
-
+\if \QLABELS1 Q3-2. \fi
 Let's consider the crabs data set we studied in lab. Recall that species (`sp`) is a factor with two levels, Blue (`B`) and Orange (`O`). We want to study the difference of frontal lobe size (`FL`) of two species. 
 
 ```{r}

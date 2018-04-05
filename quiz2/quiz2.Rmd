@@ -9,11 +9,13 @@ header-includes:
 csl: ecology.csl
 ---
 
+\def\QLABELS{1}
+
 ```{r preliminaries,echo=F,cache=F}
 ALL <- TRUE
 #ALL <- FALSE
-SOL <- FALSE
-#SOL <- TRUE
+#SOL <- FALSE
+SOL <- TRUE
 set.seed(1)
 ```
 

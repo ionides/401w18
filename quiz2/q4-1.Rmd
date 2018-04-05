@@ -1,3 +1,4 @@
+\if \QLABELS1 Q4-1. \fi
 The following is an ANOVA analysis of the football field goal kicking data that we have seen repeatedly.
 Recall that `Name` is the name of the kicker, `FGt` is the field goal percentage for the kicker in that year, and `FGtM1` is the percentage for that kicker in the previous year.
 ```{r read_data}
