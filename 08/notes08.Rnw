@@ -741,11 +741,11 @@ coef(summary(lm_loess))
 \item \m{R^2} is the square of the correlation between the data and the fitted values.
 \item It can also be computed as
 \mydisplaymath{
-R^2 = 1- \frac{RSS}{SST} = \frac{SST-RSS}{SST}
+R^2 = 1- \frac{\RSS}{\SST} = \frac{\SST-\RSS}{\SST}
 }
-where \m{RSS} is the residual sum of squares and \m{SST} is the total sum of squares, defined as
+where \m{\RSS} is the residual sum of squares and \m{\SST} is the total sum of squares, defined as
 \mydisplaymath{
-SST = \sum_{i=1}^n \big(y_i-\bar y\big)^2, \quad \mbox{ where } \bar y = \frac{1}{n}\sum_{i=1}^n y_i.
+\SST = \sum_{i=1}^n \big(y_i-\bar y\big)^2, \quad \mbox{ where } \bar y = \frac{1}{n}\sum_{i=1}^n y_i.
 }
 \item \m{R^2} is sometimes described as the fraction of the variation in the data explained by the linear model.
 \item \m{1-R^2} is the fraction of the variation in the data left unexplained by the model.
@@ -768,7 +768,7 @@ SST = \sum_{i=1}^n \big(y_i-\bar y\big)^2, \quad \mbox{ where } \bar y = \frac{1
 If you are monitoring data on the operation of an aircraft jet engine, you want to know about evidence suggesting a malfunction as soon as it is statistically significant. 
 \myemph{Interpretation of R-squared depends on context}. 
 
-\item 
+\item The \m{R^2} statistic compares the residual sum of squares under the full model with the residual sum of squares under a model with a constant mean. By contrast, the F test compares the full model with a model that omits specific selected explanatory variables. The F test is more appropriate for assessing whether a variable, or group of variables, should be included in the model. 
 
 \end{myitemize}
 
@@ -777,11 +777,53 @@ If you are monitoring data on the operation of an aircraft jet engine, you want 
 
 
 \begin{frame}[fragile]
-\frametitle{}
+\frametitle{A relationship between the F statistic and R-squared}
+\begin{myitemize}
+\item Recall that in a regression setting, the F statistic is expressed in the following way.
+\mydisplaymath{
+f=\frac{(\RSS_0-\RSS_a)/d}{\RSS_a/(n-q)}.
+}
+\item \m{q} is the dimension of the alternative hypothesis.
+\item \m{d} is the difference in dimension between the null and alternative hypotheses.
+\end{myitemize}
+\myquestion. Write the hypotheses \m{H_0} and \m{H_1} to match the \m{R^2} statistic in a linear model with \m{p} explanatory variables (including the intercept).
+
+\vspace{20mm}
+
 
 \begin{myitemize}
-\item 
+\item In this context, we see that \m{q=p} and \m{d=p-1}.
+\item Further, we see that \m{\RSS_0} is \m{\SST}, and \m{\RSS_a} is \m{RSS}.
 \end{myitemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Writing $R^2$ in terms of an F statistic}
+
+\vspace{-2mm}
+
+\begin{myitemize}
+\item From last slide, we have
+\mydisplaymath{ 
+f=\frac{(\SST-\RSS)/(p-1)}{\RSS/(n-p)}
+}
+\item Recall that \m{R^2 = 1-\RSS/\SST}. 
+\end{myitemize}
+
+\vspace{-3mm}
+
+\myquestion. Check by algebra that
+\m{ \displaystyle
+R^2=1 - \frac{1}{1+f \times (p-1)/(n-p)}
+}
+
+\vspace{35mm}
+
+\myquestion. What is \m{R^2} when \m{F} is very large? or close to zero?
+
+\vspace{15mm}
 
 \end{frame}
 
