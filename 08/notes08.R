@@ -167,3 +167,6 @@ plot(lag_e,e)
 ## ------------------------------------------------------------------------
 coef(summary(lm_loess))
 
+## ----gpa_summary,echo=F--------------------------------------------------
+summary(lm(GPA~ACT+High_School,data=gpa))
+
