@@ -735,7 +735,7 @@ coef(summary(lm_loess))
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{R-squared and adjusted R-squared}
+\frametitle{The R-squared statistics to assess goodness of fit}
 
 \begin{myitemize}
 \item \m{R^2} is the square of the correlation between the data and the fitted values.
@@ -792,14 +792,13 @@ f=\frac{(\RSS_0-\RSS_a)/d}{\RSS_a/(n-q)}.
 
 \vspace{-1mm}
 
-\myquestion. Write the hypotheses \m{H_0} and \m{H_1} to match the \m{R^2} statistic in a linear model with \m{p} explanatory variables (including the intercept).
+\myquestion. Write the hypotheses \m{H_0} and \m{H_a} to match the \m{R^2} statistic in a linear model with \m{p} explanatory variables (including the intercept). Set up these hypotheses so that \m{\RSS_0} is \m{\SST}, and \m{\RSS_a} is \m{RSS}.
 
 \vspace{20mm}
 
 
 \begin{myitemize}
 \item In this context, we see that \m{q=p} and \m{d=p-1}.
-\item Further, we see that \m{\RSS_0} is \m{\SST}, and \m{\RSS_a} is \m{RSS}.
 \end{myitemize}
 
 \end{frame}
@@ -930,9 +929,22 @@ summary(lm(GPA~ACT+High_School,data=gpa))
 \begin{frame}[fragile]
 \frametitle{Confidence intervals after model selection}
 
-\myquestion. Suppose you have \m{\ell=100} explanatory variables and you consider \m{\ell=100} different models, each with only one of the explanatory variables in the model. You pick as your favorite model the one with the highest \m{R^2} statistic. You report a 95\% confidence interval for the coefficient in this linear model. What is the chance that this confidence interval will cover the truth, under the null probability model where all the coefficients for all the explanatory variables are zero?
+\myquestion. Suppose you have \m{\ell=100} explanatory variables and you consider \m{\ell=100} different models, each with only one of the explanatory variables in the model. You pick as your favorite model the one with the highest \m{R^2} statistic, which is equivalent to picking the one with the smalles p-value for its t statistic. You report a 95\% confidence interval for the coefficient in this linear model. What is the chance that this confidence interval will cover the truth, under the null probability model where all the coefficients for all the explanatory variables are zero?
 
-\vspace{30mm}
+\vspace{40mm}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Dealing with multiple testing}
+
+\begin{myitemize}
+\item The difficulty of properly evaluating statistical significance when investigating very many hypotheses is called the \myemph{multiple testing} situation.
+\item Dealing with multiple testing is a current scientific concern. It is related to the so-called crisis in scientific reproducibility.
+\item Advances in data acquisition and computation increasingly lead to large datasets to be investigated.
+\item One principle: report all the tests you make, not just the nominally significant ones. This lets the reader assess the hazard of multiple testing bias.
+\item Another principle: any result not yet confirmed by an independent experiment is suspicious.
+\end{myitemize}
 
 \end{frame}
 
