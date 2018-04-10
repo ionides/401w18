@@ -1,0 +1,104 @@
+---
+title: "Lab Solutions"
+author: "401 GSI team"
+date: "3/8/2018 and 3/9/2018"
+output:
+  beamer_presentation:
+  colortheme: dolphin
+incremental: no
+ioslides_presentation:
+  incremental: no
+slidy_presentation:
+  incremental: no
+fontsize: 10pt
+---
+
+```{r, warning = F}
+# install.packages("MASS")
+#Load library MASS
+library(MASS)
+#Load data crabs
+data('crabs')
+
+# add indicator variable to data for crab species
+crabs$mu1 <- (crabs$sex == "M" )*1
+crabs$mu2 <- (crabs$sex == "F")*1
+```
+
+# Q1) Constructing CIs in R
+```{r}
+# Obtain estimate of population mean
+cl_crabs <- lm(CL~mu1+mu2-1, data = crabs)
+summary(cl_crabs)
+```
+
+# Q2) Constructing a 99% confidence interval for the mean of Male crabs
+
+$$\bar y \pm z_{\frac {\alpha}2}s.e(\bar y)$$
+$$32.8510 \pm 2.56(0.7097)$$
+$$(31.1974, 34.5046)$$
+
+# Constructing a 99% confidence interval for the mean of Female crabs
+$$\bar y \pm z_{\frac {\alpha}2}s.e(\bar y)$$
+$$31.3600 \pm 2.56(0.7097)$$
+$$(29.7064, 33.0136)$$
+
+
+# Q3) Difference in Means
+
+```{r}
+crabs$mu3 <- 1
+crabs$mu_diff <- crabs$mu1
+
+bd_crabs2 <- lm(CL ~ mu3 + mu_diff - 1, data = crabs)
+summary(bd_crabs2)
+```
+
+# Q4) Constructing a 95% confidence interval for the difference in means
+
+- (note: I am using the normal approximation)
+
+$$\bar d \pm z_{\frac {\alpha}2}s.e(\bar d)$$
+$$ 1.4910 \pm 2.56(1.0037)$$
+$$(-0.847621, 3.829621)$$
+
+# Confidence Intervals for Future Values
+
+- Motivating Question: What's the point of performing a regression?
+
+# Confidence Intervals for Future Values
+
+- A $100 (1-\alpha)$% **Confidence Interval** for a mean future value (or the regression line at) $\tilde y$ given values $\tilde x$:
+    - $\hat y \pm t_{(\frac {\alpha}2, n-2)}s \sqrt{\frac 1n + \frac {(\tilde x - \bar x)^2}{\sum_{i=1}^n (x_i - \bar x)^2}}$
+
+- A $100 (1-\alpha)$% **Prediction Interval** for a future value $\tilde y$ given values $\tilde x$:
+     - $\hat y \pm t_{(\frac {\alpha}2, n-2)}s \sqrt{1 + \frac 1n + \frac {(\tilde x - \bar x)^2}{\sum_{i=1}^n (x_i - \bar x)^2}}$
+    
+- It is important to note that the confidence interval is narrower than the prediction interval
+    - Why is this? (Hint: What do we know about means from 250?)
+    
+- Details can be found in sections 2.3 and 2.4 of Sheather
+
+# Confidence Intervals for Future Values in R
+
+Construct a 95% confidence interval and a 95% prediction interval for the crab's body depth given it is a blue crab with a carapace length of 45.
+
+```{r}
+
+crab_bd_reg <- lm(BD ~ sp + CL, data = crabs)
+summary(crab_bd_reg)
+
+```
+
+# Confidence Intervals for Future Values in R
+
+```{r}
+x_star <- data.frame(sp = "B", CL = 45)
+
+# confidence interval
+predict(crab_bd_reg, x_star, interval = "confidence")
+
+# prediction interval
+predict(crab_bd_reg, x_star, interval = "prediction")
+
+```
