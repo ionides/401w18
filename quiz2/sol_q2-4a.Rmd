@@ -12,5 +12,3 @@ where
   * $\mathbf{e} = (e_1, \dots, e_n)$ is a vector random variable modeling chance variation.
   
   * All vectors are interpreted as column vectors.
-
-
