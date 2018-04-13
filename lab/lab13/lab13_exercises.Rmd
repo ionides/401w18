@@ -1,0 +1,101 @@
+---
+title: "Practice Problems for Final"
+author: "401 GSI team"
+date: "4/12/2018 and 4/13/2018"
+output: pdf_document
+---
+
+# Sanity Checking Data
+
+## Car Drivers
+
+Car drivers adjust the seat position for comfort. We are interested in determining the major factors that determine the seat position (measured as hip center in mm) and have collected the following information on 38 drivers: age in years, weight in lbs, and height with shoes, height without shoes, seated height, lower arm length, thigh length, lower leg length all in cm.
+
+```{r}
+
+library(faraway)
+library(ggplot2)
+data("seatpos")
+head(seatpos)
+
+```
+
+To determine these factors, we start by fitting the following linear model:
+
+```{r}
+
+comfort <- lm(hipcenter ~ ., data = seatpos)
+summary(comfort)
+
+```
+
+1. Explain why the intercept is the only significant variable but overall the model is highly significant.
+
+2. Suppose we instead fit the following model, $y_i = b_0 + b_1x_{i1}$, where $y_i$ is the hipcenter of person $i$ and $x_{i1}$ is the height of person $i$. How would you expect the standard errors to differ between this model and the one fit above?
+
+## Garbage Data*
+
+Suppose we are interested in determining the energy content of municipal waste. This information is useful for the design and operation of municipal waste incinerators. The variables are `Energy` - energy content (kcal/kg), `Plastic` - % plastic composition by weight, `Paper` - % paper composition by weight, `Garbage` - % garbage composition by weight, and `Water` - % moisture by weight.
+
+A number of samples of municipal waste were obtained, and a regression to predict the `Energy` was computed and the following output obtained:
+
+```
+Coefficients:
+             Estimate  Std. Error  t value   Pr(>|t|)
+(Intercept)   2245.09       177.89    12.62   2.4e-12
+Plastics        28.92         2.82    10.24   2.0e-10
+Paper            7.64         2.31     3.30    0.0029
+Garbage          4.30         1.92     2.24    0.0340
+Water          -37.36         1.83   -20.37    <2e-16
+
+Residual standard error: 31.5 on 25 degrees of freedom
+Multiple R-Squared: 0.964, Adjusted R-squared: 0.958
+F-statistic: 168 on 4 and 25 DF, p-value: <2e-16
+```
+
+1. Suppose sample A has 10% more plastic (in absolute terms) than sample B. What is the predicted energy content of sample A compared to sample B? Give the mathematical formula for calculating a 95% prediction interval for this difference. Substitute all possible values from the regression output.
+
+
+2. What energy content would this model predict for a sample that was purely water? Comment on the reliability of this prediction. What is the term for a prediction like this.
+
+3. Compute the 95% confidence interval for the coefficient of garbage. Substitute all possible values from the regression output.
+
+4. How is the residual standard error calculated for this model? (Give a formula.)
+
+## Education Study Data
+
+Recall the National Education Longitudinal Study of 1988 which examined schoolchildren’s performance on a math test score in 8th grade. “ses” is the socioeconomic status of parents and “paredu” is the parents highest level of education achieved (less than high
+school, high school, college, BA, MA, PhD).
+
+```{r, warning=FALSE}
+
+library(MASS)
+data(nels88)
+
+ses_edu_lm <- lm(math ~ ses + paredu + paredu:ses, data = nels88)
+
+```
+
+1. Name 2 model diagnostics would you perform to check if this is a valid model.
+
+2. Name one potential confounding variable of this dataset.
+
+3. Suppose we fit the following model: $y_i = b_0 + b_1x_1 + b_2x_2 + b_3x_1x_2$ where $y_i$ is the math score, $x_1$ is the socioeconomic status of parents, and $x_2$ is the parents' highest level of education.
+
+a) Does it initially make sense to include the interaction terms? Explain.
+
+b) We want to know if the interaction terms are significant. Interpret the ANOVA below to answer this question. Provide the null and alternative models in subscript form, the test statistic, and the distribution of the test statistic under the null hypothesis in explaining your answer. You may define the residual sum of squares in words.
+
+```{r}
+anova(ses_edu_lm)
+```
+
+# Theorhetical Exercises
+
+1. Suppose we have the following matrix $\mathbb{X} = \begin{bmatrix} 36 & 24 & 12 \\ 24 & 24 & 0\\ 12 & 0 & 24\\\end{bmatrix}$. Find a vector $\mathbf{\alpha}$ s.t. $\mathbb{X}\mathbf{\alpha} = \mathbf{0}$
+
+2. Explain why we might be able to infer causation as opposed to just correlation in a regression of a designed experiment.
+
+**For additional exercises, see notes, quizzes, and homeworks.**
+
+*Source: Modified from previous class with permission.
