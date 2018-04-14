@@ -1,0 +1,195 @@
+---
+title: "Practice final exam, STATS 401 W18"
+output:
+  pdf_document:
+  toc: no
+header-includes:
+   - \usepackage{ifthen}
+html_document:
+  theme: flatly
+toc: no
+word_document:
+  toc: no
+csl: ecology.csl
+---
+  
+
+```{r preliminaries,echo=F,cache=F}
+ALL <- TRUE
+ALL <- FALSE
+SOL <- FALSE
+#SOL <- TRUE
+set.seed(12)
+# library(mat2tex)
+```
+
+\def\SOLUTIONS{0}
+
+\ifthenelse{\isodd{\SOLUTIONS}}{
+ \newcommand\exam[1]{} %% solutions
+ \newcommand\solution[1]{ {\bf Solution}. {#1}}
+}{ 
+ \newcommand\exam[1]{#1} %% exam paper
+ \newcommand\solution[1]{}
+} 
+
+\newcommand\mat[1]{\mathbb{#1}}
+\newcommand\vect[1]{\boldsymbol{\mathrm{#1}}}
+\newcommand\transpose{{\scriptscriptstyle \mathrm{T}}}
+\newcommand\prob{\mathrm{P}}
+\newcommand\E{\mathrm{E}}
+\newcommand\SE{\mathrm{SE}}
+\newcommand\SD{\mathrm{SD}}
+\newcommand\RSS{\mathrm{RSS}}
+\newcommand\SST{\mathrm{SST}}
+\newcommand\pval{\mathrm{pval}}
+\newcommand\var{\mathrm{Var}}
+\newcommand\cov{\mathrm{Cov}}
+
+
+\exam{
+$\quad\quad\quad$ \textbf{Name}:
+
+$\quad\quad\quad$ \textbf{UMID}:
+}
+
+-----------
+  
+**Instructions. You have a time allowance of 120 minutes.  The exam is closed book and closed notes. Any electronic devices in your possession must be turned off and remain in a bag on the floor. If you need extra paper, please number the pages and put your name and UMID on each page.**
+  
+**You may use the following formulas. Proper use of these formulas may involve making appropriate definitions of the necessary quantities.**
+
+(1)$\quad\quad\mathbf{b}=\big(\mathbb{X}^\top \mathbb{X} \big)^{-1}\, \mathbb{X}^\top\mathbf{y}$
+
+(2)$\quad\quad\var(\hat{\mathbf{\beta}})= \sigma^2 \big( \mathbb{X}^\top \mathbb{X} \big)^{-1}$
+
+(3)$\quad\quad\var(\mathbb{A}\mathbf{Y})=\mathbb{A}\var(\mathbf{Y})\mathbb{A}^\top$
+
+(4)$\quad\quad\var(X)=\E\big[ (X-\E[X])^2\big] = \E[X^2]-\big(\E[X]\big)^2$
+
+(5)$\quad\quad\cov(X,Y)=\E\big[ \big(X-\E[X]\big)\big(Y-\E[Y]\big)\big] = \E[XY]-\E[X]\,\E[Y]$
+
+(6)$\quad\quad$
+The binomial ($n,p$) distribution has mean $np$ and variance $np(1-p)$.
+
+(7)$\quad\quad \displaystyle f=\frac{(\RSS_0-\RSS_a)/(q-p)}{\RSS_a/(n-q)}.$
+\vspace{1cm}
+
+From `?pnorm`:
+```
+pnorm(q, mean = 0, sd = 1)
+qnorm(p, mean = 0, sd = 1)
+q: vector of quantiles.
+p: vector of probabilities.
+```
+
+\exam{\newpage}
+
+Questions 1--4 refer to data on 113 hospitals from the Study on the Efficacy of Nosocomial Infection Control (SENIC), provided in the R dataframe `senic`.
+The primary purpose of this study is to look for properties of hospitals associated with high (or low) rates of hospital-acquired infections, which have the technical name of *nosocomial infections*.
+The rate of nosocomial infections is measured by the variable `Infection risk`.
+The variables are described as follows:
+
+**Hospital**: index from 1 to 113
+
+**Length of stay**: average duration (in days) for all patients
+
+**Age**: average age (in years) for all patients
+
+**Infection risk**: estimated percentage of patients acquiring an infection in hospital
+
+**Culture**: average number of cultures for each patient without signs or symptoms of hospital-acquired infection, times 100
+
+**X-ray**: number of X-ray procedures divided by number of patients without signs or symptoms of pneumonia, times 100
+
+**Beds**: average number of beds in the hospital
+
+**Med school**: does the hospital have an affiliated medical school (1=Yes;2=No)
+
+**Region**: geographic region (1=North-East, 2=North-Central, 3=South, 4=West)
+
+**Patients**: average daily census of number of patients in the hospital
+
+**Nurses**: average number of full-time equivalent registed and licensed nurses
+
+**Facilities**: percent of 35 specific facilities and services which are provided by the hospital
+
+```{r load_data,echo=F}
+senic <- read.table("senic.txt",header=T)
+senic <- senic[,c("Length.of.stay","Culture","X.ray","Region")]
+```
+
+```{r show_data}
+head(senic)
+```
+
+**1. Factors and their coding in R**.  
+
+\exam{\vspace{5cm}}
+
+\solution{[1 point]
+
+}
+
+
+2. 
+
+\solution{[2 points]
+
+}
+
+\exam{\newpage}
+
+3. 
+
+\solution{[2 points]
+}
+
+\exam{\vspace{3cm}}
+
+4. 
+
+\solution{[2 points]
+}
+
+\exam{\vspace{3cm}}
+
+5. 
+
+\solution{[2 points]
+}
+
+\exam{\vspace{3cm}}
+
+6. 
+
+\solution{[2 points]
+}
+
+\exam{\vspace{3cm}}
+
+7. 
+
+\solution{[2 points]
+}
+
+\exam{\vspace{3cm}}
+
+8. 
+
+\solution{[2 points]
+}
+
+\exam{\vspace{3cm}}
+
+
+
+--------
+
+**Acknowledgments**: The SENIC study was described in a sequence of articles in The American Journal of Epidemiology, Volume 111, Issue 5, 1980, Pages 465–653. The dataset used here comes from  Kutner, Nachtscheim, Neter and Li (2005) _Applied Linear Statistical Models_, 5th Edition, Appendix C1.
+
+**License**: This material is provided under an [MIT license] (https://ionides.github.io/401w18/LICENSE)
+
+----------
+
+
