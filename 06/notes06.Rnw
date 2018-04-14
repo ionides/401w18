@@ -556,8 +556,8 @@ f = \frac{ (\RSS_0-\RSS_a)/d}{\RSS_a/(n-q)}.
 \vspace{-2mm}
 
 \begin{myitemize}
-\item Under \m{H_0}, the \m{f} statistic has an F distribution on \m{d} and \m{n-q} degrees of freedom. 
-\item Because of the way we constructed the \m{f} statistic, its distribution under \m{H_0} doesn't depend on \m{\sigma}. It only depends on the dimension of \m{\mat{X}} and \m{\mat{X}_a}.
+\item Under \m{H_0}, the model-generated \m{F} statistic has an F distribution on \m{d} and \m{n-q} degrees of freedom. 
+\item Because of the way we constructed the \m{F} statistic, its distribution under \m{H_0} doesn't depend on \m{\sigma}. It only depends on the dimension of \m{\mat{X}} and \m{\mat{X}_a}.
 
 \item We can obtain p-values for the F distribution in R using \code{pf()}. Try \code{?pf}. 
 

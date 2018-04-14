@@ -1,3 +1,4 @@
+\if \QLABELS1 Q3-1. \fi
 Consider the following linear model for the mouse diet data that we have studied repeatedly
 ```{r}
 mice <- read.table("femaleMiceWeights.csv",sep=",",header=TRUE)

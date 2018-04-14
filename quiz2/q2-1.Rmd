@@ -1,3 +1,4 @@
+\if \QLABELS1 Q2-1. \fi
 To investigate the consequences of metal poisoning, 25 beakers of minnow larvae were exposed to varying levels of copper and zinc.
 The data were
 

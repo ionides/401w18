@@ -1,0 +1,47 @@
+---
+title: "Stats 401 Lab 13"
+author: "401 GSI team"
+date: "4/12/2018 and 4/13/2018"
+output:
+  beamer_presentation:
+  colortheme: dolphin
+incremental: no
+ioslides_presentation:
+  incremental: no
+slidy_presentation:
+  incremental: no
+fontsize: 10pt
+---
+
+# Announcements
+
+- Quick Reminder: Final Exam (**April 24, 4-6pm**)
+- Office hours will still be held next week
+- Please fill out course evaluations by **April 18**
+
+# Final Exam Inforamtion
+- Cumulative
+- Large portion will cover: model diagnostics, model selection, collinearity, confounding variables, and correlation versus causation
+
+# Quiz Information
+
+```{r, echo = F}
+
+scores <- read.csv("~/Documents/UMich/Classes/2018 Spring/STATS 401/quiz2_scores005.csv", header = T)
+scores$Quiz.2[scores$Quiz.2 == 0] <- NA
+hist(scores$Quiz.2, main = "Histogram of Section 5 Quiz 2 Scores", xlab = "Quiz 2 Score")
+
+```
+
+# Quiz Information (cont.)
+
+```{r, echo = F}
+summary(scores)
+```
+
+# Lab
+
+- Practice problems
+
+
+

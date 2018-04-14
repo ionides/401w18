@@ -120,7 +120,9 @@ Due in your lab on 2/15 or 2/16. [Solutions](hw/hw06/sol_hw06.html).
 
 * [Homework 7. Using a linear model for investigation of two populations](hw/hw07/hw07.html). Due in your lab on 3/15 or 3/16. [Solutions](hw/hw07/sol_hw07.html)
 
-* [Homework 8. Making an F test, and exploring the t and F distributions](hw/hw08/hw08.html). Due in your lab on 3/22 or 3/23.
+* [Homework 8. Making an F test, and exploring the t and F distributions](hw/hw08/hw08.html). Due in your lab on 3/22 or 3/23. [Solutions](hw/hw08/sol_hw08.html)
+
+* [Homework 9. Analyzing a dataset: Investigating variables associated with hospital-acquired infection](hw/hw09/hw09.html). Due in your lab on 4/12 or 4/13.
 
 ------------
 
@@ -144,8 +146,13 @@ Due in your lab on 2/15 or 2/16. [Solutions](hw/hw06/sol_hw06.html).
 
 * [Lab 9. F tests for model selection and ANOVA](lab/lab09/lab09.pdf). Slides for 3/15 and 3/16. [Solutions](lab/lab09/sol_lab09.pdf).
 
-* [Lab 10. Review for Quiz 2](lab/lab10/lab10.html). Slides for 3/12 and 3/23. [Solutions](lab/lab10/sol_lab10.html).
+* [Lab 10. Review for Quiz 2](lab/lab10/lab10.html). Slides for 3/22 and 3/23. [Solutions](lab/lab10/sol_lab10.html).
 
+* Lab 11. Quiz 2.
+
+* Lab 12. Data analysis.
+
+* Lab 13. Final review. [Slides](lab/lab13/lab13_slides.pdf) and [exercises](lab/lab13/lab13_exercises.pdf) for 4/12 and 4/13.
 
 ------------
 

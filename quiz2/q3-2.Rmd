@@ -1,4 +1,4 @@
-
+\if \QLABELS1 Q3-2. \fi
 Let's consider the crabs data set we studied in lab. Recall that species (`sp`) is a factor with two levels, Blue (`B`) and Orange (`O`). We want to study the difference of frontal lobe size (`FL`) of two species. 
 
 ```{r}
@@ -14,11 +14,11 @@ lm_crab <- lm(FL~sp-1, data=crabs)
 summary(lm_crab)
 ```
 
-(a). Interpret the meaning of $\mu_1$ and $\mu_2$ in the above probability model?
+(a) Interpret the meaning of $\mu_1$ and $\mu_2$ in the above probability model?
 
-(b). Build a 95% confidence interval for $\mu_1$ using normal approximation
+(b) Build a 95% confidence interval for $\mu_1$ using normal approximation
 
-(c). Recall in homework we know that the full estimated covariance matrix of $\vect{\hat{\mu}} = (\hat{\mu}_1,\hat{\mu}_2)$ can be found by  
+(c) Recall in homework we know that the full estimated covariance matrix of $\vect{\hat{\mu}} = (\hat{\mu}_1,\hat{\mu}_2)$ can be found by  
 ```{r}
 V <- summary(lm_crab)$cov.unscaled * summary(lm_crab)$s^2
 V

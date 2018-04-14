@@ -9,13 +9,14 @@ header-includes:
 csl: ecology.csl
 ---
 
+\def\QLABELS{1}
+
 ```{r preliminaries,echo=F,cache=F}
 ALL <- TRUE
 #ALL <- FALSE
-SOL <- FALSE
-#SOL <- TRUE
-set.seed(12)
-library(mat2tex)
+#SOL <- FALSE
+SOL <- TRUE
+set.seed(1)
 ```
 
 \ifthenelse{\isodd{0}}{

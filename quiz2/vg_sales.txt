@@ -1,3 +1,5 @@
+# A subset of data downloaded from https://www.kaggle.com/rush4ratio/video-game-sales-with-ratings
+# Accessed March 8, 2017
 "Name" "Platform" "Year" "Genre" "Publisher" "Sales"
 "1" "Call of Duty: Black Ops" "X360" 2010 "Shooter" "Activision" 9.7
 "2" "Call of Duty: Black Ops" "PS3" 2010 "Shooter" "Activision" 5.99
