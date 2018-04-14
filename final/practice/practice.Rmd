@@ -114,16 +114,23 @@ The variables are described as follows:
 
 **Facilities**: percent of 35 specific facilities and services which are provided by the hospital
 
+Throughout Questions 1--4, we will write $y_i$ for the measured infection risk in hospital $i$ for $i=1,\dots,n$ with $n=113$. We will consider sample models of the form $\vect{y}=\mat{X}\vect{b}+\vect{e}$ where $\vect{y}=(y_1,\dots,y_n)$, and $\vect{e}=(e_1,\dots,e_n)$ is a vector of residual error. The design matrix $\mat{X}$ will be different in various models. You may use this notation without explanation, but other additional notation you use should be defined as appropriate.
+
 ```{r load_data,echo=F}
 senic <- read.table("senic.txt",header=T)
-senic <- senic[,c("Length.of.stay","Culture","X.ray","Region")]
+senic <- senic[,c("Infection.risk","Length.of.stay","Culture","X.ray","Region")]
 ```
 
 ```{r show_data}
 head(senic)
 ```
 
-**1. Factors and their coding in R**.  
+**1. Factors and their coding in R**.  Consider the following two models, specified in R code as
+```{r lm1_and_lm2}
+lm1 <- lm(Infection.risk~Region, data=senic)
+lm2 <- lm(Infection.risk~factor(Region), data=senic)
+```
+Write down the first six rows of the design matrix for each of `lm1` and `lm2`. Which model makes more sense to use?
 
 \exam{\vspace{5cm}}
 
