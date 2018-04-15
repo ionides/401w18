@@ -59,6 +59,8 @@ $\quad\quad\quad$ \textbf{UMID}:
   
 **You may use the following formulas. Proper use of these formulas may involve making appropriate definitions of the necessary quantities.**
 
+**Responses will be assessed on quality of explanation as well as whether they lead to a correct answer**.
+
 (1)$\quad\quad\mathbf{b}=\big(\mathbb{X}^\top \mathbb{X} \big)^{-1}\, \mathbb{X}^\top\mathbf{y}$
 
 (2)$\quad\quad\var(\hat{\mathbf{\beta}})= \sigma^2 \big( \mathbb{X}^\top \mathbb{X} \big)^{-1}$
@@ -118,11 +120,13 @@ Throughout Questions 1--4, we will write $y_i$ for the measured infection risk i
 
 ```{r load_data,echo=F}
 senic <- read.table("senic.txt",header=T)
-senic <- senic[,c("Infection.risk","Length.of.stay","Culture","X.ray","Region")]
+#full_senic <- senic[,-1]
+#full_senic$Region <- as.factor(full_senic$Region)
+#senic <- senic[,c("Infection.risk","Length.of.stay","Culture","X.ray","Region")]
 ```
 
 ```{r show_data}
-head(senic)
+head(senic[,c("Infection.risk","Length.of.stay","Culture","Region","Beds")])
 ```
 
 **1. Factors and their coding in R**.  Consider the following two models, specified in R code as
@@ -130,7 +134,7 @@ head(senic)
 lm1 <- lm(Infection.risk~Region, data=senic)
 lm2 <- lm(Infection.risk~factor(Region), data=senic)
 ```
-Write down the first six rows of the design matrix for each of `lm1` and `lm2`. Which model makes more sense to use?
+Write down the first six rows of the design matrix for each of `lm1` and `lm2`. Sufficient information to do this is provided in the R output above. Which model makes more sense to use?
 
 \exam{\vspace{5cm}}
 
@@ -139,64 +143,146 @@ Write down the first six rows of the design matrix for each of `lm1` and `lm2`. 
 }
 
 
-**2. Model diagnostics**. Interpreting what happens when we plot residuals against the response variable.
-```{r diagnostics}
-plot(x=senic$Infection.risk,y=resid(lm2))
+**2. An F-test**.  Do different regions tend to different levels of infection risk? To investigate the difference between regions while controlling for some other important explanatory variables, the following model was considered:
+```{r anova}
+lm3 <- lm(Infection.risk~Length.of.stay+Culture+factor(Region),data=senic)
+anova(lm3)
 ```
+
+
+(a) Write out in full the null hypothesis, $H_0$, for a test of whether there are regional differences in infection risk. You may use either a matrix or subscript form. 
+
+\solution{[2 points]
+}
+
+\exam{\vspace{3.5cm}}
+
+(b) Write out the alternative hypothesis, $H_a$. You do not have to repeat any definitions you have already made in the part (a). You may use either a matrix or subscript form. 
+
+
+\solution{[2 points]
+}
+
+\exam{\vspace{3.5cm}}
+
+(c) Carry out an F test of these hypotheses, giving explanation of how this test is constructed. What do you conclude?
+
+\solution{[2 points]
+}
+
+\exam{\vspace{4.5cm}}
+
+**3. Model diagnostics**. Here, we investigate what happens when we plot residuals against the response variable.
+```{r diagnostics,fig.width=6,out.width="4.5in"}
+plot(x=senic$Infection.risk,y=resid(lm3))
+```
+
 The graph above shows residuals of a model for infection risk plotted against the data. Does this plot indicate a flaw in the model? If so, what might you try to do to fix the model? Explain.
 
 \solution{[2 points]
 
 }
 
-\exam{\newpage}
+\exam{\vspace{3cm}}
 
-**3. An F-test**.  Do different regions tend to different levels of infection risk? To investigate the difference between regions while controlling for some other important explanatory variables, the following model was considered:
-```{r anova}
-lm4 <- lm(Infection.risk~Length.of.stay+Culture+factor(Region),data=senic)
-anova(lm4)
+
+**4. Model interpretation**. We consider the fitted model represented by the R object `lm3`. For the purposes of this question, we should ignore the possibility that we might have preferred a different model.  
+```{r senic_summary}
+summary(lm3)
 ```
 
-(a) Write out in full the null hypothesis, $H_0$, for a test of whether there are regional differences in infection risk.
+(a) An interpretation of the sample coefficient for `Length.of.stay` is that each additional day in hospital leads to an additional `r round(coef(lm3)["Length.of.stay"],2)` percent risk of infection, on average. Comment on the validity of this conclusion.
+
+\solution{[2 points]
+}
+
+\exam{\vspace{3.cm}}
+
+(b) What do you conclude from the $R^2$ and F statistics presented in the above summary? Which of these statistics is more useful for the purpose of this study? Explain. 
+
+\solution{[2 points]
+}
+
+\exam{\vspace{3.cm}}
+
+**5. Colinearity**. 
+
+(a) One might suspect that the number of beds, the number of nurses and the number of patients may be colinear. Explain why, in words.
 
 \solution{[2 points]
 }
 
 \exam{\vspace{3cm}}
 
-(b) Write out the alternative hypothesis, $H_a$. You do not have to repeat any definitions you have already made in the first part.
+To investigate this, we can make the following scatterplot:
+```{r scatterplot}
+pairs(~Beds+Nurses+Patients,data=senic)
+```
 
-(c) Describe and carry out an F test of these hypotheses. What do you conclude?
-
-4. 
-
-\solution{[2 points]
-}
-
-\exam{\vspace{3cm}}
-
-5. 
+(b) From this scatterplot, what is the strongest colinearity you can identify? Explain.
 
 \solution{[2 points]
 }
 
 \exam{\vspace{3cm}}
 
-6. 
+Now, let's see the consequences of this colinearity when comparing two fitted models.
+```{r colinear}
+lm4 <- lm(Infection.risk~Length.of.stay+Culture+factor(Region)+Beds+Nurses,data=senic)
+summary(lm4)
+lm5 <- lm(Infection.risk~Length.of.stay+Culture+factor(Region)+Beds,data=senic)
+summary(lm5)
+```
+
+(c) Explain the evidence for colinearity of number of beds and number of nurses from the outcome of fitting these two models.
 
 \solution{[2 points]
 }
 
 \exam{\vspace{3cm}}
 
-7. 
+(d) What might have happened to our investigation of the data if we had started with the model coded as `lm4` and had not considered the possibility of colinearity?
+
+\solution{[2 points]
+}
+
+
+\exam{\vspace{3cm}}
+
+(e) Suppose the sample model for `lm4` is written as $\vect{y}=\mat{X}\vect{b}+\vect{e}$ where $\mat{X}=[x_{ij}]$ with $x_{i1}$ being the number of beds for hospital $i$ and $x_{i2}$ being the number of nurses. Use output provided to suggest a nonzero vector $\alpha$ such that $\mat{X}\vect{\alpha}$ is close to $\vect{0}$. As part of this answer, you will have to figure out the dimensions of $\mat{X}$.
 
 \solution{[2 points]
 }
 
 \exam{\vspace{3cm}}
 
-8. 
+**6. Nonlinearity**. Up to this point, we have considered variables entering the model only as additive effects without interactions. Now, let's do some model diagnostics on the role of hospital size by plotting residuals against number of beds.
+```{r nonlinear_resid,fig.width=6,out.width="4.5in"}
+plot(senic$Beds,resid(lm4))
+```
+
+(a) Interpret this residual plot.
+
+\solution{[2 points]
+}
+
+\exam{\vspace{3cm}}
+
+Now let's try modeling the nonlinearity by adding a quadratic term, coded in R as follows:
+```{r nonlinear_fit}
+lm6 <- lm(Infection.risk~Length.of.stay+Culture+factor(Region)+Beds+I(Beds^2),data=senic)
+summary(lm6)
+```
+
+(b) Assess the consequences of adding the quadratic dependence on number of beds. This should involve considering the summary of `lm6` in comparison with `lm4`.
+
+\solution{[2 points]
+}
+
+\exam{\vspace{3cm}}
+
+
+(c) Superficially, it may seem strange that we can add a nonlinear term, such as a quadratic, while continuing to work within the statistical framework of linear models. Explain how to resolve this paradox.
 
 \solution{[2 points]
 }

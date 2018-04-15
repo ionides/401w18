@@ -171,7 +171,33 @@ Due in your lab on 2/15 or 2/16. [Solutions](hw/hw06/sol_hw06.html).
 
 * [Practice midterm exam](mt/practice/practice-mt.html).
 
-* [Exam](mt/mt401w18/mt401w18.pdf). [Solutions](mt/mt401w18/mt401w18sol.pdf).
+* [Midterm exam](mt/mt401w18/mt401w18.pdf), with [solutions](mt/mt401w18/mt401w18sol.pdf).
+
+--------------
+
+## Final exam materials
+
+* The following topics may be assessed in the final exam:
+
+1. F tests.
+
+2. Prediction intervals.
+
+3. Confidence intervals for parameters.
+
+4. Normal approximations and mean/variance calculations.
+
+5. Linear model diagnostics.
+
+6. Colinearity and its consequences.
+
+7. Building and interpreting design matrices for models with interactions and factors.
+
+8. Observational studies and causation.
+
+* The final exam will be based on material in the class notes, homeworks and labs. The best guide to the style of the exam is probably the following practice exam.
+
+* [Practice final exam](final/practice/practice.pdf).
 
 ------------
 
