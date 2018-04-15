@@ -151,12 +151,22 @@ The graph above shows residuals of a model for infection risk plotted against th
 
 \exam{\newpage}
 
-**3. An F-test**.  Do different regions tend to different levels of infection risk? To investigate the difference between regions
+**3. An F-test**.  Do different regions tend to different levels of infection risk? To investigate the difference between regions while controlling for some other important explanatory variables, the following model was considered:
+```{r anova}
+lm4 <- lm(Infection.risk~Length.of.stay+Culture+factor(Region),data=senic)
+anova(lm4)
+```
+
+(a) Write out in full the null hypothesis, $H_0$, for a test of whether there are regional differences in infection risk.
 
 \solution{[2 points]
 }
 
 \exam{\vspace{3cm}}
+
+(b) Write out the alternative hypothesis, $H_a$. You do not have to repeat any definitions you have already made in the first part.
+
+(c) Describe and carry out an F test of these hypotheses. What do you conclude?
 
 4. 
 
