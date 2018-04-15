@@ -90,12 +90,16 @@ b) We want to know if the interaction terms are significant. Interpret the ANOVA
 anova(ses_edu_lm)
 ```
 
-# Theorhetical Exercises
+# Theoretical Exercises
 
-1. Suppose we have the following matrix $\mathbb{X} = \begin{bmatrix} 36 & 24 & 12 \\ 24 & 24 & 0\\ 12 & 0 & 24\\\end{bmatrix}$. Find a vector $\mathbf{\alpha}$ s.t. $\mathbb{X}\mathbf{\alpha} = \mathbf{0}$
+1. a) Suppose we have the following matrix $\mathbb{X} = \begin{bmatrix} 36 & 24 & 12 \\ 24 & 24 & 0\\ 12 & 0 & 24\\\end{bmatrix}$. Find a vector $\mathbf{\alpha}$ s.t. $\mathbb{X}\mathbf{\alpha} = \mathbf{0}$.
+
+      b) Suppose we have the following matrix $\mathbb{X} = \begin{bmatrix} 1 & 5 & 2 \\ 1 & 7 & 3 \\ 1 & 15 & 7\\\end{bmatrix}$. Find a non-zero vector $\mathbf{\alpha}$ s.t. $\mathbb{X}\mathbf{\alpha} = \mathbf{0}$.
+   
+      c) What can you say about the collinearity of these two matrices?
 
 2. Explain why we might be able to infer causation as opposed to just correlation in a regression of a designed experiment.
 
 **For additional exercises, see notes, quizzes, and homeworks.**
 
-*Source: Modified from previous class with permission.
+*Source: Modified from STATS 500 Fall 2017 with permission from Liza Levina.
