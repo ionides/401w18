@@ -139,7 +139,11 @@ Write down the first six rows of the design matrix for each of `lm1` and `lm2`. 
 }
 
 
-2. 
+**2. Model diagnostics**. Interpreting what happens when we plot residuals against the response variable.
+```{r diagnostics}
+plot(x=senic$Infection.risk,y=resid(lm2))
+```
+The graph above shows residuals of a model for infection risk plotted against the data. Does this plot indicate a flaw in the model? If so, what might you try to do to fix the model? Explain.
 
 \solution{[2 points]
 
@@ -147,7 +151,7 @@ Write down the first six rows of the design matrix for each of `lm1` and `lm2`. 
 
 \exam{\newpage}
 
-3. 
+**3. An F-test**.  Do different regions tend to different levels of infection risk? To investigate the difference between regions
 
 \solution{[2 points]
 }
