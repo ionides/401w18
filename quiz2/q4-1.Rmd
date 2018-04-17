@@ -14,5 +14,8 @@ anova(lm_kickers)
 
 (c) Interpret the outcome of this test.
 
+```{r,child="sol_q4-1.Rmd",eval=SOL}
+```
+
 --------------
 

@@ -15,9 +15,9 @@ Var(\hat{y}^*+\epsilon_{new})&=Var(\mathbf{x^*}^T \mathbf{\hat{\beta}}+\epsilon_
 \end{equation}
 
 Thus the P.I. is
-$$\hat{y}^* \pm 1.96 s \sqrt{\mathbf{x^*}^T (\mathbb{X}^T\mathbb{X})^{-1}\mathbf{x^*}+1}, $$
+$$\hat{y}^* \pm 1.96 s \sqrt{\vect{x^*}^T (\mat{X}^T\mat{X})^{-1}\vect{x^*}+1}, $$
 where $s$ is the residual standard error.
   
 (c). 
 
-We can check if $\bm{x}^*$ is within the support of the given data set to avoid extrapolation; The prediction interval should be large than the confidence intervel; $\hat{y}^*$ should fall within the predection intervel.
+We can check if $\vect{x}^*$ is within the support of the given data set to avoid extrapolation; The prediction interval should be large than the confidence intervel; $\hat{y}^*$ should fall within the predection intervel.
