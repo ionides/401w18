@@ -179,21 +179,21 @@ Due in your lab on 2/15 or 2/16. [Solutions](hw/hw06/sol_hw06.html).
 
 * Topics for the final exam will include
 
-1. F tests
+1. F tests.
 
-2. Prediction intervals
+2. Prediction intervals.
 
-3. Confidence intervals for parameters
+3. Confidence intervals for linear model coefficients.
 
-4. Normal approximations and mean/variance calculations
+4. Normal approximations and mean/variance calculations.
 
-5. Model diagnostics
+5. Linear model diagnostics.
 
-6. Colinearity
+6. Colinearity and its consequences.
 
-7. Building and interpreting design matrices for models with interactions and factors
+7. Building and interpreting design matrices for models with interactions and factors.
 
-8. Observational studies and causation
+8. Observational studies and causation.
 
 * The style and format of the final exam will be based on the practice final exam below. The exam will work through a data analysis, asking questions to requiring understanding of the statistical techniques used, how they are computed, and how they are interpreted.
 
