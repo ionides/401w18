@@ -62,6 +62,8 @@ F-statistic: 168 on 4 and 25 DF, p-value: <2e-16
 
 4. How is the residual standard error calculated for this model? (Give a formula.)
 
+[Source: This question is adapted from _Applied Statistics for Engineers and Scientists_ by Jay L. Devore, Nicholas R. Farnum, Jimmy A. Doi (Ch. 3, Question 56).]
+
 ## Education Study Data
 
 Recall the National Education Longitudinal Study of 1988 which examined schoolchildren’s performance on a math test score in 8th grade. “ses” is the socioeconomic status of parents and “paredu” is the parents highest level of education achieved (less than high
@@ -102,4 +104,3 @@ anova(ses_edu_lm)
 
 **For additional exercises, see notes, quizzes, and homeworks.**
 
-*Source: Modified from STATS 500 Fall 2017 with permission from Liza Levina.
