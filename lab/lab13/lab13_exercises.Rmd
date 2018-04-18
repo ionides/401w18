@@ -33,7 +33,7 @@ summary(comfort)
 
 2. Suppose we instead fit the following model, $y_i = b_0 + b_1x_{i1}$, where $y_i$ is the hipcenter of person $i$ and $x_{i1}$ is the height of person $i$. How would you expect the standard errors to differ between this model and the one fit above?
 
-## Garbage Data*
+## Garbage Data
 
 Suppose we are interested in determining the energy content of municipal waste. This information is useful for the design and operation of municipal waste incinerators. The variables are `Energy` - energy content (kcal/kg), `Plastic` - % plastic composition by weight, `Paper` - % paper composition by weight, `Garbage` - % garbage composition by weight, and `Water` - % moisture by weight.
 
