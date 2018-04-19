@@ -25,5 +25,8 @@ V
 ```
 Use V and information provided in `summary(lm_crab)` to write down an expression that constructs a 95% confidence interval for $\mu_1-\mu_2$.
 
+```{r,child="sol_q3-2.Rmd",eval=SOL}
+```
+
 ------------------
 

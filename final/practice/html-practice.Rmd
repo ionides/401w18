@@ -1,7 +1,7 @@
 ---
 title: "Practice final exam, STATS 401 W18"
 output:
-  pdf_document:
+  html_document:
   toc: no
 header-includes:
    - \usepackage{ifthen}
@@ -87,7 +87,7 @@ p: vector of probabilities.
 
 \exam{\newpage}
 
-All questions in this exam refer to data on 113 hospitals from the Study on the Efficacy of Nosocomial Infection Control (SENIC), provided in the R dataframe `senic`.
+Questions 1--4 refer to data on 113 hospitals from the Study on the Efficacy of Nosocomial Infection Control (SENIC), provided in the R dataframe `senic`.
 The primary purpose of this study is to look for properties of hospitals associated with high (or low) rates of hospital-acquired infections, which have the technical name of *nosocomial infections*.
 The rate of nosocomial infections is measured by the variable `Infection risk`.
 The variables are described as follows:
@@ -116,7 +116,7 @@ The variables are described as follows:
 
 **Facilities**: percent of 35 specific facilities and services which are provided by the hospital
 
-Throughout the exam, we will write $y_i$ for the measured infection risk in hospital $i$ for $i=1,\dots,n$ with $n=113$. We will consider sample models of the form $\vect{y}=\mat{X}\vect{b}+\vect{e}$ where $\vect{y}=(y_1,\dots,y_n)$, and $\vect{e}=(e_1,\dots,e_n)$ is a vector of residual error. The design matrix $\mat{X}$ will be different in various models. You may use this notation without explanation, but other additional notation you use should be defined as appropriate.
+Throughout Questions 1--4, we will write $y_i$ for the measured infection risk in hospital $i$ for $i=1,\dots,n$ with $n=113$. We will consider sample models of the form $\vect{y}=\mat{X}\vect{b}+\vect{e}$ where $\vect{y}=(y_1,\dots,y_n)$, and $\vect{e}=(e_1,\dots,e_n)$ is a vector of residual error. The design matrix $\mat{X}$ will be different in various models. You may use this notation without explanation, but other additional notation you use should be defined as appropriate.
 
 ```{r load_data,echo=F}
 senic <- read.table("senic.txt",header=T)
@@ -173,7 +173,7 @@ anova(lm3)
 \exam{\vspace{4.5cm}}
 
 **3. Model diagnostics**. Here, we investigate what happens when we plot residuals against the response variable.
-```{r diagnostics,fig.width=6,out.width="4.5in"}
+```{r diagnostics,fig.width=6}
 plot(x=senic$Infection.risk,y=resid(lm3))
 ```
 
@@ -257,7 +257,7 @@ summary(lm5)
 \exam{\vspace{3cm}}
 
 **6. Nonlinearity**. Up to this point, we have considered variables entering the model only as additive effects without interactions. Now, let's do some model diagnostics on the role of hospital size by plotting residuals against number of beds.
-```{r nonlinear_resid,fig.width=6,out.width="4.5in"}
+```{r nonlinear_resid,fig.width=6}
 plot(senic$Beds,resid(lm4))
 ```
 

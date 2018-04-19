@@ -33,7 +33,7 @@ summary(comfort)
 
 2. Suppose we instead fit the following model, $y_i = b_0 + b_1x_{i1}$, where $y_i$ is the hipcenter of person $i$ and $x_{i1}$ is the height of person $i$. How would you expect the standard errors to differ between this model and the one fit above?
 
-## Garbage Data*
+## Garbage Data
 
 Suppose we are interested in determining the energy content of municipal waste. This information is useful for the design and operation of municipal waste incinerators. The variables are `Energy` - energy content (kcal/kg), `Plastic` - % plastic composition by weight, `Paper` - % paper composition by weight, `Garbage` - % garbage composition by weight, and `Water` - % moisture by weight.
 
@@ -61,6 +61,8 @@ F-statistic: 168 on 4 and 25 DF, p-value: <2e-16
 3. Compute the 95% confidence interval for the coefficient of garbage. Substitute all possible values from the regression output.
 
 4. How is the residual standard error calculated for this model? (Give a formula.)
+
+[Source: This question is adapted from _Applied Statistics for Engineers and Scientists_ by Jay L. Devore, Nicholas R. Farnum, Jimmy A. Doi (Ch. 3, Question 56).]
 
 ## Education Study Data
 
@@ -90,12 +92,15 @@ b) We want to know if the interaction terms are significant. Interpret the ANOVA
 anova(ses_edu_lm)
 ```
 
-# Theorhetical Exercises
+# Theoretical Exercises
 
-1. Suppose we have the following matrix $\mathbb{X} = \begin{bmatrix} 36 & 24 & 12 \\ 24 & 24 & 0\\ 12 & 0 & 24\\\end{bmatrix}$. Find a vector $\mathbf{\alpha}$ s.t. $\mathbb{X}\mathbf{\alpha} = \mathbf{0}$
+1. a) Suppose we have the following matrix $\mathbb{X} = \begin{bmatrix} 36 & 24 & 12 \\ 24 & 24 & 0\\ 12 & 0 & 24\\\end{bmatrix}$. Find a vector $\mathbf{\alpha}$ s.t. $\mathbb{X}\mathbf{\alpha} = \mathbf{0}$.
+
+      b) Suppose we have the following matrix $\mathbb{X} = \begin{bmatrix} 1 & 5 & 2 \\ 1 & 7 & 3 \\ 1 & 15 & 7\\\end{bmatrix}$. Find a non-zero vector $\mathbf{\alpha}$ s.t. $\mathbb{X}\mathbf{\alpha} = \mathbf{0}$.
+   
+      c) What can you say about the collinearity of these two matrices?
 
 2. Explain why we might be able to infer causation as opposed to just correlation in a regression of a designed experiment.
 
 **For additional exercises, see notes, quizzes, and homeworks.**
 
-*Source: Modified from previous class with permission.

@@ -150,7 +150,7 @@ Due in your lab on 2/15 or 2/16. [Solutions](hw/hw06/sol_hw06.html).
 
 * Lab 11. Quiz 2.
 
-* Lab 12. Data analysis.
+* Lab 12. Data analysis. [Code](lab/lab12/lab12.R).
 
 * Lab 13. Final review. [Slides](lab/lab13/lab13_slides.pdf) and [exercises](lab/lab13/lab13_exercises.pdf) for 4/12 and 4/13.
 
@@ -159,9 +159,12 @@ Due in your lab on 2/15 or 2/16. [Solutions](hw/hw06/sol_hw06.html).
 ## Quiz materials
 
 * [Information and practice for quiz 1](quiz1/quiz1.html).
- Also provided is a [list of all the questions in the quiz generator](quiz1/quiz1-all.html).
 
-* Quiz 2 will have 4 questions, with one question of each type (normal approximations; prediction; estimates and confidence intervals; F-tests) drawn randomly from the [list of questions in the quiz generator](quiz2/quiz2.pdf). The quiz generator should be essentially complete by the end of Tues 3/27 but minor edits may be made later.
+* A [list of questions in the quiz 1  generator](quiz1/quiz1-all.html).
+
+* Quiz 2 will have 4 questions, with one question of each type (normal approximations; prediction; estimates and confidence intervals; F-tests) drawn randomly.
+
+* A  [list of questions in the quiz 2 generator](quiz2/quiz2.pdf) with some [solutions](quiz2/quiz2+sol.pdf).
 
 -----------
 
@@ -172,6 +175,34 @@ Due in your lab on 2/15 or 2/16. [Solutions](hw/hw06/sol_hw06.html).
 * [Practice midterm exam](mt/practice/practice-mt.html).
 
 * [Exam](mt/mt401w18/mt401w18.pdf). [Solutions](mt/mt401w18/mt401w18sol.pdf).
+
+-----------
+
+## Final exam materials
+
+* Topics for the final exam will include
+
+1. F tests.
+
+2. Prediction intervals.
+
+3. Confidence intervals for linear model coefficients.
+
+4. Normal approximations and mean/variance calculations.
+
+5. Linear model diagnostics.
+
+6. Colinearity and its consequences.
+
+7. Building and interpreting design matrices for models with interactions and factors.
+
+8. Observational studies and causation.
+
+* The style and format of the final exam will be based on the practice final exam below. The exam will work through a data analysis, asking questions to requiring understanding of the statistical techniques used, how they are computed, and how they are interpreted.
+
+* [Practice final exam](final/practice/practice.pdf).
+
+
 
 ------------
 
