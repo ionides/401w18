@@ -214,7 +214,7 @@ plot(senic$Infection.risk, lm3$residuals)
 
 ```
 
-As we can see from the plots above, hospitals with very low infection rates are not predicted well with the model; the fitted values are consistently smaller than the actual value. Similarly, hospitals with very high infection rates have consistently larger fitted values.
+As we can see from the plots above, hospitals with very low infection rates are not predicted well with the model; the fitted values are consistently larger than the actual value. Similarly, hospitals with very high infection rates have consistently smaller fitted values.
 
 ## Conclusion
 
