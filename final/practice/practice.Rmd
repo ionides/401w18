@@ -18,12 +18,12 @@ csl: ecology.csl
 ALL <- TRUE
 ALL <- FALSE
 SOL <- FALSE
-#SOL <- TRUE
+SOL <- TRUE
 set.seed(12)
 # library(mat2tex)
 ```
 
-\def\SOLUTIONS{0}
+\def\SOLUTIONS{1}
 
 \ifthenelse{\isodd{\SOLUTIONS}}{
  \newcommand\exam[1]{} %% solutions
@@ -138,9 +138,7 @@ Write down the first six rows of the design matrix for each of `lm1` and `lm2`. 
 
 \exam{\vspace{5cm}}
 
-\solution{[1 point]
-
-}
+\solution{Discussed in class.}
 
 
 **2. An F-test**.  Do different regions tend to different levels of infection risk? To investigate the difference between regions while controlling for some other important explanatory variables, the following model was considered:
@@ -150,25 +148,20 @@ anova(lm3)
 ```
 
 
+\solution{Check class notes, lab notes, homeworks and quiz 2 for various examples of writing out hypotheses and test} 
+
+
 (a) Write out in full the null hypothesis, $H_0$, for a test of whether there are regional differences in infection risk. You may use either a matrix or subscript form. 
 
-\solution{[2 points]
-}
 
 \exam{\vspace{3.5cm}}
 
 (b) Write out the alternative hypothesis, $H_a$. You do not have to repeat any definitions you have already made in the part (a). You may use either a matrix or subscript form. 
 
 
-\solution{[2 points]
-}
-
 \exam{\vspace{3.5cm}}
 
 (c) Carry out an F test of these hypotheses, giving explanation of how this test is constructed. What do you conclude?
-
-\solution{[2 points]
-}
 
 \exam{\vspace{4.5cm}}
 
@@ -179,9 +172,7 @@ plot(x=senic$Infection.risk,y=resid(lm3))
 
 The graph above shows residuals of a model for infection risk plotted against the data. Does this plot indicate a flaw in the model? If so, what might you try to do to fix the model? Explain.
 
-\solution{[2 points]
-
-}
+\solution{Discussed in class.}
 
 \exam{\vspace{3cm}}
 
@@ -193,14 +184,18 @@ summary(lm3)
 
 (a) An interpretation of the sample coefficient for `Length.of.stay` is that each additional day in hospital leads to an additional `r round(coef(lm3)["Length.of.stay"],2)` percent risk of infection, on average. Comment on the validity of this conclusion.
 
-\solution{[2 points]
+\solution{This conclusion is the causal interpretation of a regression coefficient. For an observational study, such as this, the causal interpretation is not necessarily valid. There may be reverse causation (more nosocomial infection causes longer stays rather than the direction of causality implied by how we set up our linear model) or confounding variables. Length of stay may be a proxy for some other variable, such as severity of cases that may be more directly responsible for the observed association. 
 }
 
 \exam{\vspace{3.cm}}
 
 (b) What do you conclude from the $R^2$ and F statistics presented in the above summary? Which of these statistics is more useful for the purpose of this study? Explain. 
 
-\solution{[2 points]
+\solution{The F statistic corresponds to an F test with all the fitted model parameters against an null hypothesis that the mean is constant. The strong evidence against this null (p-value$=1.15\times 10^{-14}$) is firm evidence that there is structure in the data which can be investigated further.
+The $R^2$ statistic is equivalent to this F statistic, as shown in the notes.
+It does not usually come with an associated p-value. It does have more immediate interpretation, that the model explains about 1/2 of the variation in the data. 
+The goal of this study is to identify detectable explanatory variables predicting rates of nosocomial infection. This is more closely related to carrying out hyothesis testing under the null hypothesis that  the explanatory variables are irrelevant.
+
 }
 
 \exam{\vspace{3.cm}}
@@ -209,8 +204,8 @@ summary(lm3)
 
 (a) One might suspect that the number of beds, the number of nurses and the number of patients may be colinear. Explain why, in words.
 
-\solution{[2 points]
-}
+\solution{Discussed in class.}
+
 
 \exam{\vspace{3cm}}
 
@@ -221,8 +216,6 @@ pairs(~Beds+Nurses+Patients,data=senic)
 
 (b) From this scatterplot, what is the strongest colinearity you can identify? Explain.
 
-\solution{[2 points]
-}
 
 \exam{\vspace{3cm}}
 
@@ -236,23 +229,14 @@ summary(lm5)
 
 (c) Explain the evidence for colinearity of number of beds and number of nurses from the outcome of fitting these two models.
 
-\solution{[2 points]
-}
-
 \exam{\vspace{3cm}}
 
 (d) What might have happened to our investigation of the data if we had started with the model coded as `lm4` and had not considered the possibility of colinearity?
-
-\solution{[2 points]
-}
 
 
 \exam{\vspace{3cm}}
 
 (e) Suppose the sample model for `lm4` is written as $\vect{y}=\mat{X}\vect{b}+\vect{e}$ where $\mat{X}=[x_{ij}]$ with $x_{i1}$ being the number of beds for hospital $i$ and $x_{i2}$ being the number of nurses. Use output provided to suggest a nonzero vector $\alpha$ such that $\mat{X}\vect{\alpha}$ is close to $\vect{0}$. As part of this answer, you will have to figure out the dimensions of $\mat{X}$.
-
-\solution{[2 points]
-}
 
 \exam{\vspace{3cm}}
 
@@ -263,8 +247,7 @@ plot(senic$Beds,resid(lm4))
 
 (a) Interpret this residual plot.
 
-\solution{[2 points]
-}
+\solution{Discussed in class.}
 
 \exam{\vspace{3cm}}
 
@@ -276,16 +259,15 @@ summary(lm6)
 
 (b) Assess the consequences of adding the quadratic dependence on number of beds. This should involve considering the summary of `lm6` in comparison with `lm4`.
 
-\solution{[2 points]
-}
+
+\solution{Discussed in class.}
 
 \exam{\vspace{3cm}}
 
 
 (c) Superficially, it may seem strange that we can add a nonlinear term, such as a quadratic, while continuing to work within the statistical framework of linear models. Explain how to resolve this paradox.
 
-\solution{[2 points]
-}
+\solution{A linear model $\vect{Y}=\mat{X}\vect{\beta}+\vect{\epsilon}$ is linear in the coefficient vector $\vect{\beta}$. The quadratic term in the explanatory variable leads to a nonlinear function of an explanatory variable in $\mat{X}$, but any choice of $\mat{X}$ is a valid linear model.}
 
 \exam{\vspace{3cm}}
 
