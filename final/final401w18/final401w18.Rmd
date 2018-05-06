@@ -30,7 +30,7 @@ set.seed(12)
 
 
 \newcommand\grade[1]{} %% hide grade scheme
-%% \newcommand\grade[1]{{\bf Summary of grade scheme}. #1} %% show grade scheme
+%% \newcommand\grade[1]{ {\bf Summary of grade scheme}. #1} %% show grade scheme
 
 \newcommand\mat[1]{\mathbb{#1}}
 \newcommand\vect[1]{\boldsymbol{#1}}
