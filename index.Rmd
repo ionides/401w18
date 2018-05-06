@@ -202,6 +202,7 @@ Due in your lab on 2/15 or 2/16. [Solutions](hw/hw06/sol_hw06.html).
 
 * [Practice final exam](final/practice/practice.pdf), with [solutions](final/practice/sol_practice.pdf) for questions not discussed in class.
 
+* [Exam](final/final401w18/final401w18.pdf). [Solutions](final/final401w18/sol_final401w18.pdf).
 
 ------------
 
