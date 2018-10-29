@@ -10,6 +10,13 @@ csl: ecology.csl
 
 ------
 
+## Revised course version
+
+**An updated version of this course is at https://ionides.github.io/401f18/
+**
+
+-----
+
 ## Course description
 
 * An intermediate course in applied statistics, covering a range of topics in modeling and analysis of data including: review of simple linear regression, two-sample problems, one-way analysis of variance; multiple linear regression, diagnostics and model selection; two-way analysis of variance, multiple comparisons, and other selected topics. (4 Credits)
